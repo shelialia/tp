@@ -41,6 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
+### Ron Quah Kai Yi
+
+<img src="images/salads-source.png" width="200px">
+
+[[github](http://github.com/salads-source)]
+[[portfolio](team/salads-source.md)]
+
 ### Chloe Heng
 
 <img src="images/juniper285.png" width="200px">
@@ -48,8 +55,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/juniper285)]
 [[portfolio](team/juniper285.md]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### James Doe
 
