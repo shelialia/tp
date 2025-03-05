@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -17,25 +17,26 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/Noob-No-1)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Zhao Zhihao
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Noob-No-1)]
+[[portfolio](team/Noob-No-1.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team member
+* Responsibilities: UI/Backend 
 
-### Johnny Doe
+### Shelia Teo Zi Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shelialia.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/shelialia)]
+[[portfolio](team/shelialia.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -47,6 +48,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/salads-source)]
 [[portfolio](team/salads-source.md)]
 
+### Chloe Heng
+
+<img src="images/juniper285.png" width="200px">
+
+[[github](http://github.com/juniper285)]
+[[portfolio](team/juniper285.md]
+
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
@@ -55,7 +63,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/Noob-No-1)]
 
 * Role: Developer
 * Responsibilities: UI
