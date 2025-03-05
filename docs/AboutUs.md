@@ -58,12 +58,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
-### James Doe
+### Lucas Loh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aekyr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/Noob-No-1)]
+[[github](http://github.com/aekyr)]
+[[portfolio](team/aekyr.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality
