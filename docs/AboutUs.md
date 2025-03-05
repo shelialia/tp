@@ -40,12 +40,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ron Quah Kai Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/salads-source.png.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/salads-source)]
+[[portfolio](team/salads-source)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
