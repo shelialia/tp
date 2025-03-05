@@ -41,12 +41,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Chloe Heng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/juniper285.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/Noob-No-1)]
+[[github](http://github.com/juniper285)]
+[[portfolio](team/juniper285.md]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
