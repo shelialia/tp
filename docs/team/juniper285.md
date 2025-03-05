@@ -1,6 +1,7 @@
 ---
   layout: default.md
   title: "Chloe Heng's Project Portfolio Page"
+  author: Chloe Heng
 ---
 
 ### Project: GuestNote
