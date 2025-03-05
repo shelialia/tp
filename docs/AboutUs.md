@@ -42,10 +42,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ron Quah Kai Yi
 
-<img src="images/salads-source.png.png" width="200px">
+<img src="images/salads-source.png" width="200px">
 
 [[github](http://github.com/salads-source)]
-[[portfolio](team/salads-source)]
+[[portfolio](team/salads-source.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
