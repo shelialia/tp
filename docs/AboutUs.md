@@ -31,11 +31,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team member
 * Responsibilities: UI/Backend 
 
-### Johnny Doe
+### Shelia Teo Zi Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shelialia.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/Noob-No-1)]
+[[github](http://github.com/shelialia)]
+[[portfolio](team/shelialia.md)]
 
 * Role: Developer
 * Responsibilities: Data
