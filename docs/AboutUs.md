@@ -25,8 +25,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/Noob-No-1)]
+[[github](http://github.com/Noob-No-1)]
+[[portfolio](team/Noob-No-1.md)]
 
 * Role: Team member
 * Responsibilities: UI/Backend 
