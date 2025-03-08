@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 import seedu.guestnote.model.person.Address;
 import seedu.guestnote.model.person.Email;
@@ -14,7 +14,7 @@ import seedu.guestnote.model.person.Phone;
 import seedu.guestnote.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code GuestBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -41,7 +41,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+        GuestBook sampleAb = new GuestBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

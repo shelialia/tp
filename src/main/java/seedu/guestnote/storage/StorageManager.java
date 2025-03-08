@@ -12,7 +12,7 @@ import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of GuestBook data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -46,7 +46,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ GuestBook methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {

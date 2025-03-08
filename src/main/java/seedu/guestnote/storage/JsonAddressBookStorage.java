@@ -15,7 +15,7 @@ import seedu.guestnote.commons.util.JsonUtil;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access GuestBook data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 

@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.guestnote.commons.core.GuiSettings;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
@@ -197,7 +197,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return new GuestBook();
         }
     }
 

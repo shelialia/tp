@@ -1,34 +1,34 @@
 package seedu.guestnote.testutil;
 
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code GuestBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private GuestBook guestBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        guestBook = new GuestBook();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(GuestBook guestBook) {
+        this.guestBook = guestBook;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code GuestBook} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        guestBook.addPerson(person);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public GuestBook build() {
+        return guestBook;
     }
 }

@@ -2,7 +2,7 @@ package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAddressBook(new GuestBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

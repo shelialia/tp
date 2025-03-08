@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.guestnote.commons.core.GuiSettings;
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 import seedu.guestnote.model.UserPrefs;
 
@@ -52,12 +52,12 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonGuestBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        GuestBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new GuestBook(retrieved));
     }
 
     @Test

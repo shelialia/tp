@@ -5,10 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.guestnote.commons.exceptions.DataLoadingException;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.guestnote.model.AddressBook}.
+ * Represents a storage for {@link GuestBook}.
  */
 public interface AddressBookStorage {
 
@@ -18,7 +19,7 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns GuestBook data as a {@link ReadOnlyAddressBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.

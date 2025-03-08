@@ -9,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.guestnote.commons.exceptions.IllegalValueException;
-import seedu.guestnote.model.AddressBook;
+import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyAddressBook;
 import seedu.guestnote.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable GuestBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -41,20 +41,20 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this guestnote book into the model's {@code AddressBook} object.
+     * Converts this guestnote book into the model's {@code GuestBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public GuestBook toModelType() throws IllegalValueException {
+        GuestBook guestBook = new GuestBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (guestBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            guestBook.addPerson(person);
         }
-        return addressBook;
+        return guestBook;
     }
 
 }
