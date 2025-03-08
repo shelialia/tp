@@ -22,8 +22,12 @@ import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 import seedu.guestnote.model.util.SampleDataUtil;
-import seedu.guestnote.storage.*;
 import seedu.guestnote.storage.GuestBookStorage;
+import seedu.guestnote.storage.JsonGuestBookStorage;
+import seedu.guestnote.storage.JsonUserPrefsStorage;
+import seedu.guestnote.storage.Storage;
+import seedu.guestnote.storage.StorageManager;
+import seedu.guestnote.storage.UserPrefsStorage;
 import seedu.guestnote.ui.Ui;
 import seedu.guestnote.ui.UiManager;
 
