@@ -20,7 +20,7 @@ import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.ReadOnlyAddressBook;
+import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.person.Person;
 import seedu.guestnote.testutil.PersonBuilder;
@@ -124,12 +124,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyGuestBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyGuestBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyGuestBook getAddressBook() {
             return new GuestBook();
         }
     }

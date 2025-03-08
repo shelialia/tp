@@ -14,7 +14,7 @@ import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.AddressBookParser;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.ReadOnlyAddressBook;
+import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.person.Person;
 import seedu.guestnote.storage.Storage;
 
@@ -62,7 +62,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyGuestBook getAddressBook() {
         return model.getAddressBook();
     }
 

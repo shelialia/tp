@@ -18,16 +18,12 @@ import seedu.guestnote.logic.LogicManager;
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
-import seedu.guestnote.model.ReadOnlyAddressBook;
+import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 import seedu.guestnote.model.util.SampleDataUtil;
-import seedu.guestnote.storage.AddressBookStorage;
-import seedu.guestnote.storage.JsonAddressBookStorage;
-import seedu.guestnote.storage.JsonUserPrefsStorage;
-import seedu.guestnote.storage.Storage;
-import seedu.guestnote.storage.StorageManager;
-import seedu.guestnote.storage.UserPrefsStorage;
+import seedu.guestnote.storage.*;
+import seedu.guestnote.storage.GuestBookStorage;
 import seedu.guestnote.ui.Ui;
 import seedu.guestnote.ui.UiManager;
 
@@ -57,8 +53,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        GuestBookStorage guestBookStorage = new JsonGuestBookStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(guestBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,8 +71,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyGuestBook> addressBookOptional;
+        ReadOnlyGuestBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
