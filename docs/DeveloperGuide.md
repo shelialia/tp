@@ -150,7 +150,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.guestbook.commons` package.
+Classes used by multiple components are in the `seedu.guestnote.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
