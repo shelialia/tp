@@ -7,23 +7,15 @@ title: "About Us"
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `lucasloh@u.nus.edu`
 
 ## Project team
 
 ### W09
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/Noob-No-1)]
-
-* Role: Project Advisor
-
 ### Zhao Zhihao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/noob-no-1.png" width="200px">
 
 [[github](http://github.com/Noob-No-1)]
 [[portfolio](team/Noob-No-1.md)]
