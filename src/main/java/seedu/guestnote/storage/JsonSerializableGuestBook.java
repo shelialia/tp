@@ -37,7 +37,7 @@ class JsonSerializableGuestBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableGuestBook}.
      */
     public JsonSerializableGuestBook(ReadOnlyGuestBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getGuestList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,10 +49,10 @@ class JsonSerializableGuestBook {
         GuestBook guestBook = new GuestBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Guest guest = jsonAdaptedPerson.toModelType();
-            if (guestBook.hasPerson(guest)) {
+            if (guestBook.hasGuest(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            guestBook.addPerson(guest);
+            guestBook.addGuest(guest);
         }
         return guestBook;
     }

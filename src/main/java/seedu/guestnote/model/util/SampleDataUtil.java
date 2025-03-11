@@ -40,7 +40,7 @@ public class SampleDataUtil {
     public static ReadOnlyGuestBook getSampleAddressBook() {
         GuestBook sampleAb = new GuestBook();
         for (Guest sampleGuest : getSamplePersons()) {
-            sampleAb.addPerson(sampleGuest);
+            sampleAb.addGuest(sampleGuest);
         }
         return sampleAb;
     }

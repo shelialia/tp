@@ -65,7 +65,7 @@ public class TypicalPersons {
     public static GuestBook getTypicalAddressBook() {
         GuestBook ab = new GuestBook();
         for (Guest guest : getTypicalPersons()) {
-            ab.addPerson(guest);
+            ab.addGuest(guest);
         }
         return ab;
     }

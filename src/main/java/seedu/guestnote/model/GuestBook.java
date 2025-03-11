@@ -15,7 +15,7 @@ import seedu.guestnote.model.guest.UniquePersonList;
  */
 public class GuestBook implements ReadOnlyGuestBook {
 
-    private final UniquePersonList persons = new UniquePersonList();
+    private final UniquePersonList guests = new UniquePersonList();
 
     public GuestBook() {}
 
@@ -33,8 +33,8 @@ public class GuestBook implements ReadOnlyGuestBook {
      * Replaces the contents of the guest list with {@code guests}.
      * {@code guests} must not contain duplicate guests.
      */
-    public void setPersons(List<Guest> guests) {
-        this.persons.setPersons(guests);
+    public void setGuests(List<Guest> guests) {
+        this.guests.setPersons(guests);
     }
 
     /**
@@ -43,7 +43,7 @@ public class GuestBook implements ReadOnlyGuestBook {
     public void resetData(ReadOnlyGuestBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setGuests(newData.getGuestList());
     }
 
     //// guest-level operations
@@ -51,17 +51,17 @@ public class GuestBook implements ReadOnlyGuestBook {
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the guestnote book.
      */
-    public boolean hasPerson(Guest guest) {
+    public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return persons.contains(guest);
+        return guests.contains(guest);
     }
 
     /**
      * Adds a guest to the guestnote book.
      * The guest must not already exist in the guestnote book.
      */
-    public void addPerson(Guest p) {
-        persons.add(p);
+    public void addGuest(Guest p) {
+        guests.add(p);
     }
 
     /**
@@ -69,18 +69,18 @@ public class GuestBook implements ReadOnlyGuestBook {
      * {@code target} must exist in the guestnote book.
      * The guest identity of {@code editedGuest} must not be the same as another existing guest in the book.
      */
-    public void setPerson(Guest target, Guest editedGuest) {
+    public void setGuest(Guest target, Guest editedGuest) {
         requireNonNull(editedGuest);
 
-        persons.setPerson(target, editedGuest);
+        guests.setPerson(target, editedGuest);
     }
 
     /**
      * Removes {@code key} from this {@code GuestBook}.
      * {@code key} must exist in the guestnote book.
      */
-    public void removePerson(Guest key) {
-        persons.remove(key);
+    public void removeGuest(Guest key) {
+        guests.remove(key);
     }
 
     //// util methods
@@ -88,13 +88,13 @@ public class GuestBook implements ReadOnlyGuestBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("guests", persons)
+                .add("guests", guests)
                 .toString();
     }
 
     @Override
-    public ObservableList<Guest> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Guest> getGuestList() {
+        return guests.asUnmodifiableObservableList();
     }
 
     @Override
@@ -109,11 +109,11 @@ public class GuestBook implements ReadOnlyGuestBook {
         }
 
         GuestBook otherGuestBook = (GuestBook) other;
-        return persons.equals(otherGuestBook.persons);
+        return guests.equals(otherGuestBook.guests);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return guests.hashCode();
     }
 }

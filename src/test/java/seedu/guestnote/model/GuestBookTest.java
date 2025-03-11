@@ -28,7 +28,7 @@ public class GuestBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), guestBook.getPersonList());
+        assertEquals(Collections.emptyList(), guestBook.getGuestList());
     }
 
     @Test
@@ -55,37 +55,37 @@ public class GuestBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> guestBook.hasPerson(null));
+    public void hasPerson_nullGuest_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> guestBook.hasGuest(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(guestBook.hasPerson(ALICE));
+    public void hasPerson_guestNotInAddressBook_returnsFalse() {
+        assertFalse(guestBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        guestBook.addPerson(ALICE);
-        assertTrue(guestBook.hasPerson(ALICE));
+    public void hasPerson_guestInAddressBook_returnsTrue() {
+        guestBook.addGuest(ALICE);
+        assertTrue(guestBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        guestBook.addPerson(ALICE);
+    public void hasPerson_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        guestBook.addGuest(ALICE);
         Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(guestBook.hasPerson(editedAlice));
+        assertTrue(guestBook.hasGuest(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> guestBook.getPersonList().remove(0));
+    public void getGuestList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> guestBook.getGuestList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = GuestBook.class.getCanonicalName() + "{guests=" + guestBook.getPersonList() + "}";
+        String expected = GuestBook.class.getCanonicalName() + "{guests=" + guestBook.getGuestList() + "}";
         assertEquals(expected, guestBook.toString());
     }
 
@@ -100,7 +100,7 @@ public class GuestBookTest {
         }
 
         @Override
-        public ObservableList<Guest> getPersonList() {
+        public ObservableList<Guest> getGuestList() {
             return guests;
         }
     }
