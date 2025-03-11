@@ -26,6 +26,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
+import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
 
 /**
@@ -98,10 +99,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(guestToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
+        RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(guestToEdit.getAddress());
-        Set<Request> updatedRequests = editPersonDescriptor.getTags().orElse(guestToEdit.getTags());
+        Set<Request> updatedRequests = editPersonDescriptor.getTags().orElse(guestToEdit.getRequests());
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRequests);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedAddress, updatedRequests);
     }
 
     @Override
@@ -136,6 +138,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private RoomNumber roomNumber;
         private Address address;
         private Set<Request> requests;
 
@@ -149,6 +152,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setRoomNumber(toCopy.roomNumber);
             setAddress(toCopy.address);
             setTags(toCopy.requests);
         }
@@ -182,6 +186,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setRoomNumber(RoomNumber roomNumber) {
+            this.roomNumber = roomNumber;
+        }
+
+        public Optional<RoomNumber> getRoomNumber() {
+            return Optional.ofNullable(roomNumber);
         }
 
         public void setAddress(Address address) {
@@ -224,6 +236,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(roomNumber, otherEditPersonDescriptor.roomNumber)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(requests, otherEditPersonDescriptor.requests);
         }
@@ -234,7 +247,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("guestnote", address)
+                    .add("roomNumber", roomNumber)
+                    .add("address", address)
                     .add("requests", requests)
                     .toString();
         }

@@ -46,7 +46,7 @@ public class PersonBuilder {
         phone = guestToCopy.getPhone();
         email = guestToCopy.getEmail();
         address = guestToCopy.getAddress();
-        requests = new HashSet<>(guestToCopy.getTags());
+        requests = new HashSet<>(guestToCopy.getRequests());
     }
 
     /**

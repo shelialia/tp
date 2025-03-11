@@ -24,7 +24,7 @@ class JsonAdaptedTag {
     /**
      * Converts a given {@code Request} into this class for Jackson use.
      */
-    public JsonAdaptedTag(seedu.guestnote.model.request.Request source) {
+    public JsonAdaptedTag(Request source) {
         tagName = source.tagName;
     }
 
@@ -38,11 +38,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted request.
      */
-    public seedu.guestnote.model.request.Request toModelType() throws IllegalValueException {
-        if (!seedu.guestnote.model.request.Request.isValidTagName(tagName)) {
-            throw new IllegalValueException(seedu.guestnote.model.request.Request.MESSAGE_CONSTRAINTS);
+    public Request toModelType() throws IllegalValueException {
+        if (!Request.isValidTagName(tagName)) {
+            throw new IllegalValueException(Request.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.guestnote.model.request.Request(tagName);
+        return new Request(tagName);
     }
 
 }

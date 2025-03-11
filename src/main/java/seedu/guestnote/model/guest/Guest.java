@@ -22,17 +22,19 @@ public class Guest {
     private final Email email;
 
     // Data fields
+    private final RoomNumber roomNumber;
     private final Address address;
     private final Set<Request> requests = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Request> requests) {
+    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Address address, Set<Request> requests) {
         requireAllNonNull(name, phone, email, address, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.roomNumber = roomNumber;
         this.address = address;
         this.requests.addAll(requests);
     }
@@ -49,6 +51,10 @@ public class Guest {
         return email;
     }
 
+    public RoomNumber getRoomNumber() {
+        return roomNumber;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -57,7 +63,7 @@ public class Guest {
      * Returns an immutable request set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Request> getTags() {
+    public Set<Request> getRequests() {
         return Collections.unmodifiableSet(requests);
     }
 
@@ -93,6 +99,7 @@ public class Guest {
         return name.equals(otherGuest.name)
                 && phone.equals(otherGuest.phone)
                 && email.equals(otherGuest.email)
+                && roomNumber.equals(otherGuest.roomNumber)
                 && address.equals(otherGuest.address)
                 && requests.equals(otherGuest.requests);
     }
@@ -100,7 +107,7 @@ public class Guest {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, requests);
+        return Objects.hash(name, phone, email, roomNumber, address, requests);
     }
 
     @Override
@@ -109,7 +116,8 @@ public class Guest {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("guestnote", address)
+                .add("roomNumber", roomNumber)
+                .add("address", address)
                 .add("requests", requests)
                 .toString();
     }
