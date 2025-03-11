@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyGuestBook;
-import seedu.guestnote.model.guest.*;
+import seedu.guestnote.model.guest.Address;
+import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Name;
+import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.tag.Tag;
 
 /**

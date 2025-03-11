@@ -3,8 +3,11 @@ package seedu.guestnote.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.guestnote.model.guest.*;
+import seedu.guestnote.model.guest.Address;
+import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Name;
+import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.tag.Tag;
 import seedu.guestnote.model.util.SampleDataUtil;
 
