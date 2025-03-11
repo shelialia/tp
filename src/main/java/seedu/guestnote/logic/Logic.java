@@ -8,7 +8,7 @@ import seedu.guestnote.logic.commands.CommandResult;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.ReadOnlyGuestBook;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * API of the Logic component
@@ -31,7 +31,7 @@ public interface Logic {
     ReadOnlyGuestBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Guest> getFilteredPersonList();
 
     /**
      * Returns the user prefs' guestnote book file path.

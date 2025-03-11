@@ -1,7 +1,7 @@
 package seedu.guestnote.testutil;
 
 import seedu.guestnote.model.GuestBook;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -21,10 +21,10 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code GuestBook} that we are building.
+     * Adds a new {@code Guest} to the {@code GuestBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
-        guestBook.addPerson(person);
+    public AddressBookBuilder withPerson(Guest guest) {
+        guestBook.addGuest(guest);
         return this;
     }
 

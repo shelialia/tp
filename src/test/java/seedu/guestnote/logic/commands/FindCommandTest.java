@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
 import seedu.guestnote.model.UserPrefs;
-import seedu.guestnote.model.person.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,7 +50,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different guest -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

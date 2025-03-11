@@ -15,7 +15,7 @@ import seedu.guestnote.logic.parser.AddressBookParser;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ReadOnlyGuestBook;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.storage.Storage;
 
 /**
@@ -67,7 +67,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Guest> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 

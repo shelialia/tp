@@ -1,10 +1,10 @@
-package seedu.guestnote.model.person;
+package seedu.guestnote.model.guest;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's email in the guestnote book.
+ * Represents a Guest's email in the guestnote book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {

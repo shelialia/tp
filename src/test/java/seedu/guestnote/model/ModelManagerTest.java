@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.commons.core.GuiSettings;
-import seedu.guestnote.model.person.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 import seedu.guestnote.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

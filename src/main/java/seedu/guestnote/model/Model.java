@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.guestnote.commons.core.GuiSettings;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Guest> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,35 @@ public interface Model {
     ReadOnlyGuestBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the guestnote book.
+     * Returns true if a guest with the same identity as {@code guest} exists in the guestnote book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(Guest guest);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the guestnote book.
+     * Deletes the given guest.
+     * The guest must exist in the guestnote book.
      */
-    void deletePerson(Person target);
+    void deletePerson(Guest target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the guestnote book.
+     * Adds the given guest.
+     * {@code guest} must not already exist in the guestnote book.
      */
-    void addPerson(Person person);
+    void addPerson(Guest guest);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given guest {@code target} with {@code editedGuest}.
      * {@code target} must exist in the guestnote book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the book.
+     * The guest identity of {@code editedGuest} must not be the same as another existing guest in the book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Guest target, Guest editedGuest);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered guest list */
+    ObservableList<Guest> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered guest list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Guest> predicate);
 }

@@ -23,8 +23,8 @@ import seedu.guestnote.logic.commands.FindCommand;
 import seedu.guestnote.logic.commands.HelpCommand;
 import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.person.NameContainsKeywordsPredicate;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
 import seedu.guestnote.testutil.PersonBuilder;
 import seedu.guestnote.testutil.PersonUtil;
@@ -35,9 +35,9 @@ public class GuestBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Guest guest = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(guest));
+        assertEquals(new AddCommand(guest), command);
     }
 
     @Test
@@ -55,8 +55,8 @@ public class GuestBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Guest guest = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(guest).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

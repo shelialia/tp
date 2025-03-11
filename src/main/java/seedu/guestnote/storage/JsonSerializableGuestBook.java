@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.guestnote.commons.exceptions.IllegalValueException;
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyGuestBook;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * An Immutable GuestBook that is serializable to JSON format.
@@ -19,7 +19,7 @@ import seedu.guestnote.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableGuestBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -37,7 +37,7 @@ class JsonSerializableGuestBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableGuestBook}.
      */
     public JsonSerializableGuestBook(ReadOnlyGuestBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getGuestList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -48,11 +48,11 @@ class JsonSerializableGuestBook {
     public GuestBook toModelType() throws IllegalValueException {
         GuestBook guestBook = new GuestBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (guestBook.hasPerson(person)) {
+            Guest guest = jsonAdaptedPerson.toModelType();
+            if (guestBook.hasGuest(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            guestBook.addPerson(person);
+            guestBook.addGuest(guest);
         }
         return guestBook;
     }
