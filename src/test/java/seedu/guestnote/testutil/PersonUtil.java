@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * A utility class for Guest.
@@ -48,13 +48,15 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getAddress().ifPresent(
+                address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" ")
+        );
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+            Set<Request> requests = descriptor.getTags().get();
+            if (requests.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

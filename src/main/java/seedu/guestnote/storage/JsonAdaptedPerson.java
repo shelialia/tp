@@ -15,7 +15,6 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Guest}.
@@ -65,9 +64,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest.
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<seedu.guestnote.model.request.Request> personRequests = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            personRequests.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +101,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<seedu.guestnote.model.request.Request> modelRequests = new HashSet<>(personRequests);
+        return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelRequests);
     }
 
 }

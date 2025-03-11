@@ -17,7 +17,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -43,9 +43,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Request> requestList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Guest guest = new Guest(name, phone, email, address, tagList);
+        Guest guest = new Guest(name, phone, email, address, requestList);
 
         return new AddCommand(guest);
     }

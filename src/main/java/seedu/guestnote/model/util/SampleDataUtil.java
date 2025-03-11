@@ -11,7 +11,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Contains utility methods for populating {@code GuestBook} with sample data.
@@ -49,11 +49,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a request set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Request> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Request::new)
                 .collect(Collectors.toSet());
     }
 

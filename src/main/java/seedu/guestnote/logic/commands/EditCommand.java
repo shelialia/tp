@@ -26,7 +26,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Edits the details of an existing guest in the guestnote book.
@@ -99,9 +99,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(guestToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(guestToEdit.getTags());
+        Set<Request> updatedRequests = editPersonDescriptor.getTags().orElse(guestToEdit.getTags());
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRequests);
     }
 
     @Override
@@ -137,27 +137,27 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Request> requests;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code requests} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setTags(toCopy.requests);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, requests);
         }
 
         public void setName(Name name) {
@@ -193,20 +193,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code requests} to this object's {@code requests}.
+         * A defensive copy of {@code requests} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Request> requests) {
+            this.requests = (requests != null) ? new HashSet<>(requests) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable request set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Request>> getTags() {
+            return (requests != null) ? Optional.of(Collections.unmodifiableSet(requests)) : Optional.empty();
         }
 
         @Override
@@ -225,7 +225,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(requests, otherEditPersonDescriptor.requests);
         }
 
         @Override
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("guestnote", address)
-                    .add("tags", tags)
+                    .add("requests", requests)
                     .toString();
         }
     }

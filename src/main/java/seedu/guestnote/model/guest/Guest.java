@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.guestnote.commons.util.ToStringBuilder;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Represents a Guest in the guestnote book.
@@ -23,18 +23,18 @@ public class Guest {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Request> requests = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Guest(Name name, Phone phone, Email email, Address address, Set<Request> requests) {
+        requireAllNonNull(name, phone, email, address, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.requests.addAll(requests);
     }
 
     public Name getName() {
@@ -54,11 +54,11 @@ public class Guest {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable request set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Request> getTags() {
+        return Collections.unmodifiableSet(requests);
     }
 
     /**
@@ -94,13 +94,13 @@ public class Guest {
                 && phone.equals(otherGuest.phone)
                 && email.equals(otherGuest.email)
                 && address.equals(otherGuest.address)
-                && tags.equals(otherGuest.tags);
+                && requests.equals(otherGuest.requests);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, requests);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Guest {
                 .add("phone", phone)
                 .add("email", email)
                 .add("guestnote", address)
-                .add("tags", tags)
+                .add("requests", requests)
                 .toString();
     }
 
