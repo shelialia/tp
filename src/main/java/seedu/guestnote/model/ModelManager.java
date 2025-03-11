@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.guestnote.commons.core.GuiSettings;
 import seedu.guestnote.commons.core.LogsCenter;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * Represents the in-memory model of the guestnote book data.
@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final GuestBook guestBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Guest> filteredGuests;
 
     /**
      * Initializes a ModelManager with the given guestBook and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.guestBook = new GuestBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.guestBook.getPersonList());
+        filteredGuests = new FilteredList<>(this.guestBook.getPersonList());
     }
 
     public ModelManager() {
@@ -88,44 +88,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return guestBook.hasPerson(person);
+    public boolean hasPerson(Guest guest) {
+        requireNonNull(guest);
+        return guestBook.hasPerson(guest);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Guest target) {
         guestBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        guestBook.addPerson(person);
+    public void addPerson(Guest guest) {
+        guestBook.addPerson(guest);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Guest target, Guest editedGuest) {
+        requireAllNonNull(target, editedGuest);
 
-        guestBook.setPerson(target, editedPerson);
+        guestBook.setPerson(target, editedGuest);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Guest List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Guest} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Guest> getFilteredPersonList() {
+        return filteredGuests;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Guest> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredGuests.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return guestBook.equals(otherModelManager.guestBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredGuests.equals(otherModelManager.filteredGuests);
     }
 
 }

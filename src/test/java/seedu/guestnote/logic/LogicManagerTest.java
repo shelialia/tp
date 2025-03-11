@@ -27,7 +27,7 @@ import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
 import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.UserPrefs;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.storage.JsonGuestBookStorage;
 import seedu.guestnote.storage.JsonUserPrefsStorage;
 import seedu.guestnote.storage.StorageManager;
@@ -167,9 +167,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Guest expectedGuest = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPerson(expectedGuest);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

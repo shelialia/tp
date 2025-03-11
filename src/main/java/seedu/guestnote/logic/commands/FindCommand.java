@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.person.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in guestnote book whose name contains any of the argument keywords.

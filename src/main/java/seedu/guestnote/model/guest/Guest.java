@@ -1,4 +1,4 @@
-package seedu.guestnote.model.person;
+package seedu.guestnote.model.guest;
 
 import static seedu.guestnote.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,10 +11,10 @@ import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.model.tag.Tag;
 
 /**
- * Represents a Person in the guestnote book.
+ * Represents a Guest in the guestnote book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Guest {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -65,13 +65,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Guest otherGuest) {
+        if (otherGuest == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherGuest != null
+                && otherGuest.getName().equals(getName());
     }
 
     /**
@@ -85,16 +85,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Guest)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Guest otherGuest = (Guest) other;
+        return name.equals(otherGuest.name)
+                && phone.equals(otherGuest.phone)
+                && email.equals(otherGuest.email)
+                && address.equals(otherGuest.address)
+                && tags.equals(otherGuest.tags);
     }
 
     @Override

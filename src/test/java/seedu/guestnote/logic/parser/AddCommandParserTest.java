@@ -37,11 +37,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.AddCommand;
-import seedu.guestnote.model.person.Address;
-import seedu.guestnote.model.person.Email;
-import seedu.guestnote.model.person.Name;
-import seedu.guestnote.model.person.Person;
-import seedu.guestnote.model.person.Phone;
+import seedu.guestnote.model.guest.*;
+import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.tag.Tag;
 import seedu.guestnote.testutil.PersonBuilder;
 
@@ -50,19 +47,19 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Guest expectedGuest = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedGuest));
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedGuestMultipleTags));
     }
 
     @Test
@@ -132,9 +129,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Guest expectedGuest = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedGuest));
     }
 
     @Test

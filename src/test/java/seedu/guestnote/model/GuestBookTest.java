@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.guestnote.model.person.Person;
-import seedu.guestnote.model.person.exceptions.DuplicatePersonException;
+import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.exceptions.DuplicatePersonException;
 import seedu.guestnote.testutil.PersonBuilder;
 
 public class GuestBookTest {
@@ -45,11 +45,11 @@ public class GuestBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two guests with the same identity fields
+        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        GuestBookStub newData = new GuestBookStub(newPersons);
+        List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
+        GuestBookStub newData = new GuestBookStub(newGuests);
 
         assertThrows(DuplicatePersonException.class, () -> guestBook.resetData(newData));
     }
@@ -73,7 +73,7 @@ public class GuestBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         guestBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(guestBook.hasPerson(editedAlice));
     }
@@ -85,23 +85,23 @@ public class GuestBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = GuestBook.class.getCanonicalName() + "{persons=" + guestBook.getPersonList() + "}";
+        String expected = GuestBook.class.getCanonicalName() + "{guests=" + guestBook.getPersonList() + "}";
         assertEquals(expected, guestBook.toString());
     }
 
     /**
-     * A stub ReadOnlyGuestBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyGuestBook whose guests list can violate interface constraints.
      */
     private static class GuestBookStub implements ReadOnlyGuestBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Guest> guests = FXCollections.observableArrayList();
 
-        GuestBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        GuestBookStub(Collection<Guest> guests) {
+            this.guests.setAll(guests);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Guest> getPersonList() {
+            return guests;
         }
     }
 

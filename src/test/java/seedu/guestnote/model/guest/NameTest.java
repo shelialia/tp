@@ -1,4 +1,4 @@
-package seedu.guestnote.model.person;
+package seedu.guestnote.model.guest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

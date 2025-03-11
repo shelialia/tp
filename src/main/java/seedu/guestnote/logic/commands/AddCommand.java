@@ -11,16 +11,16 @@ import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.person.Person;
+import seedu.guestnote.model.guest.Guest;
 
 /**
- * Adds a person to the guestnote book.
+ * Adds a guest to the guestnote book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the guestnote book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the guestnote book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,17 +35,17 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the guestnote book";
+    public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the guestnote book";
 
-    private final Person toAdd;
+    private final Guest toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Guest}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Guest guest) {
+        requireNonNull(guest);
+        toAdd = guest;
     }
 
     @Override

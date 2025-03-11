@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.person.Address;
-import seedu.guestnote.model.person.Email;
-import seedu.guestnote.model.person.Name;
-import seedu.guestnote.model.person.Person;
-import seedu.guestnote.model.person.Phone;
+import seedu.guestnote.model.guest.Address;
+import seedu.guestnote.model.guest.Email;
+import seedu.guestnote.model.guest.Name;
+import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.tag.Tag;
 
 /**
@@ -45,9 +45,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Guest guest = new Guest(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(guest);
     }
 
     /**

@@ -1,10 +1,10 @@
-package seedu.guestnote.model.person;
+package seedu.guestnote.model.guest;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the guestnote book.
+ * Represents a Guest's phone number in the guestnote book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

@@ -5,11 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.guestnote.model.person.Address;
-import seedu.guestnote.model.person.Email;
-import seedu.guestnote.model.person.Name;
-import seedu.guestnote.model.person.Person;
-import seedu.guestnote.model.person.Phone;
+import seedu.guestnote.model.guest.*;
+import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.tag.Tag;
 
 /**
@@ -28,15 +25,15 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code guest}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Guest guest) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setName(guest.getName());
+        descriptor.setPhone(guest.getPhone());
+        descriptor.setEmail(guest.getEmail());
+        descriptor.setAddress(guest.getAddress());
+        descriptor.setTags(guest.getTags());
     }
 
     /**

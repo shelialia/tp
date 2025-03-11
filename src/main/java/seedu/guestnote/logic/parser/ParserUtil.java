@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.commons.util.StringUtil;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.person.Address;
-import seedu.guestnote.model.person.Email;
-import seedu.guestnote.model.person.Name;
-import seedu.guestnote.model.person.Phone;
+import seedu.guestnote.model.guest.Address;
+import seedu.guestnote.model.guest.Email;
+import seedu.guestnote.model.guest.Name;
+import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.tag.Tag;
 
 /**
