@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.guest.UniquePersonList;
+import seedu.guestnote.model.guest.UniqueGuestList;
 
 /**
  * Wraps all data at the guestnote-book level
@@ -15,7 +15,7 @@ import seedu.guestnote.model.guest.UniquePersonList;
  */
 public class GuestBook implements ReadOnlyGuestBook {
 
-    private final UniquePersonList guests = new UniquePersonList();
+    private final UniqueGuestList guests = new UniqueGuestList();
 
     public GuestBook() {}
 
@@ -34,7 +34,7 @@ public class GuestBook implements ReadOnlyGuestBook {
      * {@code guests} must not contain duplicate guests.
      */
     public void setGuests(List<Guest> guests) {
-        this.guests.setPersons(guests);
+        this.guests.setGuests(guests);
     }
 
     /**
@@ -72,7 +72,7 @@ public class GuestBook implements ReadOnlyGuestBook {
     public void setGuest(Guest target, Guest editedGuest) {
         requireNonNull(editedGuest);
 
-        guests.setPerson(target, editedGuest);
+        guests.setGuest(target, editedGuest);
     }
 
     /**

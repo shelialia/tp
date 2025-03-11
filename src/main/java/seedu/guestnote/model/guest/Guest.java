@@ -65,7 +65,7 @@ public class Guest {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Guest otherGuest) {
+    public boolean isSameGuest(Guest otherGuest) {
         if (otherGuest == this) {
             return true;
         }
