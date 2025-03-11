@@ -10,6 +10,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
+import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
 
 /**
@@ -35,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(guest.getName());
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
+        descriptor.setRoomNumber(guest.getRoomNumber());
         descriptor.setAddress(guest.getAddress());
         descriptor.setTags(guest.getRequests());
     }
@@ -60,6 +62,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code RoomNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoomNumber(String roomNumber) {
+        descriptor.setRoomNumber(new RoomNumber(roomNumber));
         return this;
     }
 

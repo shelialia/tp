@@ -13,6 +13,7 @@ import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
+import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
 
 /**
@@ -66,10 +67,25 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String guestnote} into an {@code Address}.
+     * Parses a {@code String roomNumber} into a {@code RoomNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code guestnote} is invalid.
+     * @throws ParseException if the given {@code roomNumber} is invalid.
+     */
+    public static RoomNumber parseRoomNumber(String roomNumber) throws ParseException {
+        requireNonNull(roomNumber);
+        String trimmedRoomNumber = roomNumber.trim();
+        if (!RoomNumber.isValidRoomNumber(trimmedRoomNumber)) {
+            throw new ParseException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);

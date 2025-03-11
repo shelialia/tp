@@ -106,6 +106,9 @@ class JsonAdaptedPerson {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, RoomNumber.class.getSimpleName())
             );
         }
+        if (!RoomNumber.isValidRoomNumber(roomNumber)) {
+            throw new IllegalValueException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
         final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
 
         if (address == null) {

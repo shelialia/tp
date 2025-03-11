@@ -93,7 +93,8 @@ public class GuestTest {
     @Test
     public void toStringMethod() {
         String expected = Guest.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", guestnote=" + ALICE.getAddress() + ", requests=" + ALICE.getRequests()
+                + ", email=" + ALICE.getEmail() + ", roomNumber=" + ALICE.getRoomNumber()
+                + ", address=" + ALICE.getAddress() + ", requests=" + ALICE.getRequests()
                 + "}";
         assertEquals(expected, ALICE.toString());
     }
