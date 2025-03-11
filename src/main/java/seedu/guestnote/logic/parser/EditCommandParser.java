@@ -32,8 +32,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADDRESS, PREFIX_TAG
+        );
 
         Index index;
 
@@ -43,7 +44,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADDRESS
+        );
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -57,7 +60,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ROOMNUMBER).isPresent()) {
-            editPersonDescriptor.setRoomNumber(ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOMNUMBER).get()));
+            editPersonDescriptor.setRoomNumber(ParserUtil.parseRoomNumber(
+                    argMultimap.getValue(PREFIX_ROOMNUMBER).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));

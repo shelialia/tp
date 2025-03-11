@@ -95,10 +95,9 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
-                        + ROOMNUMBER_DESC_AMY
-                        + ADDRESS_DESC_AMY
-                        + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_ROOMNUMBER, PREFIX_EMAIL, PREFIX_PHONE));
+                        + ROOMNUMBER_DESC_AMY + ADDRESS_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(
+                        PREFIX_NAME, PREFIX_ADDRESS, PREFIX_ROOMNUMBER, PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
