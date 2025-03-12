@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Guest's guestnote in the guestnote book.
+ * Represents a Guest's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
@@ -12,7 +12,7 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the guestnote must not be a whitespace,
+     * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -22,7 +22,7 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid guestnote.
+     * @param address A valid address.
      */
     public Address(String address) {
         requireNonNull(address);

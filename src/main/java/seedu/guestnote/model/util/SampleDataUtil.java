@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.ReadOnlyGuestBook;
-import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Contains utility methods for populating {@code GuestBook} with sample data.
@@ -20,22 +20,22 @@ public class SampleDataUtil {
     public static Guest[] getSamplePersons() {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
+                new RoomNumber("12-33"),
                 getTagSet("friends")),
             new Guest(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new RoomNumber("23-32"),
                 getTagSet("colleagues", "friends")),
             new Guest(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new RoomNumber("01-57"),
                 getTagSet("neighbours")),
             new Guest(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new RoomNumber("04-22"),
                 getTagSet("family")),
             new Guest(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
+                new RoomNumber("02-23"),
                 getTagSet("classmates")),
             new Guest(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
+                new RoomNumber("11-33"),
                 getTagSet("colleagues"))
         };
     }
@@ -49,11 +49,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a request set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Request> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Request::new)
                 .collect(Collectors.toSet());
     }
 

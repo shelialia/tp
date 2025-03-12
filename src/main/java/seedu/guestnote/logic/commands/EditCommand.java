@@ -5,6 +5,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,7 +27,8 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Edits the details of an existing guest in the guestnote book.
@@ -42,6 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ROOMNUMBER + "ROOMNUMBER] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -98,10 +101,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(guestToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
+        RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(guestToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(guestToEdit.getTags());
+        Set<Request> updatedRequests = editPersonDescriptor.getTags().orElse(guestToEdit.getRequests());
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedAddress, updatedRequests);
     }
 
     @Override
@@ -136,28 +140,28 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private RoomNumber roomNumber;
+        private Set<Request> requests;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code requests} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setRoomNumber(toCopy.roomNumber);
+            setTags(toCopy.requests);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, roomNumber, requests);
         }
 
         public void setName(Name name) {
@@ -184,29 +188,29 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setRoomNumber(RoomNumber roomNumber) {
+            this.roomNumber = roomNumber;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<RoomNumber> getRoomNumber() {
+            return Optional.ofNullable(roomNumber);
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code requests} to this object's {@code requests}.
+         * A defensive copy of {@code requests} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Request> requests) {
+            this.requests = (requests != null) ? new HashSet<>(requests) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable request set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Request>> getTags() {
+            return (requests != null) ? Optional.of(Collections.unmodifiableSet(requests)) : Optional.empty();
         }
 
         @Override
@@ -224,8 +228,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(roomNumber, otherEditPersonDescriptor.roomNumber)
+                    && Objects.equals(requests, otherEditPersonDescriptor.requests);
         }
 
         @Override
@@ -234,8 +238,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("guestnote", address)
-                    .add("tags", tags)
+                    .add("roomNumber", roomNumber)
+                    .add("requests", requests)
                     .toString();
         }
     }
