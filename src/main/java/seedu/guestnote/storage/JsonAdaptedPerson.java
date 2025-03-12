@@ -15,7 +15,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.guest.RoomNumber;
 
 /**
  * Jackson-friendly version of {@link Guest}.
@@ -27,6 +27,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String roomNumber;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -34,12 +35,17 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given guest details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("guestnote") String address,
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("roomNumber") String roomNumber,
+            @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.roomNumber = roomNumber;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -53,8 +59,9 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        roomNumber = source.getRoomNumber().roomNumber;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getRequests().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
@@ -65,9 +72,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest.
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<seedu.guestnote.model.request.Request> personRequests = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            personRequests.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -94,6 +101,16 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (roomNumber == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, RoomNumber.class.getSimpleName())
+            );
+        }
+        if (!RoomNumber.isValidRoomNumber(roomNumber)) {
+            throw new IllegalValueException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
+        final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -102,8 +119,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Guest(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<seedu.guestnote.model.request.Request> modelRequests = new HashSet<>(personRequests);
+        return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelAddress, modelRequests);
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.guestnote.commons.util.ToStringBuilder;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.request.Request;
 
 /**
  * Represents a Guest in the guestnote book.
@@ -22,19 +22,21 @@ public class Guest {
     private final Email email;
 
     // Data fields
+    private final RoomNumber roomNumber;
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Request> requests = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Address address, Set<Request> requests) {
+        requireAllNonNull(name, phone, email, address, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.roomNumber = roomNumber;
         this.address = address;
-        this.tags.addAll(tags);
+        this.requests.addAll(requests);
     }
 
     public Name getName() {
@@ -49,16 +51,20 @@ public class Guest {
         return email;
     }
 
+    public RoomNumber getRoomNumber() {
+        return roomNumber;
+    }
+
     public Address getAddress() {
         return address;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable request set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Request> getRequests() {
+        return Collections.unmodifiableSet(requests);
     }
 
     /**
@@ -93,14 +99,15 @@ public class Guest {
         return name.equals(otherGuest.name)
                 && phone.equals(otherGuest.phone)
                 && email.equals(otherGuest.email)
+                && roomNumber.equals(otherGuest.roomNumber)
                 && address.equals(otherGuest.address)
-                && tags.equals(otherGuest.tags);
+                && requests.equals(otherGuest.requests);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, roomNumber, address, requests);
     }
 
     @Override
@@ -109,8 +116,9 @@ public class Guest {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("guestnote", address)
-                .add("tags", tags)
+                .add("roomNumber", roomNumber)
+                .add("address", address)
+                .add("requests", requests)
                 .toString();
     }
 

@@ -10,7 +10,8 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.request.Request;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,8 +36,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(guest.getName());
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
+        descriptor.setRoomNumber(guest.getRoomNumber());
         descriptor.setAddress(guest.getAddress());
-        descriptor.setTags(guest.getTags());
+        descriptor.setTags(guest.getRequests());
     }
 
     /**
@@ -64,6 +66,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code RoomNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoomNumber(String roomNumber) {
+        descriptor.setRoomNumber(new RoomNumber(roomNumber));
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
@@ -72,12 +82,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Request>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Request> requestSet = Stream.of(tags).map(Request::new).collect(Collectors.toSet());
+        descriptor.setTags(requestSet);
         return this;
     }
 

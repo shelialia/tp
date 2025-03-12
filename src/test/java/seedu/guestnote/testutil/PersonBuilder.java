@@ -8,7 +8,8 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
-import seedu.guestnote.model.tag.Tag;
+import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.util.SampleDataUtil;
 
 /**
@@ -19,13 +20,15 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_ROOM_NUMBER = "00-00";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private RoomNumber roomNumber;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Request> requests;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +37,9 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        requests = new HashSet<>();
     }
 
     /**
@@ -45,8 +49,9 @@ public class PersonBuilder {
         name = guestToCopy.getName();
         phone = guestToCopy.getPhone();
         email = guestToCopy.getEmail();
+        roomNumber = guestToCopy.getRoomNumber();
         address = guestToCopy.getAddress();
-        tags = new HashSet<>(guestToCopy.getTags());
+        requests = new HashSet<>(guestToCopy.getRequests());
     }
 
     /**
@@ -58,10 +63,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Guest} that we are building.
+     * Parses the {@code requests} into a {@code Set<Request>} and set it to the {@code Guest} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.requests = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -89,8 +94,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code RoomNumber} of the {@code Guest} that we are building.
+     */
+    public PersonBuilder withRoomNumber(String roomNumber) {
+        this.roomNumber = new RoomNumber(roomNumber);
+        return this;
+    }
+
     public Guest build() {
-        return new Guest(name, phone, email, address, tags);
+        return new Guest(name, phone, email, roomNumber, address, requests);
     }
 
 }

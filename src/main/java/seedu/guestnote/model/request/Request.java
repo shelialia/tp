@@ -1,13 +1,13 @@
-package seedu.guestnote.model.tag;
+package seedu.guestnote.model.request;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the guestnote book.
+ * Represents a Request in the guestnote book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Request {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
@@ -15,18 +15,18 @@ public class Tag {
     public final String tagName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Request}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName A valid request name.
      */
-    public Tag(String tagName) {
+    public Request(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid request name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -39,12 +39,12 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof Request)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        Request otherRequest = (Request) other;
+        return tagName.equals(otherRequest.tagName);
     }
 
     @Override
