@@ -36,7 +36,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
         descriptor.setRoomNumber(guest.getRoomNumber());
-        descriptor.setAddress(guest.getAddress());
         descriptor.setTags(guest.getRequests());
     }
 
@@ -69,14 +68,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withRoomNumber(String roomNumber) {
         descriptor.setRoomNumber(new RoomNumber(roomNumber));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 
