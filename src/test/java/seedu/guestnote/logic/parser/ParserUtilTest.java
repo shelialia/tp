@@ -14,7 +14,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;

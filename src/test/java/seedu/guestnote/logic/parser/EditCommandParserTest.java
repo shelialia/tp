@@ -38,7 +38,6 @@ import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.EditCommand;
 import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;

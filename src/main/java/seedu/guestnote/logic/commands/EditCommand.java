@@ -22,7 +22,6 @@ import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;

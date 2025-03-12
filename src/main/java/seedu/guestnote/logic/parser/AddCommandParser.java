@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.guest.Address;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
