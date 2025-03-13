@@ -36,17 +36,18 @@ public abstract class StayDuration {
      * Returns true if a given string follows the DD-MM-YYYY date format.
      */
     public static boolean isValidDate(String test) {
+        if (test == null || !test.matches("\\d{2}-\\d{2}-\\d{4}")) {
+            return false;
+        }
         try {
-            LocalDate.parse(test, INPUT_FORMATTER);
-            return true;
+            LocalDate date = LocalDate.parse(test, INPUT_FORMATTER);
+            return test.equals(date.format(INPUT_FORMATTER));
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
-    /**
-     * Returns the stored date as a formatted string in YYYY-MM-DD format.
-     */
+
     @Override
     public String toString() {
         return date.format(OUTPUT_FORMATTER);
