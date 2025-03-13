@@ -30,17 +30,14 @@ public class ListCommand extends Command {
      * @throws CommandException If there are no guests present or no matching guests for the given query.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        /*requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);*/
+    public CommandResult execute(Model model) {
         // Update the filtered list to show all guests.
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         ObservableList<Guest> guestList = model.getFilteredPersonList();
 
         // If the guest list is empty, throw an exception.
         if (guestList.isEmpty()) {
-            throw new CommandException(MESSAGE_EMPTY_GUEST_LIST);
+            return new CommandResult(MESSAGE_SUCCESS);
         }
 
         // Build the output string with each guest's room number and name.
@@ -49,6 +46,6 @@ public class ListCommand extends Command {
             sb.append(String.format("Room Number: %s | Name: %s%n", guest.getRoomNumber(), guest.getName()));
         }
 
-        return new CommandResult(sb.toString());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
