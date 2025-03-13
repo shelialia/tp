@@ -1,14 +1,7 @@
 package seedu.guestnote.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.util.List;
-import java.util.Optional;
-
 import javafx.collections.ObservableList;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
-import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.Guest;
 
