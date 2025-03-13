@@ -41,10 +41,10 @@ public class ListCommand extends Command {
         // If the guest list is empty, throw an exception.
         if (guestList.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY_GUEST_LIST);
-        }
+    }
 
-        // Build the output string with each guest's room number and name.
-        StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + "\n");
+    // Build the output string with each guest's room number and name.
+    StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + "\n");
         for (Guest guest : guestList) {
             sb.append(String.format("Room Number: %s | Name: %s%n", guest.getRoomNumber(), guest.getName()));
         }
