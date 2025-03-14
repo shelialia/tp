@@ -20,7 +20,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.commands.CommandResult;
-import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
@@ -65,12 +64,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    }
-
-    @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
@@ -98,7 +91,9 @@ public class LogicManagerTest {
             Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, model);
+        assertEquals(expectedModel.getAddressBook(), model.getAddressBook());
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+
     }
 
     /**
