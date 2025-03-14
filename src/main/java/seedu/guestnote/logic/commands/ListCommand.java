@@ -1,10 +1,7 @@
 package seedu.guestnote.logic.commands;
 
-<<<<<<< Updated upstream
-=======
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
->>>>>>> Stashed changes
 import javafx.collections.ObservableList;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
@@ -71,10 +68,6 @@ public class ListCommand extends Command {
                     guest.getName(),
                     guest.getId()));
         }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
