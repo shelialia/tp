@@ -65,10 +65,11 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_listCommandWithNoGuests_throwsCommandException() {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandException(listCommand, ListCommand.MESSAGE_EMPTY_GUEST_LIST);
     }
+
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -98,7 +99,9 @@ public class LogicManagerTest {
             Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, model);
+        assertEquals(expectedModel.getAddressBook(), model.getAddressBook());
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+
     }
 
     /**
