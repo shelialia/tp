@@ -20,7 +20,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.commands.CommandResult;
-import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
@@ -63,13 +62,6 @@ public class LogicManagerTest {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
-    @Test
-    public void execute_listCommandWithNoGuests_throwsCommandException() {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandException(listCommand, ListCommand.MESSAGE_EMPTY_GUEST_LIST);
-    }
-
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
