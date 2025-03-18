@@ -63,10 +63,9 @@ public class ListCommand extends Command {
         // Build the output string with each guest's room number and name.
         StringBuilder sb = new StringBuilder(MESSAGE_SUCCESS + "\n");
         for (Guest guest : guestList) {
-            sb.append(String.format("Room Number: %s | Name: %s%n | UniqueID: %s \n\n",
+            sb.append(String.format("Room Number: %s | Name: %s%n \n\n",
                     guest.getRoomNumber(),
-                    guest.getName(),
-                    guest.getId()));
+                    guest.getName()));
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

@@ -37,8 +37,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label uniqueID;
-    @FXML
     private Label roomNumber;
     @FXML
     private FlowPane requests;
@@ -54,7 +52,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(guest.getName().fullName);
         phone.setText(guest.getPhone().value);
         email.setText(guest.getEmail().value);
-        uniqueID.setText(guest.getId());
         roomNumber.setText(guest.getRoomNumber().roomNumber);
         guest.getRequests().stream()
                 .sorted(Comparator.comparing(request -> request.tagName))
