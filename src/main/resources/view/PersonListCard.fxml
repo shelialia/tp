@@ -18,19 +18,25 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="requests" />
-      <FlowPane fx:id="roomNumber" />
+
+        <HBox spacing="0.5" alignment="CENTER_LEFT">
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <FlowPane fx:id="roomNumber"
+                    alignment="TOP_LEFT"
+                    vgap="0" hgap="3"
+                    maxWidth="40" />
+          <Label fx:id="name" styleClass="cell_big_label"/>
+        </HBox>
+
+        <FlowPane fx:id="requests" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+
     </VBox>
   </GridPane>
 </HBox>
