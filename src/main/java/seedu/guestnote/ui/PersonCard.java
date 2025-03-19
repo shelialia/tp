@@ -1,6 +1,7 @@
 package seedu.guestnote.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.Flow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -37,7 +38,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label roomNumber;
+    private FlowPane roomNumber;
     @FXML
     private FlowPane requests;
 
@@ -52,7 +53,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(guest.getName().fullName);
         phone.setText(guest.getPhone().value);
         email.setText(guest.getEmail().value);
-        roomNumber.setText(guest.getRoomNumber().roomNumber);
+        roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
         guest.getRequests().stream()
                 .sorted(Comparator.comparing(request -> request.tagName))
                 .forEach(request -> requests.getChildren().add(new Label(request.tagName)));
