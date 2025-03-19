@@ -36,7 +36,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
         descriptor.setRoomNumber(guest.getRoomNumber());
-        descriptor.setTags(guest.getRequests());
     }
 
     /**
@@ -72,12 +71,22 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Request>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to add**
+     * in the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Request> requestSet = Stream.of(tags).map(Request::new).collect(Collectors.toSet());
-        descriptor.setTags(requestSet);
+    public EditPersonDescriptorBuilder withRequestsToAdd(String... requests) {
+        Set<Request> requestSet = Stream.of(requests).map(Request::new).collect(Collectors.toSet());
+        descriptor.setRequestsToAdd(requestSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to remove**
+     * in the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRequestsToDelete(String... requests) {
+        Set<Request> requestSet = Stream.of(requests).map(Request::new).collect(Collectors.toSet());
+        descriptor.setRequestsToDelete(requestSet);
         return this;
     }
 

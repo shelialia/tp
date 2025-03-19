@@ -18,9 +18,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.guestnote.logic.parser.CliSyntax.*;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -41,7 +39,8 @@ import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String TAG_ADD_EMPTY = " " + PREFIX_ADD_REQ;
+    private static final String TAG_DELETE_EMPTY = " " + PREFIX_ADD_REQ;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -85,14 +84,13 @@ public class EditCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Guest} being edited,
-        // parsing it together with a valid request results in error
+        // parsing adding an empty request results in error
         assertParseFailure(parser,
-                "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Request.MESSAGE_CONSTRAINTS);
+                "1" + TAG_ADD_EMPTY, Request.MESSAGE_CONSTRAINTS);
+
+        // parsing adding an empty request results in error
         assertParseFailure(parser,
-                "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Request.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser,
-                "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Request.MESSAGE_CONSTRAINTS);
+                "1" + TAG_DELETE_EMPTY, Request.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
@@ -104,11 +102,11 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + NAME_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRequestsToAdd(VALID_TAG_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -149,7 +147,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditPersonDescriptorBuilder().withRequestsToAdd(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -189,11 +187,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + TAG_ADD_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withRequestsToAdd().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
+        System.out.println(userInput);
+        System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

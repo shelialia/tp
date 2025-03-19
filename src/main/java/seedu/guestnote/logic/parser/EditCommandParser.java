@@ -59,9 +59,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_ROOMNUMBER).get())
             );
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ)).ifPresent(editPersonDescriptor::setRequestsToAdd);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
-                .ifPresent(editPersonDescriptor::setRequestsToDelete);
+        if (argMultimap.getValue(PREFIX_ADD_REQ).isPresent()) {
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ))
+                    .ifPresent(editPersonDescriptor::setRequestsToAdd);
+        }
+        if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()) {
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
+                    .ifPresent(editPersonDescriptor::setRequestsToDelete);
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -75,14 +80,23 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Request>} containing zero tags.
      */
-    private Optional<Set<Request>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Request>> parseTagsForEdit(Collection<String> requests) throws ParseException {
+        assert requests != null;
 
-        if (tags.isEmpty()) {
+        if (requests.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        for (String request : requests) {
+            // Trim whitespace to prevent false positives
+            String trimmedRequest = request.trim();
+
+
+            // ✅ Reject requests that contain non-alphanumeric characters except spaces
+            if (!trimmedRequest.matches("[\\p{Alnum} ]+")) {
+                throw new ParseException("Tags names should be alphanumeric");
+            }
+        }
+        return Optional.of(ParserUtil.parseTags(requests));
     }
 
 }
