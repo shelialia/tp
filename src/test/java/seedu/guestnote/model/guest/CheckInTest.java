@@ -2,6 +2,7 @@ package seedu.guestnote.model.guest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,12 @@ public class CheckInTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new CheckIn(null));
+    }
+
+    @Test
+    public void constructor_validDate_success() {
+        CheckIn checkIn = new CheckIn("12-04-2024");
+        assertEquals("2024-04-12", checkIn.toString());
     }
 
     @Test
