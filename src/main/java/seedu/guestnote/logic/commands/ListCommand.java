@@ -2,10 +2,7 @@ package seedu.guestnote.logic.commands;
 
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import javafx.collections.ObservableList;
-import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 
 /**
