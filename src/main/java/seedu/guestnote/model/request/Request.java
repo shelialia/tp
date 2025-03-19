@@ -10,7 +10,7 @@ import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 public class Request {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String tagName;
 
@@ -21,6 +21,7 @@ public class Request {
      */
     public Request(String tagName) {
         requireNonNull(tagName);
+        System.out.println(tagName + "here I am");
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
