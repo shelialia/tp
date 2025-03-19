@@ -6,18 +6,18 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_ROOMNUMBER_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_REQUEST_DESC;
+import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_ROOMNUMBER_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_AMY;
-import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_FRIEND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -57,7 +57,8 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withRequests(VALID_REQUEST_FRIEND, VALID_REQUEST_HUSBAND)
+        Guest expectedGuestMultipleTags = new PersonBuilder(BOB)
+                .withRequests(VALID_REQUEST_FRIEND, VALID_REQUEST_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

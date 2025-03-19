@@ -35,7 +35,7 @@
 
       <FlowPane fx:id="requests"
                 hgap="5" vgap="3"
-                prefWrapLength="2" />
+                prefWrapLength="300" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
 

@@ -343,6 +343,8 @@
 }
 
 #requests .label {
+    -fx-wrap-text: true;
+    -fx-max-width: 300px;
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
