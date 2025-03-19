@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.model.request.Request;
@@ -21,7 +20,6 @@ public class Guest {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final String id;
 
     // Data fields
     private final RoomNumber roomNumber;
@@ -37,7 +35,6 @@ public class Guest {
         this.email = email;
         this.roomNumber = roomNumber;
         this.requests.addAll(requests);
-        this.id = UUID.randomUUID().toString();
     }
 
     public Name getName() {
@@ -54,10 +51,6 @@ public class Guest {
 
     public RoomNumber getRoomNumber() {
         return roomNumber;
-    }
-
-    public String getId() {
-        return id;
     }
 
     /**
@@ -108,7 +101,7 @@ public class Guest {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, roomNumber, requests, id);
+        return Objects.hash(name, phone, email, roomNumber, requests);
     }
 
     @Override
