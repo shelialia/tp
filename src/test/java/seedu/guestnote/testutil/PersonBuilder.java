@@ -60,8 +60,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code requests} into a {@code Set<Request>} and set it to the {@code Guest} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.requests = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withRequests(String ... requests) {
+        this.requests = SampleDataUtil.getRequestSet(requests);
         return this;
     }
 

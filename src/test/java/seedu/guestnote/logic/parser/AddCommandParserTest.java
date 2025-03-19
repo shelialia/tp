@@ -7,7 +7,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_ROOMNUMBER_DESC;
-import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_REQUEST_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -16,13 +16,13 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.ROOMNUMBER_DESC_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_HUSBAND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -49,26 +49,26 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Guest expectedGuest = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Guest expectedGuest = new PersonBuilder(BOB).withRequests(VALID_REQUEST_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOMNUMBER_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedGuest));
+                + ROOMNUMBER_DESC_BOB + REQUEST_DESC_FRIEND, new AddCommand(expectedGuest));
 
 
         // multiple tags - all accepted
-        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withRequests(VALID_REQUEST_FRIEND, VALID_REQUEST_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ROOMNUMBER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + ROOMNUMBER_DESC_BOB + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND,
                 new AddCommand(expectedGuestMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOMNUMBER_DESC_BOB + TAG_DESC_FRIEND;
+                + ROOMNUMBER_DESC_BOB + REQUEST_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -125,7 +125,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Guest expectedGuest = new PersonBuilder(AMY).withTags().build();
+        Guest expectedGuest = new PersonBuilder(AMY).withRequests().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ROOMNUMBER_DESC_AMY,
                 new AddCommand(expectedGuest));
@@ -161,27 +161,27 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROOMNUMBER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC
                 + EMAIL_DESC_BOB + ROOMNUMBER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + INVALID_EMAIL_DESC + ROOMNUMBER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid room number
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_ROOMNUMBER_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, RoomNumber.MESSAGE_CONSTRAINTS);
+                + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND, RoomNumber.MESSAGE_CONSTRAINTS);
 
         // invalid request
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROOMNUMBER_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Request.MESSAGE_CONSTRAINTS);
+                + INVALID_REQUEST_DESC + VALID_REQUEST_FRIEND, Request.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
@@ -190,7 +190,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ROOMNUMBER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + ROOMNUMBER_DESC_BOB + REQUEST_DESC_HUSBAND + REQUEST_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
