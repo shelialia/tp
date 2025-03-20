@@ -55,8 +55,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the guestnote book.";
 
-    public static final String MESSAGE_DUPLICATE_REQUEST = "This request already exists in the guest.";
-    public static final String MESSAGE_REQUEST_NOT_FOUND = "This request does not exist in the guest.";
+    public static final String MESSAGE_DUPLICATE_REQUEST = "Duplicate request detected";
+    public static final String MESSAGE_REQUEST_NOT_FOUND = "This request does not exist in the guest";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -87,9 +87,9 @@ public class EditCommand extends Command {
         try {
             editedGuest = createEditedPerson(guestToEdit, editPersonDescriptor);
         } catch (DuplicateRequestException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_REQUEST);
+            throw new CommandException(MESSAGE_DUPLICATE_REQUEST + ": " + e.getErrorRequest());
         } catch (RequestNotFoundException e) {
-            throw new CommandException(MESSAGE_REQUEST_NOT_FOUND);
+            throw new CommandException(MESSAGE_REQUEST_NOT_FOUND + ": " + e.getErrorRequest());
         }
 
         if (!guestToEdit.isSameGuest(editedGuest) && model.hasPerson(editedGuest)) {

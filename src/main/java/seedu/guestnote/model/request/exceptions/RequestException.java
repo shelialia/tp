@@ -5,7 +5,7 @@ package seedu.guestnote.model.request.exceptions;
  */
 public class RequestException extends RuntimeException {
 
-    public final String request;
+    private final String request;
 
     /**
      * Constructs a new RequestException with the specified detail {@code message} and {@code request}.
@@ -13,5 +13,9 @@ public class RequestException extends RuntimeException {
     public RequestException(String message, String request) {
         super(message);
         this.request = request;
+    }
+
+    public String getErrorRequest() {
+        return request;
     }
 }
