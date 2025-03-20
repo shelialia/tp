@@ -142,6 +142,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private RoomNumber roomNumber;
+        private UniqueRequestList requests;
         private UniqueRequestList requestsToAdd;
         private UniqueRequestList requestsToDelete;
 
@@ -156,6 +157,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setRoomNumber(toCopy.roomNumber);
+            setRequests(toCopy.requests);
             setRequestsToAdd(toCopy.requestsToAdd);
             setRequestsToDelete(toCopy.requestsToDelete);
         }
@@ -197,6 +199,19 @@ public class EditCommand extends Command {
 
         public Optional<RoomNumber> getRoomNumber() {
             return Optional.ofNullable(roomNumber);
+        }
+
+        public void setRequests(UniqueRequestList requests) {
+            this.requests = (requests != null) ? new UniqueRequestList() : null;
+            if (requests != null) {
+                this.requests.setRequests(requests);
+            }
+        }
+
+        public Optional<UniqueRequestList> getRequests() {
+            return (requests != null)
+                    ? Optional.of(requests)
+                    : Optional.empty();
         }
 
         /**

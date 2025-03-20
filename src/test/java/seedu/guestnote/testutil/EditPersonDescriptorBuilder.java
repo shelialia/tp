@@ -10,7 +10,6 @@ import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.request.UniqueRequestList;
-import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
