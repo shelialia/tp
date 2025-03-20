@@ -356,7 +356,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge requests a list of all guests.
-2. GuestBook retrieves and displays a list of all guests, each guest is paired with a 1-based index based on their position in the list.  
+2. GuestBook retrieves and displays a list of all guests.  
    Use case ends.
 
 **Extensions:**
