@@ -31,7 +31,7 @@ import seedu.guestnote.testutil.PersonUtil;
 
 public class GuestBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final GuestBookParser parser = new GuestBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

@@ -61,7 +61,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ROOMNUMBER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + ROOMNUMBER_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND ,
                 new AddCommand(expectedGuestMultipleTags));
     }
 
