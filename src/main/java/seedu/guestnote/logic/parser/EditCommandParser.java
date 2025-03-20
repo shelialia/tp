@@ -2,8 +2,8 @@ package seedu.guestnote.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQUEST;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -31,7 +31,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADD_REQ, PREFIX_DELETE_REQ
+                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADD_REQUEST, PREFIX_DELETE_REQUEST
         );
 
         Index index;
@@ -43,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADD_REQ, PREFIX_DELETE_REQ
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_ADD_REQUEST, PREFIX_DELETE_REQUEST
         );
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -62,12 +62,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_ROOMNUMBER).get())
             );
         }
-        if (argMultimap.getValue(PREFIX_ADD_REQ).isPresent()) {
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ))
+        if (argMultimap.getValue(PREFIX_ADD_REQUEST).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQUEST))
                     .ifPresent(editPersonDescriptor::setRequestsToAdd);
         }
-        if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()) {
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
+        if (argMultimap.getValue(PREFIX_DELETE_REQUEST).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQUEST))
                     .ifPresent(editPersonDescriptor::setRequestsToDelete);
         }
 
@@ -79,18 +79,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Request>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Request>} containing zero tags.
+     * Parses {@code Collection<String> requests} into a {@code Set<Request>} if {@code requests} is non-empty.
+     * If {@code requests} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Request>} containing zero requests.
      */
-    private Optional<UniqueRequestList> parseTagsForEdit(Collection<String> requests) throws ParseException {
+    private Optional<UniqueRequestList> parseRequestsForEdit(Collection<String> requests) throws ParseException {
         assert requests != null;
 
         if (requests.isEmpty()) {
             return Optional.empty();
         }
         UniqueRequestList requestList = new UniqueRequestList();
-        requestList.setRequests(ParserUtil.parseTags(requests));
+        requestList.setRequests(ParserUtil.parseRequests(requests));
         return Optional.of(requestList);
     }
 

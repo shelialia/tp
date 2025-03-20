@@ -5,30 +5,30 @@ import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Request in the guestnote book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidRequestName(String)}
  */
 public class Request {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Requests names should be alphanumeric";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*$";
 
-    public final String tagName;
+    public final String requestName;
 
     /**
      * Constructs a {@code Request}.
      *
-     * @param tagName A valid request name.
+     * @param requestName A valid request name.
      */
-    public Request(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Request(String requestName) {
+        requireNonNull(requestName);
+        checkArgument(isValidRequestName(requestName), MESSAGE_CONSTRAINTS);
+        this.requestName = requestName;
     }
 
     /**
      * Returns true if a given string is a valid request name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidRequestName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -42,7 +42,7 @@ public class Request {
         }
 
         return otherRequest != null
-                && otherRequest.tagName.equals(tagName);
+                && otherRequest.requestName.equals(requestName);
     }
 
     @Override
@@ -57,19 +57,19 @@ public class Request {
         }
 
         Request otherRequest = (Request) other;
-        return tagName.equals(otherRequest.tagName);
+        return requestName.equals(otherRequest.requestName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return requestName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + requestName + ']';
     }
 
 }

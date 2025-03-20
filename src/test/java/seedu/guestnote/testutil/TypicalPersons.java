@@ -8,8 +8,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,14 +87,14 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
-            .withRequests(VALID_TAG_FRIEND)
+            .withRequests(VALID_REQUEST_FRIEND)
             .build();
     public static final Guest BOB = new PersonBuilder()
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
-            .withRequests(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withRequests(VALID_REQUEST_HUSBAND, VALID_REQUEST_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
