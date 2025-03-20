@@ -71,7 +71,8 @@ public class Guest {
         }
 
         return otherGuest != null
-                && otherGuest.getName().equals(getName());
+                && (otherGuest.getPhone().equals(getPhone())
+                || otherGuest.getEmail().equals(getEmail()));
     }
 
     /**

@@ -21,22 +21,22 @@ public class SampleDataUtil {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new RoomNumber("12-33"),
-                getTagSet("friends")),
+                    getRequestSet("friends")),
             new Guest(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new RoomNumber("23-32"),
-                getTagSet("colleagues", "friends")),
+                    getRequestSet("colleagues", "friends")),
             new Guest(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new RoomNumber("01-57"),
-                getTagSet("neighbours")),
+                getRequestSet("neighbours")),
             new Guest(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new RoomNumber("04-22"),
-                getTagSet("family")),
+                getRequestSet("family")),
             new Guest(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new RoomNumber("02-23"),
-                getTagSet("classmates")),
+                getRequestSet("classmates")),
             new Guest(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new RoomNumber("11-33"),
-                getTagSet("colleagues"))
+                getRequestSet("colleagues"))
         };
     }
 
@@ -51,7 +51,7 @@ public class SampleDataUtil {
     /**
      * Returns a request set containing the list of strings given.
      */
-    public static Set<Request> getTagSet(String... strings) {
+    public static Set<Request> getRequestSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Request::new)
                 .collect(Collectors.toSet());

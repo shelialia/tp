@@ -12,8 +12,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_HUSBAND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -42,7 +42,7 @@ import seedu.guestnote.model.request.Request;
 import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
-
+  
     private static final String TAG_ADD_EMPTY = " " + PREFIX_ADD_REQ;
     private static final String TAG_DELETE_EMPTY = " " + PREFIX_ADD_REQ;
 
@@ -174,8 +174,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+                + REQUEST_DESC_FRIEND + PHONE_DESC_AMY + EMAIL_DESC_AMY + REQUEST_DESC_FRIEND
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + REQUEST_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));

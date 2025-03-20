@@ -6,6 +6,7 @@ import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * Represents a StayDuration (CheckIn or CheckOut) in the guestnote book.
@@ -59,7 +60,7 @@ public abstract class StayDuration {
             return true;
         }
 
-        if (!(other instanceof StayDuration)) {
+        if (other == null || this.getClass() != other.getClass()) {
             return false;
         }
 
@@ -69,6 +70,6 @@ public abstract class StayDuration {
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return Objects.hash(date);
     }
 }
