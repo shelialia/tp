@@ -5,7 +5,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 
 import java.util.Set;
@@ -38,7 +38,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ROOMNUMBER + guest.getRoomNumber().roomNumber + " ");
         guest.getRequests().stream().forEach(
-            s -> sb.append(PREFIX_REQ + s.tagName + " ")
+            s -> sb.append(PREFIX_REQUEST + s.tagName + " ")
         );
         return sb.toString();
     }
