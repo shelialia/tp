@@ -2,13 +2,13 @@ package seedu.guestnote.model.guest;
 
 import static seedu.guestnote.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
+
 
 /**
  * Represents a Guest in the guestnote book.
@@ -23,18 +23,18 @@ public class Guest {
 
     // Data fields
     private final RoomNumber roomNumber;
-    private final Set<Request> requests = new HashSet<>();
+    private final UniqueRequestList requests = new UniqueRequestList();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Set<Request> requests) {
+    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, UniqueRequestList requests) {
         requireAllNonNull(name, phone, email, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
-        this.requests.addAll(requests);
+        this.requests.setRequests(requests);
     }
 
     public Name getName() {
@@ -57,8 +57,8 @@ public class Guest {
      * Returns an immutable request set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Request> getRequests() {
-        return Collections.unmodifiableSet(requests);
+    public ObservableList<Request> getRequests() {
+        return requests.asUnmodifiableObservableList();
     }
 
     /**

@@ -32,6 +32,19 @@ public class Request {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both requests have the same name.
+     * This defines a weaker notion of equality between two requests.
+     */
+    public boolean isSameRequest(Request otherRequest) {
+        if (otherRequest == this) {
+            return true;
+        }
+
+        return otherRequest != null
+                && otherRequest.tagName.equals(tagName);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

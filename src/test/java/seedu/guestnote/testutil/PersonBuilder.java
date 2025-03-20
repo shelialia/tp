@@ -1,14 +1,11 @@
 package seedu.guestnote.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
-import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 import seedu.guestnote.model.util.SampleDataUtil;
 
 /**
@@ -25,7 +22,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private RoomNumber roomNumber;
-    private Set<Request> requests;
+    private UniqueRequestList requests;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +32,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
-        requests = new HashSet<>();
+        requests = new UniqueRequestList();
     }
 
     /**
@@ -46,7 +43,8 @@ public class PersonBuilder {
         phone = guestToCopy.getPhone();
         email = guestToCopy.getEmail();
         roomNumber = guestToCopy.getRoomNumber();
-        requests = new HashSet<>(guestToCopy.getRequests());
+        requests = new UniqueRequestList();
+        requests.setRequests(guestToCopy.getRequests());
     }
 
     /**
@@ -60,8 +58,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code requests} into a {@code Set<Request>} and set it to the {@code Guest} that we are building.
      */
-    public PersonBuilder withRequests(String ... requests) {
-        this.requests = SampleDataUtil.getRequestSet(requests);
+    public PersonBuilder withRequests(String ... tags) {
+        this.requests = SampleDataUtil.getRequestList(tags);
         return this;
     }
 

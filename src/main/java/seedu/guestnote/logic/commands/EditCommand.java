@@ -9,12 +9,9 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.commons.util.CollectionUtil;
@@ -27,7 +24,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
-import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Edits the details of an existing guest in the guestnote book.
@@ -103,7 +100,8 @@ public class EditCommand extends Command {
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
 
         // Extract existing requests and apply additions/removals
-        Set<Request> updatedRequests = new HashSet<>(guestToEdit.getRequests());
+        UniqueRequestList updatedRequests = new UniqueRequestList();
+        updatedRequests.setRequests(guestToEdit.getRequests());
 
         editPersonDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
         editPersonDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
@@ -144,8 +142,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private RoomNumber roomNumber;
-        private Set<Request> requestsToAdd;
-        private Set<Request> requestsToDelete;
+        private UniqueRequestList requests;
+        private UniqueRequestList requestsToAdd;
+        private UniqueRequestList requestsToDelete;
 
         public EditPersonDescriptor() {}
 
@@ -158,6 +157,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setRoomNumber(toCopy.roomNumber);
+            setRequests(toCopy.requests);
             setRequestsToAdd(toCopy.requestsToAdd);
             setRequestsToDelete(toCopy.requestsToDelete);
         }
@@ -201,20 +201,39 @@ public class EditCommand extends Command {
             return Optional.ofNullable(roomNumber);
         }
 
+        public void setRequests(UniqueRequestList requests) {
+            this.requests = (requests != null) ? new UniqueRequestList() : null;
+            if (requests != null) {
+                this.requests.setRequests(requests);
+            }
+        }
+
+        public Optional<UniqueRequestList> getRequests() {
+            return (requests != null)
+                    ? Optional.of(requests)
+                    : Optional.empty();
+        }
+
         /**
          * Sets {@code requestsToAdd} to this object's {@code requestsToAdd}.
          * A defensive copy of {@code requestsToAdd} is used internally.
          */
-        public void setRequestsToAdd(Set<Request> requestsToAdd) {
-            this.requestsToAdd = (requestsToAdd != null) ? new HashSet<>(requestsToAdd) : null;
+        public void setRequestsToAdd(UniqueRequestList requestsToAdd) {
+            this.requestsToAdd = (requestsToAdd != null) ? new UniqueRequestList() : null;
+            if (requestsToAdd != null) {
+                this.requestsToAdd.setRequests(requestsToAdd);
+            }
         }
 
         /**
          * Sets {@code requestsToDelete} to this object's {@code requestsToDelete}.
          * A defensive copy of {@code requestsToDelete} is used internally.
          */
-        public void setRequestsToDelete(Set<Request> requestsToDelete) {
-            this.requestsToDelete = (requestsToDelete != null) ? new HashSet<>(requestsToDelete) : null;
+        public void setRequestsToDelete(UniqueRequestList requestsToDelete) {
+            this.requestsToDelete = (requestsToDelete != null) ? new UniqueRequestList() : null;
+            if (requestsToDelete != null) {
+                this.requestsToDelete.setRequests(requestsToDelete);
+            }
         }
 
         /**
@@ -222,8 +241,10 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<Set<Request>> getRequestsToAdd() {
-            return (requestsToAdd != null) ? Optional.of(Collections.unmodifiableSet(requestsToAdd)) : Optional.empty();
+        public Optional<UniqueRequestList> getRequestsToAdd() {
+            return (requestsToAdd != null)
+                    ? Optional.of(requestsToAdd)
+                    : Optional.empty();
         }
 
         /**
@@ -231,9 +252,9 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<Set<Request>> getRequestsToDelete() {
+        public Optional<UniqueRequestList> getRequestsToDelete() {
             return (requestsToDelete != null)
-                    ? Optional.of(Collections.unmodifiableSet(requestsToDelete))
+                    ? Optional.of(requestsToDelete)
                     : Optional.empty();
         }
 

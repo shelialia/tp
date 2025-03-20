@@ -1,7 +1,5 @@
 package seedu.guestnote.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -53,8 +51,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(guest.getPhone().value);
         email.setText(guest.getEmail().value);
         roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
-        guest.getRequests().stream()
-                .sorted(Comparator.comparing(request -> request.tagName))
-                .forEach(request -> requests.getChildren().add(new Label(request.tagName)));
+        final int[] counter = {1};
+        guest.getRequests()
+                .forEach(request -> {
+                    Label requestLabel = new Label(counter[0] + ". " + request.tagName);
+                    requests.getChildren().add(requestLabel);
+                    counter[0]++;
+                });
     }
 }
