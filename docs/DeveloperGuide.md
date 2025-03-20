@@ -382,7 +382,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge retrieves a !!guest's ID (UC02)!!
+1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to update the guest’s details, passing the guest’s ID and the new details.
 3. GuestBook validates the input and updates the guest’s record.
 4. GuestBook displays a success message confirming the update.  
@@ -409,7 +409,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge retrieves a !!guest's ID (UC02)!!
+1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to delete the guest, passing the guest’s ID.
 3. GuestBook confirms the deletion of the guest.  
    Use case ends.
@@ -430,7 +430,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge retrieves a !!guest's ID (UC02)!!
+1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to create a new request for the guest, passing the guest’s ID and the request details.
 3. GuestBook validates the input and creates a new request record for the guest.
 4. GuestBook displays a success message confirming the request creation.  
@@ -510,7 +510,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge retrieves a !!guest's ID (UC02)!!
+1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge retrieves a !!request's ID (UC06)!!
 3. Concierge requests to mark the request as completed, passing the request ID.
 4. GuestBook updates the request record with the completion status.
@@ -543,7 +543,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge retrieves a !!guest's ID (UC02)!!
+1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge retrieves a !!request's ID (UC06)!!
 3. Concierge requests to delete the request, passing the request ID.
 4. GuestBook confirms the deletion of the request.  
