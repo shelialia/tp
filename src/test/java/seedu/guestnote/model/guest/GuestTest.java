@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalPersons.ALICE;
 import static seedu.guestnote.testutil.TypicalPersons.BOB;
@@ -33,6 +33,7 @@ public class GuestTest {
 
         // same phone number, different name and email -> should return true
         Guest editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
+
         assertTrue(ALICE.isSameGuest(editedAlice));
 
         // same email, different name and phone number -> should return true
@@ -79,7 +80,7 @@ public class GuestTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

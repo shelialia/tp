@@ -3,8 +3,8 @@ package seedu.guestnote.testutil;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ROOMNUMBER + guest.getRoomNumber().roomNumber + " ");
         guest.getRequests().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_REQUEST + s.tagName + " ")
         );
         return sb.toString();
     }
@@ -53,9 +53,9 @@ public class PersonUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Request> requests = descriptor.getTags().get();
             if (requests.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_REQUEST);
             } else {
-                requests.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_REQUEST).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

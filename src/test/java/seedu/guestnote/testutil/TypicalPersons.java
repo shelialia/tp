@@ -6,10 +6,10 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,13 +28,13 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withRoomNumber("12-33")
-            .withTags("friends").build();
+            .withRequests("friends").build();
     public static final Guest BENSON = new PersonBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
-            .withTags("owesMoney", "friends").build();
+            .withRequests("owesMoney", "friends").build();
     public static final Guest CARL = new PersonBuilder()
             .withName("Carl Kurz")
             .withEmail("heinz@example.com")
@@ -46,7 +46,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withPhone("87652533")
             .withRoomNumber("04-22")
-            .withTags("friends")
+            .withRequests("friends")
             .build();
     public static final Guest ELLE = new PersonBuilder()
             .withName("Elle Meyer")
@@ -87,14 +87,14 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
-            .withTags(VALID_TAG_FRIEND)
+            .withRequests(VALID_REQUEST_FRIEND)
             .build();
     public static final Guest BOB = new PersonBuilder()
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withRequests(VALID_REQUEST_HUSBAND, VALID_REQUEST_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
