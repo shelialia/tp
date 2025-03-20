@@ -22,12 +22,12 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_REQUEST = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_REQUEST_1 = "friend";
+    private static final String VALID_REQUEST_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -127,19 +127,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_REQUEST));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Request expectedRequest = new Request(VALID_TAG_1);
-        assertEquals(expectedRequest, ParserUtil.parseTag(VALID_TAG_1));
+        Request expectedRequest = new Request(VALID_REQUEST_1);
+        assertEquals(expectedRequest, ParserUtil.parseTag(VALID_REQUEST_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Request expectedRequest = new Request(VALID_TAG_1);
+        String tagWithWhitespace = WHITESPACE + VALID_REQUEST_1 + WHITESPACE;
+        Request expectedRequest = new Request(VALID_REQUEST_1);
         assertEquals(expectedRequest, ParserUtil.parseTag(tagWithWhitespace));
     }
 
@@ -150,7 +150,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_REQUEST_1,
+                INVALID_REQUEST)));
     }
 
     @Test
@@ -160,10 +161,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        UniqueRequestList actualRequestList = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        UniqueRequestList actualRequestList = ParserUtil.parseTags(Arrays.asList(VALID_REQUEST_1, VALID_REQUEST_2));
         UniqueRequestList expectedRequestList = new UniqueRequestList();
-        expectedRequestList.add(new Request(VALID_TAG_1));
-        expectedRequestList.add(new Request(VALID_TAG_2));
+        expectedRequestList.add(new Request(VALID_REQUEST_1));
+        expectedRequestList.add(new Request(VALID_REQUEST_2));
 
         assertEquals(expectedRequestList, actualRequestList);
     }

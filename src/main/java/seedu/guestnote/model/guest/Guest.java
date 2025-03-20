@@ -3,7 +3,6 @@ package seedu.guestnote.model.guest;
 import static seedu.guestnote.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import javafx.collections.ObservableList;
 import seedu.guestnote.commons.util.ToStringBuilder;
@@ -21,7 +20,6 @@ public class Guest {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final String id;
 
     // Data fields
     private final RoomNumber roomNumber;
@@ -37,7 +35,6 @@ public class Guest {
         this.email = email;
         this.roomNumber = roomNumber;
         this.requests.setRequests(requests);
-        this.id = UUID.randomUUID().toString();
     }
 
     public Name getName() {
@@ -54,10 +51,6 @@ public class Guest {
 
     public RoomNumber getRoomNumber() {
         return roomNumber;
-    }
-
-    public String getId() {
-        return id;
     }
 
     /**
@@ -78,7 +71,8 @@ public class Guest {
         }
 
         return otherGuest != null
-                && otherGuest.getName().equals(getName());
+                && (otherGuest.getPhone().equals(getPhone())
+                || otherGuest.getEmail().equals(getEmail()));
     }
 
     /**
@@ -107,7 +101,7 @@ public class Guest {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, roomNumber, requests, id);
+        return Objects.hash(name, phone, email, roomNumber, requests);
     }
 
     @Override

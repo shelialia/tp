@@ -10,6 +10,7 @@ import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.request.UniqueRequestList;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -73,13 +74,24 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Request>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to add**
+     * in the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditPersonDescriptorBuilder withRequestsToAdd(String... requests) {
         UniqueRequestList requestList = new UniqueRequestList();
-        Stream.of(tags).map(Request::new).forEach(requestList::add);
-        descriptor.setRequests(requestList);
+        Stream.of(requests).map(Request::new).forEach(requestList::add);
+        descriptor.setRequestsToAdd(requestList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to remove**
+     * in the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRequestsToDelete(String... requests) {
+        UniqueRequestList requestList = new UniqueRequestList();
+        Stream.of(requests).map(Request::new).forEach(requestList::add);
+        descriptor.setRequestsToDelete(requestList);
         return this;
     }
 

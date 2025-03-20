@@ -1,11 +1,12 @@
 package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -40,7 +41,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ROOMNUMBER + "ROOMNUMBER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ADD_REQ + "ADDREQUEST] "
+            + "[" + PREFIX_DELETE_REQ + "DELETEREQUEST]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -96,11 +98,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
-        UniqueRequestList updatedRequests = editPersonDescriptor.getRequests().orElseGet(() -> {
-            UniqueRequestList copy = new UniqueRequestList();
-            copy.setRequests(guestToEdit.getRequests());
-            return copy;
-        });
+
+        // Extract existing requests and apply additions/removals
+        UniqueRequestList updatedRequests = new UniqueRequestList();
+        updatedRequests.setRequests(guestToEdit.getRequests());
+
+        editPersonDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
+        editPersonDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
 
         return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedRequests);
     }
@@ -138,7 +142,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private RoomNumber roomNumber;
-        private UniqueRequestList requests;
+        private UniqueRequestList requestsToAdd;
+        private UniqueRequestList requestsToDelete;
 
         public EditPersonDescriptor() {}
 
@@ -151,14 +156,15 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setRoomNumber(toCopy.roomNumber);
-            setRequests(toCopy.requests);
+            setRequestsToAdd(toCopy.requestsToAdd);
+            setRequestsToDelete(toCopy.requestsToDelete);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, roomNumber, requests);
+            return CollectionUtil.isAnyNonNull(name, phone, email, roomNumber, requestsToAdd, requestsToDelete);
         }
 
         public void setName(Name name) {
@@ -194,23 +200,47 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code requests} to this object's {@code requests}.
-         * A defensive copy of {@code requests} is used internally.
+         * Sets {@code requestsToAdd} to this object's {@code requestsToAdd}.
+         * A defensive copy of {@code requestsToAdd} is used internally.
          */
-        public void setRequests(UniqueRequestList requests) {
-            this.requests = (requests != null) ? new UniqueRequestList() : null;
-            if (requests != null) {
-                this.requests.setRequests(requests);
+        public void setRequestsToAdd(UniqueRequestList requestsToAdd) {
+            this.requestsToAdd = (requestsToAdd != null) ? new UniqueRequestList() : null;
+            if (requestsToAdd != null) {
+                this.requestsToAdd.setRequests(requestsToAdd);
             }
         }
 
         /**
-         * Returns an unmodifiable request set, which throws {@code UnsupportedOperationException}
+         * Sets {@code requestsToDelete} to this object's {@code requestsToDelete}.
+         * A defensive copy of {@code requestsToDelete} is used internally.
+         */
+        public void setRequestsToDelete(UniqueRequestList requestsToDelete) {
+            this.requestsToDelete = (requestsToDelete != null) ? new UniqueRequestList() : null;
+            if (requestsToDelete != null) {
+                this.requestsToDelete.setRequests(requestsToDelete);
+            }
+        }
+
+        /**
+         * Returns an unmodifiable request set for adding, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<UniqueRequestList> getRequests() {
-            return (requests != null) ? Optional.of(requests) : Optional.empty();
+        public Optional<UniqueRequestList> getRequestsToAdd() {
+            return (requestsToAdd != null)
+                    ? Optional.of(requestsToAdd)
+                    : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable request set for deleting, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code requests} is null.
+         */
+        public Optional<UniqueRequestList> getRequestsToDelete() {
+            return (requestsToDelete != null)
+                    ? Optional.of(requestsToDelete)
+                    : Optional.empty();
         }
 
         @Override
@@ -229,7 +259,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(roomNumber, otherEditPersonDescriptor.roomNumber)
-                    && Objects.equals(requests, otherEditPersonDescriptor.requests);
+                    && Objects.equals(requestsToAdd, otherEditPersonDescriptor.requestsToAdd)
+                    && Objects.equals(requestsToDelete, otherEditPersonDescriptor.requestsToDelete);
         }
 
         @Override
@@ -239,7 +270,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("roomNumber", roomNumber)
-                    .add("requests", requests)
+                    .add("requestsToAdd", requestsToAdd)
+                    .add("requestsToDelete", requestsToDelete)
                     .toString();
         }
     }

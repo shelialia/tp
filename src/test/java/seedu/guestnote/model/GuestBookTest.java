@@ -45,7 +45,7 @@ public class GuestBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two guests with the same identity fields
-        Guest editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new PersonBuilder(ALICE).withRequests(VALID_TAG_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
         GuestBookStub newData = new GuestBookStub(newGuests);
@@ -72,7 +72,7 @@ public class GuestBookTest {
     @Test
     public void hasPerson_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
         guestBook.addGuest(ALICE);
-        Guest editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Guest editedAlice = new PersonBuilder(ALICE).withRequests(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(guestBook.hasGuest(editedAlice));
     }

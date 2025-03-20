@@ -58,7 +58,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code requests} into a {@code Set<Request>} and set it to the {@code Guest} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withRequests(String ... tags) {
         this.requests = SampleDataUtil.getRequestList(tags);
         return this;
     }

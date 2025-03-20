@@ -6,8 +6,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_REQUEST_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_ROOMNUMBER_DESC;
-import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -49,7 +49,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Guest expectedGuest = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Guest expectedGuest = new PersonBuilder(BOB).withRequests(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -57,7 +57,8 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Guest expectedGuestMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Guest expectedGuestMultipleTags = new PersonBuilder(BOB)
+                .withRequests(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -125,7 +126,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Guest expectedGuest = new PersonBuilder(AMY).withTags().build();
+        Guest expectedGuest = new PersonBuilder(AMY).withRequests().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ROOMNUMBER_DESC_AMY,
                 new AddCommand(expectedGuest));
@@ -181,7 +182,7 @@ public class AddCommandParserTest {
         // invalid request
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROOMNUMBER_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Request.MESSAGE_CONSTRAINTS);
+                + INVALID_REQUEST_DESC + VALID_TAG_FRIEND, Request.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
