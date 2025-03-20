@@ -13,5 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_REQUEST = new Prefix("rq/");
     public static final Prefix PREFIX_ADD_REQ = new Prefix("+rq/");
     public static final Prefix PREFIX_DELETE_REQ = new Prefix("-rq/");
-
+    public static final Prefix PREFIX_DELETE_REQ_INDEX = new Prefix("-ri/");
 }
