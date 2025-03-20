@@ -8,8 +8,6 @@ import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +16,7 @@ import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -155,17 +154,17 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseTags_emptyCollection_returnsEmptyList() throws Exception {
         assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Request> actualRequestSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Request> expectedRequestSet = new HashSet<Request>(
-                Arrays.asList(new Request(VALID_TAG_1), new Request(VALID_TAG_2))
-        );
+        UniqueRequestList actualRequestList = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        UniqueRequestList expectedRequestList = new UniqueRequestList();
+        expectedRequestList.add(new Request(VALID_TAG_1));
+        expectedRequestList.add(new Request(VALID_TAG_2));
 
-        assertEquals(expectedRequestSet, actualRequestSet);
+        assertEquals(expectedRequestList, actualRequestList);
     }
 }

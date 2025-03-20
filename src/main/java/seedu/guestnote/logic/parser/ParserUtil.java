@@ -3,8 +3,6 @@ package seedu.guestnote.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.commons.util.StringUtil;
@@ -14,6 +12,7 @@ import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -111,14 +110,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Request>}.
+     * Parses {@code Collection<String> tags} into a {@code UniqueRequestList}.
      */
-    public static Set<Request> parseTags(Collection<String> tags) throws ParseException {
+    public static UniqueRequestList parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Request> requestSet = new HashSet<>();
+        UniqueRequestList requestList = new UniqueRequestList();
         for (String tagName : tags) {
-            requestSet.add(parseTag(tagName));
+            requestList.add(parseTag(tagName));
         }
-        return requestSet;
+        return requestList;
     }
 }

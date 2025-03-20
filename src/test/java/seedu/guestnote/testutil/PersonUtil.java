@@ -6,12 +6,10 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-
 import seedu.guestnote.logic.commands.AddCommand;
 import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * A utility class for Guest.
@@ -50,8 +48,8 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getRoomNumber().ifPresent(roomNumber ->
                 sb.append(PREFIX_ROOMNUMBER).append(roomNumber.roomNumber).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Request> requests = descriptor.getTags().get();
+        if (descriptor.getRequests().isPresent()) {
+            UniqueRequestList requests = descriptor.getRequests().get();
             if (requests.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {

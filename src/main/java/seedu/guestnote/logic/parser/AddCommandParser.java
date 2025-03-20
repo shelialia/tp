@@ -7,7 +7,6 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.AddCommand;
@@ -17,7 +16,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
-import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -46,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         RoomNumber roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOMNUMBER).get());
-        Set<Request> requestList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        UniqueRequestList requestList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Guest guest = new Guest(name, phone, email, roomNumber, requestList);
 

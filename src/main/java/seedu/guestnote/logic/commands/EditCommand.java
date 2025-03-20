@@ -8,12 +8,9 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.commons.util.CollectionUtil;
@@ -26,7 +23,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
-import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Edits the details of an existing guest in the guestnote book.
@@ -99,7 +96,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
-        Set<Request> updatedRequests = editPersonDescriptor.getTags().orElse(guestToEdit.getRequests());
+        UniqueRequestList updatedRequests = editPersonDescriptor.getRequests().orElseGet(() -> {
+            UniqueRequestList copy = new UniqueRequestList();
+            copy.setRequests(guestToEdit.getRequests());
+            return copy;
+        });
 
         return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedRequests);
     }
@@ -137,7 +138,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private RoomNumber roomNumber;
-        private Set<Request> requests;
+        private UniqueRequestList requests;
 
         public EditPersonDescriptor() {}
 
@@ -150,7 +151,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setRoomNumber(toCopy.roomNumber);
-            setTags(toCopy.requests);
+            setRequests(toCopy.requests);
         }
 
         /**
@@ -196,8 +197,11 @@ public class EditCommand extends Command {
          * Sets {@code requests} to this object's {@code requests}.
          * A defensive copy of {@code requests} is used internally.
          */
-        public void setTags(Set<Request> requests) {
-            this.requests = (requests != null) ? new HashSet<>(requests) : null;
+        public void setRequests(UniqueRequestList requests) {
+            this.requests = (requests != null) ? new UniqueRequestList() : null;
+            if (requests != null) {
+                this.requests.setRequests(requests);
+            }
         }
 
         /**
@@ -205,8 +209,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code requests} is null.
          */
-        public Optional<Set<Request>> getTags() {
-            return (requests != null) ? Optional.of(Collections.unmodifiableSet(requests)) : Optional.empty();
+        public Optional<UniqueRequestList> getRequests() {
+            return (requests != null) ? Optional.of(requests) : Optional.empty();
         }
 
         @Override

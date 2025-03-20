@@ -60,7 +60,7 @@ public class EditGuestDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getRoomNumber().orElse(null) + ", roomNumber="
                 + editPersonDescriptor.getEmail().orElse(null) + ", requests="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getRequests().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

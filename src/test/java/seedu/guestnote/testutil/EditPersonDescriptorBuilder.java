@@ -1,7 +1,5 @@
 package seedu.guestnote.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
@@ -11,6 +9,7 @@ import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -36,7 +35,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
         descriptor.setRoomNumber(guest.getRoomNumber());
-        descriptor.setTags(guest.getRequests());
+        UniqueRequestList copiedList = new UniqueRequestList();
+        copiedList.setRequests(guest.getRequests());
+        descriptor.setRequests(copiedList);
     }
 
     /**
@@ -76,8 +77,9 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Request> requestSet = Stream.of(tags).map(Request::new).collect(Collectors.toSet());
-        descriptor.setTags(requestSet);
+        UniqueRequestList requestList = new UniqueRequestList();
+        Stream.of(tags).map(Request::new).forEach(requestList::add);
+        descriptor.setRequests(requestList);
         return this;
     }
 

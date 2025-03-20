@@ -142,4 +142,11 @@ public class UniqueRequestList implements Iterable<Request> {
         }
         return true;
     }
+
+    /**
+     * Returns true if the list is empty.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 }

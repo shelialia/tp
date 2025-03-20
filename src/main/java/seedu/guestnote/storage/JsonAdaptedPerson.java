@@ -1,9 +1,7 @@
 package seedu.guestnote.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +13,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Jackson-friendly version of {@link Guest}.
@@ -106,7 +105,8 @@ class JsonAdaptedPerson {
         }
         final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
 
-        final Set<seedu.guestnote.model.request.Request> modelRequests = new HashSet<>(personRequests);
+        final UniqueRequestList modelRequests = new UniqueRequestList();
+        modelRequests.setRequests(personRequests);
         return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelRequests);
     }
 
