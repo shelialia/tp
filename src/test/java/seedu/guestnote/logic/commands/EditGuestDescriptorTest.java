@@ -8,7 +8,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,8 +48,7 @@ public class EditGuestDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy =
-                new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_REQUEST_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRequestsToAdd(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -60,8 +59,9 @@ public class EditGuestDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", roomNumber="
-                + editPersonDescriptor.getRoomNumber().orElse(null) + ", requests="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getRoomNumber().orElse(null) + ", requestsToAdd="
+                + editPersonDescriptor.getRequestsToAdd().orElse(null) + ", requestsToDelete="
+                + editPersonDescriptor.getRequestsToDelete().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
