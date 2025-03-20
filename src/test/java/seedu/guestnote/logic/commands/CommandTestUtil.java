@@ -7,7 +7,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQ;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -46,16 +46,16 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ROOMNUMBER_DESC_AMY = " " + PREFIX_ROOMNUMBER + VALID_ROOMNUMBER_AMY;
     public static final String ROOMNUMBER_DESC_BOB = " " + PREFIX_ROOMNUMBER + VALID_ROOMNUMBER_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_REQ + VALID_TAG_FRIEND;
     public static final String ADD_TAG_DESC_FRIEND = " " + PREFIX_ADD_REQ + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_REQ + VALID_TAG_HUSBAND;
     public static final String ADD_TAG_DESC_HUSBAND = " " + PREFIX_ADD_REQ + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ROOMNUMBER_DESC = " " + PREFIX_ROOMNUMBER + "12"; // missing last digit
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_REQ + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ADD_TAG_DESC = " " + PREFIX_ADD_REQ + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

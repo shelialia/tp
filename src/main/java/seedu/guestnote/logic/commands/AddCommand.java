@@ -5,7 +5,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQ;
 
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
@@ -26,14 +26,14 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROOMNUMBER + "ROOMNUMBER "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REQ + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ROOMNUMBER + "123 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_REQ + "friends "
+            + PREFIX_REQ + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the guestnote book";
