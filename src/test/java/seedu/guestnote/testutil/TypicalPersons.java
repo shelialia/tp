@@ -28,13 +28,13 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withRoomNumber("12-33")
-            .withTags("friends").build();
+            .withTags("friend").build();
     public static final Guest BENSON = new PersonBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friend").build();
     public static final Guest CARL = new PersonBuilder()
             .withName("Carl Kurz")
             .withEmail("heinz@example.com")
@@ -46,7 +46,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withPhone("87652533")
             .withRoomNumber("04-22")
-            .withTags("friends")
+            .withTags("friend")
             .build();
     public static final Guest ELLE = new PersonBuilder()
             .withName("Elle Meyer")

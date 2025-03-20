@@ -1,7 +1,12 @@
 package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.guestnote.logic.parser.CliSyntax.*;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -227,8 +232,9 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code requests} is null.
          */
         public Optional<Set<Request>> getRequestsToDelete() {
-            return (requestsToDelete != null) ?
-                    Optional.of(Collections.unmodifiableSet(requestsToDelete)) : Optional.empty();
+            return (requestsToDelete != null)
+                    ? Optional.of(Collections.unmodifiableSet(requestsToDelete))
+                    : Optional.empty();
         }
 
         @Override

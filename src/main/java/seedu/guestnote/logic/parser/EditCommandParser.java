@@ -2,10 +2,14 @@ package seedu.guestnote.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.guestnote.logic.parser.CliSyntax.*;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -85,16 +89,6 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (requests.isEmpty()) {
             return Optional.empty();
-        }
-        for (String request : requests) {
-            // Trim whitespace to prevent false positives
-            String trimmedRequest = request.trim();
-
-
-            // ✅ Reject requests that contain non-alphanumeric characters except spaces
-            if (!trimmedRequest.matches("[\\p{Alnum} ]+")) {
-                throw new ParseException("Tags names should be alphanumeric");
-            }
         }
         return Optional.of(ParserUtil.parseTags(requests));
     }

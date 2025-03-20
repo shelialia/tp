@@ -1,5 +1,13 @@
 package seedu.guestnote.testutil;
 
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Set;
 
 import seedu.guestnote.logic.commands.AddCommand;
@@ -7,7 +15,6 @@ import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.request.Request;
 
-import static seedu.guestnote.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Guest.
