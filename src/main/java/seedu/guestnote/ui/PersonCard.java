@@ -56,8 +56,13 @@ public class PersonCard extends UiPart<Region> {
         email.setText(guest.getEmail().value);
         uniqueID.setText(guest.getId());
         roomNumber.setText(guest.getRoomNumber().roomNumber);
+        final int[] counter = {1};
         guest.getRequests().stream()
                 .sorted(Comparator.comparing(request -> request.tagName))
-                .forEach(request -> requests.getChildren().add(new Label(request.tagName)));
+                .forEach(request -> {
+                    Label requestLabel = new Label(counter[0] + ". " + request.tagName);
+                    requests.getChildren().add(requestLabel);
+                    counter[0]++;
+                });
     }
 }
