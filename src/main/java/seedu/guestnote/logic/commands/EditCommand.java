@@ -121,6 +121,12 @@ public class EditCommand extends Command {
         editPersonDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
         editPersonDescriptor.getRequestIndexesToDelete().ifPresent(indexes -> {
             List<Request> requests = updatedRequests.asUnmodifiableObservableList();
+            for (Index idx : indexes) {
+                int zeroBasedIdx = idx.getZeroBased();
+                if (zeroBasedIdx < 0 || zeroBasedIdx >= requests.size()) {
+                    throw new RequestNotFoundException("Index Number " + idx.getOneBased());
+                }
+            }
             List<Request> requestsToDeleteList = new ArrayList<>(
                     indexes.stream().map(index -> requests.get(index.getZeroBased())).toList());
 
