@@ -509,8 +509,8 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge retrieves a !!request's ID (UC06)!!
-3. Concierge requests to mark the request as completed, passing the request ID.
+2. Concierge retrieves a !!request's index (UC06)!!
+3. Concierge requests to mark the request as completed, passing the request index.
 4. GuestBook updates the request record with the completion status.
 5. GuestBook displays a success message confirming the request completion.  
    Use case ends.
@@ -518,7 +518,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 **Extensions:**
 <box type="warning" header="3a. Request Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided request ID does not exist for the guest.</li>
+      <li>3a1. GuestBook detects that the provided request index does not exist for the guest.</li>
       <li>3a2. GuestBook informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
@@ -542,15 +542,15 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge retrieves a !!request's ID (UC06)!!
-3. Concierge requests to delete the request, passing the request ID.
+2. Concierge retrieves a !!request's index (UC06)!!
+3. Concierge requests to delete the request, passing the request index.
 4. GuestBook confirms the deletion of the request.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Request Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided request ID does not exist for the guest.</li>
+      <li>3a1. GuestBook detects that the provided request index does not exist for the guest.</li>
       <li>3a2. GuestBook informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
