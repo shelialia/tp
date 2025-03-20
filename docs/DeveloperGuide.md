@@ -356,7 +356,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge requests a list of all guests.
-2. GuestBook retrieves and displays a list of all guests.  
+2. GuestBook retrieves and displays a list of all guests, each guest is paired with a 1-based index based on their position in the list.  
    Use case ends.
 
 **Extensions:**
@@ -383,7 +383,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge requests to update the guest’s details, passing the guest’s ID and the new details.
+2. Concierge requests to update the guest’s details, passing the guest’s index in displayed list and the new details.
 3. GuestBook validates the input and updates the guest’s record.
 4. GuestBook displays a success message confirming the update.  
    Use case ends.
@@ -391,7 +391,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest ID does not exist in the system.</li>
+      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
       <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
@@ -401,6 +401,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
       <li>3b2. GuestBook informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
+
 ---------------------------------------------------------
 
 ### Use case: UC04 - Delete Guest
@@ -410,14 +411,14 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge requests to delete the guest, passing the guest’s ID.
+2. Concierge requests to delete the guest, passing the guest’s index in displayed list.
 3. GuestBook confirms the deletion of the guest.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest ID does not exist in the system.</li>
+      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
       <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
@@ -431,7 +432,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge requests to create a new request for the guest, passing the guest’s ID and the request details.
+2. Concierge requests to edit the guest, passing the guest’s index in displayed list and the new request details.
 3. GuestBook validates the input and creates a new request record for the guest.
 4. GuestBook displays a success message confirming the request creation.  
    Use case ends.
@@ -446,7 +447,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest ID does not exist in the system.</li>
+      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
       <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
@@ -460,9 +461,6 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 ---------------------------------------------------------
 
 ### Use case: UC06 - List All Requests
-<box type="info">
-<b>Preconditions:</b> Guest exists in GuestBook.
-</box>
 
 **MSS:**
 1. Concierge requests a list of all requests
@@ -493,7 +491,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 </box>
 <box type="warning" header="3b. Guest Not Found" light>
     <ul>
-      <li>3b1. GuestBook detects that the provided guest ID does not exist in the system.</li>
+      <li>3b1. GuestBook detects that the provided guest index does not exist in the system.</li>
       <li>3b2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
