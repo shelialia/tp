@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "roomNumber": "04-22",
-    "tags": [ "friend" ]
+    "requests": [ "friend" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

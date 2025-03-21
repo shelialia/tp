@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         RoomNumber roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOMNUMBER).get());
-        UniqueRequestList requestList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REQUEST));
+        UniqueRequestList requestList = ParserUtil.parseRequests(argMultimap.getAllValues(PREFIX_REQUEST));
 
         Guest guest = new Guest(name, phone, email, roomNumber, requestList);
 

@@ -15,28 +15,28 @@ public class RequestTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Request(invalidTagName));
+    public void constructor_invalidRequestName_throwsIllegalArgumentException() {
+        String invalidRequestName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Request(invalidRequestName));
     }
 
     @Test
-    public void isValidTagName() {
+    public void isValidRequestName() {
         // null request name
-        assertThrows(NullPointerException.class, () -> Request.isValidTagName(null));
+        assertThrows(NullPointerException.class, () -> Request.isValidRequestName(null));
     }
 
     @Test
-    public void isValidTagName_additionalTests() {
+    public void isValidRequestName_additionalTests() {
         // invalid request names
-        assertFalse(Request.isValidTagName("")); // empty string
-        assertFalse(Request.isValidTagName(" ")); // spaces only
-        assertFalse(Request.isValidTagName("!@#")); // non-alphanumeric characters
+        assertFalse(Request.isValidRequestName("")); // empty string
+        assertFalse(Request.isValidRequestName(" ")); // spaces only
+        assertFalse(Request.isValidRequestName("!@#")); // non-alphanumeric characters
 
         // valid request names
-        assertTrue(Request.isValidTagName("Extra Towels"));
-        assertTrue(Request.isValidTagName("Late checkout"));
-        assertTrue(Request.isValidTagName("Room Cleaning"));
+        assertTrue(Request.isValidRequestName("Extra Towels"));
+        assertTrue(Request.isValidRequestName("Late checkout"));
+        assertTrue(Request.isValidRequestName("Room Cleaning"));
     }
 
     @Test
@@ -49,11 +49,11 @@ public class RequestTest {
         // null -> returns false
         assertFalse(request.isSameRequest(null));
 
-        // same tag name -> returns true
+        // same request name -> returns true
         Request sameRequest = new Request("Extra Towels");
         assertTrue(request.isSameRequest(sameRequest));
 
-        // different tag name -> returns false
+        // different request name -> returns false
         Request differentRequest = new Request("Late checkout");
         assertFalse(request.isSameRequest(differentRequest));
     }
@@ -71,11 +71,11 @@ public class RequestTest {
         // different type -> returns false
         assertFalse(request.equals("Room Cleaning"));
 
-        // same tag name -> returns true
+        // same request name -> returns true
         Request sameRequest = new Request("Room Cleaning");
         assertTrue(request.equals(sameRequest));
 
-        // different tag name -> returns false
+        // different request name -> returns false
         Request differentRequest = new Request("Extra Towels");
         assertFalse(request.equals(differentRequest));
     }

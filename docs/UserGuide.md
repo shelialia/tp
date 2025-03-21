@@ -53,10 +53,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [rq/REQUEST]` can be used as `n/John Doe rq/New Pillow` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[rq/REQUEST]…​` can be used as ` ` (i.e. 0 times), `rq/New Pillow`, `rq/New Pillow rq/Orange Juice` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a guest to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [rq/REQUEST]…​`
 
 <box type="tip" seamless>
 
@@ -89,7 +89,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/criminal`
+* `add n/Betsy Crowe rq/Add Pillow e/betsycrowe@example.com p/1234567 rq/Orange Juice`
 
 ### Listing all guests : `list`
 
@@ -101,18 +101,18 @@ Format: `list`
 
 Edits an existing guest in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [rq/REQUEST]…​`
 
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing requests, the existing requests of the guest will be removed i.e adding of requests is not cumulative.
-* You can remove all the guest’s requests by typing `t/` without
+* You can remove all the guest’s requests by typing `rq/` without
     specifying any requests after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st guest to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing requests.
+*  `edit 2 n/Betsy Crower rq/` Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing requests.
 
 ### Locating guests by name: `find`
 
@@ -197,10 +197,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com rq/Add Pillow rq/Orange Juice`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rq/REQUEST]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`

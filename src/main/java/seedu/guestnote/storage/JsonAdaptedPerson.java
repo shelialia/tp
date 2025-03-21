@@ -26,7 +26,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String roomNumber;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRequest> requests = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given guest details.
@@ -37,13 +37,13 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("roomNumber") String roomNumber,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("requests") List<JsonAdaptedRequest> requests) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (requests != null) {
+            this.requests.addAll(requests);
         }
     }
 
@@ -55,8 +55,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().roomNumber;
-        tags.addAll(source.getRequests().stream()
-                .map(JsonAdaptedTag::new)
+        requests.addAll(source.getRequests().stream()
+                .map(JsonAdaptedRequest::new)
                 .collect(Collectors.toList()));
     }
 
@@ -67,8 +67,8 @@ class JsonAdaptedPerson {
      */
     public Guest toModelType() throws IllegalValueException {
         final List<seedu.guestnote.model.request.Request> personRequests = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personRequests.add(tag.toModelType());
+        for (JsonAdaptedRequest request : requests) {
+            personRequests.add(request.toModelType());
         }
 
         if (name == null) {
