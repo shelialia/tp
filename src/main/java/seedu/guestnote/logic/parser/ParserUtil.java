@@ -114,17 +114,17 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code request} is invalid.
      */
-    public static Request parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Request.isValidTagName(trimmedTag)) {
+    public static Request parseRequest(String request) throws ParseException {
+        requireNonNull(request);
+        String trimmedRequest = request.trim();
+        if (!Request.isValidRequestName(trimmedRequest)) {
             throw new ParseException(Request.MESSAGE_CONSTRAINTS);
         }
-        return new Request(trimmedTag);
+        return new Request(trimmedRequest);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code UniqueRequestList}.
+     * Parses {@code Collection<String> requests} into a {@code UniqueRequestList}.
      */
     public static List<Request> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);

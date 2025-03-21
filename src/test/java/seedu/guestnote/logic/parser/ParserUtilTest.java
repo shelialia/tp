@@ -122,42 +122,42 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseRequest_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRequest(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_REQUEST));
+    public void parseRequest_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRequest(INVALID_REQUEST));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseRequest_validValueWithoutWhitespace_returnsRequest() throws Exception {
         Request expectedRequest = new Request(VALID_REQUEST_1);
-        assertEquals(expectedRequest, ParserUtil.parseTag(VALID_REQUEST_1));
+        assertEquals(expectedRequest, ParserUtil.parseRequest(VALID_REQUEST_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_REQUEST_1 + WHITESPACE;
+    public void parseRequest_validValueWithWhitespace_returnsTrimmedRequest() throws Exception {
+        String requestWithWhitespace = WHITESPACE + VALID_REQUEST_1 + WHITESPACE;
         Request expectedRequest = new Request(VALID_REQUEST_1);
-        assertEquals(expectedRequest, ParserUtil.parseTag(tagWithWhitespace));
+        assertEquals(expectedRequest, ParserUtil.parseRequest(requestWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseRequests_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRequests(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_REQUEST_1,
+    public void parseRequests_collectionWithInvalidRequests_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRequests(Arrays.asList(VALID_REQUEST_1,
                 INVALID_REQUEST)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptyList() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseRequests_emptyCollection_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseRequests(Collections.emptyList()).isEmpty());
     }
 
     @Test

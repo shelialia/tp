@@ -32,7 +32,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER,
                 PREFIX_ADD_REQ, PREFIX_DELETE_REQ, PREFIX_DELETE_REQ_INDEX
         );
@@ -65,12 +64,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_ROOMNUMBER).get())
             );
         }
-        if (argMultimap.getValue(PREFIX_ADD_REQ).isPresent()) {
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ))
+        if (argMultimap.getValue(PREFIX_ADD_REQUEST).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQUEST))
                     .ifPresent(editPersonDescriptor::setRequestsToAdd);
         }
-        if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()) {
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
+        if (argMultimap.getValue(PREFIX_DELETE_REQUEST).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQUEST))
                     .ifPresent(editPersonDescriptor::setRequestsToDelete);
         }
         if (argMultimap.getValue(PREFIX_DELETE_REQ_INDEX).isPresent()) {
@@ -87,9 +86,9 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Request>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Request>} containing zero tags.
+     * Parses {@code Collection<String> requests} into a {@code Set<Request>} if {@code requests} is non-empty.
+     * If {@code requests} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Request>} containing zero requests.
      */
     private Optional<List<Request>> parseTagsForEdit(Collection<String> requests) throws ParseException {
         assert requests != null;

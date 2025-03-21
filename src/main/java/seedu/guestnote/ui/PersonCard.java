@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
         final int[] counter = {1};
         guest.getRequests()
                 .forEach(request -> {
-                    Label requestLabel = new Label(counter[0] + ". " + request.tagName);
+                    Label requestLabel = new Label(counter[0] + ". " + request.requestName);
                     requests.getChildren().add(requestLabel);
                     counter[0]++;
                 });

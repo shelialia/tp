@@ -1,7 +1,7 @@
 package seedu.guestnote.testutil;
 
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQUEST;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -39,7 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ROOMNUMBER + guest.getRoomNumber().roomNumber + " ");
         guest.getRequests().stream().forEach(
-            s -> sb.append(PREFIX_REQUEST + s.tagName + " ")
+            s -> sb.append(PREFIX_REQUEST + s.requestName + " ")
         );
         return sb.toString();
     }
@@ -57,17 +57,17 @@ public class PersonUtil {
         if (descriptor.getRequestsToAdd().isPresent()) {
             List<Request> requests = descriptor.getRequestsToAdd().get();
             if (requests.isEmpty()) {
-                sb.append(PREFIX_ADD_REQ);
+                sb.append(PREFIX_ADD_REQUEST);
             } else {
-                requests.forEach(s -> sb.append(PREFIX_ADD_REQ).append(s.tagName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_ADD_REQUEST).append(s.requestName).append(" "));
             }
         }
         if (descriptor.getRequestsToAdd().isPresent()) {
             List<Request> requests = descriptor.getRequestsToAdd().get();
             if (requests.isEmpty()) {
-                sb.append(PREFIX_DELETE_REQ);
+                sb.append(PREFIX_DELETE_REQUEST);
             } else {
-                requests.forEach(s -> sb.append(PREFIX_DELETE_REQ).append(s.tagName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_DELETE_REQUEST).append(s.requestName).append(" "));
             }
         }
         return sb.toString();
