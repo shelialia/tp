@@ -31,7 +31,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
+
         requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER,
                 PREFIX_ADD_REQ, PREFIX_DELETE_REQ, PREFIX_DELETE_REQ_INDEX
         );
@@ -64,12 +66,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_ROOMNUMBER).get())
             );
         }
-        if (argMultimap.getValue(PREFIX_ADD_REQUEST).isPresent()) {
-            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQUEST))
+        if (argMultimap.getValue(PREFIX_ADD_REQ).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ))
                     .ifPresent(editPersonDescriptor::setRequestsToAdd);
         }
-        if (argMultimap.getValue(PREFIX_DELETE_REQUEST).isPresent()) {
-            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQUEST))
+        if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()) {
+            parseRequestsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
                     .ifPresent(editPersonDescriptor::setRequestsToDelete);
         }
         if (argMultimap.getValue(PREFIX_DELETE_REQ_INDEX).isPresent()) {
@@ -90,13 +92,13 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code requests} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Request>} containing zero requests.
      */
-    private Optional<List<Request>> parseTagsForEdit(Collection<String> requests) throws ParseException {
+    private Optional<List<Request>> parseRequestsForEdit(Collection<String> requests) throws ParseException {
         assert requests != null;
 
         if (requests.isEmpty()) {
             return Optional.empty();
         }
-        List<Request> requestList = ParserUtil.parseTags(requests);
+        List<Request> requestList = ParserUtil.parseRequests(requests);
         return Optional.of(requestList);
     }
 

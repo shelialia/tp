@@ -161,8 +161,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        List<Request> actualRequestList = ParserUtil.parseTags(Arrays.asList(VALID_REQUEST_1, VALID_REQUEST_2));
+    public void parseTags_collectionWithValidRequests_returnsTagSet() throws Exception {
+        List<Request> actualRequestList = ParserUtil.parseRequests(Arrays.asList(VALID_REQUEST_1, VALID_REQUEST_2));
         List<Request> expectedRequestList = new ArrayList<>();
         expectedRequestList.add(new Request(VALID_REQUEST_1));
         expectedRequestList.add(new Request(VALID_REQUEST_2));

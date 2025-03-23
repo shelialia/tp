@@ -1,7 +1,7 @@
 package seedu.guestnote.testutil;
 
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQUEST;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQUEST;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -57,17 +57,17 @@ public class PersonUtil {
         if (descriptor.getRequestsToAdd().isPresent()) {
             List<Request> requests = descriptor.getRequestsToAdd().get();
             if (requests.isEmpty()) {
-                sb.append(PREFIX_ADD_REQUEST);
+                sb.append(PREFIX_ADD_REQ);
             } else {
-                requests.forEach(s -> sb.append(PREFIX_ADD_REQUEST).append(s.requestName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_ADD_REQ).append(s.requestName).append(" "));
             }
         }
         if (descriptor.getRequestsToAdd().isPresent()) {
             List<Request> requests = descriptor.getRequestsToAdd().get();
             if (requests.isEmpty()) {
-                sb.append(PREFIX_DELETE_REQUEST);
+                sb.append(PREFIX_DELETE_REQ);
             } else {
-                requests.forEach(s -> sb.append(PREFIX_DELETE_REQUEST).append(s.requestName).append(" "));
+                requests.forEach(s -> sb.append(PREFIX_DELETE_REQ).append(s.requestName).append(" "));
             }
         }
         return sb.toString();

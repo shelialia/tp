@@ -126,11 +126,11 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> requests} into a {@code UniqueRequestList}.
      */
-    public static List<Request> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static List<Request> parseRequests(Collection<String> reqs) throws ParseException {
+        requireNonNull(reqs);
         List<Request> requestList = new ArrayList<>();
-        for (String tagName : tags) {
-            requestList.add(parseTag(tagName));
+        for (String req : reqs) {
+            requestList.add(parseRequest(req));
         }
         return requestList;
     }

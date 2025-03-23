@@ -1,8 +1,8 @@
 package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQUEST;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQUEST;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -45,8 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ROOMNUMBER + "ROOMNUMBER] "
-            + "[" + PREFIX_ADD_REQUEST + "ADDREQUEST] "
-            + "[" + PREFIX_DELETE_REQUEST + "DELETEREQUEST]...\n"
+            + "[" + PREFIX_ADD_REQ + "ADDREQUEST] "
+            + "[" + PREFIX_DELETE_REQ + "DELETEREQUEST]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
