@@ -30,7 +30,8 @@ public class CheckOutCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Guest guestToCheckOut = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest guestToCheckOut = new PersonBuilder().withStatus(Status.CHECKED_IN).build();
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), guestToCheckOut);
         CheckOutCommand checkOutCommand = new CheckOutCommand(INDEX_FIRST_PERSON);
 
         Guest checkedOutGuest = new PersonBuilder(guestToCheckOut).withStatus(Status.CHECKED_OUT).build();
@@ -48,6 +49,15 @@ public class CheckOutCommandTest {
         CheckOutCommand checkOutCommand = new CheckOutCommand(outOfBoundIndex);
 
         assertCommandFailure(checkOutCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_bookingStatus_throwsCommandException() {
+        Guest guestToCheckOut = new PersonBuilder().withStatus(Status.BOOKING).build();
+        model.setPerson(model.getFilteredPersonList().get(0), guestToCheckOut);
+        CheckOutCommand checkOutCommand = new CheckOutCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(checkOutCommand, model, CheckOutCommand.MESSAGE_NOT_CHECKED_IN);
     }
 
     @Test
