@@ -1,5 +1,18 @@
 package seedu.guestnote.testutil;
 
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +21,6 @@ import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Status;
 
-import static seedu.guestnote.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.
