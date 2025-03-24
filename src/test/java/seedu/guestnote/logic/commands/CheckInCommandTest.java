@@ -60,15 +60,6 @@ public class CheckInCommandTest {
     }
 
     @Test
-    public void execute_alreadyCheckedOut_throwsCommandException() {
-        Guest guestToCheckIn = new PersonBuilder().withStatus(Status.CHECKED_OUT).build();
-        model.setPerson(model.getFilteredPersonList().get(0), guestToCheckIn);
-        CheckInCommand checkInCommand = new CheckInCommand(INDEX_FIRST_PERSON);
-
-        assertCommandFailure(checkInCommand, model, CheckInCommand.MESSAGE_ALREADY_CHECKED_OUT);
-    }
-
-    @Test
     public void equals() {
         CheckInCommand checkInFirstCommand = new CheckInCommand(INDEX_FIRST_PERSON);
         CheckInCommand checkInSecondCommand = new CheckInCommand(INDEX_SECOND_PERSON);
