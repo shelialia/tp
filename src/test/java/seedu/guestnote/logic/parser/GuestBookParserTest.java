@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.logic.commands.AddCommand;
+import seedu.guestnote.logic.commands.CheckInCommand;
+import seedu.guestnote.logic.commands.CheckOutCommand;
 import seedu.guestnote.logic.commands.ClearCommand;
 import seedu.guestnote.logic.commands.DeleteCommand;
 import seedu.guestnote.logic.commands.EditCommand;
@@ -51,6 +53,20 @@ public class GuestBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_check_in() throws Exception {
+        CheckInCommand command = (CheckInCommand) parser.parseCommand(
+                CheckInCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new CheckInCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_check_out() throws Exception {
+        CheckOutCommand command = (CheckOutCommand) parser.parseCommand(
+                CheckOutCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new CheckOutCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
