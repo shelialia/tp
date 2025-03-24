@@ -28,6 +28,9 @@ public class CheckInCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor to set Index for guest to be checked-out.
+     */
     public CheckInCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

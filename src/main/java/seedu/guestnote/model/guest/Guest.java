@@ -29,7 +29,8 @@ public class Guest {
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Status status, UniqueRequestList requests) {
+    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Status status,
+                 UniqueRequestList requests) {
         requireAllNonNull(name, phone, email, requests);
         this.name = name;
         this.phone = phone;
@@ -54,7 +55,10 @@ public class Guest {
     public RoomNumber getRoomNumber() {
         return roomNumber;
     }
-    public Status getStatus() { return status;}
+
+    public Status getStatus() {
+        return status;
+    }
 
     /**
      * Returns an immutable request set, which throws {@code UnsupportedOperationException}
