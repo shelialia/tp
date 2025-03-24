@@ -24,6 +24,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
@@ -98,6 +99,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(guestToEdit.getEmail());
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
+        Status updatedStatus = guestToEdit.getStatus();
 
         // Extract existing requests and apply additions/removals
         UniqueRequestList updatedRequests = new UniqueRequestList();
@@ -106,7 +108,7 @@ public class EditCommand extends Command {
         editPersonDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
         editPersonDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedRequests);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedStatus, updatedRequests);
     }
 
     @Override
