@@ -1,16 +1,5 @@
 package seedu.guestnote.testutil;
 
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +7,8 @@ import java.util.List;
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Status;
+
+import static seedu.guestnote.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.
@@ -43,6 +34,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withPhone("95352563")
             .withRoomNumber("01-57")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest DANIEL = new PersonBuilder()
             .withName("Daniel Meier")
@@ -50,24 +42,28 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withRoomNumber("04-22")
             .withRequests("friend")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest ELLE = new PersonBuilder()
             .withName("Elle Meyer")
             .withEmail("werner@example.com")
             .withPhone("9482224")
             .withRoomNumber("02-23")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest FIONA = new PersonBuilder()
             .withName("Fiona Kunz")
             .withEmail("lydia@example.com")
             .withPhone("9482427")
             .withRoomNumber("11-33")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest GEORGE = new PersonBuilder()
             .withName("George Best")
             .withEmail("anna@example.com")
             .withPhone("9482442")
             .withRoomNumber("03-33")
+            .withStatus(Status.BOOKING)
             .build();
 
     // Manually added
@@ -90,6 +86,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
+            .withStatus(VALID_STATUS_AMY)
             .withRequests(VALID_REQUEST_FRIEND)
             .build();
     public static final Guest BOB = new PersonBuilder()
@@ -97,6 +94,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
+            .withStatus(VALID_STATUS_BOB)
             .withRequests(VALID_REQUEST_HUSBAND, VALID_REQUEST_FRIEND)
             .build();
 
