@@ -24,7 +24,7 @@ public class CheckInCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Checked in: %1$s";
     public static final String MESSAGE_ALREADY_CHECKED_IN = "Guest is already checked in.";
-    public static final String MESSAGE_ALREADY_CHECKED_OUT = "Guest has already checked out.";
+
 
     private final Index targetIndex;
 
@@ -49,10 +49,6 @@ public class CheckInCommand extends Command {
 
         if (guestToCheckIn.getStatus() == Status.CHECKED_IN) {
             throw new CommandException(MESSAGE_ALREADY_CHECKED_IN);
-        }
-
-        if (guestToCheckIn.getStatus() == Status.CHECKED_OUT) {
-            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
         }
 
         UniqueRequestList updatedRequests = new UniqueRequestList();
