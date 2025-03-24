@@ -3,12 +3,12 @@ package seedu.guestnote.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.guestnote.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.guestnote.logic.Messages.MESSAGE_GUESTS_LISTED_OVERVIEW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.guestnote.testutil.TypicalPersons.CARL;
-import static seedu.guestnote.testutil.TypicalPersons.ELLE;
-import static seedu.guestnote.testutil.TypicalPersons.FIONA;
-import static seedu.guestnote.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.CARL;
+import static seedu.guestnote.testutil.TypicalGuests.ELLE;
+import static seedu.guestnote.testutil.TypicalGuests.FIONA;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -55,23 +55,23 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noGuestFound() {
+        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredGuestList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleGuestsFound() {
+        String expectedMessage = String.format(MESSAGE_GUESTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredGuestList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
     }
 
     @Test

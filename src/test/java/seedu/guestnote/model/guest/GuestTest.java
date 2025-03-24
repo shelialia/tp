@@ -8,18 +8,18 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalPersons.ALICE;
-import static seedu.guestnote.testutil.TypicalPersons.BOB;
+import static seedu.guestnote.testutil.TypicalGuests.ALICE;
+import static seedu.guestnote.testutil.TypicalGuests.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.guestnote.testutil.PersonBuilder;
+import seedu.guestnote.testutil.GuestBuilder;
 
 public class GuestTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Guest guest = new PersonBuilder().build();
+        Guest guest = new GuestBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> guest.getRequests().remove(0));
     }
 
@@ -32,27 +32,27 @@ public class GuestTest {
         assertFalse(ALICE.isSameGuest(null));
 
         // same phone number, different name and email -> should return true
-        Guest editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
+        Guest editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
 
         assertTrue(ALICE.isSameGuest(editedAlice));
 
         // same email, different name and phone number -> should return true
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertTrue(ALICE.isSameGuest(editedAlice));
 
         // different phone and email -> should return false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameGuest(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Guest editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Guest editedBob = new GuestBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameGuest(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Guest aliceCopy = new PersonBuilder(ALICE).build();
+        Guest aliceCopy = new GuestBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -68,19 +68,19 @@ public class GuestTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Guest editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Guest editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withRequests(VALID_TAG_HUSBAND).build();
+        editedAlice = new GuestBuilder(ALICE).withRequests(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

@@ -1,6 +1,6 @@
 package seedu.guestnote.logic.commands;
 
-import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
@@ -8,12 +8,12 @@ import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 /**
  * Lists all guests in the guest book.
  * This command supports listing all guests as well as filtering the list based on a search query.
- * It utilizes the model's filtered person list to display the guests.
+ * It utilizes the model's filtered guest list to display the guests.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all guests";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -38,10 +38,10 @@ public class ListCommand extends Command {
         // Update the filtered list to show all guests.
         if (predicate == null) {
             // Default behavior: list all guests
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
         } else {
             // Search behavior: filter list based on the predicate
-            model.updateFilteredPersonList(predicate);
+            model.updateFilteredGuestList(predicate);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

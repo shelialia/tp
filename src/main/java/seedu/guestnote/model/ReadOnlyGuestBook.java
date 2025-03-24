@@ -9,8 +9,8 @@ import seedu.guestnote.model.guest.Guest;
 public interface ReadOnlyGuestBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the guests list.
+     * This list will not contain any duplicate guests.
      */
     ObservableList<Guest> getGuestList();
 

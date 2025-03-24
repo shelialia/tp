@@ -2,7 +2,7 @@ package seedu.guestnote.testutil;
 
 import java.util.stream.Stream;
 
-import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
@@ -12,25 +12,25 @@ import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditGuestDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditGuestDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditGuestDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+    public EditGuestDescriptorBuilder() {
+        descriptor = new EditGuestDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditGuestDescriptorBuilder(EditGuestDescriptor descriptor) {
+        this.descriptor = new EditGuestDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code guest}'s details
+     * Returns an {@code EditGuestDescriptor} with fields containing {@code guest}'s details
      */
-    public EditPersonDescriptorBuilder(Guest guest) {
-        descriptor = new EditPersonDescriptor();
+    public EditGuestDescriptorBuilder(Guest guest) {
+        descriptor = new EditGuestDescriptor();
         descriptor.setName(guest.getName());
         descriptor.setPhone(guest.getPhone());
         descriptor.setEmail(guest.getEmail());
@@ -41,42 +41,42 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditGuestDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditGuestDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditGuestDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
 
     /**
-     * Sets the {@code RoomNumber} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code RoomNumber} of the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withRoomNumber(String roomNumber) {
+    public EditGuestDescriptorBuilder withRoomNumber(String roomNumber) {
         descriptor.setRoomNumber(new RoomNumber(roomNumber));
         return this;
     }
 
     /**
      * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to add**
-     * in the {@code EditPersonDescriptor} that we are building.
+     * in the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withRequestsToAdd(String... requests) {
+    public EditGuestDescriptorBuilder withRequestsToAdd(String... requests) {
         UniqueRequestList requestList = new UniqueRequestList();
         Stream.of(requests).map(Request::new).forEach(requestList::add);
         descriptor.setRequestsToAdd(requestList);
@@ -85,16 +85,16 @@ public class EditPersonDescriptorBuilder {
 
     /**
      * Parses the {@code requests} into a {@code Set<Request>} and sets them as requests **to remove**
-     * in the {@code EditPersonDescriptor} that we are building.
+     * in the {@code EditGuestDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withRequestsToDelete(String... requests) {
+    public EditGuestDescriptorBuilder withRequestsToDelete(String... requests) {
         UniqueRequestList requestList = new UniqueRequestList();
         Stream.of(requests).map(Request::new).forEach(requestList::add);
         descriptor.setRequestsToDelete(requestList);
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditGuestDescriptor build() {
         return descriptor;
     }
 }

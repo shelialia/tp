@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalPersons.ALICE;
+import static seedu.guestnote.testutil.TypicalGuests.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,40 +23,40 @@ import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ReadOnlyGuestBook;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.testutil.PersonBuilder;
+import seedu.guestnote.testutil.GuestBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullGuest_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Guest validGuest = new PersonBuilder().build();
+    public void execute_guestAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingGuestAdded modelStub = new ModelStubAcceptingGuestAdded();
+        Guest validGuest = new GuestBuilder().build();
 
         CommandResult commandResult = new AddCommand(validGuest).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validGuest)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validGuest), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validGuest), modelStub.guestsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Guest validGuest = new PersonBuilder().build();
+    public void execute_duplicateGuest_throwsCommandException() {
+        Guest validGuest = new GuestBuilder().build();
         AddCommand addCommand = new AddCommand(validGuest);
-        ModelStub modelStub = new ModelStubWithPerson(validGuest);
+        ModelStub modelStub = new ModelStubWithGuest(validGuest);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_GUEST, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Guest alice = new PersonBuilder().withName("Alice").build();
-        Guest bob = new PersonBuilder().withName("Bob").build();
+        Guest alice = new GuestBuilder().withName("Alice").build();
+        Guest bob = new GuestBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -119,7 +119,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,27 +134,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Guest target) {
+        public void deleteGuest(Guest target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Guest target, Guest editedGuest) {
+        public void setGuest(Guest target, Guest editedGuest) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Guest> getFilteredPersonList() {
+        public ObservableList<Guest> getFilteredGuestList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Guest> predicate) {
+        public void updateFilteredGuestList(Predicate<Guest> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -162,16 +162,16 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single guest.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithGuest extends ModelStub {
         private final Guest guest;
 
-        ModelStubWithPerson(Guest guest) {
+        ModelStubWithGuest(Guest guest) {
             requireNonNull(guest);
             this.guest = guest;
         }
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
             return this.guest.isSameGuest(guest);
         }
@@ -180,19 +180,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the guest being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Guest> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingGuestAdded extends ModelStub {
+        final ArrayList<Guest> guestsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Guest guest) {
+        public boolean hasGuest(Guest guest) {
             requireNonNull(guest);
-            return personsAdded.stream().anyMatch(guest::isSameGuest);
+            return guestsAdded.stream().anyMatch(guest::isSameGuest);
         }
 
         @Override
-        public void addPerson(Guest guest) {
+        public void addGuest(Guest guest) {
             requireNonNull(guest);
-            personsAdded.add(guest);
+            guestsAdded.add(guest);
         }
 
         @Override

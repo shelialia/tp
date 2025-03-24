@@ -3,10 +3,10 @@ package seedu.guestnote.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalPersons.ALICE;
-import static seedu.guestnote.testutil.TypicalPersons.BENSON;
+import static seedu.guestnote.testutil.TypicalGuests.ALICE;
+import static seedu.guestnote.testutil.TypicalGuests.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasGuest_nullGuest_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasGuest(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasGuest_guestNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasGuest_guestInAddressBook_returnsTrue() {
+        modelManager.addGuest(ALICE);
+        assertTrue(modelManager.hasGuest(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredGuestList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredGuestList().remove(0));
     }
 
     @Test
     public void equals() {
-        GuestBook guestBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        GuestBook guestBook = new AddressBookBuilder().withGuest(ALICE).withGuest(BENSON).build();
         GuestBook differentGuestBook = new GuestBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,11 +118,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredGuestList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(guestBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

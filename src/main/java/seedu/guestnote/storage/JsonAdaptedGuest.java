@@ -18,7 +18,7 @@ import seedu.guestnote.model.request.UniqueRequestList;
 /**
  * Jackson-friendly version of {@link Guest}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedGuest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Guest's %s field is missing!";
 
@@ -29,10 +29,10 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given guest details.
+     * Constructs a {@code JsonAdaptedGuest} with the given guest details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(
+    public JsonAdaptedGuest(
             @JsonProperty("name") String name,
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Guest} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Guest source) {
+    public JsonAdaptedGuest(Guest source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -66,9 +66,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest.
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<seedu.guestnote.model.request.Request> personRequests = new ArrayList<>();
+        final List<seedu.guestnote.model.request.Request> guestRequests = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personRequests.add(tag.toModelType());
+            guestRequests.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -106,7 +106,7 @@ class JsonAdaptedPerson {
         final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
 
         final UniqueRequestList modelRequests = new UniqueRequestList();
-        modelRequests.setRequests(personRequests);
+        modelRequests.setRequests(guestRequests);
         return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelRequests);
     }
 

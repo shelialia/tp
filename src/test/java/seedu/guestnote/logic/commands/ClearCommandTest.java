@@ -1,7 +1,7 @@
 package seedu.guestnote.logic.commands;
 
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.guestnote.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

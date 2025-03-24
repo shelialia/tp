@@ -16,7 +16,7 @@ import seedu.guestnote.model.request.UniqueRequestList;
  * Contains utility methods for populating {@code GuestBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Guest[] getSamplePersons() {
+    public static Guest[] getSampleGuests() {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new RoomNumber("12-33"),
@@ -41,7 +41,7 @@ public class SampleDataUtil {
 
     public static ReadOnlyGuestBook getSampleAddressBook() {
         GuestBook sampleAb = new GuestBook();
-        for (Guest sampleGuest : getSamplePersons()) {
+        for (Guest sampleGuest : getSampleGuests()) {
             sampleAb.addGuest(sampleGuest);
         }
         return sampleAb;

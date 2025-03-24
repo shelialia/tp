@@ -29,8 +29,8 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.guestnote.testutil.TypicalPersons.AMY;
-import static seedu.guestnote.testutil.TypicalPersons.BOB;
+import static seedu.guestnote.testutil.TypicalGuests.AMY;
+import static seedu.guestnote.testutil.TypicalGuests.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,14 +42,14 @@ import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.request.Request;
-import seedu.guestnote.testutil.PersonBuilder;
+import seedu.guestnote.testutil.GuestBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Guest expectedGuest = new PersonBuilder(BOB).withRequests(VALID_TAG_FRIEND).build();
+        Guest expectedGuest = new GuestBuilder(BOB).withRequests(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -57,7 +57,7 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Guest expectedGuestMultipleTags = new PersonBuilder(BOB)
+        Guest expectedGuestMultipleTags = new GuestBuilder(BOB)
                 .withRequests(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
@@ -68,65 +68,65 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedGuestString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROOMNUMBER_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
-                        + ROOMNUMBER_DESC_AMY + validExpectedPersonString,
+                validExpectedGuestString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
+                        + ROOMNUMBER_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         PREFIX_NAME, PREFIX_ROOMNUMBER, PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid room number
-        assertParseFailure(parser, INVALID_ROOMNUMBER_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ROOMNUMBER_DESC + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROOMNUMBER));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedGuestString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedGuestString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedGuestString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Guest expectedGuest = new PersonBuilder(AMY).withRequests().build();
+        Guest expectedGuest = new GuestBuilder(AMY).withRequests().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ROOMNUMBER_DESC_AMY,
                 new AddCommand(expectedGuest));
