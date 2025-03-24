@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Status;
 
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.
@@ -28,13 +29,15 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withRoomNumber("12-33")
-            .withRequests("friend").build();
+            .withRequests("friend")
+            .withStatus(Status.BOOKING).build();
     public static final Guest BENSON = new PersonBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
-            .withRequests("owesMoney", "friend").build();
+            .withRequests("owesMoney", "friend")
+            .withStatus(Status.BOOKING).build();
     public static final Guest CARL = new PersonBuilder()
             .withName("Carl Kurz")
             .withEmail("heinz@example.com")
