@@ -23,6 +23,7 @@ public class CheckOutCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Checked out: %1$s";
+    public static final String MESSAGE_NOT_CHECKED_IN = "Guest has not checked in.";
     public static final String MESSAGE_ALREADY_CHECKED_OUT = "Guest has already checked out.";
 
     private final Index targetIndex;
@@ -45,6 +46,10 @@ public class CheckOutCommand extends Command {
         }
 
         Guest guestToCheckOut = lastShownList.get(targetIndex.getZeroBased());
+
+        if (guestToCheckOut.getStatus() == Status.BOOKING) {
+            throw new CommandException(MESSAGE_NOT_CHECKED_IN);
+        }
 
         if (guestToCheckOut.getStatus() == Status.CHECKED_OUT) {
             throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
