@@ -80,7 +80,7 @@ public class CheckInCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CheckOutCommand)) {
+        if (!(other instanceof CheckInCommand)) {
             return false;
         }
 
