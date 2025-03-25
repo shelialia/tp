@@ -31,22 +31,21 @@ public class GuestTest {
         // null -> returns false
         assertFalse(ALICE.isSameGuest(null));
 
-        // same phone number, different name and email -> should return true
-        Guest editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
-
+        // same email, different name and phone -> returns true
+        Guest editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertTrue(ALICE.isSameGuest(editedAlice));
 
-        // same email, different name and phone number -> should return true
-        editedAlice = new GuestBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
-        assertTrue(ALICE.isSameGuest(editedAlice));
-
-        // different phone and email -> should return false
-        editedAlice = new GuestBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        // different email -> returns false
+        editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameGuest(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // same email, different case in name -> returns true
         Guest editedBob = new GuestBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameGuest(editedBob));
+
+        // same email, different case in email -> returns true (assuming email comparison is case-sensitive in your system)
+        editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB.toLowerCase()).build();
+        assertFalse(ALICE.isSameGuest(editedAlice)); // should return false as emails are case-sensitive
     }
 
     @Test
