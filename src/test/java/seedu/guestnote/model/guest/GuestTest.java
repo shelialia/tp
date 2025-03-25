@@ -43,7 +43,7 @@ public class GuestTest {
         Guest editedBob = new GuestBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameGuest(editedBob));
 
-        // same email, different case in email -> returns true (assuming email comparison is case-sensitive in your system)
+        // same email, different case in email -> returns true (email comparison is case-sensitive)
         editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB.toLowerCase()).build();
         assertFalse(ALICE.isSameGuest(editedAlice)); // should return false as emails are case-sensitive
     }
