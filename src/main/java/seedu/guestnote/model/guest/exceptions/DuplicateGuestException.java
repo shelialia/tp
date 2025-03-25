@@ -1,11 +1,12 @@
 package seedu.guestnote.model.guest.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Persons (Persons are considered duplicates if they have the same
+ * Signals that the operation will result in duplicate Guests (Guests are considered duplicates if
+ * they have the same
  * identity).
  */
 public class DuplicateGuestException extends RuntimeException {
     public DuplicateGuestException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate guests");
     }
 }

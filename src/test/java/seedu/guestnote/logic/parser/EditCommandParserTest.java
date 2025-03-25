@@ -25,21 +25,21 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.guestnote.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.guestnote.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
+import static seedu.guestnote.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
+import static seedu.guestnote.testutil.TypicalIndexes.INDEX_THIRD_GUEST;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.EditCommand;
-import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.request.Request;
-import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
+import seedu.guestnote.testutil.EditGuestDescriptorBuilder;
 
 public class EditCommandParserTest {
     private static final String REQUEST_ADD_EMPTY = " " + PREFIX_ADD_REQUEST;
@@ -103,11 +103,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_GUEST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADD_REQUEST_DESC_HUSBAND
                 + EMAIL_DESC_AMY + NAME_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -117,10 +117,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_GUEST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -130,27 +130,27 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_GUEST;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditGuestDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditGuestDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // requests
         userInput = targetIndex.getOneBased() + ADD_REQUEST_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_FRIEND).build();
+        descriptor = new EditGuestDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -161,7 +161,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonRequestValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_GUEST;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));

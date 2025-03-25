@@ -3,10 +3,10 @@ package seedu.guestnote.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalPersons.ALICE;
-import static seedu.guestnote.testutil.TypicalPersons.HOON;
-import static seedu.guestnote.testutil.TypicalPersons.IDA;
-import static seedu.guestnote.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.ALICE;
+import static seedu.guestnote.testutil.TypicalGuests.HOON;
+import static seedu.guestnote.testutil.TypicalGuests.IDA;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonGuestBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonGuestBook.json"));
+    public void readAddressBook_invalidGuestAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidGuestGuestBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonGuestBook.json"));
+    public void readAddressBook_invalidAndValidGuestAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidGuestGuestBook.json"));
     }
 
     @Test

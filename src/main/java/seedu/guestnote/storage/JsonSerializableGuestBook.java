@@ -19,16 +19,16 @@ import seedu.guestnote.model.guest.Guest;
 @JsonRootName(value = "addressbook")
 class JsonSerializableGuestBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate guest(s).";
+    public static final String MESSAGE_DUPLICATE_GUEST = "Guests list contains duplicate guest(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedGuest> guests = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableGuestBook} with the given persons.
+     * Constructs a {@code JsonSerializableGuestBook} with the given guests.
      */
     @JsonCreator
-    public JsonSerializableGuestBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableGuestBook(@JsonProperty("guests") List<JsonAdaptedGuest> guests) {
+        this.guests.addAll(guests);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableGuestBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableGuestBook}.
      */
     public JsonSerializableGuestBook(ReadOnlyGuestBook source) {
-        persons.addAll(source.getGuestList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        guests.addAll(source.getGuestList().stream().map(JsonAdaptedGuest::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,10 +47,10 @@ class JsonSerializableGuestBook {
      */
     public GuestBook toModelType() throws IllegalValueException {
         GuestBook guestBook = new GuestBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Guest guest = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedGuest jsonAdaptedGuest : guests) {
+            Guest guest = jsonAdaptedGuest.toModelType();
             if (guestBook.hasGuest(guest)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
             }
             guestBook.addGuest(guest);
         }

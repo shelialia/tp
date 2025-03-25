@@ -9,12 +9,14 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.guestnote.model.guest.exceptions.DuplicateGuestException;
-import seedu.guestnote.model.guest.exceptions.PersonNotFoundException;
+import seedu.guestnote.model.guest.exceptions.GuestNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A guest is considered unique by comparing using {@code Guest#isSamePerson(Guest)}. As such, adding and updating of
- * persons uses Guest#isSamePerson(Guest) for equality so as to ensure that the guest being added or updated is
+ * A list of guests that enforces uniqueness between its elements and does not allow nulls.
+ * A guest is considered unique by comparing using {@code Guest#isSameGuest(Guest)}. As such,
+ * adding and updating of
+ * guests uses Guest#isSameGuest(Guest) for equality so as to ensure that the guest being added or
+ * updated is
  * unique in terms of identity in the UniqueGuestList. However, the removal of a guest uses Guest#equals(Object) so
  * as to ensure that the guest with exactly the same fields will be removed.
  *
@@ -58,7 +60,7 @@ public class UniqueGuestList implements Iterable<Guest> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new GuestNotFoundException();
         }
 
         if (!target.isSameGuest(editedGuest) && contains(editedGuest)) {
@@ -75,7 +77,7 @@ public class UniqueGuestList implements Iterable<Guest> {
     public void remove(Guest toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new GuestNotFoundException();
         }
     }
 

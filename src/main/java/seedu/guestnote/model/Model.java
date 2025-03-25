@@ -12,7 +12,7 @@ import seedu.guestnote.model.guest.Guest;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Guest> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Guest> PREDICATE_SHOW_ALL_GUESTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -40,7 +40,7 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' guestnote book file path.
+     * Sets the user prefs' GuestNote book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
@@ -55,33 +55,33 @@ public interface Model {
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the guestnote book.
      */
-    boolean hasPerson(Guest guest);
+    boolean hasGuest(Guest guest);
 
     /**
      * Deletes the given guest.
      * The guest must exist in the guestnote book.
      */
-    void deletePerson(Guest target);
+    void deleteGuest(Guest target);
 
     /**
      * Adds the given guest.
      * {@code guest} must not already exist in the guestnote book.
      */
-    void addPerson(Guest guest);
+    void addGuest(Guest guest);
 
     /**
      * Replaces the given guest {@code target} with {@code editedGuest}.
      * {@code target} must exist in the guestnote book.
      * The guest identity of {@code editedGuest} must not be the same as another existing guest in the book.
      */
-    void setPerson(Guest target, Guest editedGuest);
+    void setGuest(Guest target, Guest editedGuest);
 
     /** Returns an unmodifiable view of the filtered guest list */
-    ObservableList<Guest> getFilteredPersonList();
+    ObservableList<Guest> getFilteredGuestList();
 
     /**
      * Updates the filter of the filtered guest list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Guest> predicate);
+    void updateFilteredGuestList(Predicate<Guest> predicate);
 }

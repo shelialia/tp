@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyGuestBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Guest> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of guests */
+    ObservableList<Guest> getFilteredGuestList();
 
     /**
      * Returns the user prefs' guestnote book file path.

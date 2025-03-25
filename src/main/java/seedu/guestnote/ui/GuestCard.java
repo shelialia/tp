@@ -10,9 +10,9 @@ import seedu.guestnote.model.guest.Guest;
 /**
  * An UI component that displays information of a {@code Guest}.
  */
-public class PersonCard extends UiPart<Region> {
+public class GuestCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "GuestListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,9 +43,9 @@ public class PersonCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Guest} and index to display.
+     * Creates a {@code GuestCode} with the given {@code Guest} and index to display.
      */
-    public PersonCard(Guest guest, int displayedIndex) {
+    public GuestCard(Guest guest, int displayedIndex) {
         super(FXML);
         this.guest = guest;
         id.setText(displayedIndex + ". ");

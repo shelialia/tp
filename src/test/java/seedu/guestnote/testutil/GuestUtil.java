@@ -9,7 +9,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 
 import seedu.guestnote.logic.commands.AddCommand;
-import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.request.UniqueRequestList;
 
@@ -17,19 +17,19 @@ import seedu.guestnote.model.request.UniqueRequestList;
 /**
  * A utility class for Guest.
  */
-public class PersonUtil {
+public class GuestUtil {
 
     /**
      * Returns an add command string for adding the {@code guest}.
      */
     public static String getAddCommand(Guest guest) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(guest);
+        return AddCommand.COMMAND_WORD + " " + getGuestDetails(guest);
     }
 
     /**
      * Returns the part of command string for the given {@code guest}'s details.
      */
-    public static String getPersonDetails(Guest guest) {
+    public static String getGuestDetails(Guest guest) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + guest.getName().fullName + " ");
         sb.append(PREFIX_PHONE + guest.getPhone().value + " ");
@@ -42,9 +42,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditGuestDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditGuestDescriptorDetails(EditGuestDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
