@@ -9,28 +9,28 @@ import seedu.guestnote.model.request.Request;
 /**
  * Jackson-friendly version of {@link Request}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedRequest {
 
-    private final String tagName;
+    private final String requestName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedRequest} with the given {@code requestName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedRequest(String requestName) {
+        this.requestName = requestName;
     }
 
     /**
      * Converts a given {@code Request} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Request source) {
-        tagName = source.tagName;
+    public JsonAdaptedRequest(Request source) {
+        requestName = source.requestName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getRequestName() {
+        return requestName;
     }
 
     /**
@@ -39,10 +39,10 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted request.
      */
     public Request toModelType() throws IllegalValueException {
-        if (!Request.isValidTagName(tagName)) {
+        if (!Request.isValidRequestName(requestName)) {
             throw new IllegalValueException(Request.MESSAGE_CONSTRAINTS);
         }
-        return new Request(tagName);
+        return new Request(requestName);
     }
 
 }

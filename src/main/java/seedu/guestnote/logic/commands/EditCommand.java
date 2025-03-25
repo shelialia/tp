@@ -1,8 +1,8 @@
 package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQUEST;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQUEST;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +24,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
@@ -41,8 +42,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ROOMNUMBER + "ROOMNUMBER] "
-            + "[" + PREFIX_ADD_REQ + "ADDREQUEST] "
-            + "[" + PREFIX_DELETE_REQ + "DELETEREQUEST]...\n"
+            + "[" + PREFIX_ADD_REQUEST + "ADDREQUEST] "
+            + "[" + PREFIX_DELETE_REQUEST + "DELETEREQUEST]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -98,6 +99,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editGuestDescriptor.getPhone().orElse(guestToEdit.getPhone());
         Email updatedEmail = editGuestDescriptor.getEmail().orElse(guestToEdit.getEmail());
         RoomNumber updatedRoomNumber = editGuestDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
+        Status updatedStatus = guestToEdit.getStatus();
 
         // Extract existing requests and apply additions/removals
         UniqueRequestList updatedRequests = new UniqueRequestList();
@@ -106,7 +108,7 @@ public class EditCommand extends Command {
         editGuestDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
         editGuestDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
 
-        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedRequests);
+        return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedStatus, updatedRequests);
     }
 
     @Override
@@ -269,13 +271,13 @@ public class EditCommand extends Command {
                 return false;
             }
 
-            EditGuestDescriptor otherEditGuestDescriptor = (EditGuestDescriptor) other;
-            return Objects.equals(name, otherEditGuestDescriptor.name)
-                    && Objects.equals(phone, otherEditGuestDescriptor.phone)
-                    && Objects.equals(email, otherEditGuestDescriptor.email)
-                    && Objects.equals(roomNumber, otherEditGuestDescriptor.roomNumber)
-                    && Objects.equals(requestsToAdd, otherEditGuestDescriptor.requestsToAdd)
-                    && Objects.equals(requestsToDelete, otherEditGuestDescriptor.requestsToDelete);
+            EditGuestDescriptor otherEditPersonDescriptor = (EditGuestDescriptor) other;
+            return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(roomNumber, otherEditPersonDescriptor.roomNumber)
+                    && Objects.equals(requestsToAdd, otherEditPersonDescriptor.requestsToAdd)
+                    && Objects.equals(requestsToDelete, otherEditPersonDescriptor.requestsToDelete);
         }
 
         @Override

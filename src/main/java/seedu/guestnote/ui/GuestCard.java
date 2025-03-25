@@ -37,6 +37,8 @@ public class GuestCard extends UiPart<Region> {
     @FXML
     private FlowPane roomNumber;
     @FXML
+    private FlowPane status;
+    @FXML
     private FlowPane requests;
 
 
@@ -51,10 +53,32 @@ public class GuestCard extends UiPart<Region> {
         phone.setText(guest.getPhone().value);
         email.setText(guest.getEmail().value);
         roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
+        Label statusLabel = new Label(guest.getStatus().name());
+        statusLabel.getStyleClass().add("status-label");
+
+        switch (guest.getStatus()) {
+
+        case BOOKING:
+            statusLabel.getStyleClass().add("status-booking");
+            break;
+        case CHECKED_IN:
+            statusLabel.getStyleClass().add("status-checkedin");
+            break;
+        case CHECKED_OUT:
+            statusLabel.getStyleClass().add("status-checkedout");
+            break;
+
+        default:
+            break;
+        }
+
+
+        status.getChildren().add(statusLabel);
+
         final int[] counter = {1};
         guest.getRequests()
                 .forEach(request -> {
-                    Label requestLabel = new Label(counter[0] + ". " + request.tagName);
+                    Label requestLabel = new Label(counter[0] + ". " + request.requestName);
                     requests.getChildren().add(requestLabel);
                     counter[0]++;
                 });

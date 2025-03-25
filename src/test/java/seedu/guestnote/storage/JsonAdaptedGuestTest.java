@@ -27,8 +27,9 @@ public class JsonAdaptedGuestTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ROOMNUMBER = BENSON.getRoomNumber().toString();
-    private static final List<JsonAdaptedTag> VALID_REQUESTS = BENSON.getRequests().stream()
-            .map(JsonAdaptedTag::new)
+    private static final String VALID_STATUS = BENSON.getStatus().toString();
+    private static final List<JsonAdaptedRequest> VALID_REQUESTS = BENSON.getRequests().stream()
+            .map(JsonAdaptedRequest::new)
             .collect(Collectors.toList());
 
     @Test
@@ -40,7 +41,7 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_REQUESTS);
+                INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -48,7 +49,7 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_REQUESTS);
+                null, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -57,7 +58,7 @@ public class JsonAdaptedGuestTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedGuest guest =
                 new JsonAdaptedGuest(
-                        VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_REQUESTS);
+                        VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -65,7 +66,7 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                VALID_NAME, null, VALID_EMAIL, VALID_ROOMNUMBER, VALID_REQUESTS);
+                VALID_NAME, null, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -74,7 +75,7 @@ public class JsonAdaptedGuestTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedGuest guest =
                 new JsonAdaptedGuest(
-                        VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ROOMNUMBER, VALID_REQUESTS);
+                        VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -82,7 +83,7 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                VALID_NAME, VALID_PHONE, null, VALID_ROOMNUMBER, VALID_REQUESTS);
+                VALID_NAME, VALID_PHONE, null, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -90,7 +91,7 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_invalidRoomNumber_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                        VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ROOMNUMBER, VALID_REQUESTS);
+                        VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = RoomNumber.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
@@ -98,17 +99,17 @@ public class JsonAdaptedGuestTest {
     @Test
     public void toModelType_nullRoomNumber_throwsIllegalValueException() {
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_REQUESTS);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_STATUS, VALID_REQUESTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RoomNumber.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_REQUESTS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_REQUEST));
+    public void toModelType_invalidRequests_throwsIllegalValueException() {
+        List<JsonAdaptedRequest> invalidRequests = new ArrayList<>(VALID_REQUESTS);
+        invalidRequests.add(new JsonAdaptedRequest(INVALID_REQUEST));
         JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, invalidTags);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, invalidRequests);
         assertThrows(IllegalValueException.class, guest::toModelType);
     }
 

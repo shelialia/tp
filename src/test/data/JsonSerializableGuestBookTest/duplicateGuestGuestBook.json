@@ -4,11 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "roomNumber": "04-22",
-    "tags": [ "friend" ]
+    "status": "BOOKING",
+    "requests": [ "friend" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "roomNumber": "04-22"
+    "roomNumber": "04-22",
+    "status": "BOOKING"
   } ]
 }

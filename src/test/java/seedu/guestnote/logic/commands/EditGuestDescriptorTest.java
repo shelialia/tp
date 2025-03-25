@@ -8,7 +8,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,9 +46,9 @@ public class EditGuestDescriptorTest {
         // different email -> returns false
         editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different tags -> returns false
-        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRequestsToAdd(VALID_TAG_HUSBAND).build();
+        
+        // different requests -> returns false
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

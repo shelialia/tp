@@ -3,11 +3,13 @@
     "name": "Valid Guest",
     "phone": "9482424",
     "email": "hans@example.com",
-    "roomNumber": "04-22"
+    "roomNumber": "04-22",
+    "status": "BOOKING"
   }, {
     "name": "Guest With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "roomNumber": "04-22"
+    "roomNumber": "04-22",
+    "status": "BOOKING"
   } ]
 }

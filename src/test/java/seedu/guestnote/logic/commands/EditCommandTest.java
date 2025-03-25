@@ -7,7 +7,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.guestnote.logic.commands.CommandTestUtil.showGuestAtIndex;
@@ -54,12 +54,12 @@ public class EditCommandTest {
         Index indexLastGuest = Index.fromOneBased(model.getFilteredGuestList().size());
         Guest lastGuest = model.getFilteredGuestList().get(indexLastGuest.getZeroBased());
 
-        GuestBuilder guestInList = new GuestBuilder(lastGuest);
-        Guest editedGuest = guestInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withRequests(VALID_TAG_HUSBAND).build();
+        GuestBuilder personInList = new GuestBuilder(lastGuest);
+        Guest editedGuest = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withRequests(VALID_REQUEST_HUSBAND).build();
 
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withRequestsToAdd(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastGuest, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS,

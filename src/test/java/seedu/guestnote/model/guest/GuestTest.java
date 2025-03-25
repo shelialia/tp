@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalGuests.ALICE;
 import static seedu.guestnote.testutil.TypicalGuests.BOB;
@@ -79,8 +79,8 @@ public class GuestTest {
         editedAlice = new GuestBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new GuestBuilder(ALICE).withRequests(VALID_TAG_HUSBAND).build();
+        // different requests -> returns false
+        editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -88,6 +88,7 @@ public class GuestTest {
     public void toStringMethod() {
         String expected = Guest.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", roomNumber=" + ALICE.getRoomNumber()
+                + ", status=" + ALICE.getStatus()
                 + ", requests=" + ALICE.getRequests()
                 + "}";
         assertEquals(expected, ALICE.toString());

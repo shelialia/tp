@@ -13,6 +13,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
@@ -26,7 +27,8 @@ class JsonAdaptedGuest {
     private final String phone;
     private final String email;
     private final String roomNumber;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String status;
+    private final List<JsonAdaptedRequest> requests = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedGuest} with the given guest details.
@@ -37,13 +39,15 @@ class JsonAdaptedGuest {
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("roomNumber") String roomNumber,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("status") String status,
+            @JsonProperty("requests") List<JsonAdaptedRequest> requests) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.status = status;
+        if (requests != null) {
+            this.requests.addAll(requests);
         }
     }
 
@@ -55,8 +59,9 @@ class JsonAdaptedGuest {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().roomNumber;
-        tags.addAll(source.getRequests().stream()
-                .map(JsonAdaptedTag::new)
+        status = source.getStatus().name();
+        requests.addAll(source.getRequests().stream()
+                .map(JsonAdaptedRequest::new)
                 .collect(Collectors.toList()));
     }
 
@@ -67,8 +72,8 @@ class JsonAdaptedGuest {
      */
     public Guest toModelType() throws IllegalValueException {
         final List<seedu.guestnote.model.request.Request> guestRequests = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            guestRequests.add(tag.toModelType());
+        for (JsonAdaptedRequest request : requests) {
+            guestRequests.add(request.toModelType());
         }
 
         if (name == null) {
@@ -105,9 +110,14 @@ class JsonAdaptedGuest {
         }
         final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        final Status modelStatus = Status.valueOf(status);
+
         final UniqueRequestList modelRequests = new UniqueRequestList();
         modelRequests.setRequests(guestRequests);
-        return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelRequests);
+        return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelStatus, modelRequests);
     }
 
 }

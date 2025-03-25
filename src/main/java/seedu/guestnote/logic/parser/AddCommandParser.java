@@ -16,6 +16,7 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
@@ -45,9 +46,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         RoomNumber roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOMNUMBER).get());
-        UniqueRequestList requestList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REQUEST));
+        Status status = Status.BOOKING;
+        UniqueRequestList requestList = ParserUtil.parseRequests(argMultimap.getAllValues(PREFIX_REQUEST));
 
-        Guest guest = new Guest(name, phone, email, roomNumber, requestList);
+        Guest guest = new Guest(name, phone, email, roomNumber, status, requestList);
 
         return new AddCommand(guest);
     }

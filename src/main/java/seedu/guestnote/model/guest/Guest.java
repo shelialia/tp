@@ -23,17 +23,20 @@ public class Guest {
 
     // Data fields
     private final RoomNumber roomNumber;
+    private final Status status;
     private final UniqueRequestList requests = new UniqueRequestList();
 
     /**
      * Every field must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, UniqueRequestList requests) {
+    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Status status,
+                 UniqueRequestList requests) {
         requireAllNonNull(name, phone, email, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
+        this.status = status;
         this.requests.setRequests(requests);
     }
 
@@ -51,6 +54,10 @@ public class Guest {
 
     public RoomNumber getRoomNumber() {
         return roomNumber;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -95,13 +102,14 @@ public class Guest {
                 && phone.equals(otherGuest.phone)
                 && email.equals(otherGuest.email)
                 && roomNumber.equals(otherGuest.roomNumber)
+                && status.equals(otherGuest.status)
                 && requests.equals(otherGuest.requests);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, roomNumber, requests);
+        return Objects.hash(name, phone, email, roomNumber, status, requests);
     }
 
     @Override
@@ -111,6 +119,7 @@ public class Guest {
                 .add("phone", phone)
                 .add("email", email)
                 .add("roomNumber", roomNumber)
+                .add("status", status)
                 .add("requests", requests)
                 .toString();
     }

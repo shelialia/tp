@@ -6,10 +6,12 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,8 @@ import java.util.List;
 
 import seedu.guestnote.model.GuestBook;
 import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Status;
+
 
 /**
  * A utility class containing a list of {@code Guest} objects to be used in tests.
@@ -28,18 +32,21 @@ public class TypicalGuests {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withRoomNumber("12-33")
-            .withRequests("friend").build();
+            .withRequests("friend")
+            .withStatus(Status.BOOKING).build();
     public static final Guest BENSON = new GuestBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
-            .withRequests("owesMoney", "friend").build();
+            .withRequests("owesMoney", "friend")
+            .withStatus(Status.BOOKING).build();
     public static final Guest CARL = new GuestBuilder()
             .withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withPhone("95352563")
             .withRoomNumber("01-57")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest DANIEL = new GuestBuilder()
             .withName("Daniel Meier")
@@ -47,24 +54,28 @@ public class TypicalGuests {
             .withPhone("87652533")
             .withRoomNumber("04-22")
             .withRequests("friend")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest ELLE = new GuestBuilder()
             .withName("Elle Meyer")
             .withEmail("werner@example.com")
             .withPhone("9482224")
             .withRoomNumber("02-23")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest FIONA = new GuestBuilder()
             .withName("Fiona Kunz")
             .withEmail("lydia@example.com")
             .withPhone("9482427")
             .withRoomNumber("11-33")
+            .withStatus(Status.BOOKING)
             .build();
     public static final Guest GEORGE = new GuestBuilder()
             .withName("George Best")
             .withEmail("anna@example.com")
             .withPhone("9482442")
             .withRoomNumber("03-33")
+            .withStatus(Status.BOOKING)
             .build();
 
     // Manually added
@@ -87,14 +98,16 @@ public class TypicalGuests {
             .withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
-            .withRequests(VALID_TAG_FRIEND)
+            .withStatus(VALID_STATUS_AMY)
+            .withRequests(VALID_REQUEST_FRIEND)
             .build();
     public static final Guest BOB = new GuestBuilder()
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
-            .withRequests(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withStatus(VALID_STATUS_BOB)
+            .withRequests(VALID_REQUEST_HUSBAND, VALID_REQUEST_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

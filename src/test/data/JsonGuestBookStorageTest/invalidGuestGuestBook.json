@@ -3,6 +3,7 @@
     "name": "Guest with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
-    "roomNumber": "04-22"
+    "roomNumber": "04-22",
+    "status": "BOOKING"
   } ]
 }
