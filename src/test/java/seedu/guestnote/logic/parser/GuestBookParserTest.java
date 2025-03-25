@@ -58,15 +58,15 @@ public class GuestBookParserTest {
     @Test
     public void parseCommand_check_in() throws Exception {
         CheckInCommand command = (CheckInCommand) parser.parseCommand(
-                CheckInCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new CheckInCommand(INDEX_FIRST_PERSON), command);
+                CheckInCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased());
+        assertEquals(new CheckInCommand(INDEX_FIRST_GUEST), command);
     }
 
     @Test
     public void parseCommand_check_out() throws Exception {
         CheckOutCommand command = (CheckOutCommand) parser.parseCommand(
-                CheckOutCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new CheckOutCommand(INDEX_FIRST_PERSON), command);
+                CheckOutCommand.COMMAND_WORD + " " + INDEX_FIRST_GUEST.getOneBased());
+        assertEquals(new CheckOutCommand(INDEX_FIRST_GUEST), command);
     }
 
     @Test

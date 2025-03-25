@@ -4,7 +4,7 @@ import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class CheckInCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsCheckInCommand() throws Exception {
-        assertParseSuccess(parser, "1", new CheckInCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new CheckInCommand(INDEX_FIRST_GUEST));
     }
 
     @Test

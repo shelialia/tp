@@ -39,10 +39,10 @@ public class CheckOutCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredPersonList();
+        List<Guest> lastShownList = model.getFilteredGuestList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
         }
 
         Guest guestToCheckOut = lastShownList.get(targetIndex.getZeroBased());
@@ -67,8 +67,8 @@ public class CheckOutCommand extends Command {
                 updatedRequests
         );
 
-        model.setPerson(guestToCheckOut, checkedOutGuest);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setGuest(guestToCheckOut, checkedOutGuest);
+        model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(checkedOutGuest)));
     }
