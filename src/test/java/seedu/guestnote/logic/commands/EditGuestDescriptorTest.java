@@ -12,56 +12,49 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBA
 
 import org.junit.jupiter.api.Test;
 
-import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
+import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
+import seedu.guestnote.testutil.EditGuestDescriptorBuilder;
 
 public class EditGuestDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditGuestDescriptor descriptorWithSameValues = new EditGuestDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
-
         // same object -> returns true
         assertTrue(DESC_AMY.equals(DESC_AMY));
-
         // null -> returns false
         assertFalse(DESC_AMY.equals(null));
-
         // different types -> returns false
         assertFalse(DESC_AMY.equals(5));
-
         // different values -> returns false
         assertFalse(DESC_AMY.equals(DESC_BOB));
-
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditGuestDescriptor editedAmy = new EditGuestDescriptorBuilder(DESC_AMY)
+                .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
         // different requests -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", roomNumber="
-                + editPersonDescriptor.getRoomNumber().orElse(null) + ", requestsToAdd="
-                + editPersonDescriptor.getRequestsToAdd().orElse(null) + ", requestsToDelete="
-                + editPersonDescriptor.getRequestsToDelete().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditGuestDescriptor editGuestDescriptor = new EditGuestDescriptor();
+        String expected = EditGuestDescriptor.class.getCanonicalName() + "{name="
+                + editGuestDescriptor.getName().orElse(null) + ", phone="
+                + editGuestDescriptor.getPhone().orElse(null) + ", email="
+                + editGuestDescriptor.getEmail().orElse(null) + ", roomNumber="
+                + editGuestDescriptor.getRoomNumber().orElse(null) + ", requestsToAdd="
+                + editGuestDescriptor.getRequestsToAdd().orElse(null) + ", requestsToDelete="
+                + editGuestDescriptor.getRequestsToDelete().orElse(null) + "}";
+        assertEquals(expected, editGuestDescriptor.toString());
     }
 }

@@ -11,7 +11,7 @@ import seedu.guestnote.model.guest.UniqueGuestList;
 
 /**
  * Wraps all data at the guestnote-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameGuest comparison)
  */
 public class GuestBook implements ReadOnlyGuestBook {
 
@@ -20,7 +20,7 @@ public class GuestBook implements ReadOnlyGuestBook {
     public GuestBook() {}
 
     /**
-     * Creates an GuestBook using the Persons in the {@code toBeCopied}
+     * Creates an GuestBook using the Guests in the {@code toBeCopied}
      */
     public GuestBook(ReadOnlyGuestBook toBeCopied) {
         this();

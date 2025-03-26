@@ -1,12 +1,12 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
+  "guests": [ {
+    "name": "Valid Guest",
     "phone": "9482424",
     "email": "hans@example.com",
     "roomNumber": "04-22",
     "status": "BOOKING"
   }, {
-    "name": "Person With Invalid Phone Field",
+    "name": "Guest With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "roomNumber": "04-22",
