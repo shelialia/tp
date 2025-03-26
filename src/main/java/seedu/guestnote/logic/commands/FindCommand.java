@@ -8,11 +8,11 @@ import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all guests in guestnote book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all guests in guest book whose information (name, phone number, email etc)
+ * contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 

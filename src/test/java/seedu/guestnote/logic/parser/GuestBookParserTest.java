@@ -27,10 +27,9 @@ import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.guest.AnyFieldContainsKeywordsPredicate;
 import seedu.guestnote.model.guest.FieldContainsKeywordsPredicate;
 import seedu.guestnote.model.guest.Guest;
-
-import seedu.guestnote.testutil.EditPersonDescriptorBuilder;
-import seedu.guestnote.testutil.PersonBuilder;
-import seedu.guestnote.testutil.PersonUtil;
+import seedu.guestnote.testutil.EditGuestDescriptorBuilder;
+import seedu.guestnote.testutil.GuestBuilder;
+import seedu.guestnote.testutil.GuestUtil;
 
 
 public class GuestBookParserTest {

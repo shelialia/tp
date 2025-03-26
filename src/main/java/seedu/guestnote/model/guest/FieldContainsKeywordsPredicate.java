@@ -4,10 +4,22 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * Predicate that tests whether a field of a Guest object contains any of the given keywords.
+ * <p>
+ * This class is used to test whether a Guest object's field (e.g., name, phone, email, etc.)
+ * contains any of the given keywords.
+ * </p>
+ */
 public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
     private final List<String> keywords;
     private final Function<Guest, T> fieldExtractor;
 
+    /**
+     * Constructor for FieldContainsKeywordsPredicate.
+     * @param fieldExtractor Function that extracts the field to be tested from a Guest object.
+     * @param keywords List of keywords to test against the field.
+     */
     public FieldContainsKeywordsPredicate(Function<Guest, T> fieldExtractor, List<String> keywords) {
         this.keywords = keywords;
         this.fieldExtractor = fieldExtractor;
