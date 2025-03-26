@@ -2,11 +2,16 @@ package seedu.guestnote.logic.parser;
 
 import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.guestnote.logic.commands.FindCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.AnyFieldContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.FieldContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.Guest;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,9 +30,18 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] keywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        List<Predicate<Guest>> fieldPredicates = new ArrayList<>();
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getName, Arrays.asList(keywords)));
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getPhone, Arrays.asList(keywords)));
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getEmail, Arrays.asList(keywords)));
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getStatus, Arrays.asList(keywords)));
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getRoomNumber, Arrays.asList(keywords)));
+        fieldPredicates.add(new FieldContainsKeywordsPredicate<>(Guest::getRequestsArray, Arrays.asList(keywords)));
+        //add more field predicates here
+        Predicate<Guest> compositePredicate = new AnyFieldContainsKeywordsPredicate(fieldPredicates);
+        return new FindCommand(compositePredicate);
     }
 
 }
