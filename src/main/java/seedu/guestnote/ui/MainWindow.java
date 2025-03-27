@@ -211,7 +211,7 @@ public class MainWindow extends UiPart<Stage> {
             toggleThemeMenuItem.setText("Switch to Dark Theme");
         } else {
             scene.getStylesheets().add(MainWindow.class.getResource("/view/DarkTheme.css").toExternalForm());
-            scene.getStylesheets().add(MainWindow.class.getResource("/view/Extensions.css").toExternalForm());
+            scene.getStylesheets().add(MainWindow.class.getResource("/view/DarkExtensions.css").toExternalForm());
             toggleThemeMenuItem.setText("Switch to Light Theme");
         }
 
