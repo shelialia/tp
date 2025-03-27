@@ -151,6 +151,22 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicateRequest_failure() {
+        Guest guestWithRequest = new GuestBuilder().withRequests("friend").build();
+        model.setGuest(model.getFilteredGuestList().get(0), guestWithRequest);
+
+        // Attempt to add "dinner" again -> should throw DuplicateRequestException
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder()
+                .withRequestsToAdd("friend")
+                .build();
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_REQUEST + ": [friend]");
+    }
+
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_GUEST, DESC_AMY);
 
