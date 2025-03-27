@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.commands.EditCommand;
-import seedu.guestnote.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.request.Request;
 
@@ -31,7 +31,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
-
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER,
@@ -50,41 +49,41 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER
         );
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditGuestDescriptor editGuestDescriptor = new EditGuestDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editGuestDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editGuestDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editGuestDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ROOMNUMBER).isPresent()) {
-            editPersonDescriptor.setRoomNumber(ParserUtil.parseRoomNumber(
+            editGuestDescriptor.setRoomNumber(ParserUtil.parseRoomNumber(
                     argMultimap.getValue(PREFIX_ROOMNUMBER).get())
             );
         }
         if (argMultimap.getValue(PREFIX_ADD_REQ).isPresent()) {
             parseRequestsForEdit(argMultimap.getAllValues(PREFIX_ADD_REQ))
-                    .ifPresent(editPersonDescriptor::setRequestsToAdd);
+                    .ifPresent(editGuestDescriptor::setRequestsToAdd);
         }
         if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()) {
             parseRequestsForEdit(argMultimap.getAllValues(PREFIX_DELETE_REQ))
-                    .ifPresent(editPersonDescriptor::setRequestsToDelete);
+                    .ifPresent(editGuestDescriptor::setRequestsToDelete);
         }
         if (argMultimap.getValue(PREFIX_DELETE_REQ_INDEX).isPresent()) {
-            editPersonDescriptor.setRequestIndexesToDelete(ParserUtil.parseIndexes(
+            editGuestDescriptor.setRequestIndexesToDelete(ParserUtil.parseIndexes(
                     argMultimap.getAllValues(PREFIX_DELETE_REQ_INDEX))
             );
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editGuestDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editGuestDescriptor);
     }
 
     /**

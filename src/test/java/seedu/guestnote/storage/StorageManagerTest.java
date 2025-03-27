@@ -2,7 +2,7 @@ package seedu.guestnote.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.guestnote.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

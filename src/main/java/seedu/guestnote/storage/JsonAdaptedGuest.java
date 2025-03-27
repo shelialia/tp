@@ -13,12 +13,13 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
 import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.RoomNumber;
+import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Jackson-friendly version of {@link Guest}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedGuest {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Guest's %s field is missing!";
 
@@ -26,22 +27,25 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String roomNumber;
+    private final String status;
     private final List<JsonAdaptedRequest> requests = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given guest details.
+     * Constructs a {@code JsonAdaptedGuest} with the given guest details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(
+    public JsonAdaptedGuest(
             @JsonProperty("name") String name,
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("roomNumber") String roomNumber,
+            @JsonProperty("status") String status,
             @JsonProperty("requests") List<JsonAdaptedRequest> requests) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
+        this.status = status;
         if (requests != null) {
             this.requests.addAll(requests);
         }
@@ -50,11 +54,12 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Guest} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Guest source) {
+    public JsonAdaptedGuest(Guest source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().roomNumber;
+        status = source.getStatus().name();
         requests.addAll(source.getRequests().stream()
                 .map(JsonAdaptedRequest::new)
                 .collect(Collectors.toList()));
@@ -66,9 +71,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted guest.
      */
     public Guest toModelType() throws IllegalValueException {
-        final List<seedu.guestnote.model.request.Request> personRequests = new ArrayList<>();
+        final List<seedu.guestnote.model.request.Request> guestRequests = new ArrayList<>();
         for (JsonAdaptedRequest request : requests) {
-            personRequests.add(request.toModelType());
+            guestRequests.add(request.toModelType());
         }
 
         if (name == null) {
@@ -105,9 +110,14 @@ class JsonAdaptedPerson {
         }
         final RoomNumber modelRoomNumber = new RoomNumber(roomNumber);
 
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        final Status modelStatus = Status.valueOf(status);
+
         final UniqueRequestList modelRequests = new UniqueRequestList();
-        modelRequests.setRequests(personRequests);
-        return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelRequests);
+        modelRequests.setRequests(guestRequests);
+        return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelStatus, modelRequests);
     }
 
 }

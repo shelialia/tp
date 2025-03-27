@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.guestnote.commons.core.LogsCenter;
 import seedu.guestnote.logic.commands.AddCommand;
+import seedu.guestnote.logic.commands.CheckInCommand;
+import seedu.guestnote.logic.commands.CheckOutCommand;
 import seedu.guestnote.logic.commands.ClearCommand;
 import seedu.guestnote.logic.commands.Command;
 import seedu.guestnote.logic.commands.DeleteCommand;
@@ -61,6 +63,12 @@ public class GuestBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case CheckInCommand.COMMAND_WORD:
+            return new CheckInCommandParser().parse(arguments);
+
+        case CheckOutCommand.COMMAND_WORD:
+            return new CheckOutCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.testutil.Assert.assertThrows;
-import static seedu.guestnote.testutil.TypicalPersons.ALICE;
-import static seedu.guestnote.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.ALICE;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.exceptions.DuplicateGuestException;
-import seedu.guestnote.testutil.PersonBuilder;
+import seedu.guestnote.testutil.GuestBuilder;
 
 public class GuestBookTest {
 
@@ -43,9 +43,9 @@ public class GuestBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateGuests_throwsDuplicateGuestException() {
         // Two guests with the same identity fields
-        Guest editedAlice = new PersonBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
         GuestBookStub newData = new GuestBookStub(newGuests);
@@ -54,25 +54,25 @@ public class GuestBookTest {
     }
 
     @Test
-    public void hasPerson_nullGuest_throwsNullPointerException() {
+    public void hasGuest_nullGuest_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> guestBook.hasGuest(null));
     }
 
     @Test
-    public void hasPerson_guestNotInAddressBook_returnsFalse() {
+    public void hasGuest_guestNotInAddressBook_returnsFalse() {
         assertFalse(guestBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_guestInAddressBook_returnsTrue() {
+    public void hasGuest_guestInAddressBook_returnsTrue() {
         guestBook.addGuest(ALICE);
         assertTrue(guestBook.hasGuest(ALICE));
     }
 
     @Test
-    public void hasPerson_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasGuest_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
         guestBook.addGuest(ALICE);
-        Guest editedAlice = new PersonBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
                 .build();
         assertTrue(guestBook.hasGuest(editedAlice));
     }

@@ -10,9 +10,9 @@ import seedu.guestnote.model.guest.Guest;
 /**
  * An UI component that displays information of a {@code Guest}.
  */
-public class PersonCard extends UiPart<Region> {
+public class GuestCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "GuestListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,13 +37,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane roomNumber;
     @FXML
+    private FlowPane status;
+    @FXML
     private FlowPane requests;
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Guest} and index to display.
+     * Creates a {@code GuestCode} with the given {@code Guest} and index to display.
      */
-    public PersonCard(Guest guest, int displayedIndex) {
+    public GuestCard(Guest guest, int displayedIndex) {
         super(FXML);
         this.guest = guest;
         id.setText(displayedIndex + ". ");
@@ -51,6 +53,28 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(guest.getPhone().value);
         email.setText(guest.getEmail().value);
         roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
+        Label statusLabel = new Label(guest.getStatus().name());
+        statusLabel.getStyleClass().add("status-label");
+
+        switch (guest.getStatus()) {
+
+        case BOOKING:
+            statusLabel.getStyleClass().add("status-booking");
+            break;
+        case CHECKED_IN:
+            statusLabel.getStyleClass().add("status-checkedin");
+            break;
+        case CHECKED_OUT:
+            statusLabel.getStyleClass().add("status-checkedout");
+            break;
+
+        default:
+            break;
+        }
+
+
+        status.getChildren().add(statusLabel);
+
         final int[] counter = {1};
         guest.getRequests()
                 .forEach(request -> {
