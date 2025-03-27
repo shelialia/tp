@@ -82,8 +82,7 @@ public class Guest {
         }
 
         return otherGuest != null
-                && (otherGuest.getPhone().equals(getPhone())
-                || otherGuest.getEmail().equals(getEmail()));
+                && otherGuest.getEmail().equals(getEmail());
     }
 
     /**
