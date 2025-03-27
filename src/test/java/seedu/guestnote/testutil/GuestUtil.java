@@ -32,7 +32,13 @@ public class GuestUtil {
     public static String getGuestDetails(Guest guest) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + guest.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + guest.getPhone().value + " ");
+        // Check if phone is present and append accordingly
+        sb.append(PREFIX_PHONE);
+        guest.getPhone().ifPresentOrElse(
+                phone -> sb.append(phone.getValue() + " "),  // If phone is present, append its value
+                () -> sb.append("Not added ")                    // If phone is absent, append "N/A"
+        );
+
         sb.append(PREFIX_EMAIL + guest.getEmail().value + " ");
         sb.append(PREFIX_ROOMNUMBER + guest.getRoomNumber().roomNumber + " ");
         guest.getRequests().stream().forEach(

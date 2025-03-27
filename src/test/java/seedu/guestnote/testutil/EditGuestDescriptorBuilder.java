@@ -1,5 +1,6 @@
 package seedu.guestnote.testutil;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
@@ -52,7 +53,7 @@ public class EditGuestDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditGuestDescriptor} that we are building.
      */
     public EditGuestDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.setPhone(Optional.of(new Phone(phone)));
         return this;
     }
 

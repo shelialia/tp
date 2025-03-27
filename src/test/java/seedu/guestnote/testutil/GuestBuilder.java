@@ -1,5 +1,7 @@
 package seedu.guestnote.testutil;
 
+import java.util.Optional;
+
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
@@ -21,7 +23,7 @@ public class GuestBuilder {
     public static final Status DEFAULT_STATUS = Status.BOOKING;
 
     private Name name;
-    private Phone phone;
+    private Optional<Phone> phone;
     private Email email;
     private RoomNumber roomNumber;
     private Status status;
@@ -32,7 +34,7 @@ public class GuestBuilder {
      */
     public GuestBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        phone = Optional.of(new Phone(DEFAULT_PHONE));
         email = new Email(DEFAULT_EMAIL);
         roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
         status = DEFAULT_STATUS;
@@ -72,7 +74,7 @@ public class GuestBuilder {
      * Sets the {@code Phone} of the {@code Guest} that we are building.
      */
     public GuestBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.phone = Optional.of(new Phone(phone));
         return this;
     }
 

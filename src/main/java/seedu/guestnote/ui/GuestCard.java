@@ -50,7 +50,11 @@ public class GuestCard extends UiPart<Region> {
         this.guest = guest;
         id.setText(displayedIndex + ". ");
         name.setText(guest.getName().fullName);
-        phone.setText(guest.getPhone().value);
+        // Handle Optional<Phone> properly
+        guest.getPhone().ifPresentOrElse(
+                phoneObj -> phone.setText(phoneObj.toString()),  // If phone is present, set the value
+                () -> phone.setText("Not Added")                  // If phone is absent, set default value "N/A"
+        );
         email.setText(guest.getEmail().value);
         roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
         Label statusLabel = new Label(guest.getStatus().name());

@@ -61,7 +61,7 @@ public class CheckOutCommand extends Command {
         Guest checkedOutGuest = new Guest(
                 guestToCheckOut.getName(),
                 guestToCheckOut.getPhone(),
-                guestToCheckOut.getEmail(),
+        guestToCheckOut.getEmail(),
                 guestToCheckOut.getRoomNumber(),
                 Status.CHECKED_OUT,
                 updatedRequests

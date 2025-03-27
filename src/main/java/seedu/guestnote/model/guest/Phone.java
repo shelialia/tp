@@ -1,7 +1,8 @@
 package seedu.guestnote.model.guest;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
+
+import java.util.Optional;
 
 /**
  * Represents a Guest's phone number in the guestnote book.
@@ -9,21 +10,25 @@ import static seedu.guestnote.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
+    public final Optional<String> value;
 
     /**
      * Constructs a {@code Phone}.
+     * If phone is null, it creates an Optional.empty().
+     * Otherwise, it validates the phone number and stores it.
      *
-     * @param phone A valid phone number.
+     * @param phone A valid phone number or null if the phone is absent.
      */
     public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        if (phone == null) {
+            this.value = Optional.empty();  // Phone is optional, so we allow null values.
+        } else {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+            this.value = Optional.of(phone);
+        }
     }
 
     /**
@@ -33,9 +38,16 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the phone number value as a String, if present.
+     */
+    public Optional<String> getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return value.orElse("");  // Returns an empty string if the phone is absent
     }
 
     @Override

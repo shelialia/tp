@@ -2,6 +2,7 @@ package seedu.guestnote.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,7 +25,7 @@ class JsonAdaptedGuest {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Guest's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String phone;  // Can be null if not provided
     private final String email;
     private final String roomNumber;
     private final String status;
@@ -56,7 +57,8 @@ class JsonAdaptedGuest {
      */
     public JsonAdaptedGuest(Guest source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        // If the phone is present, we store it as a string, otherwise null.
+        phone = source.getPhone().toString();
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().roomNumber;
         status = source.getStatus().name();
@@ -84,13 +86,14 @@ class JsonAdaptedGuest {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        // If phone is not null, validate and create the Phone object; otherwise, set it as Optional.empty()
+        Optional<Phone> modelPhone = Optional.empty();
+        if (phone != null) {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = Optional.of(new Phone(phone));  // Wrap in Optional
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -117,6 +120,8 @@ class JsonAdaptedGuest {
 
         final UniqueRequestList modelRequests = new UniqueRequestList();
         modelRequests.setRequests(guestRequests);
+
+        // Create a new Guest, passing the Optional<Phone> value
         return new Guest(modelName, modelPhone, modelEmail, modelRoomNumber, modelStatus, modelRequests);
     }
 

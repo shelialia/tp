@@ -3,6 +3,7 @@ package seedu.guestnote.model.guest;
 import static seedu.guestnote.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.guestnote.commons.util.ToStringBuilder;
@@ -18,7 +19,7 @@ public class Guest {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Optional<Phone> phone;
     private final Email email;
 
     // Data fields
@@ -27,11 +28,11 @@ public class Guest {
     private final UniqueRequestList requests = new UniqueRequestList();
 
     /**
-     * Every field must be present and not null.
+     * Every field except phone must be present and not null.
      */
-    public Guest(Name name, Phone phone, Email email, RoomNumber roomNumber, Status status,
+    public Guest(Name name, Optional<Phone> phone, Email email, RoomNumber roomNumber, Status status,
                  UniqueRequestList requests) {
-        requireAllNonNull(name, phone, email, requests);
+        requireAllNonNull(name, email, requests);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,7 +45,7 @@ public class Guest {
         return name;
     }
 
-    public Phone getPhone() {
+    public Optional<Phone> getPhone() {
         return phone;
     }
 
@@ -98,7 +99,7 @@ public class Guest {
 
         Guest otherGuest = (Guest) other;
         return name.equals(otherGuest.name)
-                && phone.equals(otherGuest.phone)
+                && (Objects.equals(phone, otherGuest.phone))
                 && email.equals(otherGuest.email)
                 && roomNumber.equals(otherGuest.roomNumber)
                 && status.equals(otherGuest.status)
@@ -115,7 +116,7 @@ public class Guest {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("phone", phone == null ? "Not added" : phone)  // Show "Not added" if phone is null
                 .add("email", email)
                 .add("roomNumber", roomNumber)
                 .add("status", status)

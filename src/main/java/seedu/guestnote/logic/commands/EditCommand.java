@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         assert guestToEdit != null;
 
         Name updatedName = editGuestDescriptor.getName().orElse(guestToEdit.getName());
-        Phone updatedPhone = editGuestDescriptor.getPhone().orElse(guestToEdit.getPhone());
+        Optional<Phone> updatedPhone = editGuestDescriptor.getPhone();
         Email updatedEmail = editGuestDescriptor.getEmail().orElse(guestToEdit.getEmail());
         RoomNumber updatedRoomNumber = editGuestDescriptor.getRoomNumber().orElse(guestToEdit.getRoomNumber());
         Status updatedStatus = guestToEdit.getStatus();
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
      */
     public static class EditGuestDescriptor {
         private Name name;
-        private Phone phone;
+        private Optional<Phone> phone;
         private Email email;
         private RoomNumber roomNumber;
         private UniqueRequestList requests;
@@ -179,12 +179,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
+        public void setPhone(Optional<Phone> phone) {
             this.phone = phone;
         }
 
         public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+            return phone;
         }
 
         public void setEmail(Email email) {
@@ -282,6 +282,7 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
+            System.out.println(phone);
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("phone", phone)
