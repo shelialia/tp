@@ -45,7 +45,7 @@ You can reach us at the email `lucasloh@u.nus.edu`
 <img src="images/juniper285.png" width="200px">
 
 [[github](http://github.com/juniper285)]
-[[portfolio](team/juniper285.md]
+[[portfolio](team/juniper285.md)]
 
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
