@@ -9,7 +9,6 @@ import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +24,13 @@ import seedu.guestnote.logic.commands.FindCommand;
 import seedu.guestnote.logic.commands.HelpCommand;
 import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
+import seedu.guestnote.model.guest.AnyFieldContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.FieldContainsKeywordsPredicate;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
 import seedu.guestnote.testutil.EditGuestDescriptorBuilder;
 import seedu.guestnote.testutil.GuestBuilder;
 import seedu.guestnote.testutil.GuestUtil;
+
 
 public class GuestBookParserTest {
 
@@ -87,9 +88,31 @@ public class GuestBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        String input = FindCommand.COMMAND_WORD + " " + String.join(" ", keywords);
+        FindCommand command = (FindCommand) parser.parseCommand(input);
+
+        FindCommand expectedCommand = new FindCommand(
+                new AnyFieldContainsKeywordsPredicate(Arrays.asList(
+                        new FieldContainsKeywordsPredicate<>(Guest::getName, keywords),
+                        new FieldContainsKeywordsPredicate<>(Guest::getPhone, keywords),
+                        new FieldContainsKeywordsPredicate<>(Guest::getEmail, keywords),
+                        new FieldContainsKeywordsPredicate<>(Guest::getRoomNumber, keywords),
+                        new FieldContainsKeywordsPredicate<>(Guest::getStatus, keywords),
+                        new FieldContainsKeywordsPredicate<>(Guest::getRequestsArray, keywords)
+                ))
+        );
+
+        // Extract the "meaningful" portion of the toString output (i.e. remove any default hash codes)
+        String actualStr = command.toString();
+        int actualIdx = actualStr.indexOf('<');
+        String meaningfulActual = actualIdx != -1 ? actualStr.substring(actualIdx) : actualStr;
+
+        String expectedStr = expectedCommand.toString();
+        int expectedIdx = expectedStr.indexOf('<');
+        String meaningfulExpected = expectedIdx != -1 ? expectedStr.substring(expectedIdx) : expectedStr;
+
+        // Compare only the meaningful parts.
+        assertEquals(meaningfulExpected, meaningfulActual);
     }
 
     @Test

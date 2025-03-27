@@ -68,6 +68,10 @@ public class Guest {
         return requests.asUnmodifiableObservableList();
     }
 
+    public String[] getRequestsArray() {
+        return requests.asUnmodifiableObservableList().stream().map(Request::toString).toArray(String[]::new);
+    }
+
     /**
      * Returns true if both guests have the same name.
      * This defines a weaker notion of equality between two guests.

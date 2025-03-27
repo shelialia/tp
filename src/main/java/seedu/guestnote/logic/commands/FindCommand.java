@@ -2,14 +2,17 @@ package seedu.guestnote.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.Guest;
 
 /**
- * Finds and lists all guests in guestnote book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all guests in guest book whose information (name, phone number, email etc)
+ * contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -20,9 +23,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Guest> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate<Guest> predicate) {
         this.predicate = predicate;
     }
 
