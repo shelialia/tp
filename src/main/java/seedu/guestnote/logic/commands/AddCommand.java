@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the guestnote book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the guestnote. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -31,12 +31,11 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ROOMNUMBER + "123 "
-            + PREFIX_REQUEST + "friends "
-            + PREFIX_REQUEST + "owesMoney";
+            + PREFIX_ROOMNUMBER + "01-01 "
+            + PREFIX_REQUEST + "One extra pillow";
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the guestnote book";
+    public static final String MESSAGE_DUPLICATE_GUEST = "This guest already exists in the guestnote";
 
     private final Guest toAdd;
 

@@ -27,7 +27,7 @@
 
       <FlowPane fx:id="status" alignment="TOP_LEFT" vgap="3" hgap="5" />
 
-      <FlowPane fx:id="requests" hgap="5" vgap="3" prefWrapLength="300" />
+      <FlowPane fx:id="requests" hgap="5" vgap="3" prefWrapLength="250" />
       <Label fx:id="phone" styleClass="cell_small_label" />
       <Label fx:id="email" styleClass="cell_small_label" />
     </VBox>

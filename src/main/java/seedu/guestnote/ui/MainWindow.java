@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -49,6 +50,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private MenuItem toggleThemeMenuItem;
+
+    private boolean isDarkTheme = true;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -192,5 +198,23 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    @FXML
+    private void handleToggleTheme() {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+
+        if (isDarkTheme) {
+            scene.getStylesheets().add(MainWindow.class.getResource("/view/LightTheme.css").toExternalForm());
+            scene.getStylesheets().add(MainWindow.class.getResource("/view/LightExtensions.css").toExternalForm());
+            toggleThemeMenuItem.setText("Switch to Dark Theme");
+        } else {
+            scene.getStylesheets().add(MainWindow.class.getResource("/view/DarkTheme.css").toExternalForm());
+            scene.getStylesheets().add(MainWindow.class.getResource("/view/Extensions.css").toExternalForm());
+            toggleThemeMenuItem.setText("Switch to Light Theme");
+        }
+
+        isDarkTheme = !isDarkTheme;
     }
 }
