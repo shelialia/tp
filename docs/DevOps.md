@@ -13,7 +13,7 @@
 
 ## Build automation
 
-This project uses Gradle for **build automation and dependency management**. **You are recommended to read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/stutorials/gradle.html)**.
+This project uses Gradle for **build automation and dependency management**. **You are recommended to read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html)**.
 
 
 Given below are how to use Gradle for some important project tasks.
