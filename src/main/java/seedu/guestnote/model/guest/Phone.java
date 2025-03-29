@@ -54,7 +54,7 @@ public class Phone {
 
         Phone otherPhone = (Phone) other;
         if (this.value == null || otherPhone.value == null) {
-            return this.value == otherPhone.value;  // return true if both are null
+            return this.value == otherPhone.value;
         }
         return this.value.equals(otherPhone.value);
     }

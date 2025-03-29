@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER
         );
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = null;  // Default value for phone
+        Phone phone = null;
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         }

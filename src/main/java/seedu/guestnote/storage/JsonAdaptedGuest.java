@@ -87,7 +87,7 @@ class JsonAdaptedGuest {
         if (phone != null && !Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = phone == null? new Phone(""): new Phone(phone);
+        final Phone modelPhone = phone == null ? new Phone("") : new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
