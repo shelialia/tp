@@ -22,8 +22,12 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        if (phone.isEmpty()) {
+            this.value = null; // Or set to a default value if desired
+        } else {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+            this.value = phone;
+        }
     }
 
     /**
