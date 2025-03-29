@@ -56,7 +56,7 @@ class JsonAdaptedGuest {
      */
     public JsonAdaptedGuest(Guest source) {
         name = source.getName().fullName;
-        phone = source.getPhone().map(Phone::toString).orElse("No phone number");
+        phone = source.getPhone().map(Phone::toString).orElse(null);
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().roomNumber;
         status = source.getStatus().name();

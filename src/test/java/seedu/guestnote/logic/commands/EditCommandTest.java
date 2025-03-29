@@ -12,9 +12,9 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailur
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.guestnote.logic.commands.CommandTestUtil.showGuestAtIndex;
 import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalIndexes.INDEX_EIGHTH_GUEST;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
-import static seedu.guestnote.testutil.TypicalIndexes.INDEX_EIGHTH_GUEST;
 
 import org.junit.jupiter.api.Test;
 
