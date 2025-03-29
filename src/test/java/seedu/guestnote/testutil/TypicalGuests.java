@@ -92,6 +92,12 @@ public class TypicalGuests {
             .withRoomNumber("01-09")
             .build();
 
+    public static final Guest JAY = new GuestBuilder()
+            .withName("Jay Chua")
+            .withEmail("jayc@example.com")
+            .withRoomNumber("05-33")
+            .build();
+
     // Manually added - Guest's details found in {@code CommandTestUtil}
     public static final Guest AMY = new GuestBuilder()
             .withName(VALID_NAME_AMY)
@@ -126,6 +132,6 @@ public class TypicalGuests {
     }
 
     public static List<Guest> getTypicalGuests() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JAY));
     }
 }

@@ -64,14 +64,6 @@ public class JsonAdaptedGuestTest {
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedGuest guest = new JsonAdaptedGuest(
-                VALID_NAME, null, VALID_EMAIL, VALID_ROOMNUMBER, VALID_STATUS, VALID_REQUESTS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, guest::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedGuest guest =
                 new JsonAdaptedGuest(
