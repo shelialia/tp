@@ -24,7 +24,7 @@ public class JsonAdaptedGuestTest {
     private static final String INVALID_ROOMNUMBER = " ";
     private static final String INVALID_REQUEST = "#friend";
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
+    private static final String VALID_PHONE = BENSON.getPhone().map(Phone::toString).orElse("Not Added");
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ROOMNUMBER = BENSON.getRoomNumber().toString();
     private static final String VALID_STATUS = BENSON.getStatus().toString();
