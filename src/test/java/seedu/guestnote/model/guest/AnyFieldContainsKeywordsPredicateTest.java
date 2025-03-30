@@ -61,7 +61,7 @@ public class AnyFieldContainsKeywordsPredicateTest {
         // Create a guest that does not match the name predicate but does have matching email.
         // Since our helper always uses dummy@example.com, we manually construct this Guest.
         UniqueRequestList uniqueRequests = new UniqueRequestList();
-        Guest guestWithMatchingEmail = new Guest(new Name("Bob"), new Phone("12345678"),
+        Guest guestWithMatchingEmail = new Guest(new Name("Bob"), new Phone("92345678"),
                 new Email("alice@example.com"), new RoomNumber("10-01"), Status.CHECKED_IN, uniqueRequests);
         assertTrue(compositePredicate.test(guestWithMatchingEmail));
     }
