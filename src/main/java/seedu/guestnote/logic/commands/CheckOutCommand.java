@@ -69,7 +69,6 @@ public class CheckOutCommand extends Command {
         );
 
         model.setGuest(guestToCheckOut, checkedOutGuest);
-        model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(checkedOutGuest)));
     }

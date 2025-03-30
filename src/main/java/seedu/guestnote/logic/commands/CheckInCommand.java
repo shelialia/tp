@@ -65,7 +65,6 @@ public class CheckInCommand extends Command {
         );
 
         model.setGuest(guestToCheckIn, checkedInGuest);
-        model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(checkedInGuest)));
     }
