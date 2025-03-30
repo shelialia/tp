@@ -14,6 +14,12 @@ public class PhoneTest {
     }
 
     @Test
+    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+        String invalidPhone = "34";
+        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    }
+
+    @Test
     public void isValidPhone() {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
