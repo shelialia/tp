@@ -61,16 +61,11 @@ public class FieldContainsKeywordsPredicateTest {
         // One keyword for a simple field (name)
         FieldContainsKeywordsPredicate<String> predicate = new FieldContainsKeywordsPredicate<>(
                 guest -> guest.getName().toString(), Collections.singletonList("Alice"));
-        assertTrue(predicate.test(createGuest("Alice Bob")));
-
-        // Multiple keywords for a simple field (name)
-        predicate = new FieldContainsKeywordsPredicate<>(
-                guest -> guest.getName().toString(), Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(createGuest("Alice Bob")));
+        assertTrue(predicate.test(createGuest("Alice")));
 
         // Mixed-case keywords for a simple field
         predicate = new FieldContainsKeywordsPredicate<>(
-                guest -> guest.getName().toString(), Arrays.asList("aLIce", "bOB"));
+                guest -> guest.getName().toString(), Arrays.asList("aLIce bOB"));
         assertTrue(predicate.test(createGuest("Alice Bob")));
     }
 
