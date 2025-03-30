@@ -48,7 +48,7 @@ public class CheckOutCommand extends Command {
 
         Guest guestToCheckOut = lastShownList.get(targetIndex.getZeroBased());
 
-        if (guestToCheckOut.getStatus() == Status.BOOKING) {
+        if (guestToCheckOut.getStatus() == Status.BOOKED) {
             throw new CommandException(MESSAGE_NOT_CHECKED_IN);
         }
 

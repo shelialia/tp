@@ -10,8 +10,8 @@ class StatusTest {
 
     @Test
     void testBookingStatus() {
-        Status status = Status.BOOKING;
-        assertEquals("BOOKING", status.name());
+        Status status = Status.BOOKED;
+        assertEquals("BOOKED", status.name());
         assertEquals(0, status.ordinal());
     }
 
@@ -31,7 +31,7 @@ class StatusTest {
 
     @Test
     void testValueOf() {
-        assertEquals(Status.BOOKING, Status.valueOf("BOOKING"));
+        assertEquals(Status.BOOKED, Status.valueOf("BOOKED"));
         assertEquals(Status.CHECKED_IN, Status.valueOf("CHECKED_IN"));
         assertEquals(Status.CHECKED_OUT, Status.valueOf("CHECKED_OUT"));
     }
@@ -40,7 +40,7 @@ class StatusTest {
     void testValues() {
         Status[] statuses = Status.values();
         assertEquals(3, statuses.length);
-        assertEquals(Status.BOOKING, statuses[0]);
+        assertEquals(Status.BOOKED, statuses[0]);
         assertEquals(Status.CHECKED_IN, statuses[1]);
         assertEquals(Status.CHECKED_OUT, statuses[2]);
     }
