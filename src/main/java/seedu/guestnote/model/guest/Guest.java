@@ -34,7 +34,7 @@ public class Guest {
                  UniqueRequestList requests) {
         requireAllNonNull(name, email, requests);
         this.name = name;
-        this.phone = phone != null ? phone : new Phone(""); // or use null depending on your preference
+        this.phone = phone != null ? phone : new Phone("");
         this.email = email;
         this.roomNumber = roomNumber;
         this.status = status;
