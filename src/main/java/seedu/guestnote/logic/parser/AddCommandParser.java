@@ -27,7 +27,7 @@ import seedu.guestnote.model.request.exceptions.DuplicateRequestException;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    public static String DUPLICATE_REQUEST_MESSAGE = "Duplicate requests are not allowed";
+    public static final String DUPLICATE_REQUEST_MESSAGE = "Duplicate requests are not allowed";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
