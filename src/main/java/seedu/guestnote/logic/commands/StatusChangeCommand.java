@@ -49,6 +49,5 @@ public abstract class StatusChangeCommand extends Command {
 
     protected void updateModelWithGuest(Model model, Guest oldGuest, Guest newGuest) {
         model.setGuest(oldGuest, newGuest);
-        model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
     }
 }
