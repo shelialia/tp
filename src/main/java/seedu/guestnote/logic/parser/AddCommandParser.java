@@ -20,11 +20,14 @@ import seedu.guestnote.model.guest.RoomNumber;
 import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.request.UniqueRequestList;
+import seedu.guestnote.model.request.exceptions.DuplicateRequestException;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+
+    public static String DUPLICATE_REQUEST_MESSAGE = "Duplicate requests are not allowed";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -54,7 +57,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Status status = Status.BOOKED;
         List<Request> requestList = ParserUtil.parseRequests(argMultimap.getAllValues(PREFIX_REQUEST));
         UniqueRequestList requests = new UniqueRequestList();
-        requests.addAll(requestList);
+
+        try {
+            requests.addAll(requestList);
+        } catch (DuplicateRequestException e) {
+            throw new ParseException(DUPLICATE_REQUEST_MESSAGE);
+        }
 
         Guest guest = new Guest(name, phone, email, roomNumber, status, requests);
 

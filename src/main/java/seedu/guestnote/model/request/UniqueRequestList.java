@@ -36,7 +36,7 @@ public class UniqueRequestList implements Iterable<Request> {
      * Adds a request to the list.
      * The request must not already exist in the list.
      */
-    public void add(Request toAdd) {
+    public void add(Request toAdd) throws DuplicateRequestException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateRequestException(toAdd.toString());
