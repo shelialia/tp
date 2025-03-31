@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         RoomNumber roomNumber = ParserUtil.parseRoomNumber(argMultimap.getValue(PREFIX_ROOMNUMBER).get());
-        Status status = Status.BOOKING;
+        Status status = Status.BOOKED;
         List<Request> requestList = ParserUtil.parseRequests(argMultimap.getAllValues(PREFIX_REQUEST));
         UniqueRequestList requests = new UniqueRequestList();
         requests.addAll(requestList);

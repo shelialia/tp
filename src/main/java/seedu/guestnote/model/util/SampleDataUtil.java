@@ -20,22 +20,22 @@ public class SampleDataUtil {
     public static Guest[] getSampleGuests() {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new RoomNumber("12-33"), Status.BOOKING,
+                new RoomNumber("12-33"), Status.BOOKED,
                 getRequestList("friends")),
             new Guest(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new RoomNumber("23-32"), Status.BOOKING,
+                new RoomNumber("23-32"), Status.BOOKED,
                 getRequestList("colleagues", "friends")),
             new Guest(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new RoomNumber("01-57"), Status.BOOKING,
+                new RoomNumber("01-57"), Status.BOOKED,
                 getRequestList("neighbours")),
             new Guest(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new RoomNumber("04-22"), Status.BOOKING,
+                new RoomNumber("04-22"), Status.BOOKED,
                 getRequestList("family")),
             new Guest(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new RoomNumber("02-23"), Status.BOOKING,
+                new RoomNumber("02-23"), Status.BOOKED,
                 getRequestList("classmates")),
             new Guest(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new RoomNumber("11-33"), Status.BOOKING,
+                new RoomNumber("11-33"), Status.BOOKED,
                 getRequestList("colleagues"))
         };
     }

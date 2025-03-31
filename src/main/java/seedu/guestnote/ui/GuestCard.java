@@ -59,7 +59,7 @@ public class GuestCard extends UiPart<Region> {
 
         switch (guest.getStatus()) {
 
-        case BOOKING:
+        case BOOKED:
             statusLabel.getStyleClass().add("status-booking");
             break;
         case CHECKED_IN:

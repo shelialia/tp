@@ -37,20 +37,20 @@ public class TypicalGuests {
             .withPhone("94351253")
             .withRoomNumber("12-33")
             .withRequests("friend")
-            .withStatus(Status.BOOKING).build();
+            .withStatus(Status.BOOKED).build();
     public static final Guest BENSON = new GuestBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
             .withRequests("owesMoney", "friend")
-            .withStatus(Status.BOOKING).build();
+            .withStatus(Status.BOOKED).build();
     public static final Guest CARL = new GuestBuilder()
             .withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withPhone("95352563")
             .withRoomNumber("01-57")
-            .withStatus(Status.BOOKING)
+            .withStatus(Status.BOOKED)
             .build();
     public static final Guest DANIEL = new GuestBuilder()
             .withName("Daniel Meier")
@@ -58,28 +58,28 @@ public class TypicalGuests {
             .withPhone("87652533")
             .withRoomNumber("04-22")
             .withRequests("friend")
-            .withStatus(Status.BOOKING)
+            .withStatus(Status.BOOKED)
             .build();
     public static final Guest ELLE = new GuestBuilder()
             .withName("Elle Meyer")
             .withEmail("werner@example.com")
             .withPhone("9482224")
             .withRoomNumber("02-23")
-            .withStatus(Status.BOOKING)
+            .withStatus(Status.BOOKED)
             .build();
     public static final Guest FIONA = new GuestBuilder()
             .withName("Fiona Kunz")
             .withEmail("lydia@example.com")
             .withPhone("9482427")
             .withRoomNumber("11-33")
-            .withStatus(Status.BOOKING)
+            .withStatus(Status.BOOKED)
             .build();
     public static final Guest GEORGE = new GuestBuilder()
             .withName("George Best")
             .withEmail("anna@example.com")
             .withPhone("9482442")
             .withRoomNumber("03-33")
-            .withStatus(Status.BOOKING)
+            .withStatus(Status.BOOKED)
             .build();
 
     // Manually added
@@ -101,7 +101,7 @@ public class TypicalGuests {
                 null,
                 new Email("jayc@example.com"),
                 new RoomNumber("05-33"),
-                Status.BOOKING, new UniqueRequestList())
+                Status.BOOKED, new UniqueRequestList())
                 )
             .build();
 
