@@ -83,7 +83,7 @@ public class Guest {
         }
 
         return otherGuest != null
-                && otherGuest.getEmail().equals(getEmail());
+                && otherGuest.getEmail().value.equalsIgnoreCase(getEmail().value);
     }
 
     /**
@@ -104,7 +104,7 @@ public class Guest {
         Guest otherGuest = (Guest) other;
         return name.equals(otherGuest.name)
                 && phone.equals(otherGuest.phone)
-                && email.equals(otherGuest.email)
+                && email.value.equalsIgnoreCase(otherGuest.email.value)
                 && roomNumber.equals(otherGuest.roomNumber)
                 && status.equals(otherGuest.status)
                 && requests.equals(otherGuest.requests);
