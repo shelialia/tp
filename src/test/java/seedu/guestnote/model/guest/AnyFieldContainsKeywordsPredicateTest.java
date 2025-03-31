@@ -42,8 +42,8 @@ public class AnyFieldContainsKeywordsPredicateTest {
         AnyFieldContainsKeywordsPredicate compositePredicate =
                 new AnyFieldContainsKeywordsPredicate(Arrays.asList(namePredicate, emailPredicate));
 
-        // Create a guest whose name contains "Alice" (email is dummy).
-        Guest guest = createGuest("Alice Wonderland", "dummy@example.com", "Need wifi");
+        // Create a guest whose name contains "Alice", and the email is the predicate.
+        Guest guest = createGuest("Alice Wonderland", "alice@example.com", "Need wifi");
         assertTrue(compositePredicate.test(guest));
     }
 
