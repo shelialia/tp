@@ -157,6 +157,14 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_duplicateRequests_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
+                + VALID_REQUEST_FRIEND + VALID_REQUEST_FRIEND, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
