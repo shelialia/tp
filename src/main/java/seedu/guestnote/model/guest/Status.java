@@ -4,7 +4,7 @@ package seedu.guestnote.model.guest;
  * Represents the status of a guest in the guestnote book.
  */
 public enum Status {
-    BOOKING,
+    BOOKED,
     CHECKED_IN,
     CHECKED_OUT
 }

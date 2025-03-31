@@ -18,7 +18,7 @@ public class GuestBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ROOM_NUMBER = "00-00";
-    public static final Status DEFAULT_STATUS = Status.BOOKING;
+    public static final Status DEFAULT_STATUS = Status.BOOKED;
 
     private Name name;
     private Phone phone;
@@ -44,7 +44,7 @@ public class GuestBuilder {
      */
     public GuestBuilder(Guest guestToCopy) {
         name = guestToCopy.getName();
-        phone = guestToCopy.getPhone();
+        phone = guestToCopy.getPhone().orElse(new Phone("")); // Default phone if absent
         email = guestToCopy.getEmail();
         roomNumber = guestToCopy.getRoomNumber();
         status = guestToCopy.getStatus();

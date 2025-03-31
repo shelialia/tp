@@ -38,8 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_REQUEST_FRIEND = "friend";
     public static final String VALID_ROOMNUMBER_AMY = "12-03";
     public static final String VALID_ROOMNUMBER_BOB = "12-04";
-    public static final Status VALID_STATUS_AMY = Status.BOOKING;
-    public static final Status VALID_STATUS_BOB = Status.BOOKING;
+    public static final Status VALID_STATUS_AMY = Status.BOOKED;
+    public static final Status VALID_STATUS_BOB = Status.BOOKED;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

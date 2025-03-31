@@ -10,6 +10,7 @@ import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.Guest;
+import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.Status;
 import seedu.guestnote.model.request.UniqueRequestList;
 
@@ -47,7 +48,7 @@ public class CheckOutCommand extends Command {
 
         Guest guestToCheckOut = lastShownList.get(targetIndex.getZeroBased());
 
-        if (guestToCheckOut.getStatus() == Status.BOOKING) {
+        if (guestToCheckOut.getStatus() == Status.BOOKED) {
             throw new CommandException(MESSAGE_NOT_CHECKED_IN);
         }
 
@@ -60,7 +61,7 @@ public class CheckOutCommand extends Command {
 
         Guest checkedOutGuest = new Guest(
                 guestToCheckOut.getName(),
-                guestToCheckOut.getPhone(),
+                guestToCheckOut.getPhone().orElse(new Phone("")),
                 guestToCheckOut.getEmail(),
                 guestToCheckOut.getRoomNumber(),
                 Status.CHECKED_OUT,
@@ -68,7 +69,6 @@ public class CheckOutCommand extends Command {
         );
 
         model.setGuest(guestToCheckOut, checkedOutGuest);
-        model.updateFilteredGuestList(Model.PREDICATE_SHOW_ALL_GUESTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(checkedOutGuest)));
     }
