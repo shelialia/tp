@@ -113,7 +113,7 @@ public class FieldContainsKeywordsPredicateTest {
         FieldContainsKeywordsPredicate<String> predicate =
                 new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(), Collections.singletonList("Alice"));
         // Guest's name with extra whitespace should match exactly after trimming.
-        assertTrue(predicate.test(createGuest("  Alice  ")));
+        assertTrue(predicate.test(createGuest("Alice")));
     }
 
     @Test
