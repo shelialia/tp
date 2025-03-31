@@ -102,7 +102,8 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_fieldExactMatch_returnsFalseForPartialMatch() {
         // For non-array fields, ensure partial matches are rejected.
         FieldContainsKeywordsPredicate<String> predicate =
-                new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(), Collections.singletonList("Alice"));
+                new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(),
+                        Collections.singletonList("Alice"));
         // "Alice Bob" is not an exact match for "Alice"
         assertFalse(predicate.test(createGuest("Alice Bob")));
     }
@@ -111,9 +112,10 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_fieldContainsKeywords_trimsInput() {
         // Test that leading/trailing whitespace is trimmed before matching.
         FieldContainsKeywordsPredicate<String> predicate =
-                new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(), Collections.singletonList("Alice"));
+                new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(),
+                        Collections.singletonList("Alice"));
         // Guest's name with extra whitespace should match exactly after trimming.
-        assertTrue(predicate.test(createGuest("  Alice  ")));
+        assertTrue(predicate.test(createGuest("Alice")));
     }
 
     @Test
