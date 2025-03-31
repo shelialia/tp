@@ -29,23 +29,27 @@ GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all guests.
+* `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who lives in room `#01-01` with a unique email `johnd@example.com` and a request of `One extra pillow` to the Guest list.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who are in room 01-01 with a request of one extra pillow to the Guest list.
+* `list` : Lists all guests.
 
-   * `delete 3` : Deletes the 3rd guest shown in the current list.
+* `edit 2 n/James Lee +rq/Room cleaning`: Edit guest No.2 to be named `James Lee` with an additional request `Room cleaning`.
 
-   * `clear` : Deletes all guests.
+* `edit 2 -ri/1`: Edit guest No.2 by deleting the first request for the guest. 
 
-   * `exit` : Exits the app.
+* `delete 3` : Deletes the 3rd guest shown in the current list.
+
+* `clear` : Deletes all guests.
+
+* `exit` : Exits the app.
    
-   * `help` : Shows the help window.
+* `help` : Shows the help window.
    
-   * `find John` : Finds all guests whose names contain the word `John`.
+* `find John` : Finds all guests whose names contain the word `John`.
    
-   * `edit 2 n/James Lee`: Edit guest No. 2 to be named `James Lee`.
-   
-   * `check-in 1` : Check in guest No.1
+* `check-in 1` : Check in guest No.1
+
+* `check-out 1`: Check out guest No.1
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -67,7 +71,7 @@ GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line 
   e.g. `[rq/REQUEST]…​` can be used as ` ` (i.e. 0 times), `rq/New Pillow`, `rq/New Pillow rq/Orange Juice` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -88,15 +92,18 @@ Format: `help`
 
 Adds a guest to the guest list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [rq/REQUEST]…​`
+Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A guest can have any number of requests (including 0)
+**Tip:** 
+* A guest can have any number of requests (including 0)
+* A guest can be added without a phone number
+
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/01-01`
+* `add n/John Doe e/johnd@example.com p/98765432 r/01-01`
 * `add n/Betsy Crowe rq/Add Pillow e/betsycrowe@example.com p/1234567 r/01-01 rq/Orange Juice`
 
 ### Listing all guests : `list`
@@ -109,18 +116,20 @@ Format: `list`
 
 Edits an existing guest in the guest list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [rq/REQUEST]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [+rq/REQUEST]…​ [-rq/REQUEST]…​`
 
-* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be within the number of guests displayed** 1, 2, 3, …​ 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing requests, the existing requests of the guest will be removed i.e adding of requests is not cumulative.
-* You can remove all the guest’s requests by typing `rq/` without
-    specifying any requests after it.
+* When editing requests:
+  * an add request input will be added to the back of the current request list for the guest.
+  * a remove request input will cause the positions for all remaining requests will be updated.
+* If the edit results in a duplicate guest in the guest list, the command is not allowed. 
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st guest to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower rq/` Edits the name of the 2nd guest to be `Betsy Crower` and clears all existing requests.
+*  `edit 1 p/91234567 e/johndoe@example.com ` Edits the phone number and email address of the 1st guest to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower -rq/Extra toothbrush` Edits the name of the 2nd guest to be `Betsy Crower` and removes the existing request `Extra toothbrush`.
+*  `edit 3 e/chloeng@example.com` Will not be allowed when there is an existing guest with the email `chloeng@example.com` in the guest list. 
 
 ### Locating guests by name: `find`
 
@@ -224,7 +233,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM-NUMBER [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rq/REQUEST]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
