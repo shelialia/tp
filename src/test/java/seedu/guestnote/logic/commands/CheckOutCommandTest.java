@@ -55,7 +55,7 @@ public class CheckOutCommandTest {
 
     @Test
     public void execute_bookingStatus_throwsCommandException() {
-        Guest guestToCheckOut = new GuestBuilder().withStatus(Status.BOOKING).build();
+        Guest guestToCheckOut = new GuestBuilder().withStatus(Status.BOOKED).build();
         model.setGuest(model.getFilteredGuestList().get(0), guestToCheckOut);
         CheckOutCommand checkOutCommand = new CheckOutCommand(INDEX_FIRST_GUEST);
 

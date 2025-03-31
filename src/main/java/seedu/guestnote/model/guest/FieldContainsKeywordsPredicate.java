@@ -36,7 +36,8 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
             return arrayContainsKeyword(arr, keywords);
         } else {
             String fieldString = fieldValue.toString().toLowerCase();
-            return keywords.stream().anyMatch(keyword -> fieldString.contains(keyword.toLowerCase()));
+            return keywords.stream()
+                    .anyMatch(keyword -> fieldString.equalsIgnoreCase(keyword.trim()));
         }
     }
 
@@ -54,9 +55,11 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
         FieldContainsKeywordsPredicate<?> otherPredicate = (FieldContainsKeywordsPredicate<?>) other;
         return keywords.equals(otherPredicate.keywords);
     }
+
     /**
-     * Helper method that checks if any keyword is contained in the concatenated string of array elements.
-     * This method avoids nested loops by first concatenating all non-null elements into one string.
+     * Helper method that checks if the concatenated string of array elements contains
+     * the full phrase formed by joining all keywords.
+     * This ensures that for array fields (like requests), the complete phrase is matched.
      */
     private boolean arrayContainsKeyword(Object[] arr, List<String> keywords) {
         StringBuilder sb = new StringBuilder();
@@ -66,12 +69,9 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
             }
         }
         String combined = sb.toString();
-        for (String keyword : keywords) {
-            if (combined.contains(keyword.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
+        // Join all keywords with a space to form the full search phrase.
+        String joinedKeywords = String.join(" ", keywords).toLowerCase();
+        return combined.contains(joinedKeywords);
     }
     @Override
     public String toString() {

@@ -29,7 +29,7 @@ public class CheckOutCommand extends StatusChangeCommand {
     public CommandResult execute(Model model) throws CommandException {
         Guest guest = getGuestByIndex(model);
 
-        if (guest.getStatus() == Status.BOOKING) {
+        if (guest.getStatus() == Status.BOOKED) {
             throw new CommandException(MESSAGE_NOT_CHECKED_IN);
         }
 
