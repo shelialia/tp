@@ -27,7 +27,7 @@
     "email" : "cornelia@example.com",
     "roomNumber" : "04-22",
     "status" : "BOOKED",
-    "requests" : [ "" ]
+    "requests" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",

@@ -7,7 +7,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_LUGGAGE_RACK;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.guestnote.logic.commands.CommandTestUtil.showGuestAtIndex;
@@ -38,7 +38,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Guest editedGuest = new GuestBuilder().withRequests("friend").build();
+        Guest editedGuest = new GuestBuilder().withRequests("Extra Pillow").build();
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
 
@@ -57,10 +57,10 @@ public class EditCommandTest {
 
         GuestBuilder personInList = new GuestBuilder(lastGuest);
         Guest editedGuest = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withRequests(VALID_REQUEST_HUSBAND).build();
+                .withRequests(VALID_REQUEST_LUGGAGE_RACK).build();
 
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withRequestsToAdd(VALID_REQUEST_LUGGAGE_RACK).build();
         EditCommand editCommand = new EditCommand(indexLastGuest, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS,
@@ -150,7 +150,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_originalGuestWithPhone_editSuccess() {
-        Guest editedGuest = new GuestBuilder().withPhone("81234567").withRequests("friend").build();
+        Guest editedGuest = new GuestBuilder().withPhone("81234567").withRequests("Extra Pillow").build();
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder(editedGuest).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
 

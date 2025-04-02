@@ -18,8 +18,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_LUGGAGE_RACK;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_TOWEL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -109,7 +109,7 @@ public class EditCommandParserTest {
 
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
+                .withRequestsToAdd(VALID_REQUEST_LUGGAGE_RACK).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -150,7 +150,7 @@ public class EditCommandParserTest {
 
         // requests
         userInput = targetIndex.getOneBased() + ADD_REQUEST_DESC_FRIEND;
-        descriptor = new EditGuestDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_FRIEND).build();
+        descriptor = new EditGuestDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_TOWEL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
