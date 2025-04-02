@@ -65,4 +65,11 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean containsSubstringIgnoreCase(String fullName, String keyword) {
+        requireNonNull(fullName);
+        requireNonNull(keyword);
+
+        return fullName.toLowerCase().contains(keyword.toLowerCase());
+    }
 }
