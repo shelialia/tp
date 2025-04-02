@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.guestnote.commons.core.GuiSettings;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
-import seedu.guestnote.model.GuestBook;
+import seedu.guestnote.model.GuestNote;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.testutil.GuestBuilder;
@@ -126,12 +126,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getGuestNoteFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setGuestNoteFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -141,12 +141,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyGuestBook newData) {
+        public void setGuestNote(ReadOnlyGuestNote newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyGuestBook getAddressBook() {
+        public ReadOnlyGuestNote getGuestNote() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,8 +213,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyGuestBook getAddressBook() {
-            return new GuestBook();
+        public ReadOnlyGuestNote getGuestNote() {
+            return new GuestNote();
         }
     }
 

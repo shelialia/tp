@@ -11,10 +11,10 @@ import seedu.guestnote.commons.core.LogsCenter;
 import seedu.guestnote.logic.commands.Command;
 import seedu.guestnote.logic.commands.CommandResult;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
-import seedu.guestnote.logic.parser.GuestBookParser;
+import seedu.guestnote.logic.parser.GuestNoteParser;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.storage.Storage;
 
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final GuestBookParser guestBookParser;
+    private final GuestNoteParser guestNoteParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        guestBookParser = new GuestBookParser();
+        guestNoteParser = new GuestNoteParser();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = guestBookParser.parseCommand(commandText);
+        Command command = guestNoteParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveGuestNote(model.getGuestNote());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyGuestBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyGuestNote getGuestNote() {
+        return model.getGuestNote();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getGuestNoteFilePath() {
+        return model.getGuestNoteFilePath();
     }
 
     @Override

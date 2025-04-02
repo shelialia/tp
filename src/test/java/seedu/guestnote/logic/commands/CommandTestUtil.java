@@ -16,7 +16,7 @@ import java.util.List;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
-import seedu.guestnote.model.GuestBook;
+import seedu.guestnote.model.GuestNote;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
@@ -107,16 +107,16 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the guestnote book, filtered guest list and selected guest in {@code actualModel} remain unchanged
+     * - the guestnote, filtered guest list and selected guest in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        GuestBook expectedGuestBook = new GuestBook(actualModel.getAddressBook());
+        GuestNote expectedGuestNote = new GuestNote(actualModel.getGuestNote());
         List<Guest> expectedFilteredList = new ArrayList<>(actualModel.getFilteredGuestList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedGuestBook, actualModel.getAddressBook());
+        assertEquals(expectedGuestNote, actualModel.getGuestNote());
         assertEquals(expectedFilteredList, actualModel.getFilteredGuestList());
     }
     /**

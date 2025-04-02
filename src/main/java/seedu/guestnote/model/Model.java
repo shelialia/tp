@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' guestnote book file path.
      */
-    Path getAddressBookFilePath();
+    Path getGuestNoteFilePath();
 
     /**
      * Sets the user prefs' GuestNote book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setGuestNoteFilePath(Path guestNoteFilePath);
 
     /**
-     * Replaces guestnote book data with the data in {@code addressBook}.
+     * Replaces guestnote data with the data in {@code guestNote}.
      */
-    void setAddressBook(ReadOnlyGuestBook addressBook);
+    void setGuestNote(ReadOnlyGuestNote guestNote);
 
-    /** Returns the GuestBook */
-    ReadOnlyGuestBook getAddressBook();
+    /** Returns the GuestNote */
+    ReadOnlyGuestNote getGuestNote();
 
     /**
      * Returns true if a guest with the same identity as {@code guest} exists in the guestnote book.

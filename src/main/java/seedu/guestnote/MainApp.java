@@ -15,15 +15,15 @@ import seedu.guestnote.commons.util.ConfigUtil;
 import seedu.guestnote.commons.util.StringUtil;
 import seedu.guestnote.logic.Logic;
 import seedu.guestnote.logic.LogicManager;
-import seedu.guestnote.model.GuestBook;
+import seedu.guestnote.model.GuestNote;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 import seedu.guestnote.model.util.SampleDataUtil;
-import seedu.guestnote.storage.GuestBookStorage;
-import seedu.guestnote.storage.JsonGuestBookStorage;
+import seedu.guestnote.storage.GuestNoteStorage;
+import seedu.guestnote.storage.JsonGuestNoteStorage;
 import seedu.guestnote.storage.JsonUserPrefsStorage;
 import seedu.guestnote.storage.Storage;
 import seedu.guestnote.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing GuestBook ]===========================");
+        logger.info("=============================[ Initializing GuestNote ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        GuestBookStorage guestBookStorage = new JsonGuestBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(guestBookStorage, userPrefsStorage);
+        GuestNoteStorage guestNoteStorage = new JsonGuestNoteStorage(userPrefs.getGuestNoteFilePath());
+        storage = new StorageManager(guestNoteStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -69,25 +69,27 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s guestnote book and {@code userPrefs}. <br>
-     * The data from the sample guestnote book will be used instead if {@code storage}'s guestnote book is not found,
+     * The data from the sample guestnote will be used instead if {@code storage}'s guestnote book is not found,
      * or an empty guestnote book will be used instead if errors occur when reading {@code storage}'s guestnote book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getGuestNoteFilePath());
 
-        Optional<ReadOnlyGuestBook> addressBookOptional;
-        ReadOnlyGuestBook initialData;
+        Optional<ReadOnlyGuestNote> guestNoteOptional;
+        ReadOnlyGuestNote initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample GuestBook.");
+            guestNoteOptional = storage.readGuestNote();
+            if (!guestNoteOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getGuestNoteFilePath()
+                        + " populated with a sample GuestNote.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = guestNoteOptional.orElseGet(SampleDataUtil::getSampleGuestNote);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty GuestBook.");
-            initialData = new GuestBook();
+            logger.warning("Data file at "
+                    + storage.getGuestNoteFilePath()
+                    + " could not be " + "loaded."
+                    + " Will be starting with an empty GuestNote.");
+            initialData = new GuestNote();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +172,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting GuestBook " + MainApp.VERSION);
+        logger.info("Starting GuestNote " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping GuestBook ] =============================");
+        logger.info("============================ [ Stopping GuestNote ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

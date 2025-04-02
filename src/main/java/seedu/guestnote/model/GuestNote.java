@@ -13,16 +13,16 @@ import seedu.guestnote.model.guest.UniqueGuestList;
  * Wraps all data at the guestnote-book level
  * Duplicates are not allowed (by .isSameGuest comparison)
  */
-public class GuestBook implements ReadOnlyGuestBook {
+public class GuestNote implements ReadOnlyGuestNote {
 
     private final UniqueGuestList guests = new UniqueGuestList();
 
-    public GuestBook() {}
+    public GuestNote() {}
 
     /**
-     * Creates an GuestBook using the Guests in the {@code toBeCopied}
+     * Creates an GuestNote using the Guests in the {@code toBeCopied}
      */
-    public GuestBook(ReadOnlyGuestBook toBeCopied) {
+    public GuestNote(ReadOnlyGuestNote toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -38,9 +38,9 @@ public class GuestBook implements ReadOnlyGuestBook {
     }
 
     /**
-     * Resets the existing data of this {@code GuestBook} with {@code newData}.
+     * Resets the existing data of this {@code GuestNote} with {@code newData}.
      */
-    public void resetData(ReadOnlyGuestBook newData) {
+    public void resetData(ReadOnlyGuestNote newData) {
         requireNonNull(newData);
 
         setGuests(newData.getGuestList());
@@ -76,7 +76,7 @@ public class GuestBook implements ReadOnlyGuestBook {
     }
 
     /**
-     * Removes {@code key} from this {@code GuestBook}.
+     * Removes {@code key} from this {@code GuestNote}.
      * {@code key} must exist in the guestnote book.
      */
     public void removeGuest(Guest key) {
@@ -104,12 +104,12 @@ public class GuestBook implements ReadOnlyGuestBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GuestBook)) {
+        if (!(other instanceof GuestNote)) {
             return false;
         }
 
-        GuestBook otherGuestBook = (GuestBook) other;
-        return guests.equals(otherGuestBook.guests);
+        GuestNote otherGuestNote = (GuestNote) other;
+        return guests.equals(otherGuestNote.guests);
     }
 
     @Override

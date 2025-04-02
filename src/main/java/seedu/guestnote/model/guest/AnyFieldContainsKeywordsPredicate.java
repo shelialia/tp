@@ -23,6 +23,7 @@ public class AnyFieldContainsKeywordsPredicate implements Predicate<Guest> {
         // Return true if any predicate matches
         for (Predicate<Guest> predicate : predicates) {
             if (predicate.test(guest)) {
+                assert(predicate != null);
                 return true;
             }
         }

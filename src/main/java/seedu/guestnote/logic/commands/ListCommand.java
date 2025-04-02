@@ -39,10 +39,12 @@ public class ListCommand extends Command {
         if (predicate == null) {
             // Default behavior: list all guests
             model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
+            return new CommandResult(MESSAGE_SUCCESS);
         } else {
             // Search behavior: filter list based on the predicate
             model.updateFilteredGuestList(predicate);
+            return new CommandResult(MESSAGE_SUCCESS + " (filtered)");
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+
     }
 }

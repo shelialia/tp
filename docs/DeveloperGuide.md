@@ -316,37 +316,37 @@ Priorities: High (must have) - ```* * *`, Medium (nice to have) - `* *`, Low (un
 
 # Use Cases
 
-This document outlines the use cases for the GuestBook system, detailing the interactions between the system and the Hotel Concierge actor. Each use case includes a main success scenario (MSS) and possible extensions or variations.
+This document outlines the use cases for the GuestNote system, detailing the interactions between the system and the Hotel Concierge actor. Each use case includes a main success scenario (MSS) and possible extensions or variations.
 
 Note for any given step in the following use case, we assume that they are atomic operations and are executed successfully unless otherwise specified in the extensions.
 
-For all cases below, the **System** is the `GuestBook` and the **Actor** is the `Hotel Concierge`, unless specified otherwise
+For all cases below, the **System** is the `GuestNote` and the **Actor** is the `Hotel Concierge`, unless specified otherwise
 
 ---------------------------------------------------------
 
 ### Use case: UC01 - Create New Guest
 
 <box type="info">
-    <b>Preconditions:</b> Guest does not already exist in GuestBook.
+    <b>Preconditions:</b> Guest does not already exist in GuestNote.
 </box>
 
 **MSS:**
 1. Concierge requests to create a new guest, passing the new guest’s details (name, room number).
-2. GuestBook validates the input and creates a new guest record.
-3. GuestBook displays a success message confirming the guest’s creation.  
+2. GuestNote validates the input and creates a new guest record.
+3. GuestNote displays a success message confirming the guest’s creation.  
    Use case ends.
 
 **Extensions:**
 <box type="tip" header="1a. Optional Requests 📝" light>
     <ul>
       <li>1a1. Concierge provides zero or more optional “requests” (e.g., special amenities, notes).</li>
-      <li>1a2. Use case resumes from step 2.</li>
+      <li>1a2. Use case resumes from step 2.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="2a. Invalid or Incomplete Details" light>
     <ul>
-      <li>2a1. GuestBook detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
-      <li>2a2. GuestBook informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
+      <li>2a2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -356,21 +356,21 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge requests a list of all guests.
-2. GuestBook retrieves and displays a list of all guests.  
+2. GuestNote retrieves and displays a list of all guests.  
    Use case ends.
 
 **Extensions:**
 <box type="tip" header="1a. Search :search:" light>
     <ul>
       <li>1a1. Concierge provides a search term.</li>
-      <li>1a2. GuestBook filters the list of guests based on the search term.</li>
-      <li>1a3. GuestBook displays the filtered list of guests.<br>Use case ends.</li>
+      <li>1a2. GuestNote filters the list of guests based on the search term.</li>
+      <li>1a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="warning" header="2a. No Guests" light>
     <ul>
-      <li>2a1. GuestBook detects that there are no guests in the system.</li>
-      <li>2a2. GuestBook displays a message indicating that there are no guests.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that there are no guests in the system.</li>
+      <li>2a2. GuestNote displays a message indicating that there are no guests.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -378,27 +378,27 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 ### Use case: UC03 - Update Guest Details
 <box type="info">
-<b>Preconditions:</b> Guest exists in GuestBook.
+<b>Preconditions:</b> Guest exists in GuestNote.
 </box>
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to update the guest’s details, passing the guest’s index in displayed list and the new details.
-3. GuestBook validates the input and updates the guest’s record.
-4. GuestBook displays a success message confirming the update.  
+3. GuestNote validates the input and updates the guest’s record.
+4. GuestNote displays a success message confirming the update.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="3b. Invalid or Incomplete Details" light>
     <ul>
-      <li>3b1. GuestBook detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
-      <li>3b2. GuestBook informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+      <li>3b1. GuestNote detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
+      <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -406,20 +406,20 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 ### Use case: UC04 - Delete Guest
 <box type="info">
-    <b>Preconditions:</b> Guest exists in GuestBook.
+    <b>Preconditions:</b> Guest exists in GuestNote.
 </box>
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to delete the guest, passing the guest’s index in displayed list.
-3. GuestBook confirms the deletion of the guest.  
+3. GuestNote confirms the deletion of the guest.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -427,34 +427,34 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 ### Use case: UC05 - Create New Request for Guest
 <box type="info">
-<b>Preconditions:</b> Guest exists in GuestBook.
+<b>Preconditions:</b> Guest exists in GuestNote.
 </box>
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge requests to edit the guest, passing the guest’s index in displayed list and the new request details.
-3. GuestBook validates the input and creates a new request record for the guest.
-4. GuestBook displays a success message confirming the request creation.  
+3. GuestNote validates the input and creates a new request record for the guest.
+4. GuestNote displays a success message confirming the request creation.  
    Use case ends.
 
 **Extensions:**
 <box type="tip" header="2a. Optional Completion Status" light>
     <ul>
       <li>2a1. Concierge provides optional completion status (e.g., pending, completed).</li>
-      <li>2a2. Use case resumes from step 3.</li>
+      <li>2a2. Use case resumes from step 3.<br>Use case ends.</li>
     </ul>
 </box>
 
 <box type="warning" header="3a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="3b. Invalid or Incomplete Details" light>
     <ul>
-      <li>3b1. GuestBook detects that the provided information is missing or fails validation.</li>
-      <li>3b2. GuestBook informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+      <li>3b1. GuestNote detects that the provided information is missing or fails validation.</li>
+      <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -464,35 +464,35 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 
 **MSS:**
 1. Concierge requests a list of all requests
-2. GuestBook retrieves and displays a list of all requests.  
+2. GuestNote retrieves and displays a list of all requests.  
    Use case ends.
 
 **Extensions:**
 <box type="tip" header="2a. Search 🔍" light>
     <ul>
       <li>2a1. Concierge provides a search term.</li>
-      <li>2a2. GuestBook filters the list of requests based on the search term.</li>
-      <li>2a3. GuestBook displays the filtered list of requests.<br>Use case ends.</li>
+      <li>2a2. GuestNote filters the list of requests based on the search term.</li>
+      <li>2a3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="tip" header="2b. Filter by Completion Status 📥" light>
     <ul>
       <li>2b1. Concierge provides a completion status.</li>
-      <li>2b2. GuestBook filters the list of requests with matching completion status.</li>
-      <li>2b3. GuestBook displays the filtered list of requests.<br>Use case ends.</li>
+      <li>2b2. GuestNote filters the list of requests with matching completion status.</li>
+      <li>2b3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
     </ul>
 </box>
 
 <box type="warning" header="3a. No Requests" light>
     <ul>
-      <li>3a1. GuestBook detects that there are no requests for the guest.</li>
-      <li>3a2. GuestBook displays a message indicating that there are no requests for the guest.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that there are no requests for the guest.</li>
+      <li>3a2. GuestNote displays a message indicating that there are no requests for the guest.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="warning" header="3b. Guest Not Found" light>
     <ul>
-      <li>3b1. GuestBook detects that the provided guest index does not exist in the system.</li>
-      <li>3b2. GuestBook informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>3b1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>3b2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -502,7 +502,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 <box type="info">
     <b>Preconditions:</b>
     <ul>
-        <li>Guest exists in GuestBook.</li>
+        <li>Guest exists in GuestNote.</li>
         <li>Request exists for the guest.</li>
     </ul>
 </box>
@@ -511,21 +511,21 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge retrieves a !!request's index (UC06)!!
 3. Concierge requests to mark the request as completed, passing the request index.
-4. GuestBook updates the request record with the completion status.
-5. GuestBook displays a success message confirming the request completion.  
+4. GuestNote updates the request record with the completion status.
+5. GuestNote displays a success message confirming the request completion.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Request Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided request index does not exist for the guest.</li>
-      <li>3a2. GuestBook informs the Concierge that the request was not found.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that the provided request index does not exist for the guest.</li>
+      <li>3a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="3b. Invalid Completion Status" light>
     <ul>
-      <li>3b1. GuestBook detects that the provided completion status is invalid.</li>
-      <li>3b2. GuestBook informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+      <li>3b1. GuestNote detects that the provided completion status is invalid.</li>
+      <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -535,7 +535,7 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 <box type="info">
     <b>Preconditions:</b>
     <ul>
-        <li>Guest exists in GuestBook.</li>
+        <li>Guest exists in GuestNote.</li>
         <li>Request exists for the guest.</li>
     </ul>
 </box>
@@ -544,22 +544,22 @@ For all cases below, the **System** is the `GuestBook` and the **Actor** is the 
 1. Concierge retrieves a !!guest (UC02)!!
 2. Concierge retrieves a !!request's index (UC06)!!
 3. Concierge requests to delete the request, passing the request index.
-4. GuestBook confirms the deletion of the request.  
+4. GuestNote confirms the deletion of the request.  
    Use case ends.
 
 **Extensions:**
 <box type="warning" header="3a. Request Not Found" light>
     <ul>
-      <li>3a1. GuestBook detects that the provided request index does not exist for the guest.</li>
-      <li>3a2. GuestBook informs the Concierge that the request was not found.<br>Use case ends.</li>
+      <li>3a1. GuestNote detects that the provided request index does not exist for the guest.</li>
+      <li>3a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
 ### Glossary
 
 * **Guest:**
-A guest staying at the hotel whose information is stored in the **GuestBook** system.
-* **GuestBook:**
+A guest staying at the hotel whose information is stored in the **GuestNote** system.
+* **GuestNote:**
 The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.
 * **Request:**
 A service or action requested by a guest (e.g., room service, maintenance, additional amenities).

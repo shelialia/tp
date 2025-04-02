@@ -1,23 +1,17 @@
 package seedu.guestnote.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.commons.util.ToStringBuilder;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.model.guest.Phone;
 import seedu.guestnote.model.guest.Status;
-import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
  * Checks out a guest identified using it's displayed index from the guestnote book.
  */
-public class CheckOutCommand extends Command {
+public class CheckOutCommand extends StatusChangeCommand {
     public static final String COMMAND_WORD = "check-out";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Checks out the guest identified by the index number used in the displayed guest list.\n"
@@ -27,50 +21,26 @@ public class CheckOutCommand extends Command {
     public static final String MESSAGE_NOT_CHECKED_IN = "Guest has not checked in.";
     public static final String MESSAGE_ALREADY_CHECKED_OUT = "Guest has already checked out.";
 
-    private final Index targetIndex;
-
-    /**
-     * Constructor to set Index for guest to be checked-out.
-     */
     public CheckOutCommand(Index targetIndex) {
-        requireNonNull(targetIndex);
-        this.targetIndex = targetIndex;
+        super(targetIndex);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Guest> lastShownList = model.getFilteredGuestList();
+        Guest guest = getGuestByIndex(model);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
-        }
-
-        Guest guestToCheckOut = lastShownList.get(targetIndex.getZeroBased());
-
-        if (guestToCheckOut.getStatus() == Status.BOOKED) {
+        if (guest.getStatus() == Status.BOOKED) {
             throw new CommandException(MESSAGE_NOT_CHECKED_IN);
         }
 
-        if (guestToCheckOut.getStatus() == Status.CHECKED_OUT) {
+        if (guest.getStatus() == Status.CHECKED_OUT) {
             throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
         }
 
-        UniqueRequestList updatedRequests = new UniqueRequestList();
-        updatedRequests.setRequests(guestToCheckOut.getRequests());
+        Guest updatedGuest = updateGuestStatus(guest, Status.CHECKED_OUT);
+        updateModelWithGuest(model, guest, updatedGuest);
 
-        Guest checkedOutGuest = new Guest(
-                guestToCheckOut.getName(),
-                guestToCheckOut.getPhone().orElse(new Phone("")),
-                guestToCheckOut.getEmail(),
-                guestToCheckOut.getRoomNumber(),
-                Status.CHECKED_OUT,
-                updatedRequests
-        );
-
-        model.setGuest(guestToCheckOut, checkedOutGuest);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(checkedOutGuest)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedGuest)));
     }
 
     @Override

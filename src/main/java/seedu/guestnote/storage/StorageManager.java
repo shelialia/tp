@@ -7,24 +7,24 @@ import java.util.logging.Logger;
 
 import seedu.guestnote.commons.core.LogsCenter;
 import seedu.guestnote.commons.exceptions.DataLoadingException;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 
 /**
- * Manages storage of GuestBook data in local storage.
+ * Manages storage of GuestNote data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private GuestBookStorage guestBookStorage;
+    private GuestNoteStorage guestNoteStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code GuestBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code GuestNoteStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(GuestBookStorage guestBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.guestBookStorage = guestBookStorage;
+    public StorageManager(GuestNoteStorage guestNoteStorage, UserPrefsStorage userPrefsStorage) {
+        this.guestNoteStorage = guestNoteStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ GuestBook methods ==============================
+    // ================ GuestNote methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return guestBookStorage.getAddressBookFilePath();
+    public Path getGuestNoteFilePath() {
+        return guestNoteStorage.getGuestNoteFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyGuestBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(guestBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyGuestNote> readGuestNote() throws DataLoadingException {
+        return readGuestNote(guestNoteStorage.getGuestNoteFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyGuestBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyGuestNote> readGuestNote(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return guestBookStorage.readAddressBook(filePath);
+        return guestNoteStorage.readGuestNote(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGuestBook addressBook) throws IOException {
-        saveAddressBook(addressBook, guestBookStorage.getAddressBookFilePath());
+    public void saveGuestNote(ReadOnlyGuestNote guestNote) throws IOException {
+        saveGuestNote(guestNote, guestNoteStorage.getGuestNoteFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGuestBook addressBook, Path filePath) throws IOException {
+    public void saveGuestNote(ReadOnlyGuestNote guestNote, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        guestBookStorage.saveAddressBook(addressBook, filePath);
+        guestNoteStorage.saveGuestNote(guestNote, filePath);
     }
 
 }

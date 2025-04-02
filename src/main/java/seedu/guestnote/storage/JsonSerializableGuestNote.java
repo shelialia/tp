@@ -9,52 +9,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.guestnote.commons.exceptions.IllegalValueException;
-import seedu.guestnote.model.GuestBook;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.GuestNote;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.guest.Guest;
 
 /**
- * An Immutable GuestBook that is serializable to JSON format.
+ * An Immutable GuestNote that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableGuestBook {
+@JsonRootName(value = "guestNote")
+class JsonSerializableGuestNote {
 
     public static final String MESSAGE_DUPLICATE_GUEST = "Guests list contains duplicate guest(s).";
 
     private final List<JsonAdaptedGuest> guests = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableGuestBook} with the given guests.
+     * Constructs a {@code JsonSerializableGuestNote} with the given guests.
      */
     @JsonCreator
-    public JsonSerializableGuestBook(@JsonProperty("guests") List<JsonAdaptedGuest> guests) {
+    public JsonSerializableGuestNote(@JsonProperty("guests") List<JsonAdaptedGuest> guests) {
         this.guests.addAll(guests);
     }
 
     /**
-     * Converts a given {@code ReadOnlyGuestBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyGuestNote} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableGuestBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableGuestNote}.
      */
-    public JsonSerializableGuestBook(ReadOnlyGuestBook source) {
+    public JsonSerializableGuestNote(ReadOnlyGuestNote source) {
         guests.addAll(source.getGuestList().stream().map(JsonAdaptedGuest::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this guestnote book into the model's {@code GuestBook} object.
+     * Converts this guestnote book into the model's {@code GuestNote} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public GuestBook toModelType() throws IllegalValueException {
-        GuestBook guestBook = new GuestBook();
+    public GuestNote toModelType() throws IllegalValueException {
+        GuestNote guestNote = new GuestNote();
         for (JsonAdaptedGuest jsonAdaptedGuest : guests) {
             Guest guest = jsonAdaptedGuest.toModelType();
-            if (guestBook.hasGuest(guest)) {
+            if (guestNote.hasGuest(guest)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GUEST);
             }
-            guestBook.addGuest(guest);
+            guestNote.addGuest(guest);
         }
-        return guestBook;
+        return guestNote;
     }
 
 }
