@@ -21,22 +21,21 @@ public class SampleDataUtil {
         return new Guest[] {
             new Guest(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new RoomNumber("12-33"), Status.BOOKED,
-                getRequestList("friends")),
+                getRequestList("Extra Pillow")),
             new Guest(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new RoomNumber("23-32"), Status.BOOKED,
-                getRequestList("colleagues", "friends")),
+                new RoomNumber("23-32"), Status.CHECKED_IN,
+                getRequestList("High Floor", "Sea View Suite")),
             new Guest(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new RoomNumber("01-57"), Status.BOOKED,
-                getRequestList("neighbours")),
+                new RoomNumber("01-57"), Status.CHECKED_OUT,
+                getRequestList("Extra Luggage Rack")),
             new Guest(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new RoomNumber("04-22"), Status.BOOKED,
-                getRequestList("family")),
+                getRequestList("Extra Towel")),
             new Guest(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new RoomNumber("02-23"), Status.BOOKED,
-                getRequestList("classmates")),
+                getRequestList("Airport Transfer")),
             new Guest(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new RoomNumber("11-33"), Status.BOOKED,
-                getRequestList("colleagues"))
+                new RoomNumber("11-33"), Status.BOOKED, new UniqueRequestList())
         };
     }
 
