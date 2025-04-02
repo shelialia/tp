@@ -277,12 +277,20 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GuestNote home folder.
 
+**Q**: What should I do if the app crashes or behaves unexpectedly?<br>
+**A**: Ensure you are using the correct version of Java as specified in the Quick Start section. If the issue persists, check the log files for any error messages and report them to the support team.
+
+**Q**: Can I use GuestNote on multiple computers simultaneously?<br>
+**A**: GuestNote is designed to be used on a single computer. Using it on multiple computers simultaneously may lead to data inconsistencies.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
+3. **Slow performance on large guest lists**, if the guest list contains a large number of entries, the application may experience slow performance. The remedy is to periodically clear out old or unnecessary entries.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
