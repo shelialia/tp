@@ -345,7 +345,6 @@
 
 #requests .label {
     -fx-wrap-text: true;
-    -fx-max-width: 250px;
     -fx-text-overrun: clip;
     -fx-text-fill: white;
     -fx-background-color: #357ABD;

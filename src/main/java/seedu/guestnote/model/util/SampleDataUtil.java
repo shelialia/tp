@@ -2,8 +2,8 @@ package seedu.guestnote.model.util;
 
 import java.util.Arrays;
 
-import seedu.guestnote.model.GuestBook;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.GuestNote;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
@@ -14,7 +14,7 @@ import seedu.guestnote.model.request.Request;
 import seedu.guestnote.model.request.UniqueRequestList;
 
 /**
- * Contains utility methods for populating {@code GuestBook} with sample data.
+ * Contains utility methods for populating {@code GuestNote} with sample data.
  */
 public class SampleDataUtil {
     public static Guest[] getSampleGuests() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyGuestBook getSampleAddressBook() {
-        GuestBook sampleAb = new GuestBook();
+    public static ReadOnlyGuestNote getSampleGuestNote() {
+        GuestNote sampleAb = new GuestNote();
         for (Guest sampleGuest : getSampleGuests()) {
             sampleAb.addGuest(sampleGuest);
         }

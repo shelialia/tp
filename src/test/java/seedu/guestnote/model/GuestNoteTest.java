@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalGuests.ALICE;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,25 +21,25 @@ import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.exceptions.DuplicateGuestException;
 import seedu.guestnote.testutil.GuestBuilder;
 
-public class GuestBookTest {
+public class GuestNoteTest {
 
-    private final GuestBook guestBook = new GuestBook();
+    private final GuestNote guestNote = new GuestNote();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), guestBook.getGuestList());
+        assertEquals(Collections.emptyList(), guestNote.getGuestList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> guestBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> guestNote.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        GuestBook newData = getTypicalAddressBook();
-        guestBook.resetData(newData);
-        assertEquals(newData, guestBook);
+    public void resetData_withValidReadOnlyGuestNote_replacesData() {
+        GuestNote newData = getTypicalGuestNote();
+        guestNote.resetData(newData);
+        assertEquals(newData, guestNote);
     }
 
     @Test
@@ -48,53 +48,54 @@ public class GuestBookTest {
         Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
-        GuestBookStub newData = new GuestBookStub(newGuests);
+        GuestNoteStub newData = new GuestNoteStub(newGuests);
 
-        assertThrows(DuplicateGuestException.class, () -> guestBook.resetData(newData));
+        assertThrows(DuplicateGuestException.class, () -> guestNote.resetData(newData));
     }
 
     @Test
     public void hasGuest_nullGuest_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> guestBook.hasGuest(null));
+        assertThrows(NullPointerException.class, () -> guestNote.hasGuest(null));
     }
 
     @Test
-    public void hasGuest_guestNotInAddressBook_returnsFalse() {
-        assertFalse(guestBook.hasGuest(ALICE));
+    public void hasGuest_guestNotInGuestNote_returnsFalse() {
+        assertFalse(guestNote.hasGuest(ALICE));
     }
 
     @Test
-    public void hasGuest_guestInAddressBook_returnsTrue() {
-        guestBook.addGuest(ALICE);
-        assertTrue(guestBook.hasGuest(ALICE));
+    public void hasGuest_guestInGuestNote_returnsTrue() {
+        guestNote.addGuest(ALICE);
+        assertTrue(guestNote.hasGuest(ALICE));
     }
 
     @Test
-    public void hasGuest_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        guestBook.addGuest(ALICE);
+    public void hasGuest_guestWithSameIdentityFieldsInGuestNote_returnsTrue() {
+        guestNote.addGuest(ALICE);
         Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
                 .build();
-        assertTrue(guestBook.hasGuest(editedAlice));
+        assertTrue(guestNote.hasGuest(editedAlice));
     }
 
     @Test
     public void getGuestList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> guestBook.getGuestList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> guestNote.getGuestList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = GuestBook.class.getCanonicalName() + "{guests=" + guestBook.getGuestList() + "}";
-        assertEquals(expected, guestBook.toString());
+        String expected =
+                GuestNote.class.getCanonicalName() + "{guests=" + guestNote.getGuestList() + "}";
+        assertEquals(expected, guestNote.toString());
     }
 
     /**
-     * A stub ReadOnlyGuestBook whose guests list can violate interface constraints.
+     * A stub ReadOnlyGuestNote whose guests list can violate interface constraints.
      */
-    private static class GuestBookStub implements ReadOnlyGuestBook {
+    private static class GuestNoteStub implements ReadOnlyGuestNote {
         private final ObservableList<Guest> guests = FXCollections.observableArrayList();
 
-        GuestBookStub(Collection<Guest> guests) {
+        GuestNoteStub(Collection<Guest> guests) {
             this.guests.setAll(guests);
         }
 

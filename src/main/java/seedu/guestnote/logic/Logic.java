@@ -7,7 +7,7 @@ import seedu.guestnote.commons.core.GuiSettings;
 import seedu.guestnote.logic.commands.CommandResult;
 import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.guest.Guest;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the GuestBook.
+     * Returns the GuestNote.
      *
-     * @see seedu.guestnote.model.Model#getAddressBook()
+     * @see seedu.guestnote.model.Model#getGuestNote()
      */
-    ReadOnlyGuestBook getAddressBook();
+    ReadOnlyGuestNote getGuestNote();
 
     /** Returns an unmodifiable view of the filtered list of guests */
     ObservableList<Guest> getFilteredGuestList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' guestnote book file path.
      */
-    Path getAddressBookFilePath();
+    Path getGuestNoteFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

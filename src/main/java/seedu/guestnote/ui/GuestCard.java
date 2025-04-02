@@ -20,7 +20,7 @@ public class GuestCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on GuestBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on GuestNote level 4</a>
      */
 
     public final Guest guest;
@@ -75,13 +75,19 @@ public class GuestCard extends UiPart<Region> {
 
 
         status.getChildren().add(statusLabel);
+        requests.prefWrapLengthProperty().bind(cardPane.widthProperty().subtract(30));
 
         final int[] counter = {1};
         guest.getRequests()
                 .forEach(request -> {
                     Label requestLabel = new Label(counter[0] + ". " + request.requestName);
+                    requestLabel.setWrapText(true);
+                    requestLabel.setMaxWidth(Double.MAX_VALUE - 10);
+                    requestLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                    requestLabel.setMinHeight(Region.USE_PREF_SIZE);
                     requests.getChildren().add(requestLabel);
                     counter[0]++;
                 });
+
     }
 }

@@ -24,10 +24,10 @@ import seedu.guestnote.logic.commands.exceptions.CommandException;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.UserPrefs;
 import seedu.guestnote.model.guest.Guest;
-import seedu.guestnote.storage.JsonGuestBookStorage;
+import seedu.guestnote.storage.JsonGuestNoteStorage;
 import seedu.guestnote.storage.JsonUserPrefsStorage;
 import seedu.guestnote.storage.StorageManager;
 import seedu.guestnote.testutil.GuestBuilder;
@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonGuestBookStorage addressBookStorage =
-                new JsonGuestBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonGuestNoteStorage guestNoteStorage =
+                new JsonGuestNoteStorage(temporaryFolder.resolve("guestNote.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(guestNoteStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -91,7 +91,7 @@ public class LogicManagerTest {
                                       Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel.getAddressBook(), model.getAddressBook());
+        assertEquals(expectedModel.getGuestNote(), model.getGuestNote());
         assertEquals(expectedModel.getFilteredGuestList(), model.getFilteredGuestList());
 
     }
@@ -118,7 +118,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGuestNote(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -144,10 +144,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an GuestBookStorage that throws the IOException e when saving
-        JsonGuestBookStorage addressBookStorage = new JsonGuestBookStorage(prefPath) {
+        // Inject LogicManager with an GuestNoteStorage that throws the IOException e when saving
+        JsonGuestNoteStorage guestNoteStorage = new JsonGuestNoteStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyGuestBook addressBook, Path filePath)
+            public void saveGuestNote(ReadOnlyGuestNote guestNote, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -155,11 +155,11 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(guestNoteStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveGuestNote method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ROOMNUMBER_DESC_AMY
                 + EMAIL_DESC_AMY;
         Guest expectedGuest = new GuestBuilder(AMY).withRequests().build();

@@ -2,7 +2,7 @@ package seedu.guestnote.logic.commands;
 
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalGuestNote(), new UserPrefs());
     }
 
     @Test
     public void execute_newGuest_success() {
         Guest validGuest = new GuestBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGuestNote(), new UserPrefs());
         expectedModel.addGuest(validGuest);
 
         assertCommandSuccess(new AddCommand(validGuest), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateGuest_throwsCommandException() {
-        Guest guestInList = model.getAddressBook().getGuestList().get(0);
+        Guest guestInList = model.getGuestNote().getGuestList().get(0);
         assertCommandFailure(new AddCommand(guestInList), model,
                 AddCommand.MESSAGE_DUPLICATE_GUEST);
     }

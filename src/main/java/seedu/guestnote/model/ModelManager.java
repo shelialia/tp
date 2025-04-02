@@ -19,25 +19,25 @@ import seedu.guestnote.model.guest.Guest;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final GuestBook guestBook;
+    private final GuestNote guestNote;
     private final UserPrefs userPrefs;
     private final FilteredList<Guest> filteredGuests;
 
     /**
-     * Initializes a ModelManager with the given guestBook and userPrefs.
+     * Initializes a ModelManager with the given guestNote and userPrefs.
      */
-    public ModelManager(ReadOnlyGuestBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyGuestNote guestNote, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(guestNote, userPrefs);
 
-        logger.fine("Initializing with guestnote book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with guestnote book: " + guestNote + " and user prefs " + userPrefs);
 
-        this.guestBook = new GuestBook(addressBook);
+        this.guestNote = new GuestNote(guestNote);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredGuests = new FilteredList<>(this.guestBook.getGuestList());
+        filteredGuests = new FilteredList<>(this.guestNote.getGuestList());
     }
 
     public ModelManager() {
-        this(new GuestBook(), new UserPrefs());
+        this(new GuestNote(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +65,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getGuestNoteFilePath() {
+        return userPrefs.getGuestNoteFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setGuestNoteFilePath(Path guestNoteFilePath) {
+        requireNonNull(guestNoteFilePath);
+        userPrefs.setGuestNoteFilePath(guestNoteFilePath);
     }
 
-    //=========== GuestBook ================================================================================
+    //=========== GuestNote ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyGuestBook addressBook) {
-        this.guestBook.resetData(addressBook);
+    public void setGuestNote(ReadOnlyGuestNote guestNote) {
+        this.guestNote.resetData(guestNote);
     }
 
     @Override
-    public ReadOnlyGuestBook getAddressBook() {
-        return guestBook;
+    public ReadOnlyGuestNote getGuestNote() {
+        return guestNote;
     }
 
     @Override
     public boolean hasGuest(Guest guest) {
         requireNonNull(guest);
-        return guestBook.hasGuest(guest);
+        return guestNote.hasGuest(guest);
     }
 
     @Override
     public void deleteGuest(Guest target) {
-        guestBook.removeGuest(target);
+        guestNote.removeGuest(target);
     }
 
     @Override
     public void addGuest(Guest guest) {
-        guestBook.addGuest(guest);
+        guestNote.addGuest(guest);
         updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setGuest(Guest target, Guest editedGuest) {
         requireAllNonNull(target, editedGuest);
 
-        guestBook.setGuest(target, editedGuest);
+        guestNote.setGuest(target, editedGuest);
     }
 
     //=========== Filtered Guest List Accessors =============================================================
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return guestBook.equals(otherModelManager.guestBook)
+        return guestNote.equals(otherModelManager.guestNote)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredGuests.equals(otherModelManager.filteredGuests);
     }

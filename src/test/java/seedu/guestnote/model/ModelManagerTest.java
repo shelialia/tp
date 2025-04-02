@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.guestnote.commons.core.GuiSettings;
 import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
-import seedu.guestnote.testutil.AddressBookBuilder;
+import seedu.guestnote.testutil.GuestNoteBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new GuestBook(), new GuestBook(modelManager.getAddressBook()));
+        assertEquals(new GuestNote(), new GuestNote(modelManager.getGuestNote()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("guestnote/book/file/path"));
+        userPrefs.setGuestNoteFilePath(Paths.get("guestnote/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/guestnote/book/file/path"));
+        userPrefs.setGuestNoteFilePath(Paths.get("new/guestnote/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +61,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setGuestNoteFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setGuestNoteFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setGuestNoteFilePath_validPath_setsGuestNoteFilePath() {
         Path path = Paths.get("guestnote/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setGuestNoteFilePath(path);
+        assertEquals(path, modelManager.getGuestNoteFilePath());
     }
 
     @Test
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasGuest_guestNotInAddressBook_returnsFalse() {
+    public void hasGuest_guestNotInGuestNote_returnsFalse() {
         assertFalse(modelManager.hasGuest(ALICE));
     }
 
     @Test
-    public void hasGuest_guestInAddressBook_returnsTrue() {
+    public void hasGuest_guestInGuestNote_returnsTrue() {
         modelManager.addGuest(ALICE);
         assertTrue(modelManager.hasGuest(ALICE));
     }
@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        GuestBook guestBook = new AddressBookBuilder().withGuest(ALICE).withGuest(BENSON).build();
-        GuestBook differentGuestBook = new GuestBook();
+        GuestNote guestNote = new GuestNoteBuilder().withGuest(ALICE).withGuest(BENSON).build();
+        GuestNote differentGuestNote = new GuestNote();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(guestBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(guestBook, userPrefs);
+        modelManager = new ModelManager(guestNote, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(guestNote, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +113,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different guestBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentGuestBook, userPrefs)));
+        // different guestNote -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentGuestNote, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredGuestList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(guestBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(guestNote, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(guestBook, differentUserPrefs)));
+        differentUserPrefs.setGuestNoteFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(guestNote, differentUserPrefs)));
     }
 }
