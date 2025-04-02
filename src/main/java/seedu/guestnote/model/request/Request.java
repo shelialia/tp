@@ -42,7 +42,7 @@ public class Request {
         }
 
         return otherRequest != null
-                && otherRequest.requestName.equals(requestName);
+                && otherRequest.requestName.equalsIgnoreCase(requestName);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Request {
         }
 
         Request otherRequest = (Request) other;
-        return requestName.equals(otherRequest.requestName);
+        return requestName.equalsIgnoreCase(otherRequest.requestName);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Guest> {
     @Override
     public boolean test(Guest guest) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(guest.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(guest.getName().fullName, keyword));
     }
 
     @Override

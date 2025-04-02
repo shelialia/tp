@@ -340,7 +340,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 <box type="tip" header="1a. Optional Requests 📝" light>
     <ul>
       <li>1a1. Concierge provides zero or more optional “requests” (e.g., special amenities, notes).</li>
-      <li>1a2. Use case resumes from step 2.</li>
+      <li>1a2. Use case resumes from step 2.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="2a. Invalid or Incomplete Details" light>
@@ -441,7 +441,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 <box type="tip" header="2a. Optional Completion Status" light>
     <ul>
       <li>2a1. Concierge provides optional completion status (e.g., pending, completed).</li>
-      <li>2a2. Use case resumes from step 3.</li>
+      <li>2a2. Use case resumes from step 3.<br>Use case ends.</li>
     </ul>
 </box>
 
