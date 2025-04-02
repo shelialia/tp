@@ -3,8 +3,8 @@ package seedu.guestnote.model.guest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalGuests.ALICE;
 import static seedu.guestnote.testutil.TypicalGuests.BOB;
@@ -42,7 +42,7 @@ public class UniqueGuestListTest {
     @Test
     public void contains_guestWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGuestList.add(ALICE);
-        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_EXTRAPILLOW)
                 .build();
         assertTrue(uniqueGuestList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniqueGuestListTest {
     @Test
     public void setGuest_editedGuestHasSameIdentity_success() {
         uniqueGuestList.add(ALICE);
-        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_FRIEND)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_SEAVIEW)
                 .build();
         uniqueGuestList.setGuest(ALICE, editedAlice);
         UniqueGuestList expectedUniqueGuestList = new UniqueGuestList();
