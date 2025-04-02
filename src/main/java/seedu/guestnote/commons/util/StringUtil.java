@@ -65,4 +65,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code fullName} contains {@code keyword} as a substring.
+     * The comparison is case-insensitive.
+     */
+    public static boolean containsSubstringIgnoreCase(String fullName, String keyword) {
+        requireNonNull(fullName);
+        requireNonNull(keyword);
+
+        return fullName.toLowerCase().contains(keyword.toLowerCase());
+    }
 }
