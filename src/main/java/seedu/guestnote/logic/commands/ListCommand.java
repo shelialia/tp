@@ -14,17 +14,32 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Listed all guests";
-
+    private final boolean listWithRequests;
     private final NameContainsKeywordsPredicate predicate;
-
+    /**
+     * Constructs a ListCommand that lists all guests.
+     */
     public ListCommand() {
         this.predicate = null;
+        this.listWithRequests = false;
     }
-
+    /**
+     * Constructs a ListCommand that lists guests based on the provided search query.
+     * @param predicate The predicate used to filter the guest list.
+     */
     public ListCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        this.listWithRequests = false;
     }
 
+    /**
+     * Constructs a ListCommand that lists all guests with requests.
+     * @param listWithRequests
+     */
+    public ListCommand(boolean listWithRequests) {
+        this.predicate = null;
+        this.listWithRequests = listWithRequests;
+    }
     /**
      * Executes the list command and returns the result.
      * If a search query is provided, the command filters the guest list by matching the guest's name or ID.
@@ -36,6 +51,10 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         // Update the filtered list to show all guests.
+        if (listWithRequests) {
+            model.updateFilteredGuestList(guest -> !guest.getRequests().isEmpty());
+            return new CommandResult("Listed all guests with requests");
+        }
         if (predicate == null) {
             // Default behavior: list all guests
             model.updateFilteredGuestList(PREDICATE_SHOW_ALL_GUESTS);

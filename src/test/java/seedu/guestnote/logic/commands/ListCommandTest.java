@@ -50,4 +50,12 @@ public class ListCommandTest {
         assertCommandSuccess(
                 new ListCommand(predicate), model, ListCommand.MESSAGE_SUCCESS + " (filtered)", expectedModel);
     }
+
+    @Test
+    public void execute_listWithRequest_showsOnlyGuestsWithRequests() {
+        expectedModel.updateFilteredGuestList(guest -> guest.getRequests() != null);
+        String expectedMessage = "Listed all guests with requests";
+        assertCommandSuccess(
+                new ListCommand(true), model, expectedMessage, model);
+    }
 }
