@@ -1,8 +1,11 @@
 package seedu.guestnote.model.guest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import seedu.guestnote.commons.util.StringUtil;
 
 /**
  * Predicate that tests whether a field of a Guest object contains any of the given keywords.
@@ -28,6 +31,13 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
+        if (fieldValue instanceof Optional) {
+            Optional<?> optionalValue = (Optional<?>) fieldValue;
+            if (!optionalValue.isPresent()) {
+                return false;
+            }
+            fieldValue = (T) optionalValue.get();
+        }
         if (fieldValue == null) {
             return false;
         }
@@ -35,9 +45,9 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
             Object[] arr = (Object[]) fieldValue;
             return arrayContainsKeyword(arr, keywords);
         } else {
-            String fieldString = fieldValue.toString().toLowerCase();
+            String fieldString = fieldValue.toString().trim();
             return keywords.stream()
-                    .anyMatch(keyword -> fieldString.equalsIgnoreCase(keyword.trim()));
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fieldString, keyword.trim()));
         }
     }
 
