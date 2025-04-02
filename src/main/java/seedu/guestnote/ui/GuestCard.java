@@ -54,7 +54,7 @@ public class GuestCard extends UiPart<Region> {
         phone.setText(guest.getPhone().map(Phone::toString).orElse("Phone: Not Added"));
         email.setText(guest.getEmail().value);
         roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
-        Label statusLabel = new Label(guest.getStatus().name());
+        Label statusLabel = new Label(guest.getStatus().name().replace("_", " "));
         statusLabel.getStyleClass().add("status-label");
 
         switch (guest.getStatus()) {
