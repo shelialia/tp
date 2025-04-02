@@ -6,7 +6,7 @@ import seedu.guestnote.model.guest.Guest;
 /**
  * Unmodifiable view of an guestnote book
  */
-public interface ReadOnlyGuestBook {
+public interface ReadOnlyGuestNote {
 
     /**
      * Returns an unmodifiable view of the guests list.

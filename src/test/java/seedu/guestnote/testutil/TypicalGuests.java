@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.guestnote.model.GuestBook;
+import seedu.guestnote.model.GuestNote;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
 import seedu.guestnote.model.guest.Name;
@@ -128,10 +128,10 @@ public class TypicalGuests {
     private TypicalGuests() {} // prevents instantiation
 
     /**
-     * Returns an {@code GuestBook} with all the typical guests.
+     * Returns an {@code GuestNote} with all the typical guests.
      */
-    public static GuestBook getTypicalAddressBook() {
-        GuestBook ab = new GuestBook();
+    public static GuestNote getTypicalGuestNote() {
+        GuestNote ab = new GuestNote();
         for (Guest guest : getTypicalGuests()) {
             ab.addGuest(guest);
         }

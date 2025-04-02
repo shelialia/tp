@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
 
@@ -26,7 +26,7 @@ import seedu.guestnote.testutil.GuestBuilder;
  */
 public class CheckInCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalGuestNote(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,7 +37,7 @@ public class CheckInCommandTest {
                 new GuestBuilder(guestToCheckIn).withStatus(Status.CHECKED_IN).build();
         String expectedMessage = String.format(CheckInCommand.MESSAGE_SUCCESS, Messages.format(checkedInGuest));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getGuestNote(), new UserPrefs());
         expectedModel.setGuest(guestToCheckIn, checkedInGuest);
 
         assertCommandSuccess(checkInCommand, model, expectedMessage, expectedModel);

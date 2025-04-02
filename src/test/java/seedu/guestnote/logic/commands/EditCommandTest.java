@@ -11,7 +11,7 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBA
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.guestnote.logic.commands.CommandTestUtil.showGuestAtIndex;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_EIGHTH_GUEST;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_SECOND_GUEST;
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.Messages;
 import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
-import seedu.guestnote.model.GuestBook;
+import seedu.guestnote.model.GuestNote;
 import seedu.guestnote.model.Model;
 import seedu.guestnote.model.ModelManager;
 import seedu.guestnote.model.UserPrefs;
@@ -34,7 +34,7 @@ import seedu.guestnote.testutil.GuestBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalGuestNote(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
         expectedModel.setGuest(model.getFilteredGuestList().get(0), editedGuest);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -66,7 +66,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS,
                 Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
         expectedModel.setGuest(lastGuest, editedGuest);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -97,7 +97,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS,
                 Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
         expectedModel.setGuest(model.getFilteredGuestList().get(0), editedGuest);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -117,7 +117,7 @@ public class EditCommandTest {
         showGuestAtIndex(model, INDEX_FIRST_GUEST);
 
         // edit guest in filtered list into a duplicate in guestnote book
-        Guest guestInList = model.getAddressBook().getGuestList().get(INDEX_SECOND_GUEST.getZeroBased());
+        Guest guestInList = model.getGuestNote().getGuestList().get(INDEX_SECOND_GUEST.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST,
                 new EditGuestDescriptorBuilder(guestInList).build());
 
@@ -137,7 +137,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
         expectedModel.setGuest(model.getFilteredGuestList().get(7), editedGuest);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -156,7 +156,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest));
 
-        Model expectedModel = new ModelManager(new GuestBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
         expectedModel.setGuest(model.getFilteredGuestList().get(0), editedGuest);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -181,7 +181,7 @@ public class EditCommandTest {
         showGuestAtIndex(model, INDEX_FIRST_GUEST);
         Index outOfBoundIndex = INDEX_SECOND_GUEST;
         // ensures that outOfBoundIndex is still in bounds of guestnote book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getGuestList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getGuestNote().getGuestList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB).build());

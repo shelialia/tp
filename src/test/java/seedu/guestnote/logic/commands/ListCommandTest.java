@@ -2,7 +2,7 @@ package seedu.guestnote.logic.commands;
 
 import static seedu.guestnote.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.guestnote.logic.commands.CommandTestUtil.showGuestAtIndex;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 
 import java.util.List;
@@ -26,8 +26,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalGuestNote(), new UserPrefs());
+        expectedModel = new ModelManager(model.getGuestNote(), new UserPrefs());
     }
 
     @Test

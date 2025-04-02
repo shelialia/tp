@@ -32,9 +32,9 @@ import seedu.guestnote.testutil.GuestBuilder;
 import seedu.guestnote.testutil.GuestUtil;
 
 
-public class GuestBookParserTest {
+public class GuestNoteParserTest {
 
-    private final GuestBookParser parser = new GuestBookParser();
+    private final GuestNoteParser parser = new GuestNoteParser();
 
     @Test
     public void parseCommand_add() throws Exception {

@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.guestnote.commons.exceptions.DataLoadingException;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.ReadOnlyUserPrefs;
 import seedu.guestnote.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends GuestBookStorage, UserPrefsStorage {
+public interface Storage extends GuestNoteStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -21,12 +21,12 @@ public interface Storage extends GuestBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getGuestNoteFilePath();
 
     @Override
-    Optional<ReadOnlyGuestBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyGuestNote> readGuestNote() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyGuestBook addressBook) throws IOException;
+    void saveGuestNote(ReadOnlyGuestNote guestNote) throws IOException;
 
 }

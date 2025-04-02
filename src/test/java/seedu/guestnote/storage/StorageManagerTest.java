@@ -2,7 +2,7 @@ package seedu.guestnote.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.guestnote.testutil.TypicalGuests.getTypicalAddressBook;
+import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.guestnote.commons.core.GuiSettings;
-import seedu.guestnote.model.GuestBook;
-import seedu.guestnote.model.ReadOnlyGuestBook;
+import seedu.guestnote.model.GuestNote;
+import seedu.guestnote.model.ReadOnlyGuestNote;
 import seedu.guestnote.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonGuestBookStorage addressBookStorage = new JsonGuestBookStorage(getTempFilePath("ab"));
+        JsonGuestNoteStorage guestNoteStorage = new JsonGuestNoteStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(guestNoteStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void guestNoteReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonGuestBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonGuestBookStorageTest} class.
+         * {@link JsonGuestNoteStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonGuestNoteStorageTest} class.
          */
-        GuestBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyGuestBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new GuestBook(retrieved));
+        GuestNote original = getTypicalGuestNote();
+        storageManager.saveGuestNote(original);
+        ReadOnlyGuestNote retrieved = storageManager.readGuestNote().get();
+        assertEquals(original, new GuestNote(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getGuestNoteFilePath() {
+        assertNotNull(storageManager.getGuestNoteFilePath());
     }
 
 }
