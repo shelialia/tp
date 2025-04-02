@@ -345,10 +345,9 @@
 
 #requests .label {
     -fx-wrap-text: true;
-    -fx-max-width: 250px;
-    -fx-text-overrun: clip;
-    -fx-text-fill: black;
-    -fx-background-color: #2D9CDB;
+    -fx-max-width: 140px;
+    -fx-text-fill: white;
+    -fx-background-color: #357ABD;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
