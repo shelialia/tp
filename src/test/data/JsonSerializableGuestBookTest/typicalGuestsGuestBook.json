@@ -6,14 +6,14 @@
     "email" : "alice@example.com",
     "roomNumber" : "12-33",
     "status" : "BOOKED",
-    "requests" : [ "friend" ]
+    "requests" : [ "Extra Pillow" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "roomNumber" : "23-32",
     "status" : "BOOKED",
-    "requests" : [ "owesMoney", "friend" ]
+    "requests" : [ "High Floor", "Sea View Suite" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -27,7 +27,7 @@
     "email" : "cornelia@example.com",
     "roomNumber" : "04-22",
     "status" : "BOOKED",
-    "requests" : [ "friend" ]
+    "requests" : [ "" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
