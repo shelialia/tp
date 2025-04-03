@@ -3,7 +3,7 @@ package seedu.guestnote.logic.commands;
 import static seedu.guestnote.model.Model.PREDICATE_SHOW_ALL_GUESTS;
 
 import seedu.guestnote.model.Model;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.NameContainsSubstringsPredicate;
 
 /**
  * Lists all guests in the guest book.
@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Listed all guests";
     private final boolean listWithRequests;
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsSubstringsPredicate predicate;
     /**
      * Constructs a ListCommand that lists all guests.
      */
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * Constructs a ListCommand that lists guests based on the provided search query.
      * @param predicate The predicate used to filter the guest list.
      */
-    public ListCommand(NameContainsKeywordsPredicate predicate) {
+    public ListCommand(NameContainsSubstringsPredicate predicate) {
         this.predicate = predicate;
         this.listWithRequests = false;
     }
