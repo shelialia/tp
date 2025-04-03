@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.guestnote.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Request in the guestnote book.
+ * Represents a Request in the guestnote.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRequestName(String)}
  */
 public class Request {
 
-    public static final String MESSAGE_CONSTRAINTS = "Requests names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Request names should be alphanumeric, "
+        + "may include spaces, and must not exceed 75 characters ";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*$";
 
     public final String requestName;
@@ -29,7 +30,7 @@ public class Request {
      * Returns true if a given string is a valid request name.
      */
     public static boolean isValidRequestName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 75;
     }
 
     /**

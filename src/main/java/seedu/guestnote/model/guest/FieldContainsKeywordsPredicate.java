@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.guestnote.commons.util.StringUtil;
 
@@ -68,20 +70,28 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
 
     /**
      * Helper method that checks if the concatenated string of array elements contains
-     * the full phrase formed by joining all keywords.
+     * keywords on a word-by-word basis.
      * This ensures that for array fields (like requests), the complete phrase is matched.
      */
     private boolean arrayContainsKeyword(Object[] arr, List<String> keywords) {
-        StringBuilder sb = new StringBuilder();
+        // Join keywords into a normalized search phrase.
+        String normalizedSearch = String.join(" ", keywords).toLowerCase().trim()
+                .replaceAll("\\s+", " ");
+        // Prepare a regex pattern with word boundaries.
+        Pattern pattern = Pattern.compile("\\b" + Pattern.quote(normalizedSearch) + "\\b");
+
+        // Check each element of the array.
         for (Object element : arr) {
             if (element != null) {
-                sb.append(element.toString().toLowerCase()).append(" ");
+                String normalizedElement = element.toString().toLowerCase().trim()
+                        .replaceAll("\\s+", " ");
+                Matcher matcher = pattern.matcher(normalizedElement);
+                if (matcher.find()) {
+                    return true;
+                }
             }
         }
-        String combined = sb.toString();
-        // Join all keywords with a space to form the full search phrase.
-        String joinedKeywords = String.join(" ", keywords).toLowerCase();
-        return combined.contains(joinedKeywords);
+        return false;
     }
     @Override
     public String toString() {

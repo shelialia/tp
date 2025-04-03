@@ -37,12 +37,15 @@ public class Messages {
      */
     public static String format(Guest guest) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(guest.getName())
+        builder.append("Name: ")
+                .append(guest.getName())
                 .append("; Phone: ")
                 .append(guest.getPhone().orElse(new Phone("")))
                 .append("; Email: ")
                 .append(guest.getEmail())
-                .append("; Requests: ");
+                .append("; Room Number: ")
+                .append(guest.getRoomNumber())
+                .append("; Request(s): ");
         guest.getRequests().forEach(builder::append);
         return builder.toString();
     }
