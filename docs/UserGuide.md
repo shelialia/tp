@@ -175,7 +175,7 @@ Format: `list`
 
 Edits an existing guest in the guest list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQUEST]…​ [-rq/REQUEST]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQUEST]…​ [-rq/REQUEST]…​ [-ri/REQUEST_INDEX]…​`
 
 **Tip:**
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be valid** (ie. within the number of guests displayed).
@@ -187,8 +187,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQ
 * If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed. 
 
 Examples:
-*  `edit 2 +rq/Extra toothbrush` Edits the 2nd guest in the list by adding a request `Extra toothbrush`.
+*  `edit 2 +rq/Extra toothbrush` Edits guest No.2 in the list by adding a request `Extra toothbrush`.
 ![Screenshot 2025-04-03 at 10.31.32 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5n5Q0h%2FScreenshot%202025-04-03%20at%2010.31.32%E2%80%AFAM.png)
+*  `edit 2 -ri/1` Edits guest No.2 in the list by deleting the first request for that guest.
+![Screenshot 2025-04-03 at 10.38.28 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_CNbzyP%2FScreenshot%202025-04-03%20at%2010.38.28%E2%80%AFAM.png)
 *  `edit 1 e/charlotte@example.com` Will not be allowed when there is an existing guest with the email `charlotte@example.com` in the guest list.
 ![Screenshot 2025-04-03 at 10.31.56 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KenDd3%2FScreenshot%202025-04-03%20at%2010.31.56%E2%80%AFAM.png)
 
