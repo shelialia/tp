@@ -18,7 +18,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (trimmedArgs.isEmpty()) {
             return new ListCommand(); // Default list command
         }
-        if (trimmedArgs.equalsIgnoreCase("rq")) {
+        if (trimmedArgs.equalsIgnoreCase("rq/")) {
             // List all guests with requests
             return new ListCommand(true);
         } else {
