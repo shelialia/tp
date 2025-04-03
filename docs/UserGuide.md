@@ -51,126 +51,171 @@ Visit our online [User Guide](https://ay2425s2-cs2103t-w09-2.github.io/tp/UserGu
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-<panel header="_Not sure which Java version you have?_" no-close>
-    <tabs>
-        <tab header="Windows">
-        To check your Java version on Windows, please follow these steps:
-        <ol>
-        <li>Open Command Prompt.</li>
-        <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
-        </ol>
-        <img src="images/ug/checkjavaversion_windows.jpeg" alt="Java version Windows" style="width:100%;">
-        </tab>
-        <tab header="Mac">
-        To check your Java version on Mac, please follow these steps:
-        <ol>
-        <li>Open Terminal.</li>
-        <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
-        </ol>
-        <img src="images/ug/checkjavaversion_mac.png" alt="Java version Mac" style="width:100%;">
-        </tab>
-    </tabs>
-</panel>
+<box type="info">
+
+Hey there! If you are an **advanced user** and you:
+* Have Java `17` or above installed in your computer, and
+* Already have GuestNote installed in your computer,
+
+Click [here](#features) to view the features of GuestNote.
+
+</box>
+
+#### Installing Java and GuestNote
+1. If you already have Java `17` or above installed in your computer, you can skip to step 2.<br>
+
+<box border-left-color="#3c3c3c" icon=":glyphicon-wrench:" light>
+<span class="badge bg-secondary" style="font-size:1em">Windows Users: </span>
+<b>Installing Java for Windows</b> <br>
+
+* Follow these instructions to download and install Java [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html). { text="1. " }
+* To check your Java version on Windows, please follow these steps: { text="2. " }
+    * Open Command Prompt. { text="2.1 " }
+    * Type `java -version` and press Enter. { text="2.2 " }
+    * Check the version of Java installed on your computer. Your Command Prompt window should look like this:  { text="2.3 " }
+
+<img src="images/ug/checkjavaversion_windows.jpeg" alt="Java version Windows" style="width:100%;">
+</box>
+<box border-left-color="#3c3c3c" icon=":glyphicon-wrench:" light>
+<span class="badge bg-secondary" style="font-size:1em">Mac Users</span>
+<b>Installing Java for Mac</b> <br>
+
+* Follow these instructions to download and install Java [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). { text="1. " }
+* To check your Java version on Mac, please follow these steps: { text="2. " }
+    * Open Terminal. { text="2.1 " }
+    * Type `java --version` and press Enter. { text="2.2 " }
+    * Check the version of Java installed on your computer. Your Terminal window should look like this: { text="2.3 " }
+
+<img src="images/ug/checkjavaversion_mac.png" alt="Java version Mac" style="width:100%;">
+</box>
 <br>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-W09-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your GuestNote.
+3. Copy the file to the folder you want to use as the _home folder_ for your GuestNote. GuestNote will create all the files it needs in this folder.
 
-4. Open a command terminal, and use the `cd` command to navigate into the folder you put the jar file in.<br>Run `java -jar guestnote.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+#### Running GuestNote
+
+1. Open a command terminal, and use the `cd` command to navigate into the folder you put the jar file in. For example, if you put the jar file in a folder named `GuestNote` on the `Desktop`, you can run the following commands:
+    ```bash
+    cd Desktop      # Navigate from home directory to the Desktop
+    cd GuestNote    # Navigate to the folder containing the jar file
+    ```
+   
+2. Run `java -jar guestnote.jar` command to run the application.<br>
+   A GUI should appear in a few seconds. Note how the app contains some sample data.<br>
    ![firstview.png](images/ug/firstview.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-<panel header="Take it for a spin, let's try out some commands!" no-close expanded>
-    <tabs>
-        <tab header="**Parts of the App**">
-            <markdown>
+
+3. If you prefer to explore GuestNote on your own, you may refer to the [Features](#features) below for details of each command. Otherwise, keep reading!
+
+## Introducing the User Interface
+
 **The app is divided into 3 parts:**
 1. **Command Box:** This is where you type the commands.
 2. **Output Box:** This is where the result of the command is shown.
 3. **Guest Book:** This is where the list of guests is shown.
 ![labelledUI.png](images/ug/labelledUI.png)
-            </markdown>
-        </tab>
-        <tab header="**Try out the help command**">
-            <markdown>
-**Type `help` and press Enter to see the help window.**
-            </markdown>
-            <panel header="Help! Where do I type **`help`**?" no-close>
-                <markdown>
-Type the command **`help`** into the Command Box, as shown below:
-![command_input_help.png](images/ug/command_input_help.png)
-                </markdown>
-            </panel>
-            <panel header="What you should see:" no-close expanded>
-                <markdown>
-Now you can always come back to this page if you need help!
-![help_command_executed.png](images/ug/help_command_executed.png)
-                </markdown>
-            </panel>
-        </tab>
-        <tab header="**Try out some other commands**">
-            <markdown>
+
+<box type="info" header="##### Try out your first command: `help`" light>
+
+1. Type the command `help` into the Command Box, as shown below, then press Enter. 
+2. Now you can always come back to this page if you need help:
+![help_command_executed.png](images/ug/help_command_executed.png) 
+
+</box>
+
+<box type="tip" header="##### Try out some other commands: `add`, `list`, `edit`, `check-in`, and `delete`" light>
+
 Some example commands you can try:
 
-* `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who lives in room `#01-01` with phone number `98765432` and unique email `johnd@example.com` and a request of `One extra pillow` to the Guest list.
+<box type="default" icon=":glyphicon-plus:" background-color="#efefef" light>
 
-* `list` : Lists all guests.
+**Add your first guest:** `add n/John Doe p/91234567 e/johnd@example.com r/01-01`<br>
+Adds a guest named !!John Doe!! who lives in room !!#01-01!! with a unique email !!johnd@example.com!! and phone number !!91234567!!.
 
-* `edit 2 n/James Lee +rq/Room cleaning`: Edit guest No.2 to be named `James Lee` with an additional request `Room cleaning`.
+</box>
+<box type="default" icon=":glyphicon-th-list:" background-color="#efefef" light>
 
-* `edit 2 -ri/1`: Edit guest No.2 by deleting the first request for the guest. 
+**List all guests:** `list`<br>
+Shows a list of all guests.
 
-* `delete 3` : Deletes guest No.3 in the current list of guests.
+</box>
+<box type="default" icon=":glyphicon-edit:" background-color="#efefef" light>
 
-* `clear` : Deletes all guests.
-   
-* `find John` : Finds all guests whose fields (e.g. name, phone, email, room request) contain the word `John`.
-   
-* `check-in 1` : Check in guest No.1
+**Edit a guest:** `edit 1 +rq/Room cleaning`<br>
+Edits the !!first guest!!, adding an additional request !!Room cleaning!!.
 
-* `check-out 1`: Check out guest No.1
+</box>
+<box type="default" icon=":glyphicon-log-out:" background-color="#efefef" light>
 
-* `exit` : Exits the app.
+**Check-in a guest:** `check-in 1`<br>
+Checks in the !!first guest!!.
 
-* `help` : Shows the help window.
-            </markdown>
-        </tab>
-    </tabs>
-</panel>
+</box>
+<box type="default" icon=":glyphicon-trash:" background-color="#efefef" light>
+
+**Delete a guest:** `delete 1`<br>
+Deletes the !!first guest!! from the app.
+
+</box>
+
+Want to learn more? Continue reading the [Features](#features) section below.
+
+</box>
 <br>
 
-6. Refer to the [Features](#features) below for details of each command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<box type="info" seamless>
+<box type="primary" light>
 
-**Notes about the command format:**<br>
+#### Format Legend
+Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+<box type="default" icon=":mif-text-fields:" background-color="#efefef" light>
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [rq/REQUEST]` can be used as `n/John Doe rq/New Pillow` or as `n/John Doe`.
+**UPPER_CASE = !!Fill it in!!**<br>
+Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+**Example:** `n/NAME` :mif-arrow-right-alt: `n/John Doe` :mif-done:
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[rq/REQUEST]…​` can be used as ` ` (i.e. 0 times), `rq/New Pillow`, `rq/New Pillow rq/Orange Juice` etc.
+</box>
+<box type="default" icon=":mif-data-array:" background-color="#efefef" light>
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+**[Square Brackets] = !!Optional!!** <br>
+Items in square brackets are optional.<br>
+**Example:** `n/NAME [rq/REQUEST]`<br>
+:mif-arrow-right-alt: `n/John Doe` :mif-done: <br>
+:mif-arrow-right-alt: `n/John Doe rq/New Pillow` :mif-done:
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+</box>
+<box type="default" icon=":mif-more-horiz:" background-color="#efefef" light>
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+**Ellipsis … = !!Multiple Times!!** <br>
+Items with `…` after them can be used multiple times including zero times.<br>
+**Example:** `[rq/REQUEST]…`<br>
+:mif-arrow-right-alt: ` ` (not used at all) :mif-done: <br>
+:mif-arrow-right-alt: `rq/New Pillow` :mif-done: <br>
+:mif-arrow-right-alt: `rq/New Pillow rq/Orange Juice rq/Socks` :mif-done:
+</box>
+<box type="warning" icon=":mif-swap-horiz:">
+
+**!!Any Order!!: Parameters can be in any order**<br>
+Example: `n/NAME `**`p/PHONE e/EMAIL`**<br>
+:mif-arrow-right-alt: `n/NAME `**`p/PHONE e/EMAIL`** (same order) :mif-done: <br>
+:mif-arrow-right-alt: **`e/EMAIL`**` n/NAME `**`p/PHONE`** (different order) :mif-done:
+
+</box>
+<box type="wrong" icon=":mif-close:">
+
+**!!Copy Carefully!!: Copying across line breaks in PDF version may cause issues**<br>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</box>
+
+</box>
 
 ### Viewing help : `help`
 
