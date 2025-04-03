@@ -50,11 +50,11 @@ public class GuestCard extends UiPart<Region> {
         super(FXML);
         this.guest = guest;
         id.setText(displayedIndex + ". ");
-        name.setText(guest.getName().fullName);
+        name.setText(" " + guest.getName().fullName + " ");
         phone.setText(guest.getPhone().map(Phone::toString).orElse("Phone: Not Added"));
         email.setText(guest.getEmail().value);
-        roomNumber.getChildren().add(new Label(guest.getRoomNumber().roomNumber));
-        Label statusLabel = new Label(guest.getStatus().name());
+        roomNumber.getChildren().add(new Label("#" + guest.getRoomNumber().roomNumber));
+        Label statusLabel = new Label(guest.getStatus().name().replace("_", " "));
         statusLabel.getStyleClass().add("status-label");
 
         switch (guest.getStatus()) {
