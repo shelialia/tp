@@ -3,7 +3,7 @@
 
 # GuestNote
 ___
-![firstview.png](images/ug/firstview.png)
+![firstview.png](docs/images/ug/firstview.png)
 
 ## **Overview**
 ___
