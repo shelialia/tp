@@ -6,7 +6,7 @@
 
 # GuestNote User Guide
 
-GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, GuestNote can get your guest management tasks done faster than traditional GUI apps.
+GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphic al User Interface (GUI). If you can type fast, GuestNote can get your guest management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -81,7 +81,7 @@ Now you can always come back to this page if you need help!
             <markdown>
 Some example commands you can try:
 
-* `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who lives in room `#01-01` with a unique email `johnd@example.com` and a request of `One extra pillow` to the Guest list.
+* `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who lives in room `#01-01` with phone number `98765432` and unique email `johnd@example.com` and a request of `One extra pillow` to the Guest list.
 
 * `list` : Lists all guests.
 
@@ -89,19 +89,19 @@ Some example commands you can try:
 
 * `edit 2 -ri/1`: Edit guest No.2 by deleting the first request for the guest. 
 
-* `delete 3` : Deletes the 3rd guest shown in the current list.
+* `delete 3` : Deletes guest No.3 in the current list of guests.
 
 * `clear` : Deletes all guests.
-
-* `exit` : Exits the app.
    
-* `help` : Shows the help window.
-   
-* `find John` : Finds all guests whose names contain the word `John`.
+* `find John` : Finds all guests whose fields (e.g. name, phone, email, room request) contain the word `John`.
    
 * `check-in 1` : Check in guest No.1
 
 * `check-out 1`: Check out guest No.1
+
+* `exit` : Exits the app.
+
+* `help` : Shows the help window.
             </markdown>
         </tab>
     </tabs>
@@ -156,37 +156,41 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
 **Tip:** 
 * A guest can have any number of requests (including 0)
 * A guest can be added without a phone number
+* All guests automatically have status set to 'BOOKED' when they are added. 
 
 </box>
 
 Examples:
-* `add n/John Doe e/johnd@example.com p/98765432 r/01-01`
-* `add n/Betsy Crowe rq/Add Pillow e/betsycrowe@example.com p/1234567 r/01-01 rq/Orange Juice`
+* `add n/David Li e/lidavid@example.com p/98767890 rq/family`
+![Screenshot 2025-04-03 at 10.33.26 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_Ytl3Mo%2FScreenshot%202025-04-03%20at%2010.33.26%E2%80%AFAM.png)
 
 ### Listing all guests : `list`
 
 Shows a list of all guests in the guest list.
 
 Format: `list`
+![Screenshot 2025-04-03 at 10.29.33 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_vPmog8%2FScreenshot%202025-04-03%20at%2010.29.33%E2%80%AFAM.png)
 
 ### Editing a guest : `edit`
 
 Edits an existing guest in the guest list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [+rq/REQUEST]…​ [-rq/REQUEST]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQUEST]…​ [-rq/REQUEST]…​`
 
-* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be within the number of guests displayed** 1, 2, 3, …​ 
+**Tip:**
+* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be valid** (ie. within the number of guests displayed).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing requests:
   * an add request input will be added to the back of the current request list for the guest.
-  * a remove request input will cause the positions for all remaining requests will be updated.
-* If the edit results in a duplicate guest in the guest list, the command is not allowed. 
+  * a remove request input will cause the requests behind the deleted one to be shifted forward.
+* If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed. 
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com ` Edits the phone number and email address of the 1st guest to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower -rq/Extra toothbrush` Edits the name of the 2nd guest to be `Betsy Crower` and removes the existing request `Extra toothbrush`.
-*  `edit 3 e/chloeng@example.com` Will not be allowed when there is an existing guest with the email `chloeng@example.com` in the guest list. 
+*  `edit 2 +rq/Extra toothbrush` Edits the 2nd guest in the list by adding a request `Extra toothbrush`.
+![Screenshot 2025-04-03 at 10.31.32 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5n5Q0h%2FScreenshot%202025-04-03%20at%2010.31.32%E2%80%AFAM.png)
+*  `edit 1 e/charlotte@example.com` Will not be allowed when there is an existing guest with the email `charlotte@example.com` in the guest list.
+![Screenshot 2025-04-03 at 10.31.56 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KenDd3%2FScreenshot%202025-04-03%20at%2010.31.56%E2%80%AFAM.png)
 
 ### Locating guests by name: `find`
 
