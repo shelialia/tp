@@ -161,15 +161,15 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
 </box>
 
 Examples:
-* `add n/David Li e/lidavid@example.com p/98767890 rq/family`
-![Screenshot 2025-04-03 at 10.33.26 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_Ytl3Mo%2FScreenshot%202025-04-03%20at%2010.33.26%E2%80%AFAM.png)
+* `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
+![Screenshot 2025-04-03 at 11.22.47 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_aTywuZ%2FScreenshot%202025-04-03%20at%2011.22.47%E2%80%AFAM.png)
 
 ### Listing all guests : `list`
 
 Shows a list of all guests in the guest list.
 
 Format: `list`
-![Screenshot 2025-04-03 at 10.29.33 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_vPmog8%2FScreenshot%202025-04-03%20at%2010.29.33%E2%80%AFAM.png)
+![Screenshot 2025-04-03 at 11.23.14 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KsmbAU%2FScreenshot%202025-04-03%20at%2011.23.14%E2%80%AFAM.png)
 
 ### Editing a guest : `edit`
 
@@ -187,12 +187,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQ
 * If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed. 
 
 Examples:
-*  `edit 2 +rq/Extra toothbrush` Edits guest No.2 in the list by adding a request `Extra toothbrush`.
-![Screenshot 2025-04-03 at 10.31.32 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_5n5Q0h%2FScreenshot%202025-04-03%20at%2010.31.32%E2%80%AFAM.png)
+*  `edit 2 +rq/Extra blanket` Edits guest No.2 in the list by adding a request `Extra blanket`.
+   ![Screenshot 2025-04-03 at 11.23.49 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_OpgCT6%2FScreenshot%202025-04-03%20at%2011.23.49%E2%80%AFAM.png)
 *  `edit 2 -ri/1` Edits guest No.2 in the list by deleting the first request for that guest.
-![Screenshot 2025-04-03 at 10.38.28 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_CNbzyP%2FScreenshot%202025-04-03%20at%2010.38.28%E2%80%AFAM.png)
+   ![Screenshot 2025-04-03 at 11.24.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_oyI2Dx%2FScreenshot%202025-04-03%20at%2011.24.46%E2%80%AFAM.png)
 *  `edit 1 e/charlotte@example.com` Will not be allowed when there is an existing guest with the email `charlotte@example.com` in the guest list.
-![Screenshot 2025-04-03 at 10.31.56 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KenDd3%2FScreenshot%202025-04-03%20at%2010.31.56%E2%80%AFAM.png)
+![Screenshot 2025-04-03 at 11.25.12 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_M8SZpG%2FScreenshot%202025-04-03%20at%2011.25.12%E2%80%AFAM.png)
 
 ### Locating guests by name: `find`
 
