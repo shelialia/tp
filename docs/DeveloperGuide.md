@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# GuestNote Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
+- The formatting of our UserGuide is inspired by [a group's UserGuide (AY2425S1-CS2103T-F15-4)](https://ay2425s1-cs2103t-f15-4.github.io/tp/DeveloperGuide.html#appendix-requirements) from the previous semester.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,15 +128,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Request` list in the `GuestNote`, which `Guest` references. This allows `GuestNote` to only require one `Request` object per unique request, instead of each `Guest` needing their own `Request` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -158,103 +149,150 @@ Classes used by multiple components are in the `seedu.guestnote.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### List all Guests with Requests Feature
+This feature is an extension of the standard list command. It allows users to view all guests and their details if the guest has at least one request. 
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Given below is an example usage scenario of how the listing all guests with requests occurs.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+**Example Usage: `list rq`**
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Step 1. The user executes `list rq`. The input is sent to the `ListCommandParser`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 2. The `ListCommandParser` checks the input. Recognizing the parameter, the parser creates a new `ListCommand` with the request filter enabled (i.e., new ListCommand(true)).
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 3. When `ListCommand` is executed, the model verifies the flag and calls `model.updateFilteredGuestList` to filter the guest list for guests with at least one request.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+Step 4. The command then returns a `CommandResult` with the message `Listed all guests with requests`. This message is displayed to the user, and the UI updates to show only the guests with recorded requests.
 
-Step 2. The user executes `delete 5` command to delete the 5th guest in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+### Find Feature
+This feature intends to list the guests if any guest fields match with any search terms. A match occurs when at least one guest field contains a full-word, case-insensitive match for one of the search terms. 
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+#### Implementation
 
-Step 3. The user executes `add n/David …​` to add a new guest. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Given below is an example usage scenario of how the find feature used in GuestNote.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+**Example Usage: `find alex 23-32`**<br>
+_In this case, the search terms are "alex" and "23-32"._
 
-<box type="info" seamless>
+Step 1. The user executes `find alex 23-32`. The input is sent to the `FindCommandParser`.
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 2. The parser trims the input and splits it into keywords (e.g. "alex" and "23-32"). It then creates multiple `FieldContainsKeywordsPredicate` objects—one for each guest field.
 
-</box>
+Step 3. The individual field predicates are combined into a single composite predicate. This composite predicate works as follows:<br>
+• For a given guest, each individual field predicate is applied.<br>
+• If at least one predicate returns true (i.e. a match occurs), the composite predicate returns true.
 
-Step 4. The user now decides that adding the guest was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The `FindCommand` is constructed and then returned to the `Logic` component for execution.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+Step 5. When the command is executed, the command updates the filtered list to include only those guests who satisfy the search criteria.
 
+Step 6. The command then returns a `CommandResult` with a message indicating how many guests have been found. The UI then updates to display the filtered guest list accordingly.
 
-<box type="info" seamless>
+### Check-in Feature
+This feature allows users to check in a guest into the hotel. 
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+#### Implementation
 
-</box>
+Given below is an example usage scenario of how the check-in feature used in GuestNote.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+**Example Usage: `check-in 1`**
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+Step 1. The user executes `check-in 1`. 
 
-<box type="info" seamless>
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`. 
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Step 3. `GuestNoteParser` creates a new` CheckInCommandParser` and calls its parse method, which extracts the guest index. 
 
-</box>
+Step 4. `CheckInCommandParser` creates a new `CheckInCommand` object, which is then passed back to Logic Manager for execution.
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+Step 5. When the command is executed, the command returns a `CommandResult` with a message indicating that the guest has been checked in. 
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+### Check-out Feature
+This feature allows users to check out a guest into the hotel.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Implementation
 
-<box type="info" seamless>
+Given below is an example usage scenario of how the check-out feature used in GuestNote.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Example Usage: `check-out 2`**
 
-</box>
+Step 1. The user executes `check-out 2`.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+Step 3. `GuestNoteParser` creates a new `CheckInCommandParser` and calls its parse method, which extracts the guest index. 
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 4. `CheckInCommandParser` creates a new `CheckInCommand` object, which is then passed back to Logic Manager for execution.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+Step 5. When the command is executed, `CheckOutCommand` calls `updateGuestStatus` to change the guest status to `CHECKED_OUT`. It returns a `CommandResult` with a message indicating that the guest has been checked out.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+### Add Request Feature
+This feature allows users to add requests made by guests. Requests can added along when the guest is originally created via the `AddCommand` or be added to an existing guest via the `EditCommand`.
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+#### Implementation
 
-#### Design considerations:
+Given below is an example usage scenario of how a request is added alongside adding a new guest using `AddCommand`.
 
-**Aspect: How undo & redo executes:**
+**Example Usage: `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+Step 1. The user executes `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the guest being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
-_{more aspects and alternatives to be added}_
+Step 3. `GuestNoteParser` creates a new `AddCommandParser` and calls its parse method, which extracts the guest name, phone, email, room, and request.
 
-### \[Proposed\] Data archiving
+Step 4. `AddCommandParser` creates a new `AddCommand` object, which is then passed back to Logic Manager for execution.
 
-_{Explain here how the data archiving feature will be implemented}_
+Step 5. When the command is executed, the model calls `addGuest` to add the guest to the list of guests. It returns a `CommandResult` with a message indicating that the guest has been added.
 
+Given below is an example usage scenario of how a request is added to an existing guest using `EditCommand`.
+
+**Example Usage: `edit 2 +rq/One extra blanket`**
+
+Step 1. The user executes `edit 2 +rq/One extra blanket`.
+
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
+
+Step 3. `GuestNoteParser` creates a new `EditCommandParser` and calls its parse method, which extracts the guest index and the request. 
+
+Step 4. `EditCommandParser` creates a new `EditCommand` object, which is then passed back to Logic Manager for execution.
+
+Step 5. When the command is executed, the original guest and its details are retrieved. An `EditGuestDescriptor` object is created where the new request(s) are added to its `UniqueRequestList` field. `createEditedGuest` is then called with the modified `EditGuestDescriptor` object to create a new `Guest` object with updated guest fields. The model calls `setGuest` to update guest No.2 in the current list of guests. It returns a `CommandResult` with a message indicating that the guest has been edited.
+
+### Delete Request Feature
+This feature allows users to delete requests made by guests. Requests can be deleted using the `EditCommand` by passing in `-rq` prefix with the request or by passing in `ri` prefix with the index of the request to be deleted. 
+
+#### Implementation
+
+Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `-rq` prefix.
+
+**Example Usage: `edit 2 -rq/One extra pillow`**
+
+Step 1. The user executes `edit 2 -rq/One extra pillow`.
+
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
+
+Step 3. `GuestNoteParser` creates a new `EditCommandParser` and calls its parse method, which extracts the guest index and the request. 
+
+Step 4. `EditCommandParser` creates a new `EditCommand` object, which is then passed back to Logic Manager for execution.
+
+Step 5. When the command is executed, the original guest and its details are retrieved. An `EditGuestDescriptor` object is created where the matching request is being removed from its `UniqueRequestList` field. `createEditedGuest` is then called with the `EditGuestDescriptor` to create a new `Guest` object with updated guest fields. The model calls `setGuest` to update guest No.2 in the current list of guests. It returns a `CommandResult` with a message indicating that the guest has been edited.
+
+Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `ri` prefix.
+
+**Example Usage: `edit 2 ri/1`**
+
+Step 1. The user executes `edit 2 ri/1`.
+
+Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
+
+Step 3. `GuestNoteParser` creates a new `EditCommandParser` and calls its parse method, which extracts the guest index and request index.
+
+Step 4. `EditCommandParser` creates a new `EditCommand` object, which is then passed back to Logic Manager for execution.
+
+Step 5. When the command is executed, the original guest and its details are retrieved. An `EditGuestDescriptor` object is created where the request(s) at the matching indexes are removed. `createEditedGuest` is then called with the `EditGuestDescriptor` to create a new `Guest` object with updated guest fields. The model calls `setGuest` to update guest No.2 in the current list of guests. It returns a `CommandResult` with a message indicating that the guest has been edited.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -282,39 +320,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage hotel guests faster than a typical mouse/GUI driven app
 
+---------------------------------------------------------
 
 ### User stories
 
-Priorities: High (must have) - ```* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                       |
-|-------|--------------------------------------------|------------------------------|-----------------------------------------------------------------------|
-| `* * *` | Hotel Concierge                            | Create guests' details (Name, Room Number)       | Add new guests to the hotel                                          |
-| `* * *` | Hotel Concierge                            | Read guests' details                             | Keep track of the information of hotel guests                        |
-| `* * *` | Hotel Concierge                            | Update guests' details                           | Edit guest information when a change is requested                    |
-| `* * *` | Hotel Concierge                            | Delete guests and their details                  | Remove guests that request their information to be deleted           |
-| `* * *` | Hotel Concierge                            | View a list of all current guests               | Keep track of the number of hotel guests                             |
-| `* * *` | Hotel Concierge                            | Search for guest by name                        | Quickly look up information                                          |
-| `* *` | Hotel Concierge                            | CRUD guests' requests                           | Track requests by guests                                            |
-| `* *` | Hotel Concierge                            | Search for guest by request                     | Match the request to the guest                                       |
-| `* *` | Hotel Concierge                            | Mark and unmark guest requests as completed     | Track what requests are completed                                   |
-| `* *` | Hotel Concierge                            | List all outstanding requests by guest          | See what requests need to be completed                              |
-| `* *` | Hotel Concierge                            | Log a guest's check-in date                     | Maintain check-in records                                           |
-| `* *` | Hotel Concierge                            | Log a guest's check-out date                    | Maintain check-out records                                          |
-| `* *` | Newbie Hotel Concierge                    | Have easy access to a guide of commands         | Easily navigate through the app and access necessary information     |
-| `* *` | Newbie Hotel Concierge                    | See help text on command format                 | Understand the correct format for a command                         |
-| `* *` | Experienced Hotel Concierge               | Enter commands using short-forms                | Access required information with fewer keystrokes                   |
-| `* *` | Experienced Hotel Concierge               | Quickly input most commonly used commands       | Access and update information faster                                |
-| `* *` | Experienced Hotel Concierge               | Have power commands that shortcut multiple commands | Streamline repetitive commands and workflows                         |
-| `* *` | Concierge                                 | Pin guests                                      | Quickly refer to guests without searching each time                 |
-| `* *` | An impatient user                         | Experience reasonable response time             | Use the app for large cases                                         |
-| `* *` | A user who prefers hardcopy              | Export guest data in text format                | Have a backup of guest details                                       |
-| `*`     | A potential user exploring the app       | See the app populated with sample data          | Understand how the app will look in use                             |
-| `*`     | A user ready to start using the app      | Purge all current data                          | Remove sample/experimental data used for exploring the app          |
+| Priority | As a …​                                    | I want to …​                                                                                | So that I can…​                                                        |
+|-------|--------------------------------------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | Hotel Concierge                            | Create guests' details (ie. Name, Phone, Email, and Room Number)                            | Add new guests to the hotel                      |
+| `* * *` | Hotel Concierge                            | Read guests' details                                                                        | Keep track of the information of hotel guests                          |
+| `* * *` | Hotel Concierge                            | Update guests' details                                                                      | Edit guest information when a change is requested                      |
+| `* * *` | Hotel Concierge                            | Delete guests and their details                                                             | Remove guests that request their information to be deleted             |
+| `* * *` | Hotel Concierge                            | View a list of all guests                                                                   | Get a full overview of guests information to prioritize certain guests |
+| `* * *` | Hotel Concierge                            | Search for guests using any single detail (ie. phone, email, name, room number, or request) | Quickly look up a specific guest's information                         |
+| `* *` | Hotel Concierge                            | Create guests' requests                                                                     | Add requests made by guests                                            |
+| `* *` | Hotel Concierge                            | Read guests' requests                                                                       | See what requestsneed to be completed                                  |
+| `* *` | Hotel Concierge                            | Delete guests' requests                                                                     | Remove completed requests                                              |         
+| `* *` | Hotel Concierge                            | Search for guest by request                                                                 | Match the request to the guest                                         |
+| `* *` | Hotel Concierge                            | Update a guest's status from booking to check-in                                            | Avoid service errors to guests that have not arrived                   |
+| `* *` | Hotel Concierge                            | Update a guest's status from check-in to check-out                                          | Avoid service errors to guests that have departed                      |
+| `* *` | Hotel Concierge                            | View a guest's check-in/check-out status                                                    | Coordinate arrivals and departures                                     |
+| `* *` | Newbie Hotel Concierge                    | Have easy access to a guide of commands                                                     | Easily navigate through the app and access necessary information       |
+| `* *` | Newbie Hotel Concierge                    | See help text on command format                                                             | Understand the correct format for a command                            |
+| `* *` | Experienced Hotel Concierge               | Enter commands using short-forms                                                            | Access required information with fewer keystrokes                      |
+| `* *` | Experienced Hotel Concierge               | Quickly input most commonly used commands                                                   | Access and update information faster                                   |
+| `* *` | Experienced Hotel Concierge               | Have power commands that shortcut multiple commands                                         | Streamline repetitive commands and workflows                           |
+| `* *` | Concierge                                 | Pin guests                                                                                  | Quickly refer to guests without searching each time                    |
+| `* *` | An impatient user                         | Experience reasonable response time                                                         | Use the app for large cases                                            |
+| `* *` | A user who prefers hardcopy              | Export guest data in text format                                                            | Have a backup of guest details                                         |
+| `* *` | Hotel Concierge                            | Log a guest's check-in date                                                                 | Maintain check-in records                                              |
+| `* *` | Hotel Concierge                            | Log a guest's check-out date                                                                | Maintain check-out records                                             |
+| `*`     | A potential user exploring the app       | See the app populated with sample data                                                      | Understand how the app will look in use                                |
+| `*`     | A user ready to start using the app      | Purge all current data                                                                      | Remove sample/experimental data used for exploring the app             |
 
-*{More to be added}*
+---------------------------------------------------------
 
-# Use Cases
+### Use Cases
 
 This document outlines the use cases for the GuestNote system, detailing the interactions between the system and the Hotel Concierge actor. Each use case includes a main success scenario (MSS) and possible extensions or variations.
 
@@ -331,13 +373,13 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 
 **MSS:**
-1. Concierge requests to create a new guest, passing the new guest’s details (name, room number).
+1. Concierge requests to create a new guest, passing the new guest’s details (ie. name, phone, email, room).
 2. GuestNote validates the input and creates a new guest record.
 3. GuestNote displays a success message confirming the guest’s creation.  
    Use case ends.
 
 **Extensions:**
-<box type="tip" header="1a. Optional Requests 📝" light>
+<box type="tip" header="1a. Optional Requests" light>
     <ul>
       <li>1a1. Concierge provides zero or more optional “requests” (e.g., special amenities, notes).</li>
       <li>1a2. Use case resumes from step 2.<br>Use case ends.</li>
@@ -345,7 +387,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 <box type="wrong" header="2a. Invalid or Incomplete Details" light>
     <ul>
-      <li>2a1. GuestNote detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
+      <li>2a1. GuestNote detects that the provided information is missing compulsory fields or fails validation (e.g., invalid name or room number).</li>
       <li>2a2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
@@ -355,22 +397,29 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 ### Use case: UC02 - List Guests
 
 **MSS:**
-1. Concierge requests a list of all guests.
-2. GuestNote retrieves and displays a list of all guests.  
+1. Concierge requests a list of all guests with their details (ie. name, phone, email, room, requests).
+2. GuestNote retrieves and displays a list of all guests with their details. 
    Use case ends.
 
 **Extensions:**
-<box type="tip" header="1a. Search :search:" light>
+<box type="warning" header="1a. No Guests" light>
     <ul>
-      <li>1a1. Concierge provides a search term.</li>
-      <li>1a2. GuestNote filters the list of guests based on the search term.</li>
-      <li>1a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
+        <li>1a1. GuestNote detects that there are no guests in the system.</li>
+        <li>1a2. GuestNote displays a message indicating that there are no guests.<br>Use case ends.</li>
     </ul>
 </box>
-<box type="warning" header="2a. No Guests" light>
+<box type="tip" header="2a. Filter Guests to display those with Requests" light>
     <ul>
-      <li>2a1. GuestNote detects that there are no guests in the system.</li>
-      <li>2a2. GuestNote displays a message indicating that there are no guests.<br>Use case ends.</li>
+        <li>2a1. Concierge requests to see only guests with requests.</li>
+        <li>2a2. GuestNote filters the list of guests based on them having requests.</li>
+        <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="tip" header="2b. Filter Guests by search term" light>
+    <ul>    
+        <li>2a1. Concierge provides a search term.</li>
+        <li>2a2. GuestNote filters the list of guests by comparing all their details against that search term.</li>
+        <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -383,22 +432,22 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge requests to update the guest’s details, passing the guest’s index in displayed list and the new details.
+2. Concierge requests to update the guest’s details, passing the guest’s index in displayed list and new details.
 3. GuestNote validates the input and updates the guest’s record.
 4. GuestNote displays a success message confirming the update.  
    Use case ends.
 
 **Extensions:**
-<box type="warning" header="3a. Guest Not Found" light>
+<box type="warning" header="2a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
-<box type="wrong" header="3b. Invalid or Incomplete Details" light>
+<box type="wrong" header="2b. Invalid or Incomplete Details" light>
     <ul>
-      <li>3b1. GuestNote detects that the provided information is missing or fails validation (e.g., invalid name or room number).</li>
-      <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+      <li>2b1. GuestNote detects that required parameters is missing or the provided information fails validation (e.g., invalid name or room number).</li>
+      <li>2b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -416,10 +465,10 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
    Use case ends.
 
 **Extensions:**
-<box type="warning" header="3a. Guest Not Found" light>
+<box type="wrong" header="2a. Guest Not Found" light>
     <ul>
-      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -432,132 +481,65 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 **MSS:**
 1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge requests to edit the guest, passing the guest’s index in displayed list and the new request details.
+2. Concierge requests to edit the guest, passing the guest’s index in currently displayed list and the new request details.
 3. GuestNote validates the input and creates a new request record for the guest.
 4. GuestNote displays a success message confirming the request creation.  
    Use case ends.
 
 **Extensions:**
-<box type="tip" header="2a. Optional Completion Status" light>
+<box type="wrong" header="2a. Guest Not Found" light>
     <ul>
-      <li>2a1. Concierge provides optional completion status (e.g., pending, completed).</li>
-      <li>2a2. Use case resumes from step 3.<br>Use case ends.</li>
-    </ul>
-</box>
-
-<box type="warning" header="3a. Guest Not Found" light>
-    <ul>
-      <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-      <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+      <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="3b. Invalid or Incomplete Details" light>
     <ul>
-      <li>3b1. GuestNote detects that the provided information is missing or fails validation.</li>
+      <li>3b1. GuestNote detects that required parameters is missing or the provided information fails validation.</li>
       <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
     </ul>
 </box>
 
 ---------------------------------------------------------
 
-### Use case: UC06 - List All Requests
+### Use case: UC06 - Delete Request of Guest by Request Index
+<box type="info">
+    <b>Preconditions:</b>
+    <ul>
+        <li>Guest exists in GuestNote.</li>
+        <li>Request of that index exists for the Guest.</li>
+    </ul>
+</box>
 
 **MSS:**
-1. Concierge requests a list of all requests
-2. GuestNote retrieves and displays a list of all requests.  
+1. Concierge retrieves a !!guest and the request index (UC02)!!
+2. Concierge requests to delete the request for the guest, passing the guest’s index in currently displayed list and the request index.
+3. GuestNote confirms the deletion of the request.  
    Use case ends.
 
 **Extensions:**
-<box type="tip" header="2a. Search 🔍" light>
+<box type="wrong" header="2a. Guest Not Found" light>
     <ul>
-      <li>2a1. Concierge provides a search term.</li>
-      <li>2a2. GuestNote filters the list of requests based on the search term.</li>
-      <li>2a3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
+        <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+        <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
-<box type="tip" header="2b. Filter by Completion Status 📥" light>
+<box type="wrong" header="2a. Request Not Found" light>
     <ul>
-      <li>2b1. Concierge provides a completion status.</li>
-      <li>2b2. GuestNote filters the list of requests with matching completion status.</li>
-      <li>2b3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
-    </ul>
-</box>
-
-<box type="warning" header="3a. No Requests" light>
-    <ul>
-      <li>3a1. GuestNote detects that there are no requests for the guest.</li>
-      <li>3a2. GuestNote displays a message indicating that there are no requests for the guest.<br>Use case ends.</li>
-    </ul>
-</box>
-<box type="warning" header="3b. Guest Not Found" light>
-    <ul>
-      <li>3b1. GuestNote detects that the provided guest index does not exist in the system.</li>
-      <li>3b2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+      <li>2a1. GuestNote detects that the provided request index does not exist for the guest.</li>
+      <li>2a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
 ---------------------------------------------------------
 
-### Use case: UC07 - Mark Request as Completed
+### Use case: UC07 - Check-In Guest
 <box type="info">
     <b>Preconditions:</b>
     <ul>
         <li>Guest exists in GuestNote.</li>
-        <li>Request exists for the guest.</li>
+        <li>Guest has not yet checked in.</li>
     </ul>
-</box>
-
-**MSS:**
-1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge retrieves a !!request's index (UC06)!!
-3. Concierge requests to mark the request as completed, passing the request index.
-4. GuestNote updates the request record with the completion status.
-5. GuestNote displays a success message confirming the request completion.  
-   Use case ends.
-
-**Extensions:**
-<box type="warning" header="3a. Request Not Found" light>
-    <ul>
-      <li>3a1. GuestNote detects that the provided request index does not exist for the guest.</li>
-      <li>3a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
-    </ul>
-</box>
-<box type="wrong" header="3b. Invalid Completion Status" light>
-    <ul>
-      <li>3b1. GuestNote detects that the provided completion status is invalid.</li>
-      <li>3b2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
-    </ul>
-</box>
-
----------------------------------------------------------
-
-### Use case: UC08 - Delete Request
-<box type="info">
-    <b>Preconditions:</b>
-    <ul>
-        <li>Guest exists in GuestNote.</li>
-        <li>Request exists for the guest.</li>
-    </ul>
-</box>
-
-**MSS:**
-1. Concierge retrieves a !!guest (UC02)!!
-2. Concierge retrieves a !!request's index (UC06)!!
-3. Concierge requests to delete the request, passing the request index.
-4. GuestNote confirms the deletion of the request.  
-   Use case ends.
-
-**Extensions:**
-<box type="warning" header="3a. Request Not Found" light>
-    <ul>
-      <li>3a1. GuestNote detects that the provided request index does not exist for the guest.</li>
-      <li>3a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
-    </ul>
-</box>
-
-### Use case: UC09 - Check In Guest
-<box type="info">
-    <b>Preconditions:</b> Guest exists in GuestNote.
 </box>
 
 **MSS:**
@@ -567,18 +549,22 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
    Use case ends.
 
 **Extensions:**
-<box type="warning" header="3a. Guest Not Found" light>
-<ul>
-<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
-</ul>
+<box type="wrong" header="2a. Guest Not Found" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+        <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+    </ul>
 </box>
 
 ---------------------------------------------------------
 
-### Use case: UC10 - Check Out Guest
+### Use case: UC08 - Check Out Guest
 <box type="info">
-    <b>Preconditions:</b> Guest exists in GuestNote.
+    <b>Preconditions:</b>
+    <ul>
+        <li>Guest exists in GuestNote.</li>
+        <li>Guest has checked in but not yet checked out.</li>
+    </ul>
 </box>
 
 **MSS:**
@@ -588,40 +574,56 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
    Use case ends.
 
 **Extensions:**
-<box type="warning" header="3a. Guest Not Found" light>
-<ul>
-<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
-</ul>
+<box type="wrong" header="2a. Guest Not Found" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+        <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="wrong" header="2b. Guest Not Checked In" light>
+    <ul>
+        <li>2b1. GuestNote detects that the provided guest is not checked in yet.</li>
+        <li>2b2. GuestNote informs the Concierge that the guest is not checked in yet.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="wrong" header="2c. Guest Has Checked Out" light>
+    <ul>
+        <li>2c1. GuestNote detects that the provided guest has already checked out.</li>
+        <li>2c2. GuestNote informs the Concierge that the guest has already checked out.<br>Use case ends.</li>
+    </ul>
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 ### **Glossary**
 ___
 
-| **Term**                     | **Definition / Example**                                                                                                                                   |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AddressBook Level 3 (AB3)** | The original open-source Java application from which GuestNote was adapted. AB3 serves as a contact management app with a CLI interface and basic CRUD functionality, forming the foundation for GuestNote’s structure and features. |
-| **Backup**                  | A saved copy of your data file, used to restore the AddressBook in case of data loss.                                                                      |
-| **cd**                      | Stands for "change directory" – a terminal command used to navigate between folders.<br>e.g., `cd path/to/folder`                                          |
-| **Check-in**                | The process of registering a guest’s arrival at the hotel.                                                                                                  |
-| **Check-out**               | The process of finalising a guest’s stay and removing their active record.                                                                                 |
-| **CLI (Command Line Interface)** | A text-based interface for interacting with software by typing commands, instead of using a graphical interface. Common in developer tools and command-based apps like GuestNote. |
-| **Command**                 | An instruction typed into the CLI to perform an action in GuestNote.<br>e.g., `add`, `edit`, `check-in`                                                    |
-| **CSV (Comma Separated Values)** | A file format used for tabular data, where values are separated by commas and records by newlines. Can be opened by spreadsheet software like Excel.     |
-| **Guest**                   | A guest staying at the hotel whose information is stored in the **GuestNote** system.                                                                      |
-| **GuestNote**               | The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.                                |
-| **GUI (Graphical User Interface)** | A visual interface that allows users to interact with GuestNote using elements like buttons, lists, and panels.                                      |
-| **Home Folder**             | The folder on your computer where GuestNote stores its data files.                                                                                         |
-| **Index**                   | A number representing the position of a guest in the list.<br>e.g., in `delete 2`, "2" is the index of the guest to be deleted.                            |
-| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format that is easy to read and write. GuestNote uses JSON to store its internal data files.                      |
-| **JSON File Location**      | The path to the JSON data file used by GuestNote.<br>e.g., `/home/user/data/guestnote.json`                                                                |
-| **Mainstream OS**           | Refers to common operating systems supported by GuestNote: **Windows**, **Linux**, **Unix**, and **MacOS**.                                                |
-| **Parameter**               | A specific input provided with a command, usually in the form of a prefix and value.<br>e.g., `n/James` or `r/01-01`                                       |
-| **Request**                 | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                           |
-| **Status**                  | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                             |
-| **UI (User Interface)**     | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                   |
+| **Term**                              | **Definition / Example**                                                                                                                                                                                                           |
+|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AddressBook Level 3 (AB3)**         | The original open-source Java application from which GuestNote was adapted. AB3 serves as a contact management app with a CLI interface and basic CRUD functionality, forming the foundation for GuestNote’s structure and features. |
+| **Backup**                            | A saved copy of your data file, used to restore the AddressBook in case of data loss.                                                                                                                                              |
+| **cd**                                | Stands for "change directory" – a terminal command used to navigate between folders.<br>e.g., `cd path/to/folder`                                                                                                                  |
+| **Check-in**                          | The process of registering a guest’s arrival at the hotel.                                                                                                                                                                         |
+| **Check-out**                         | The process of finalising a guest’s stay and removing their active record.                                                                                                                                                         |
+| **CLI (Command Line Interface)**      | A text-based interface for interacting with software by typing commands, instead of using a graphical interface. Common in developer tools and command-based apps like GuestNote.                                                  |
+| **Command**                           | An instruction typed into the CLI to perform an action in GuestNote.<br>e.g., `add`, `edit`, `check-in`                                                                                                                            |
+| **CSV (Comma Separated Values)**      | A file format used for tabular data, where values are separated by commas and records by newlines. Can be opened by spreadsheet software like Excel.                                                                               |
+| **Guest**                             | A guest staying at the hotel whose information is stored in the **GuestNote** system.                                                                                                                                              |
+| **Guest Field**                       | A name, email, phone, room number, or request of a guest stored in the **GuestNote** system.                                                                                                                                       |
+| **Guest Fields**                      | The name, email, phone, room number, and request(s) of a guest stored in the **GuestNote** system.                                                                                                                                 |
+| **GuestNote**                         | The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.                                                                                                        |
+| **GUI (Graphical User Interface)**    | A visual interface that allows users to interact with GuestNote using elements like buttons, lists, and panels.                                                                                                                    |
+| **Home Folder**                       | The folder on your computer where GuestNote stores its data files.                                                                                                                                                                 |
+| **Index**                             | A number representing the position of a guest in the list.<br>e.g., in `delete 2`, "2" is the index of the guest to be deleted.                                                                                                    |
+| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format that is easy to read and write. GuestNote uses JSON to store its internal data files.                                                                                                        |
+| **JSON File Location**                | The path to the JSON data file used by GuestNote.<br>e.g., `/home/user/data/guestnote.json`                                                                                                                                        |
+| **Mainstream OS**                     | Refers to common operating systems supported by GuestNote: **Windows**, **Linux**, **Unix**, and **MacOS**.                                                                                                                        |
+| **Parameter**                         | A specific input provided with a command, usually in the form of a prefix and value.<br>e.g., `n/James` or `r/01-01`                                                                                                               |
+| **Request**                           | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                                                                                                  |
+| **Status**                            | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                                                                                                      |
+| **Search Term**                       | The white-space separated value used in the Find feature e.g. for `find pillows`, it is `pillows`                                                                                                          |
+| **UI (User Interface)**               | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                                                                                           |
 =======
+
 ---------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -639,133 +641,146 @@ Ensure that you have read the notes about command format and the various command
 
 ### Launch and shutdown
 
-1. Initial launch
+**Initial launch**
+1. Download the [jar](https://github.com/AY2425S2-CS2103T-W09-2/tp/releases) file and copy into an empty folder
 
-   1. Download the [jar](https://github.com/AY2425S2-CS2103T-W09-2/tp/releases) file and copy into an empty folder
+2. Double-click the jar file  
+**Expected**: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file  
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+**Saving window preferences**
+1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+2. Re-launch the app by double-clicking the jar file.<br>
+**Expected**: The most recent window size and location is retained.
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-### **Adding a guest**
+### **Adding a Guest**
 
 Adding a guest while in the main guest list view.
 
-1. **Prerequisites**: Guest list is visible using the `list` command. Guest to be added has a unique email and phone number, not currently in Guest list. Once added in, each test case is not to be repeated due to Unique Guest requirements. 
+**Prerequisites**
+1. Guest list is visible using the `list` command. 
+2. Guest to be added has a unique email and is not currently in guest list.
 
-2. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`  
+**Test Cases**
+1. `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`  
    **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-3. **Test case**: `add n/Jane Doe e/janed@example.com r/01-01 rq/One extra pillow`  
+2. `add n/Jane Doe e/janed@example.com r/01-01 rq/One extra pillow`  
    **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-4. **Test case**: `add n/June Doe p/98764444 e/johnd@example.com r/01-01`  
+3. `add n/June Doe p/98764444 e/johnd@example.com r/01-01`  
    **Expected**: Guest `John Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
 
-5. **Other incorrect add commands to try**:  
-   `add n/ p/98765432 e/johnd@example.com r/01-01`  
-   `add n/John Doe r/01-01`  
-   `add` 
-   **Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`). 
-
+4. Other Incorrect add commands to try:  
+- `add n/ p/98765432 e/johnd@example.com r/01-01`  
+- `add n/John Doe r/01-01`  
+- `add`<br>
+**Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`).
 
 ### Deleting a guest
 
-Deleting a guest while all guests are being shown
+Deleting a guest while in the main guest list view.
 
-   1. Prerequisites: List all guests using the `list` command. Multiple guests in the list.
+**Prerequisites**
+1. Guest list is visible using the `list` command.
+2. Guest to be deleted exists in the guest list.
 
-   1. **Test case**: `delete 1`  
-      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+**Test Cases**
+1. `delete 1`  
+   **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. **Test case**: `delete 0`  
-      **Expected**: No guest is deleted. Error details shown in the status message. Status bar remains the same.
+2. `delete 0`  
+   **Expected**: No guest is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. Other Incorrect delete commands to try: 
+- `delete`
+- `delete x` (where x is larger than the size of the list<br>
+**Expected**: Similar to Test Case No.2.
 
 ### Editing a guest
 Editing a guest while all guests are being shown.
 
-1. **Prerequisites**: List all guests using the `list` command. Multiple guests in the list.
+**Prerequisites**
+1. List all guests using the `list` command. 
+2. Multiple guests in the list.
 
-2. **Test case**: `edit 1 n/Jonathan Doe`  
-   **Expected**: Name of the first guest is updated to `Jonathan Doe`. Other details remain unchanged. Status message reflects successful edit.
+**Test Cases**
+1. `edit 1 n/Jonathan Doe`  
+**Expected**: Name of the first guest is updated to `Jonathan Doe`. Other details remain unchanged. Status message reflects successful edit.
 
-3. **Test case**: `edit 1 +rq/Fruit Basket`  
-   **Expected**: Adds `Fruit Basket` to the list of requests for the first guest. Status message reflects successful edit.
+2. `edit 1 +rq/Fruit Basket`  
+**Expected**: Adds `Fruit Basket` to the list of requests for the first guest. Status message reflects successful edit.
 
-4. **Test case**: `edit 1 -rq/Fruit Basket`  
-   **Expected**: Removes `Fruit Basket` from the request list of the first guest. If request is not found, error message is shown. Otherwise, status message reflects successful update.
+3. `edit 1 -rq/Fruit Basket`  
+**Expected**: Removes `Fruit Basket` from the request list of the first guest. If request is not found, error message is shown. Otherwise, status message reflects successful update.
 
-5. **Test case**: `edit 1 n/ r/`  
-   **Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
+4. `edit 1 n/ r/`  
+**Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
 
-6. Other incorrect edit commands to try:  
-   `edit`,  
-   `edit x`,  
-   `edit 5 abc`,  
-   `edit 0`  
-   **Expected**: No guest is edited. Error message is shown in the status bar. If the index is invalid or missing, or if the parameters are unrecognised or empty, an appropriate error is returned. Status bar remains unchanged.
+5. Other incorrect edit commands to try:  
+- `edit`
+- `edit x`
+- `edit 5 abc`
+- `edit 0`  
+**Expected**: No guest is edited. Error message is shown in the status bar. If the index is invalid or missing, or if the parameters are unrecognised or empty, an appropriate error is returned. Status bar remains unchanged.
 
 ### Listing
 
 Listing all or filtered guests using the `list` command.
 
-1. `Prerequisites`: Guests are already added to the system. Some may have been deleted.
+**Test cases**
+1. `list`  
+**Expected**: All current guests in the system are shown in the guest list. Deleted guests are not shown. Status message reflects the success of the `list` command.
 
-2. **Test case**: `list`  
-   **Expected**: All current guests in the system are shown in the guest list. Deleted guests are not shown. Status message reflects the success of the `list` command.
+2. `list alex`  
+**Expected**: Guests with names containing `alex` (e.g., `Alex Yeoh`, `Alexander Tan`) are shown. If no such guests exist, the guest list appears empty. Status message reflects the success of the `list` command.
 
-3. **Test case**: `list alex`  
-   **Expected**: Guests with names containing `alex` (e.g., `Alex Yeoh`, `Alexander Tan`) are shown. If no such guests exist, the guest list appears empty. Status message reflects the success of the `list` command.
+3. `list roy irfan`  
+**Expected**: Guests with names matching the keywords `roy` or `irfan` (e.g., `Roy Ibrahim`, `Irfan Balakrishnan`) are shown. Deleted guests are not shown. Status message reflects the success of the `list` command.
 
-4. **Test case**: `list roy irfan`  
-   **Expected**: Guests with names matching the keywords `roy` or `irfan` (e.g., `Roy Ibrahim`, `Irfan Balakrishnan`) are shown. Deleted guests are not shown. Status message reflects the success of the `list` command.
-
-5. **Test case**: `list n/NAMETHATDOESNOTEXIST`  
-   **Expected**: No guests are shown. The guest list is empty. Status message reflects that no matching guests were found.
-
+4. `list n/NAMETHATDOESNOTEXIST`  
+**Expected**: No guests are shown. The guest list is empty. Status message reflects that no matching guests were found.
 
 ### Finding a guest
 
-1. **Prerequisites**: Guest list is populated with a variety of guests. Each test case assumes no guests have been deleted. All fields (e.g. phone, email, request) contain varied values to verify the scope of the `find` command.
+**Prerequisites**
+1. Guest list is populated with a variety of guests. 
+2. Each test case assumes no guests have been deleted. 
+3. All fields (e.g. phone, email, request) contain varied values to verify the scope of the `find` command.
 
-2. **Test case**: `find Alex`  
+**Test cases**
+1. `find Alex`  
    **Expected**: Guests with names containing `Alex` (e.g., `Alex Yeoh`, `Alexis Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
-3. **Test case**: `find Ander`  
+
+2. `find Ander`  
    **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`, `Alexander Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
 
-4. **Test case**: `find 9876`  
+3. `find 9876`  
    **Expected**: Guests with phone numbers that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
 
-5. **Test case**: `find 01-01`  
+4. `find 01-01`  
    **Expected**: Guests with room numbers matching `01-01` are shown. Partial matches (e.g., searching `01`) may also display other rooms like `01-02` or `02-01`). Status message confirms results.
 
-6. **Test case**: `find bed`  
+5. `find bed`  
    **Expected**: Guests with tags or requests that include the word `bed` (e.g., `bedside table`, `bed lamp`) are shown. Partial match works within multi-word requests. Status message reflects success.
 
-7. **Test case**: `find`  
+6. `find`  
    **Expected**: No input keyword provided. Error message appears, stating that a keyword must be included in the `find` command. Guest list remains unchanged.
 
-8. **Test case**: `find xyznotfound`  
+7. `find xyznotfound`  
     **Expected**: No guests match the keyword `xyznotfound`. Guest list is empty. Status message reflects that no guests matched the search.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+**Dealing with missing/corrupted data files**
+1. If upon running GuestNote, the guest's name/room number/status/email/contact number/request list is not as expected, open the `data` folder where GuestNote stores its data. 
+2. In the `data` folder, open `guestnote.json` and identify the mistakes in the stored data. If the error is missing data, you can correct it by altering the data in `guestnote.json`.
+3. Otherwise, the terminal from where `GuestNote.jar` is launched will log where the file is corrupted.
+4. If the data is beyond repair, delete the entire data folder or the `guestnote.json` file to start afresh with sample data.
 
-   1. If upon running GuestNote, the guest's name/room number/status/email/contact number/request list is not as expected, open the `data` folder where GuestNote stores its data. 
-   2. In the `data` folder, open `guestnote.json` and identify the mistakes in the stored data. If the error is missing data, you can correct it by altering the data in `guestnote.json`.
-   3. Otherwise, the terminal from where `GuestNote.jar` is launched will log where the file is corrupted.
-   4. If the data is beyond repair, delete the entire data folder or the `guestnote.json` file to start afresh with sample data.
+---------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+Team size: 5
 
-## **Appendix: Effort**
+Soon to be updated.
+
