@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
-import seedu.guestnote.model.guest.NameContainsKeywordsPredicate;
+import seedu.guestnote.model.guest.NameContainsSubstringsPredicate;
 
 /**
  * Parses input arguments and creates a new ListCommand object.
@@ -23,7 +23,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(true);
         } else {
             // Convert input into a FindCommand-like predicate
-            return new ListCommand(new NameContainsKeywordsPredicate(Arrays.asList(trimmedArgs.split("\\s+"))));
+            return new ListCommand(new NameContainsSubstringsPredicate(Arrays.asList(trimmedArgs.split("\\s+"))));
         }
     }
 }
