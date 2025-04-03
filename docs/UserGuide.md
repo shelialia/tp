@@ -6,7 +6,8 @@ pageNav: 3
 
 # GuestNote User Guide
 **Welcome to GuestNote!**  
-_Time is money, and in the hotel industry, every second counts._
+> Time is money, and in the hotel industry, every second counts.
+
 Mistakes in guest handling - like assigning the wrong room or forgetting a special request - don’t just hurt your workflow. They hurt your guests’ experience and cost your hotel real money.  
 
 **That’s where GuestNote comes in.**
@@ -30,6 +31,7 @@ With **GuestNote**, you can stay on top of guest needs, streamline daily concier
 Refer to the sidebar if you are on the website, or to the table below if you are on the PDF.
 
 1. [Quick Start](#quick-start)
+2. [Introducing the User Interface](#introducing-the-user-interface)
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
@@ -131,7 +133,7 @@ Some example commands you can try:
 <box type="default" icon=":glyphicon-plus:" background-color="#efefef" light>
 
 **Add your first guest:** `add n/John Doe p/91234567 e/johnd@example.com r/01-01`<br>
-Adds a guest named !!John Doe!! who lives in room !!#01-01!! with a unique email !!johnd@example.com!! and phone number !!91234567!!.
+Adds a guest named !!John Doe!! who lives in room !!#01-01!! with email !!johnd@example.com!! and phone number !!91234567!!.
 
 </box>
 <box type="default" icon=":glyphicon-th-list:" background-color="#efefef" light>
@@ -159,7 +161,7 @@ Deletes the !!first guest!! from the app.
 
 </box>
 
-Want to learn more? Continue reading the [Features](#features) section below.
+Want to learn more? Check out the [Features](#features) section below.
 
 </box>
 <br>
@@ -170,7 +172,21 @@ Want to learn more? Continue reading the [Features](#features) section below.
 
 ## Features
 
-<box type="primary" light>
+#### Table of Contents
+* [Format Legend](#format-legend)
+* [Viewing help](#viewing-help-help)
+* [Adding a guest](#adding-a-guest-add)
+* [Listing all guests](#listing-all-guests-list)
+* [Editing a guest](#editing-a-guest-edit)
+* [Locating guests by name](#locating-guests-by-name-find)
+* [Deleting a guest](#deleting-a-guest-delete)
+* [Clearing all entries](#clearing-all-entries-clear)
+* [Exiting the program](#exiting-the-program-exit)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [Check-In a guest](#check-in-a-guest-check-in)
+* [Check-Out a guest](#check-out-a-guest-check-out)
+* [Extended Find](#extended-find-coming-in-v14)
 
 #### Format Legend
 Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
@@ -215,65 +231,205 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 </box>
 
+### Commands
+
+
+
+### Viewing help: `help`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Shows a message with a link to this help page.
 </box>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Format: `help`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Output:<br>
+![help message](images/helpMessage.png)
+</box>
+</div>
+<br>
 
 
 ### Adding a guest: `add`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Adds a guest to the guest list.
-
-Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
-
-<box type="tip" seamless>
-
-**Tip:** 
-* A guest can have any number of requests (including 0)
-* A guest can be added without a phone number
-* All guests automatically have status set to 'BOOKED' when they are added. 
+Adds a guest to the guest book.
+- A guest can have any number of requests (including 0)
+- A guest can be added without a phone number
+- All guests automatically have status set to 'BOOKED' when they are added.
 
 </box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Examples:
-* `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
-![Screenshot 2025-04-03 at 11.22.47 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_aTywuZ%2FScreenshot%202025-04-03%20at%2011.22.47%E2%80%AFAM.png)
+Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` <br>
+Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
+</box>
+</div>
+<br>
 
 ### Listing all guests : `list`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Shows a list of all guests in the guest list.
+- The list is sorted by the order in which guests were added.
+- An optional filter can be applied to the list to show only guests whose names match the filter.
 
-Format: `list`
-![Screenshot 2025-04-03 at 11.23.14 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KsmbAU%2FScreenshot%202025-04-03%20at%2011.23.14%E2%80%AFAM.png)
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-### Editing a guest : `edit`
+Format: `list [NAME_FILTER]…`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list` <br>
+Shows a list of all guests in the guest list.
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list John` <br>
+Shows a list of all guests with `John` in their name, including `John Doe` and `Johnathon Chua`.
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list John Alex` <br>
+Shows a list of all guests with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
+</box>
+</div>
+<br>
+
+
+
+### Editing a guest: `edit`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Edits an existing guest in the guest list.
-
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQUEST]…​ [-rq/REQUEST]…​ [-ri/REQUEST_INDEX]…​`
-
-**Tip:**
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be valid** (ie. within the number of guests displayed).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing requests:
-  * an add request input will be added to the back of the current request list for the guest.
-  * a remove request input will cause the requests behind the deleted one to be shifted forward.
-* If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed. 
+* If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed.
 
-Examples:
-*  `edit 2 +rq/Extra blanket` Edits guest No.2 in the list by adding a request `Extra blanket`.
-   ![Screenshot 2025-04-03 at 11.23.49 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_OpgCT6%2FScreenshot%202025-04-03%20at%2011.23.49%E2%80%AFAM.png)
-*  `edit 2 -ri/1` Edits guest No.2 in the list by deleting the first request for that guest.
-   ![Screenshot 2025-04-03 at 11.24.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_oyI2Dx%2FScreenshot%202025-04-03%20at%2011.24.46%E2%80%AFAM.png)
-*  `edit 1 e/charlotte@example.com` Will not be allowed when there is an existing guest with the email `charlotte@example.com` in the guest list.
-![Screenshot 2025-04-03 at 11.25.12 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_M8SZpG%2FScreenshot%202025-04-03%20at%2011.25.12%E2%80%AFAM.png)
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER]`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 1 e/charlotte@example.com`<br>
+Changes the email for the first guest to `charlotte@example.com`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 p/91234567 r/01-03` <br>
+Changes the phone number for the second guest to `91234567` and the room number to `01-03`.
+</box>
+<box theme="danger" icon=":mif-close:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04` <br>
+Tries to change a guest's email to one that is already registered to another guest, and update the room number. Nothing will occur, and an error message will be shown explaining that the email is not valid.
+
+</box>
+</div>
+<br>
+
+### Adding a request to a guest: `edit GUEST_INDEX +rq/REQUEST`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Adds a request to an existing guest in the guest list.
+* Conditions described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The new request will be **added** to the back of the current request list for the guest.
+
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [+rq/REQUEST]…​`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 +rq/Extra blanket`  <br>
+Edits guest No.2 in the list by adding a request `Extra blanket`.
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 +rq/Extra blanket +rq/Extra pillow`  <br>
+Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra pillow`.
+</box>
+</div>
+<br>
+
+### Removing a request of a guest: `edit GUEST_INDEX -rq/REQUEST`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Removes an existing request of an existing guest in the guest list.
+* Conditions described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The request will be **removed** from the list of requests for the guest.
+* If the request is not found in the list of requests for the guest, nothing will happen and an error message will be shown.
+
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [-rq/REQUEST]…​`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -rq/Extra blanket`  <br>
+Edits guest No.2 in the list by removing the request `Extra blanket`.
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`  <br>
+Edits guest No.2 in the list by removing two requests `Extra blanket` and `Extra pillow`.
+</box>
+</div>
+<br>
+
+### Removing a request by index: `edit GUEST_INDEX -ri/REQUEST_INDEX `
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Removes** an existing request **using the index of the request** of an existing guest in the guest list.
+* Conditions described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The request at the **specified index** will be **removed** from the list of requests for the guest.
+* Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
+
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [-ri/REQUEST_INDEX]​`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -ri/1`  <br>
+Edits guest No.2 in the list by removing the first request in the list of requests for that guest.
+</box>
+<box theme="danger" icon=":mif-close:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -ri/1 -ri/2`  <br>
+Tries to remove the first and second requests in the list of requests for that guest. However, this is not allowed as the requests deleted can be different depending on how the command is interpreted. <br>
+**To prevent confusion, nothing will occur, and an error message will be shown.**
+</box>
+</div>
+<br>
 
 ### Locating guests by name: `find`
 
@@ -291,7 +447,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a guest : `delete`
 
