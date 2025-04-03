@@ -285,12 +285,18 @@ Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@
 
 Shows a list of all guests in the guest list.
 - The list is sorted by the order in which guests were added.
-- An optional filter can be applied to the list to show only guests whose names match the filter.
+- An optional filter can be applied to **show only guests with requests**.
+- An optional filter can be applied to **show only guests whose names match the filter**.
+- The filters are provided for convenience to quickly find guests in the guest list, a stronger search can be done using the [find](#locating-guests-find) command.
 
 </box>
 <box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `list [NAME_FILTER]…`
+Format: `list [rq/] [NAME_FILTER]…`
+- **`list`** displays every guest.
+- **`list rq/`** displays only guests with requests (i.e. guests whose request field is not null).
+- **`list NAME_FILTER…`** displays only guests whose names match the filter.
+- **`list rq/ NAME_FILTER…`** displays only guests with requests whose names match the filter.
 </box>
 <box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -299,69 +305,63 @@ Shows a list of all guests in the guest list.
 </box>
 <box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
+Sample Input: `list rq/` <br>
+Shows a list of all guests in the guest list with requests.
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
 Sample Input: `list John` <br>
 Shows a list of all guests with `John` in their name, including `John Doe` and `Johnathon Chua`.
 </box>
 <box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `list John Alex` <br>
-Shows a list of all guests with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
+Sample Input: `list rq/ John Alex` <br>
+Shows a list of all guests with requests, with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
 </box>
 </div>
 <br>
 
-### Listing all guests : `list` and `list rq`
-
-Shows a list of all guests in the guest list.
-
-Format: `list`
-- **`list`** displays every guest.
-- **`list rq`** displays only guests with requests (i.e. guests whose request field is not null).
-
-**Examples:**
-- `list`  
-  Returns the complete guest list.
-- `list rq`  
-  Returns only those guests who have recorded requests.
-
-**Warning:**
-- Make sure that request details are correctly recorded for guests; otherwise, some guests may not appear in the `list rq` results.
-- If you receive fewer results than expected, verify that the request field is populated for those guests.
-
-**Tips:**
-- Use `list rq` when you need to quickly identify guests who have special requests.
-- If you need to search further, combine this command with the `find` command to refine the results.
-  ![Screenshot 2025-04-03 at 11.23.14 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KsmbAU%2FScreenshot%202025-04-03%20at%2011.23.14%E2%80%AFAM.png)
-
 ### Locating guests: `find`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 The `find` command now searches across all guest fields by default—including name, email, phone number, room number, and requests. Use this command to search for a keyword that may appear in any field.
+* At least one keyword must be provided.
+* The search is case-insensitive (e.g. `john` matches `John`).
+* Only full words are matched. For example, `Han` will not match `Hans`.
+* The search is performed across all guest fields (name, phone number, room number, and requests).
+* Guests matching at least one keyword will be returned (i.e. an OR search).
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-- The search is case-insensitive (e.g. `john` matches `John`).
-- Only full words are matched. For example, `Han` will not match `Hans`.
-- The search is performed across all guest fields (name, phone number, room number, and requests).
-- Guests matching at least one keyword will be returned (i.e. an OR search).
-
-**Examples:**
-- `find John`  
-  Returns guests where any field (e.g. email, name) contains the full word "John" (e.g. "John Doe").
-- `find 1234`  
-  Returns guests whose phone numbers or email address contains "1234".
-- `find pillow`  
-  Returns guests whose requests include the word "pillow".
-- `find alice 01-01`  
-  Returns guests if any field contains"01-01" (e.g. room number).
+</box>
+<box theme="warning" icon=":mif-warning:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 **Warning:**
 - Avoid using overly generic or very short keywords, as these may produce unintended matches.
 - Because the command uses an OR search across all fields, multiple keywords can broaden your search results more than expected.
+</box>
+<box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-**Tips:**
-- Use full and specific words to narrow down your search.
-- If you receive too many results, consider refining your keywords.
-- Double-check your spelling since only full words are matched.
+Format: `find KEYWORD [MORE_KEYWORDS]…`
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find John` <br>
+Shows a list where any field (e.g. email, name) contains the full word "John" (e.g. "John Doe").
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find BOOKED` <br>
+Shows all guests with the status `BOOKED`. You can also apply this for other statuses like `CHECKED IN` or `CHECKED OUT`, however you will need to use `find CHECKED_IN` and `find CHECKED_OUT` instead. 
+</box>
+<box theme="success" icon=":mif-done:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find 03-04` <br>
+Shows all guests where any field (e.g. email, name) contains the full word "03-04" (e.g. "03-04"). This is useful for looking up the guests in a specific room. Note that the `#` symbol is not required.
+</box>
+
+</div>
+<br>
 
 
 ### Editing a guest: `edit`
@@ -405,6 +405,7 @@ Tries to change a guest's email to one that is already registered to another gue
 <box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Adds a request to an existing guest in the guest list.
+* Request names should be alphanumeric, may include spaces, and must not exceed 75 characters
 * Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The new request will be **added** to the back of the current request list for the guest.
 
