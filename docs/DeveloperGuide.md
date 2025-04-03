@@ -417,9 +417,9 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 <box type="tip" header="2b. Filter Guests by search term" light>
     <ul>    
-        <li>2a1. Concierge provides a search term.</li>
-        <li>2a2. GuestNote filters the list of guests by comparing all their details against that search term.</li>
-        <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
+        <li>2b1. Concierge provides a search term.</li>
+        <li>2b2. GuestNote filters the list of guests by comparing all their details against that search term.</li>
+        <li>2b3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -524,10 +524,10 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
         <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
-<box type="wrong" header="2a. Request Not Found" light>
+<box type="wrong" header="2b. Request Not Found" light>
     <ul>
-      <li>2a1. GuestNote detects that the provided request index does not exist for the guest.</li>
-      <li>2a2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
+      <li>2b1. GuestNote detects that the provided request index does not exist for the guest.</li>
+      <li>2b2. GuestNote informs the Concierge that the request was not found.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -768,6 +768,28 @@ Listing all or filtered guests using the `list` command.
 
 7. `find xyznotfound`  
     **Expected**: No guests match the keyword `xyznotfound`. Guest list is empty. Status message reflects that no guests matched the search.
+
+### Check In
+
+**Prerequisites**
+1. The guest to be checked in is not already checked in.
+
+**Test cases**
+1. `check-in 3`  
+   **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-IN`.
+
+2. `check-in`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command. Guest list remains unchanged.
+
+### Check Out
+
+**Prerequisites**
+1. The guest to be checked out is already checked in.
+
+**Test cases**
+1. `check-in 3`  
+   **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-OUT`.
+
+2. `check-out`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-out` command. Guest list remains unchanged.
 
 ### Saving data
 
