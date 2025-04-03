@@ -6,8 +6,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_LUGGAGE_RACK;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_TOWEL;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
@@ -111,7 +111,7 @@ public class TypicalGuests {
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
             .withStatus(VALID_STATUS_AMY)
-            .withRequests(VALID_REQUEST_TOWEL)
+            .withRequests(VALID_REQUEST_SEAVIEW)
             .build();
     public static final Guest BOB = new GuestBuilder()
             .withName(VALID_NAME_BOB)
@@ -119,7 +119,7 @@ public class TypicalGuests {
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
             .withStatus(VALID_STATUS_BOB)
-            .withRequests(VALID_REQUEST_LUGGAGE_RACK, VALID_REQUEST_TOWEL)
+            .withRequests(VALID_REQUEST_EXTRAPILLOW, VALID_REQUEST_SEAVIEW)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

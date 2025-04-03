@@ -34,8 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_REQUEST_LUGGAGE_RACK = "Extra Luggage Rack";
-    public static final String VALID_REQUEST_TOWEL = "Extra Towel";
+    public static final String VALID_REQUEST_EXTRAPILLOW = "Extra Pillow";
+    public static final String VALID_REQUEST_SEAVIEW = "Sea View";
     public static final String VALID_ROOMNUMBER_AMY = "12-03";
     public static final String VALID_ROOMNUMBER_BOB = "12-04";
     public static final Status VALID_STATUS_AMY = Status.BOOKED;
@@ -49,10 +49,10 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ROOMNUMBER_DESC_AMY = " " + PREFIX_ROOMNUMBER + VALID_ROOMNUMBER_AMY;
     public static final String ROOMNUMBER_DESC_BOB = " " + PREFIX_ROOMNUMBER + VALID_ROOMNUMBER_BOB;
-    public static final String REQUEST_DESC_FRIEND = " " + PREFIX_REQUEST + VALID_REQUEST_TOWEL;
-    public static final String ADD_REQUEST_DESC_FRIEND = " " + PREFIX_ADD_REQ + VALID_REQUEST_TOWEL;
-    public static final String REQUEST_DESC_HUSBAND = " " + PREFIX_REQUEST + VALID_REQUEST_LUGGAGE_RACK;
-    public static final String ADD_REQUEST_DESC_HUSBAND = " " + PREFIX_ADD_REQ + VALID_REQUEST_LUGGAGE_RACK;
+    public static final String REQUEST_DESC_SEAVIEW = " " + PREFIX_REQUEST + VALID_REQUEST_SEAVIEW;
+    public static final String ADD_REQUEST_DESC_SEAVIEW = " " + PREFIX_ADD_REQ + VALID_REQUEST_SEAVIEW;
+    public static final String REQUEST_DESC_EXTRAPILLOW = " " + PREFIX_REQUEST + VALID_REQUEST_EXTRAPILLOW;
+    public static final String ADD_REQUEST_DESC_EXTRAPILLOW = " " + PREFIX_ADD_REQ + VALID_REQUEST_EXTRAPILLOW;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -71,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withRoomNumber(VALID_ROOMNUMBER_AMY)
-                .withRequestsToAdd(VALID_REQUEST_TOWEL).build();
+                .withRequestsToAdd(VALID_REQUEST_SEAVIEW).build();
         DESC_BOB = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withRoomNumber(VALID_ROOMNUMBER_AMY)
-                .withRequestsToAdd(VALID_REQUEST_LUGGAGE_RACK, VALID_REQUEST_TOWEL).build();
+                .withRequestsToAdd(VALID_REQUEST_EXTRAPILLOW, VALID_REQUEST_SEAVIEW).build();
     }
 
     /**
