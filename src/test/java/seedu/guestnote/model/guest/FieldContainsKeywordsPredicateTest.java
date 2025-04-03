@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -81,6 +82,33 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate<>(guest -> guest.getName().toString(), Collections.emptyList());
         assertFalse(predicate.test(createGuest("Alice")));
     }
+    /**
+     * Tests that when the field extractor returns an Optional with a value,
+     * the predicate properly extracts it and returns true if the contained value
+     * matches the keyword.
+     */
+    @Test
+    public void test_optionalFieldMatching_returnsTrueForPresentValue() {
+        // Create a predicate that uses getPhone(), which now returns Optional<Phone>
+        FieldContainsKeywordsPredicate<Optional<Phone>> predicate =
+                new FieldContainsKeywordsPredicate<>(Guest::getPhone, Collections.singletonList("12345678"));
+        // The guest is created with a phone number "12345678" in createGuest(...)
+        Guest guestWithPhone = createGuest("Alice", "Need wifi");
+        assertTrue(predicate.test(guestWithPhone));
+    }
+
+    /**
+     * Tests that when the field extractor returns an empty Optional,
+     * the predicate returns false.
+     */
+    @Test
+    public void test_optionalFieldMatching_returnsFalseForEmptyValue() {
+        // Create a predicate that simulates an empty Optional value
+        FieldContainsKeywordsPredicate<Optional<?>> predicate =
+                new FieldContainsKeywordsPredicate<>(guest -> Optional.empty(), Collections.singletonList("12345678"));
+        Guest guestWithoutPhone = createGuest("Alice", "Need wifi");
+        assertFalse(predicate.test(guestWithoutPhone));
+    }
 
     @Test
     public void test_arrayFieldContainsKeywords_returnsTrue() {
@@ -125,6 +153,23 @@ public class FieldContainsKeywordsPredicateTest {
                 new FieldContainsKeywordsPredicate<>(Guest::getRequestsArray, Collections.singletonList("bed sheet"));
         // If guest's requests are "bed lamp", it should return false.
         assertFalse(predicate.test(createGuest("Alice", "bed lamp")));
+    }
+
+    @Test
+    public void test_arrayFieldWholeWordMatching() {
+        // Case 1: Exact whole phrase match
+        FieldContainsKeywordsPredicate<String[]> predicateExact =
+                new FieldContainsKeywordsPredicate<>(Guest::getRequestsArray,
+                        Collections.singletonList("extra pillow"));
+        // Create a guest with a request that includes the exact phrase "extra pillow"
+        Guest guestWithExactPhrase = createGuest("Alice", "Need extra pillow", "Extra blanket");
+        assertTrue(predicateExact.test(guestWithExactPhrase));
+
+        // Case 2: Partial substring match should be rejected
+        FieldContainsKeywordsPredicate<String[]> predicatePartial =
+                new FieldContainsKeywordsPredicate<>(Guest::getRequestsArray, Collections.singletonList("x"));
+        // The letter "x" is only a part of the word "extra", so it should not match as a whole word
+        assertFalse(predicatePartial.test(guestWithExactPhrase));
     }
     @Test
     public void toStringMethod() {

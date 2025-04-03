@@ -17,6 +17,10 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         if (trimmedArgs.isEmpty()) {
             return new ListCommand(); // Default list command
+        }
+        if (trimmedArgs.equalsIgnoreCase("rq")) {
+            // List all guests with requests
+            return new ListCommand(true);
         } else {
             // Convert input into a FindCommand-like predicate
             return new ListCommand(new NameContainsKeywordsPredicate(Arrays.asList(trimmedArgs.split("\\s+"))));

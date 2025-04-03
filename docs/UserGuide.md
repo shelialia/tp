@@ -310,6 +310,58 @@ Shows a list of all guests with either `John` or `Alex` in their name, including
 </div>
 <br>
 
+### Listing all guests : `list` and `list rq`
+
+Shows a list of all guests in the guest list.
+
+Format: `list`
+- **`list`** displays every guest.
+- **`list rq`** displays only guests with requests (i.e. guests whose request field is not null).
+
+**Examples:**
+- `list`  
+  Returns the complete guest list.
+- `list rq`  
+  Returns only those guests who have recorded requests.
+
+**Warning:**
+- Make sure that request details are correctly recorded for guests; otherwise, some guests may not appear in the `list rq` results.
+- If you receive fewer results than expected, verify that the request field is populated for those guests.
+
+**Tips:**
+- Use `list rq` when you need to quickly identify guests who have special requests.
+- If you need to search further, combine this command with the `find` command to refine the results.
+  ![Screenshot 2025-04-03 at 11.23.14 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KsmbAU%2FScreenshot%202025-04-03%20at%2011.23.14%E2%80%AFAM.png)
+
+### Locating guests: `find`
+
+The `find` command now searches across all guest fields by default—including name, email, phone number, room number, and requests. Use this command to search for a keyword that may appear in any field.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+- The search is case-insensitive (e.g. `john` matches `John`).
+- Only full words are matched. For example, `Han` will not match `Hans`.
+- The search is performed across all guest fields (name, phone number, room number, and requests).
+- Guests matching at least one keyword will be returned (i.e. an OR search).
+
+**Examples:**
+- `find John`  
+  Returns guests where any field (e.g. email, name) contains the full word "John" (e.g. "John Doe").
+- `find 1234`  
+  Returns guests whose phone numbers or email address contains "1234".
+- `find pillow`  
+  Returns guests whose requests include the word "pillow".
+- `find alice 01-01`  
+  Returns guests if any field contains"01-01" (e.g. room number).
+
+**Warning:**
+- Avoid using overly generic or very short keywords, as these may produce unintended matches.
+- Because the command uses an OR search across all fields, multiple keywords can broaden your search results more than expected.
+
+**Tips:**
+- Use full and specific words to narrow down your search.
+- If you receive too many results, consider refining your keywords.
+- Double-check your spelling since only full words are matched.
 
 
 ### Editing a guest: `edit`

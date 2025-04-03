@@ -32,11 +32,19 @@ public class RequestTest {
         assertFalse(Request.isValidRequestName("")); // empty string
         assertFalse(Request.isValidRequestName(" ")); // spaces only
         assertFalse(Request.isValidRequestName("!@#")); // non-alphanumeric characters
+        assertFalse(Request.isValidRequestName(
+                "thequickbrownfoxjumpsoverthelazydog"
+                        + "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
+                        + "thequic")); // exceeds 75 characters
 
         // valid request names
         assertTrue(Request.isValidRequestName("Extra Towels"));
         assertTrue(Request.isValidRequestName("Late checkout"));
         assertTrue(Request.isValidRequestName("Room Cleaning"));
+        assertTrue(Request.isValidRequestName(
+                "thequickbrownfoxjumpsoverthelazydog"
+                        + "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
+                        + "t")); // less than 75 characters
     }
 
     @Test
