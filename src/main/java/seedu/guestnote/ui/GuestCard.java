@@ -80,14 +80,32 @@ public class GuestCard extends UiPart<Region> {
         final int[] counter = {1};
         guest.getRequests()
                 .forEach(request -> {
-                    Label requestLabel = new Label(counter[0] + ". " + request.requestName);
+                    String text = counter[0] + ". " + request.requestName;
+                    String safeText = insertSoftWraps(text, 15);
+
+                    Label requestLabel = new Label(safeText);
                     requestLabel.setWrapText(true);
-                    requestLabel.setMaxWidth(Double.MAX_VALUE - 10);
+                    requestLabel.setMinWidth(0);
+                    requestLabel.setMaxWidth(150);
                     requestLabel.setPrefWidth(Region.USE_COMPUTED_SIZE);
                     requestLabel.setMinHeight(Region.USE_PREF_SIZE);
                     requests.getChildren().add(requestLabel);
                     counter[0]++;
                 });
 
+    }
+
+    private String insertSoftWraps(String text, int maxChunkLength) {
+        StringBuilder result = new StringBuilder();
+        int count = 0;
+        for (char c : text.toCharArray()) {
+            result.append(c);
+            count++;
+            if (count >= maxChunkLength) {
+                result.append('\u200B'); // zero-width space
+                count = 0;
+            }
+        }
+        return result.toString();
     }
 }
