@@ -1,15 +1,51 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # GuestNote User Guide
+**Welcome to GuestNote!**  
+_Time is money, and in the hotel industry, every second counts._
+Mistakes in guest handling - like assigning the wrong room or forgetting a special request - don’t just hurt your workflow. They hurt your guests’ experience and cost your hotel real money.  
 
-GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphic al User Interface (GUI). If you can type fast, GuestNote can get your guest management tasks done faster than traditional GUI apps.
+**That’s where GuestNote comes in.**
 
-<!-- * Table of Contents -->
-<page-nav-print />
+Adapted from [AddressBook Level 3 (AB3)](#glossary), **GuestNote** takes the core of a reliable contact management system and reimagines it for hotel operations. The result? A lightning-fast desktop app built for concierges and front desk staff, designed for the speed of a [Command-Line Interface (CLI)](#glossary), but with the clarity of a [Graphical User Interface (GUI)](#glossary), when managing hotel guests. Think of it as muscle memory meets modern [User Interface (UI)](#glossary) – if you can type, you can fly.
+
+![firstview.png](images/ug/firstview.png)
+
+**Why Choose GuestNote?**  
+Designed with the fast-paced world of hotel operations in mind, **GuestNote** helps you: 
+- Quickly check in guests and assign rooms with just a few keystrokes 
+- View and manage essential guest information at a glance, all in one place 
+- Track and organise guest requests using simple, structured commands 
+- Reduce costly mistakes through built-in data validation
+- Keep track of all guest requests in one place, so nothing gets missed or forgotten
+
+With **GuestNote**, you can stay on top of guest needs, streamline daily concierge tasks, and ensure that no request falls through the cracks. Tailored to your team’s workflow, **GuestNote** simplifies routine processes so you can focus on delivering a smooth and memorable experience for every guest. Spend less time figuring things out and more time focusing on your guests. Provide your guests with a tailored experience, a home away from home.
+
+--------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+Refer to the sidebar if you are on the website, or to the table below if you are on the PDF.
+
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+3. [FAQ](#faq)
+4. [Known Issues](#known-issues)
+5. [Command Summary](#command-summary)
+6. [Glossary](#glossary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## How to use our User Guide
+Whether you're just getting started or coming back for a refresher, this guide has you covered.  
+
+[New to GuestNote?](#quick-start) You’ll find everything you need in [Quick Start](#quick-start) to hit the ground running. 
+
+[Been here before?](#command-summary) Use our handy [Command Summary](#command-summary) as a quick way to brush up on features.
+
+Visit our online [User Guide](https://ay2425s2-cs2103t-w09-2.github.io/tp/UserGuide.html) for the best (and most updated) experience, or view our [Developer Guide](https://ay2425s2-cs2103t-w09-2.github.io/tp/DeveloperGuide.html) to understand our design principles.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +60,7 @@ GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line 
         <ol>
         <li>Open Command Prompt.</li>
         <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer:</li>
+        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
         </ol>
         <img src="images/ug/checkjavaversion_windows.jpeg" alt="Java version Windows" style="width:100%;">
         </tab>
@@ -33,7 +69,7 @@ GuestNote is a **desktop app for hotel concierge, optimized for use via a  Line 
         <ol>
         <li>Open Terminal.</li>
         <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer:</li>
+        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
         </ol>
         <img src="images/ug/checkjavaversion_mac.png" alt="Java version Mac" style="width:100%;">
         </tab>
@@ -314,3 +350,31 @@ Action     | Format, Examples
 **Exit**   | `exit`
 **Check-In** | `check-in INDEX`<br> e.g., `check-in 1`
 **Check-Out** | `check-out INDEX`<br> e.g., `check-out 1`
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+### **Glossary**
+___
+
+| **Term**                     | **Definition / Example**                                                                                                                                   |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AddressBook Level 3 (AB3)** | The original open-source Java application from which GuestNote was adapted. AB3 serves as a contact management app with a CLI interface and basic CRUD functionality, forming the foundation for GuestNote’s structure and features. |
+| **Backup**                  | A saved copy of your data file, used to restore the AddressBook in case of data loss.                                                                      |
+| **cd**                      | Stands for "change directory" – a terminal command used to navigate between folders.<br>e.g., `cd path/to/folder`                                          |
+| **Check-in**                | The process of registering a guest’s arrival at the hotel.                                                                                                  |
+| **Check-out**               | The process of finalising a guest’s stay and removing their active record.                                                                                 |
+| **CLI (Command Line Interface)** | A text-based interface for interacting with software by typing commands, instead of using a graphical interface. Common in developer tools and command-based apps like GuestNote. |
+| **Command**                 | An instruction typed into the CLI to perform an action in GuestNote.<br>e.g., `add`, `edit`, `check-in`                                                    |
+| **CSV (Comma Separated Values)** | A file format used for tabular data, where values are separated by commas and records by newlines. Can be opened by spreadsheet software like Excel.     |
+| **Guest**                   | A guest staying at the hotel whose information is stored in the **GuestNote** system.                                                                      |
+| **GuestNote**               | The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.                                |
+| **GUI (Graphical User Interface)** | A visual interface that allows users to interact with GuestNote using elements like buttons, lists, and panels.                                      |
+| **Home Folder**             | The folder on your computer where GuestNote stores its data files.                                                                                         |
+| **Index**                   | A number representing the position of a guest in the list.<br>e.g., in `delete 2`, "2" is the index of the guest to be deleted.                            |
+| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format that is easy to read and write. GuestNote uses JSON to store its internal data files.                      |
+| **JSON File Location**      | The path to the JSON data file used by GuestNote.<br>e.g., `/home/user/data/guestnote.json`                                                                |
+| **Mainstream OS**           | Refers to common operating systems supported by GuestNote: **Windows**, **Linux**, **Unix**, and **MacOS**.                                                |
+| **Parameter**               | A specific input provided with a command, usually in the form of a prefix and value.<br>e.g., `n/James` or `r/01-01`                                       |
+| **Request**                 | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                           |
+| **Status**                  | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                             |
+| **UI (User Interface)**     | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                   |

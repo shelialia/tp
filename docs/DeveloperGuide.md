@@ -624,7 +624,6 @@ ___
 =======
 ---------------------------------------------------------
 
-
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
