@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
+- The formatting of our UserGuide is inspired by a group's UserGuide (AY2425S1-CS2103T-F15-4) from the previous semester.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,7 +255,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -287,32 +286,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - ```* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                       |
-|-------|--------------------------------------------|------------------------------|-----------------------------------------------------------------------|
-| `* * *` | Hotel Concierge                            | Create guests' details (Name, Room Number)       | Add new guests to the hotel                                          |
-| `* * *` | Hotel Concierge                            | Read guests' details                             | Keep track of the information of hotel guests                        |
-| `* * *` | Hotel Concierge                            | Update guests' details                           | Edit guest information when a change is requested                    |
-| `* * *` | Hotel Concierge                            | Delete guests and their details                  | Remove guests that request their information to be deleted           |
-| `* * *` | Hotel Concierge                            | View a list of all current guests               | Keep track of the number of hotel guests                             |
-| `* * *` | Hotel Concierge                            | Search for guest by name                        | Quickly look up information                                          |
-| `* *` | Hotel Concierge                            | CRUD guests' requests                           | Track requests by guests                                            |
-| `* *` | Hotel Concierge                            | Search for guest by request                     | Match the request to the guest                                       |
-| `* *` | Hotel Concierge                            | Mark and unmark guest requests as completed     | Track what requests are completed                                   |
-| `* *` | Hotel Concierge                            | List all outstanding requests by guest          | See what requests need to be completed                              |
-| `* *` | Hotel Concierge                            | Log a guest's check-in date                     | Maintain check-in records                                           |
-| `* *` | Hotel Concierge                            | Log a guest's check-out date                    | Maintain check-out records                                          |
-| `* *` | Newbie Hotel Concierge                    | Have easy access to a guide of commands         | Easily navigate through the app and access necessary information     |
-| `* *` | Newbie Hotel Concierge                    | See help text on command format                 | Understand the correct format for a command                         |
-| `* *` | Experienced Hotel Concierge               | Enter commands using short-forms                | Access required information with fewer keystrokes                   |
-| `* *` | Experienced Hotel Concierge               | Quickly input most commonly used commands       | Access and update information faster                                |
-| `* *` | Experienced Hotel Concierge               | Have power commands that shortcut multiple commands | Streamline repetitive commands and workflows                         |
-| `* *` | Concierge                                 | Pin guests                                      | Quickly refer to guests without searching each time                 |
-| `* *` | An impatient user                         | Experience reasonable response time             | Use the app for large cases                                         |
-| `* *` | A user who prefers hardcopy              | Export guest data in text format                | Have a backup of guest details                                       |
-| `*`     | A potential user exploring the app       | See the app populated with sample data          | Understand how the app will look in use                             |
-| `*`     | A user ready to start using the app      | Purge all current data                          | Remove sample/experimental data used for exploring the app          |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                                                                 | So that I can…​                                                        |
+|-------|--------------------------------------------|----------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | Hotel Concierge                            | Create guests' details (ie. Name, Phone, Email, and Room Number)                             | Add new guests to the hotel                      |
+| `* * *` | Hotel Concierge                            | Read guests' details                                                                         | Keep track of the information of hotel guests                          |
+| `* * *` | Hotel Concierge                            | Update guests' details                                                                       | Edit guest information when a change is requested                      |
+| `* * *` | Hotel Concierge                            | Delete guests and their details                                                              | Remove guests that request their information to be deleted             |
+| `* * *` | Hotel Concierge                            | View a list of all guests                                                                    | Get a full overview of guests information to prioritize certain guests |
+| `* * *` | Hotel Concierge                            | Search for a guest using any single detail (ie. phone, email, name, room number, or request) | Quickly look up a specific guest's information                         |
+| `* *` | Hotel Concierge                            | Create guests' requests                                                                      | Add requests made by guests                                            |
+| `* *` | Hotel Concierge                            | Read guests' requests                                                                        | See what requestsneed to be completed                                  |
+| `* *` | Hotel Concierge                            | Delete guests' requests                                                                      | Remove completed requests                                              |         
+| `* *` | Hotel Concierge                            | Search for guest by request                                                                  | Match the request to the guest                                         |
+| `* *` | Hotel Concierge                            | Update a guest's status from booking to check-in                                             | Avoid service errors to guests that have not arrived                   |
+| `* *` | Hotel Concierge                            | Update a guest's status from check-in to check-out                                           | Avoid service errors to guests that have departed                      |
+| `* *` | Hotel Concierge                            | View a guest's check-in/check-out status                                                     | Coordinate arrivals and departures                                     |
+| `* *` | Newbie Hotel Concierge                    | Have easy access to a guide of commands                                                      | Easily navigate through the app and access necessary information       |
+| `* *` | Newbie Hotel Concierge                    | See help text on command format                                                              | Understand the correct format for a command                            |
+| `* *` | Experienced Hotel Concierge               | Enter commands using short-forms                                                             | Access required information with fewer keystrokes                      |
+| `* *` | Experienced Hotel Concierge               | Quickly input most commonly used commands                                                    | Access and update information faster                                   |
+| `* *` | Experienced Hotel Concierge               | Have power commands that shortcut multiple commands                                          | Streamline repetitive commands and workflows                           |
+| `* *` | Concierge                                 | Pin guests                                                                                   | Quickly refer to guests without searching each time                    |
+| `* *` | An impatient user                         | Experience reasonable response time                                                          | Use the app for large cases                                            |
+| `* *` | A user who prefers hardcopy              | Export guest data in text format                                                             | Have a backup of guest details                                         |
+| `* *` | Hotel Concierge                            | Log a guest's check-in date                                                                  | Maintain check-in records                                              |
+| `* *` | Hotel Concierge                            | Log a guest's check-out date                                                                 | Maintain check-out records                                             |
+| `*`     | A potential user exploring the app       | See the app populated with sample data                                                       | Understand how the app will look in use                                |
+| `*`     | A user ready to start using the app      | Purge all current data                                                                       | Remove sample/experimental data used for exploring the app             |
 
 # Use Cases
 
@@ -371,6 +371,20 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
     <ul>
       <li>2a1. GuestNote detects that there are no guests in the system.</li>
       <li>2a2. GuestNote displays a message indicating that there are no guests.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="warning" header="2b. Filter by Guests with Requests" light>
+    <ul>
+      <li>2a1. Concierge requests to only see guests with requests.</li>
+      <li>2a2. GuestNote filters the list of guests based on them having requests.</li>
+      <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="warning" header="2c. Find by search term" light>
+    <ul>    
+        <li>2a1. Concierge provides a search term.</li>
+        <li>2a2. GuestNote filters the list of guests based on their attributes (e.g., name, phone, email, room, request) containing that search term.</li>
+        <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
 
@@ -460,45 +474,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 ---------------------------------------------------------
 
-### Use case: UC06 - List All Requests
-
-**MSS:**
-1. Concierge requests a list of all requests
-2. GuestNote retrieves and displays a list of all requests.  
-   Use case ends.
-
-**Extensions:**
-<box type="tip" header="2a. Search 🔍" light>
-    <ul>
-      <li>2a1. Concierge provides a search term.</li>
-      <li>2a2. GuestNote filters the list of requests based on the search term.</li>
-      <li>2a3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
-    </ul>
-</box>
-<box type="tip" header="2b. Filter by Completion Status 📥" light>
-    <ul>
-      <li>2b1. Concierge provides a completion status.</li>
-      <li>2b2. GuestNote filters the list of requests with matching completion status.</li>
-      <li>2b3. GuestNote displays the filtered list of requests.<br>Use case ends.</li>
-    </ul>
-</box>
-
-<box type="warning" header="3a. No Requests" light>
-    <ul>
-      <li>3a1. GuestNote detects that there are no requests for the guest.</li>
-      <li>3a2. GuestNote displays a message indicating that there are no requests for the guest.<br>Use case ends.</li>
-    </ul>
-</box>
-<box type="warning" header="3b. Guest Not Found" light>
-    <ul>
-      <li>3b1. GuestNote detects that the provided guest index does not exist in the system.</li>
-      <li>3b2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
-    </ul>
-</box>
-
----------------------------------------------------------
-
-### Use case: UC07 - Mark Request as Completed
+### Use case: UC06 - Mark Request as Completed
 <box type="info">
     <b>Preconditions:</b>
     <ul>
@@ -531,7 +507,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 ---------------------------------------------------------
 
-### Use case: UC08 - Delete Request
+### Use case: UC07 - Delete Request
 <box type="info">
     <b>Preconditions:</b>
     <ul>
@@ -557,7 +533,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 ---------------------------------------------------------
 
-### Use case: UC09 - Check In Guest
+### Use case: UC08 - Check In Guest
 <box type="info">
     <b>Preconditions:</b> Guest exists in GuestNote.
 </box>
@@ -570,15 +546,15 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
-<ul>
-<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
-</ul>
+    <ul>
+        <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+        <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+    </ul>
 </box>
 
 ---------------------------------------------------------
 
-### Use case: UC10 - Check Out Guest
+### Use case: UC09 - Check Out Guest
 <box type="info">
     <b>Preconditions:</b> Guest exists in GuestNote.
 </box>
@@ -591,10 +567,10 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 **Extensions:**
 <box type="warning" header="3a. Guest Not Found" light>
-<ul>
-<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
-<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
-</ul>
+    <ul>
+        <li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+        <li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+    </ul>
 </box>
 
 ---------------------------------------------------------
