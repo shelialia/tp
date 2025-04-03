@@ -610,7 +610,7 @@ Any changes to the data are immediately saved to the data file. **There is no ne
 <box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 The data file is stored in the home folder of GuestNote, where you placed the GuestNote jar file.
-- The data file is named `guestbook.json` and is created automatically when you run the application for the first time.
+- The data file is named `guestnote.json` and is created automatically when you run the application for the first time.
 - The data file is used to store all the guest information in JSON format, which is a standard format for storing data in a structured way.
 
 </box>
@@ -651,15 +651,15 @@ The data file is stored in the home folder of GuestNote, where you placed the Gu
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rq/REQUEST]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Exit**   | `exit`
 **Check-In** | `check-in INDEX`<br> e.g., `check-in 1`
 **Check-Out** | `check-out INDEX`<br> e.g., `check-out 1`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [+rq/REQUEST]… [-rq/REQUEST]… [-ri/REQUEST]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Exit**   | `exit`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Help**   | `help`
+**List**   | `list`
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
