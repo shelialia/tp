@@ -555,6 +555,50 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
     </ul>
 </box>
 
+---------------------------------------------------------
+
+### Use case: UC09 - Check In Guest
+<box type="info">
+    <b>Preconditions:</b> Guest exists in GuestNote.
+</box>
+
+**MSS:**
+1. Concierge retrieves a !!guest (UC02)!!
+2. Concierge requests to check in the guest, passing the guest’s index in displayed list.
+3. GuestNote confirms the guest has been checked in.  
+   Use case ends.
+
+**Extensions:**
+<box type="warning" header="3a. Guest Not Found" light>
+<ul>
+<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+</ul>
+</box>
+
+---------------------------------------------------------
+
+### Use case: UC10 - Check Out Guest
+<box type="info">
+    <b>Preconditions:</b> Guest exists in GuestNote.
+</box>
+
+**MSS:**
+1. Concierge retrieves a !!guest (UC02)!!
+2. Concierge requests to check out the guest, passing the guest’s index in displayed list.
+3. GuestNote confirms the guest has been checked out.  
+   Use case ends.
+
+**Extensions:**
+<box type="warning" header="3a. Guest Not Found" light>
+<ul>
+<li>3a1. GuestNote detects that the provided guest index does not exist in the system.</li>
+<li>3a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
+</ul>
+</box>
+
+---------------------------------------------------------
+
 ### Glossary
 
 ### **Glossary**
