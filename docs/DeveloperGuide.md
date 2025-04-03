@@ -555,8 +555,6 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
     </ul>
 </box>
 
----------------------------------------------------------
-
 ### Use case: UC09 - Check In Guest
 <box type="info">
     <b>Preconditions:</b> Guest exists in GuestNote.
@@ -597,12 +595,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </ul>
 </box>
 
----------------------------------------------------------
-
-### Glossary
-
-### **Glossary**
-___
+--------------------------------------------------------------------------------------------------------------------
 ### **Glossary**
 ___
 
@@ -628,8 +621,8 @@ ___
 | **Request**                 | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                           |
 | **Status**                  | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                             |
 | **UI (User Interface)**     | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                   |
-
---------------------------------------------------------------------------------------------------------------------
+=======
+---------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
@@ -640,15 +633,18 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
+Ensure that you have read the notes about command format and the various commands themselves from the [User Guide](https://ay2425s2-cs2103t-w09-2.github.io/tp/UserGuide.html), as they will not be repeated here. 
+
 </box>
 
 ### Launch and shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the [jar](https://github.com/AY2425S2-CS2103T-W09-2/tp/releases) file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file  
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -657,29 +653,119 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### **Adding a guest**
+
+Adding a guest while in the main guest list view.
+
+1. **Prerequisites**: Guest list is visible using the `list` command. Guest to be added has a unique email and phone number, not currently in Guest list. Once added in, each test case is not to be repeated due to Unique Guest requirements. 
+
+2. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`  
+   **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
+
+3. **Test case**: `add n/Jane Doe e/janed@example.com r/01-01 rq/One extra pillow`  
+   **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
+
+4. **Test case**: `add n/June Doe p/98764444 e/johnd@example.com r/01-01`  
+   **Expected**: Guest `John Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
+
+5. **Other incorrect add commands to try**:  
+   `add n/ p/98765432 e/johnd@example.com r/01-01`  
+   `add n/John Doe r/01-01`  
+   `add` 
+   **Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`). 
+
 
 ### Deleting a guest
 
-1. Deleting a guest while all guests are being shown
+Deleting a guest while all guests are being shown
 
    1. Prerequisites: List all guests using the `list` command. Multiple guests in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. **Test case**: `delete 1`  
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No guest is deleted. Error details shown in the status message. Status bar remains the same.
+   1. **Test case**: `delete 0`  
+      **Expected**: No guest is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a guest
+Editing a guest while all guests are being shown.
+
+1. **Prerequisites**: List all guests using the `list` command. Multiple guests in the list.
+
+2. **Test case**: `edit 1 n/Jonathan Doe`  
+   **Expected**: Name of the first guest is updated to `Jonathan Doe`. Other details remain unchanged. Status message reflects successful edit.
+
+3. **Test case**: `edit 1 +rq/Fruit Basket`  
+   **Expected**: Adds `Fruit Basket` to the list of requests for the first guest. Status message reflects successful edit.
+
+4. **Test case**: `edit 1 -rq/Fruit Basket`  
+   **Expected**: Removes `Fruit Basket` from the request list of the first guest. If request is not found, error message is shown. Otherwise, status message reflects successful update.
+
+5. **Test case**: `edit 1 n/ r/`  
+   **Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
+
+6. Other incorrect edit commands to try:  
+   `edit`,  
+   `edit x`,  
+   `edit 5 abc`,  
+   `edit 0`  
+   **Expected**: No guest is edited. Error message is shown in the status bar. If the index is invalid or missing, or if the parameters are unrecognised or empty, an appropriate error is returned. Status bar remains unchanged.
+
+### Listing
+
+Listing all or filtered guests using the `list` command.
+
+1. `Prerequisites`: Guests are already added to the system. Some may have been deleted.
+
+2. **Test case**: `list`  
+   **Expected**: All current guests in the system are shown in the guest list. Deleted guests are not shown. Status message reflects the success of the `list` command.
+
+3. **Test case**: `list alex`  
+   **Expected**: Guests with names containing `alex` (e.g., `Alex Yeoh`, `Alexander Tan`) are shown. If no such guests exist, the guest list appears empty. Status message reflects the success of the `list` command.
+
+4. **Test case**: `list roy irfan`  
+   **Expected**: Guests with names matching the keywords `roy` or `irfan` (e.g., `Roy Ibrahim`, `Irfan Balakrishnan`) are shown. Deleted guests are not shown. Status message reflects the success of the `list` command.
+
+5. **Test case**: `list n/NAMETHATDOESNOTEXIST`  
+   **Expected**: No guests are shown. The guest list is empty. Status message reflects that no matching guests were found.
+
+
+### Finding a guest
+
+1. **Prerequisites**: Guest list is populated with a variety of guests. Each test case assumes no guests have been deleted. All fields (e.g. phone, email, request) contain varied values to verify the scope of the `find` command.
+
+2. **Test case**: `find Alex`  
+   **Expected**: Guests with names containing `Alex` (e.g., `Alex Yeoh`, `Alexis Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
+3. **Test case**: `find Ander`  
+   **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`, `Alexander Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
+
+4. **Test case**: `find 9876`  
+   **Expected**: Guests with phone numbers that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
+
+5. **Test case**: `find 01-01`  
+   **Expected**: Guests with room numbers matching `01-01` are shown. Partial matches (e.g., searching `01`) may also display other rooms like `01-02` or `02-01`). Status message confirms results.
+
+6. **Test case**: `find bed`  
+   **Expected**: Guests with tags or requests that include the word `bed` (e.g., `bedside table`, `bed lamp`) are shown. Partial match works within multi-word requests. Status message reflects success.
+
+7. **Test case**: `find`  
+   **Expected**: No input keyword provided. Error message appears, stating that a keyword must be included in the `find` command. Guest list remains unchanged.
+
+8. **Test case**: `find xyznotfound`  
+    **Expected**: No guests match the keyword `xyznotfound`. Guest list is empty. Status message reflects that no guests matched the search.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. If upon running GuestNote, the guest's name/room number/status/email/contact number/request list is not as expected, open the `data` folder where GuestNote stores its data. 
+   2. In the `data` folder, open `guestnote.json` and identify the mistakes in the stored data. If the error is missing data, you can correct it by altering the data in `guestnote.json`.
+   3. Otherwise, the terminal from where `GuestNote.jar` is launched will log where the file is corrupted.
+   4. If the data is beyond repair, delete the entire data folder or the `guestnote.json` file to start afresh with sample data.
 
-1. _{ more test cases …​ }_
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
