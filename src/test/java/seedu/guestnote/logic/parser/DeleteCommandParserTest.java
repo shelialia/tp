@@ -3,6 +3,9 @@ package seedu.guestnote.logic.parser;
 import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.guestnote.logic.parser.ParserUtil.MESSAGE_INDEX_HAS_LEADING_ZEROES;
+import static seedu.guestnote.logic.parser.ParserUtil.MESSAGE_INDEX_TOO_LARGE;
+import static seedu.guestnote.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +29,26 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_nonNumeric_throwsParseException() {
+        assertParseFailure(parser, "a",
+                MESSAGE_INVALID_INDEX + "\n" + DeleteCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_leadingZero_throwsParseException() {
+        assertParseFailure(parser, "00001",
+                String.format(MESSAGE_INDEX_HAS_LEADING_ZEROES, "1", "00001") + "\n" + DeleteCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_overflow_throwsParseException() {
+        assertParseFailure(parser, "10000000000000000000000000000000",
+                MESSAGE_INDEX_TOO_LARGE + "\n" + DeleteCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
