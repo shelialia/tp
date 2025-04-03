@@ -66,8 +66,13 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        GuiSettings guiSettings = logic.getGuiSettings();
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        this.isDarkTheme = guiSettings.isDarkTheme();
+        applyTheme();
 
         setAccelerators();
 
@@ -163,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isDarkTheme);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -201,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleToggleTheme() {
+    private void applyTheme() {
         Scene scene = primaryStage.getScene();
         scene.getStylesheets().clear();
 
@@ -214,7 +219,12 @@ public class MainWindow extends UiPart<Stage> {
             scene.getStylesheets().add(MainWindow.class.getResource("/view/DarkExtensions.css").toExternalForm());
             toggleThemeMenuItem.setText("Switch to Light Theme");
         }
-
-        isDarkTheme = !isDarkTheme;
     }
+
+    @FXML
+    private void handleToggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        applyTheme();
+    }
+
 }
