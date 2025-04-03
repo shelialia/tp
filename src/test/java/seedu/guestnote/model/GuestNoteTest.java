@@ -3,7 +3,7 @@ package seedu.guestnote.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_LUGGAGE_RACK;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalGuests.ALICE;
 import static seedu.guestnote.testutil.TypicalGuests.getTypicalGuestNote;
@@ -45,7 +45,7 @@ public class GuestNoteTest {
     @Test
     public void resetData_withDuplicateGuests_throwsDuplicateGuestException() {
         // Two guests with the same identity fields
-        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_LUGGAGE_RACK)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_EXTRAPILLOW)
                 .build();
         List<Guest> newGuests = Arrays.asList(ALICE, editedAlice);
         GuestNoteStub newData = new GuestNoteStub(newGuests);
@@ -70,9 +70,9 @@ public class GuestNoteTest {
     }
 
     @Test
-    public void hasGuest_guestWithSameIdentityFieldsInGuestNote_returnsTrue() {
+    public void hasGuest_guestWithSameIdentityFieldsInAddressBook_returnsTrue() {
         guestNote.addGuest(ALICE);
-        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_LUGGAGE_RACK)
+        Guest editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_EXTRAPILLOW)
                 .build();
         assertTrue(guestNote.hasGuest(editedAlice));
     }
