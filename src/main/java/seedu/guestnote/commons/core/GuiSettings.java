@@ -40,6 +40,9 @@ public class GuiSettings implements Serializable {
         isDarkTheme = true;
     }
 
+    /**
+     * Constructs a {@code GuiSettings} with the specified height, width, position and theme.
+     */
     public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, boolean isDarkTheme) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
