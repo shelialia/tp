@@ -471,6 +471,18 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
       <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
+<box type="wrong" header="2a. Provided Index has Leading Zeros" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided index has leading zeros.</li>
+        <li>2a2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="wrong" header="2a. Provided Index Is Too Large" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided index is larger than the system's maximum allowable value (greater than 2,147,483,647).</li>
+        <li>2a2. GuestNote informs the Concierge of the error and prompts for corrections.<br>Use case ends.</li>
+    </ul>
+</box>
 
 ---------------------------------------------------------
 
@@ -689,12 +701,19 @@ Deleting a guest while in the main guest list view.
    **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
 2. `delete 0`  
-   **Expected**: No guest is deleted. Error details shown in the status message. Status bar remains the same.
+   **Expected**: No guest is deleted. Error details shown in the status message, stating that index is not a non-zero unsigned integer. Status bar remains the same.
 
-3. Other Incorrect delete commands to try: 
-- `delete`
-- `delete x` (where x is larger than the size of the list<br>
-**Expected**: Similar to Test Case No.2.
+3. `delete 0001`
+   **Expected**: No guest is deleted. Error details shown in the status message, stating that leading zeros are not allowed. Status bar remains the same.
+
+4. `delete`
+   **Expected**: No guest is deleted. Error details shown in the status message, stating that missing field guest index. Status bar remains the same.
+
+5. `delete x.` where x is greater than 2147483647
+   **Expected**: No guest is deleted. Error details shown in the status message, stating that large positive indexes are not allowed. Status bar remains the same.
+
+6. `delete x` where x is larger than the size of the list and smaller than or equal to 2147483647
+   **Expected**: No guest is deleted. Error details shown in the status message, stating that provided guest index is invalid. Status bar remains the same.
 
 ### Editing a guest
 Editing a guest while all guests are being shown.
@@ -775,10 +794,17 @@ Listing all or filtered guests using the `list` command.
 1. The guest to be checked in is not already checked in.
 
 **Test cases**
-1. `check-in 3`  
+1. `check-in 3` for when guest list is at least of length 3 and the guest has status `BOOKED` or `CHECKED-OUT`.
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-IN`.
 
-2. `check-in`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command. Guest list remains unchanged.
+2. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-IN`.
+   **Expected**: An error is displayed, stating that the guest is already checked in. 
+
+3. `check-in 3` for when guest list is shorter than length 3
+   **Expected**: An error is displayed, stating that the guest index provided is invalid.
+
+4. `check-in`:
+   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command. Guest list remains unchanged.
 
 ### Check Out
 
@@ -786,10 +812,20 @@ Listing all or filtered guests using the `list` command.
 1. The guest to be checked out is already checked in.
 
 **Test cases**
-1. `check-in 3`  
+1. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-IN`.
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-OUT`.
 
-2. `check-out`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-out` command. Guest list remains unchanged.
+2. `check-in 3` for when guest list is at least of length 3 and the guest has status `BOOKED`.
+   **Expected**: An error is displayed, stating that the guest has not checked in. 
+
+3. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-OUT`.
+   **Expected**: An error is displayed, stating that the guest has already checked out.
+
+4. `check-in 3` for when guest list is shorter than length 3
+   **Expected**: An error is displayed, stating that the guest index provided is invalid.
+
+5. `check-out`:
+   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-out` command. Guest list remains unchanged.
 
 ### Saving data
 
