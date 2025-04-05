@@ -451,7 +451,7 @@ Removes an existing request of an existing guest in the guest list.
 </box>
 <box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit … [-rq/REQUEST]…​`
+Format: `edit INDEX [-rq/REQUEST]…​`
 </box>
 <box theme="warning" icon=":mif-warning:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
