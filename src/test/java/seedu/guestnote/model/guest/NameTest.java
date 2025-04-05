@@ -40,6 +40,7 @@ public class NameTest {
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         // names with forward slash
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd s/o Ron The First"));
+        assertTrue(Name.isValidName("David-Roger Jackson Ray Jr 2nd")); // hyphen
     }
 
     @Test
