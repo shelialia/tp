@@ -178,15 +178,15 @@ Want to learn more? Check out the [Features](#features) section below.
 * [Adding a guest](#adding-a-guest-add)
 * [Listing all guests](#listing-all-guests-list)
 * [Editing a guest](#editing-a-guest-edit)
-* [Locating guests by name](#locating-guests-by-name-find)
+* [Locating guests by name](#locating-guests-find)
 * [Deleting a guest](#deleting-a-guest-delete)
 * [Clearing all entries](#clearing-all-entries-clear)
 * [Exiting the program](#exiting-the-program-exit)
-* [Saving the data](#saving-the-data)
-* [Editing the data file](#editing-the-data-file)
-* [Check-In a guest](#check-in-a-guest-check-in)
-* [Check-Out a guest](#check-out-a-guest-check-out)
-* [Extended Find](#extended-find-coming-in-v14)
+* [Saving the data](#notes-on-the-data-file)
+* [Editing the data file](#notes-on-the-data-file)
+* [Check-In a guest](#checking-in-a-guest-check-in)
+* [Check-Out a guest](#checking-out-a-guest-check-out)
+* [Extended Find](#locating-guests-find)
 
 #### Format Legend
 Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
