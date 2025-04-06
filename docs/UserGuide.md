@@ -178,15 +178,15 @@ Want to learn more? Check out the [Features](#features) section below.
 * [Adding a guest](#adding-a-guest-add)
 * [Listing all guests](#listing-all-guests-list)
 * [Editing a guest](#editing-a-guest-edit)
-* [Locating guests by name](#locating-guests-by-name-find)
+* [Locating guests by name](#locating-guests-find)
 * [Deleting a guest](#deleting-a-guest-delete)
 * [Clearing all entries](#clearing-all-entries-clear)
 * [Exiting the program](#exiting-the-program-exit)
-* [Saving the data](#saving-the-data)
-* [Editing the data file](#editing-the-data-file)
-* [Check-In a guest](#check-in-a-guest-check-in)
-* [Check-Out a guest](#check-out-a-guest-check-out)
-* [Extended Find](#extended-find-coming-in-v14)
+* [Saving the data](#notes-on-the-data-file)
+* [Editing the data file](#notes-on-the-data-file)
+* [Check-In a guest](#checking-in-a-guest-check-in)
+* [Check-Out a guest](#checking-out-a-guest-check-out)
+* [Extended Find](#locating-guests-find)
 
 #### Format Legend
 Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
@@ -415,7 +415,7 @@ Tries to change a guest's email to one that is already registered to another gue
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Adds a request to an existing guest in the guest list.
+**Adds** a request to an existing guest in the guest list.
 * Request names should be alphanumeric, may include spaces, and must not exceed 75 characters
 * Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The new request will be **added** to the back of the current request list for the guest.
@@ -443,7 +443,7 @@ Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra p
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="primary" icon=":mif-question-mark:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Removes an existing request of an existing guest in the guest list.
+**Removes** an existing request of an existing guest in the guest list.
 * Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The request will be **removed** from the list of requests for the guest.
 * If the request is not found in the list of requests for the guest, nothing will happen and an error message will be shown.
@@ -451,7 +451,7 @@ Removes an existing request of an existing guest in the guest list.
 </box>
 <box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit … [-rq/REQUEST]…​`
+Format: `edit INDEX [-rq/REQUEST]…​`
 </box>
 <box theme="warning" icon=":mif-warning:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -491,7 +491,7 @@ The above command is not allowed as the requests deleted can be different depend
 </box>
 <box theme="warning" icon=":mif-format-italic:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit … [-ri/REQUEST_INDEX]​`
+Format: `edit INDEX [-ri/REQUEST_INDEX]​`
 </box>
 <box theme="warning" icon=":mif-warning:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
