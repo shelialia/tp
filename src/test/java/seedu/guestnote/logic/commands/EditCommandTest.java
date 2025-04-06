@@ -242,6 +242,26 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_deleteIndexOutOfBoundsAndAddRequest_failure() {
+        // Set up the guest with 3 initial requests
+        Guest originalGuest = new GuestBuilder()
+                .withName("Alex Yeoh")
+                .withRequests("hello", "hello2", "hello3")
+                .build();
+        model.setGuest(model.getFilteredGuestList().get(0), originalGuest);
+
+        // Attempt to delete index 4 (invalid), then add "hello4"
+        // Deletion of index 4 should give error
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder()
+                .withRequestsToAdd("hello4")
+                .withRequestIndexesToDelete("4")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
+        String expectedMessage = "This request does not exist in the guest: Index Number 4";
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_GUEST, DESC_AMY);
 
