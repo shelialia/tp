@@ -19,6 +19,7 @@ public class CheckInCommand extends StatusChangeCommand {
         + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Checked in: %1$s";
     public static final String MESSAGE_ALREADY_CHECKED_IN = "Guest is already checked in.";
+    public static final String MESSAGE_ALREADY_CHECKED_OUT = "Guest has already checked out.";
 
     public CheckInCommand(Index targetIndex) {
         super(targetIndex);
@@ -30,6 +31,10 @@ public class CheckInCommand extends StatusChangeCommand {
 
         if (guest.getStatus() == Status.CHECKED_IN) {
             throw new CommandException(MESSAGE_ALREADY_CHECKED_IN);
+        }
+
+        if (guest.getStatus() == Status.CHECKED_OUT) {
+            throw new CommandException(MESSAGE_ALREADY_CHECKED_OUT);
         }
 
         Guest updatedGuest = updateGuestStatus(guest, Status.CHECKED_IN);
