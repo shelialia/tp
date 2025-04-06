@@ -41,6 +41,11 @@ public class NameTest {
         // names with forward slash
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd s/o Ron The First"));
         assertTrue(Name.isValidName("David-Roger Jackson Ray Jr 2nd")); // hyphen
+        assertTrue(Name.isValidName("peter@")); // contains non-alphanumeric characters
+        assertTrue(Name.isValidName("peter-jane")); // contains non-alphanumeric characters
+        assertTrue(Name.isValidName("peter (jane)")); // contains non-alphanumeric characters
+        assertTrue(Name.isValidName("peter, jane")); // contains non-alphanumeric characters
+        assertTrue(Name.isValidName("peter'jane")); // contains non-alphanumeric characters
     }
 
     @Test
