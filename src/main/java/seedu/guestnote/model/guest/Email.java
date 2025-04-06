@@ -25,7 +25,8 @@ public class Email {
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC = "[\\p{Alnum}_]+";
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC + "([" + SPECIAL_CHARACTERS + "]" + ALPHANUMERIC + ")*";
+    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC + "([" + SPECIAL_CHARACTERS + "]" + ALPHANUMERIC
+            + ")*";
     private static final String DOMAIN_PART_REGEX = "[^\\W_]+" + "(-" + "[^\\W_]+" + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + "[^\\W_]+" + "(-" + "[^\\W_]+" + ")*" + "){2,}$";
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
