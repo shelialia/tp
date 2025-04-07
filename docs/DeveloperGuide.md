@@ -694,7 +694,7 @@ Adding a guest while in the main guest list view.
    **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
 3. `add n\June Doe p\98764444 e\johnd@example.com r\01-01`  
-   **Expected**: Guest `John Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
+   **Expected**: Guest `June Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
 
 4. Other Incorrect add commands to try:  
 - `add n\ p\98765432 e\johnd@example.com r\01-01`  
