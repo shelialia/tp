@@ -28,11 +28,14 @@ public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
         this.fieldExtractor = fieldExtractor;
     }
 
+    /**
+     * @param guest the input argument
+     * @return
+     */
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
-        if (fieldValue instanceof Optional) {
-            Optional<?> optionalValue = (Optional<?>) fieldValue;
+        if (fieldValue instanceof Optional<?> optionalValue) {//pattern matching
             if (!optionalValue.isPresent()) {
                 return false;
             }

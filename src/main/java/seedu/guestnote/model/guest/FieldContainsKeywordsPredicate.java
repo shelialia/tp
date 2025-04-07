@@ -30,10 +30,15 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
         this.fieldExtractor = fieldExtractor;
     }
 
+    /**
+     * Tests whether the field of a Guest object contains any of the given keywords.
+     * @param guest The Guest object to test.
+     * @return true if the field contains any of the keywords, false otherwise.
+     */
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
-        if (fieldValue instanceof Optional<?> optionalValue) {
+        if (fieldValue instanceof Optional<?> optionalValue) {//pattern matching
             if (!optionalValue.isPresent()) {
                 return false;
             }
