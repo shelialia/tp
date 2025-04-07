@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `GuestNoteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `GuestNoteParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `GuestNoteParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -235,9 +235,9 @@ This feature allows users to add requests made by guests. Requests can added alo
 
 Given below is an example usage scenario of how a request is added alongside adding a new guest using `AddCommand`.
 
-**Example Usage: `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`**
+**Example Usage: `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`**
 
-Step 1. The user executes `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`.
+Step 1. The user executes `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -249,9 +249,9 @@ Step 5. When the command is executed, the model calls `addGuest` to add the gues
 
 Given below is an example usage scenario of how a request is added to an existing guest using `EditCommand`.
 
-**Example Usage: `edit 2 +rq/One extra blanket`**
+**Example Usage: `edit 2 +rq\One extra blanket`**
 
-Step 1. The user executes `edit 2 +rq/One extra blanket`.
+Step 1. The user executes `edit 2 +rq\One extra blanket`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -268,9 +268,9 @@ This feature allows users to delete requests made by guests. Requests can be del
 
 Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `-rq` prefix.
 
-**Example Usage: `edit 2 -rq/One extra pillow`**
+**Example Usage: `edit 2 -rq\One extra pillow`**
 
-Step 1. The user executes `edit 2 -rq/One extra pillow`.
+Step 1. The user executes `edit 2 -rq\One extra pillow`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -282,9 +282,9 @@ Step 5. When the command is executed, the original guest and its details are ret
 
 Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `ri` prefix.
 
-**Example Usage: `edit 2 ri/1`**
+**Example Usage: `edit 2 -ri\1`**
 
-Step 1. The user executes `edit 2 ri/1`.
+Step 1. The user executes `edit 2 -ri\1`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---------------------------------------------------------
 
-### Use Cases
+### **Use Cases**
 
 This document outlines the use cases for the GuestNote system, detailing the interactions between the system and the Hotel Concierge actor. Each use case includes a main success scenario (MSS) and possible extensions or variations.
 
@@ -606,8 +606,39 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+### **Non-Functional Requirements**
+**Performance Requirements**
+1. GuestNote should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+2. GuestNote should respond within two seconds for most user operations.
+
+**Usability Requirements**
+1. GuestNote should only support a single user and does not support multiple users on a shared computer. 
+2. GuestNote should target users who prefer keyboard-based interaction and are comfortable with fast typing, rather than relying on mouse-driven actions such as clicking buttons, selecting from dropdowns, or using drag-and-drop interfaces. 
+3. GuestNote should target users who handle actions on an individual basis. All commands in GuestNote are designed for managing one person at a time. 
+4. GuestNote should target users who are meticulous and unlikely to make input errors. Actions such as check-in and check-out are designed to be irreversible, so the system assumes that users execute these commands with care and confidence.
+5. GuestNote should target hotels with up to 99 floors and up to 99 rooms per floor. This supports a room numbering scheme in the format `FF-RR`, where:</br>
+- `FF` represents the floor number (01 to 99), and</br>
+- `RR` represents the room number on that floor (01 to 99)</br>
+6. GuestNote should provide clear and user-friendly error messages when operations fail to assist users in correcting mistakes. 
+7. GuestNote should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+
+**Compatibility Requirements**
+1. GuestNote should work on any mainstream OS as long as it has Java 17 or above installed.
+2. GuestNote should work on Windows, Linux, and OS-X systems without relying on OS-dependent libraries or features.
+3. GuestNote should not depend on a remote server. 
+
+**Data Requirements**
+1. GuestNote should not use an external database for data storage.
+2. GuestNote should store data locally. 
+3. GuestNote should be packaged into a single JAR file. 
+4. GuestNote JAR file should not be above 100MB.
+
+**Reliability Requirements**
+1. The application should not crash under normal operations and should handle errors gracefully without data loss.
+2. The application should maintain a stable performance over extended usage periods.
+
+--------------------------------------------------------------------------------------------------------------------
 ### **Glossary**
-___
 
 | **Term**                              | **Definition / Example**                                                                                                                                                                                                           |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -634,7 +665,6 @@ ___
 | **Status**                            | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                                                                                                      |
 | **Search Term**                       | The white-space separated value used in the Find feature e.g. for `find pillows`, it is `pillows`                                                                                                          |
 | **UI (User Interface)**               | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                                                                                           |
-=======
 
 ---------------------------------------------------------
 
@@ -673,18 +703,18 @@ Adding a guest while in the main guest list view.
 2. Guest to be added has a unique email and is not currently in guest list.
 
 **Test Cases**
-1. `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`  
+1. `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`  
    **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-2. `add n/Jane Doe e/janed@example.com r/01-01 rq/One extra pillow`  
-   **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
+2. `add n\Jane Doe e\janed@example.com r\01-01 rq\One extra pillow`  
+   **Expected**: Guest `Jane Doe` is added. Phone is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-3. `add n/June Doe p/98764444 e/johnd@example.com r/01-01`  
-   **Expected**: Guest `John Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
+3. `add n\June Doe p\98764444 e\johnd@example.com r\01-01`  
+   **Expected**: Guest `June Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
 
 4. Other Incorrect add commands to try:  
-- `add n/ p/98765432 e/johnd@example.com r/01-01`  
-- `add n/John Doe r/01-01`  
+- `add n\ p\98765432 e\johnd@example.com r\01-01`  
+- `add n\John Doe r\01-01`  
 - `add`<br>
 **Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`).
 
@@ -723,16 +753,16 @@ Editing a guest while all guests are being shown.
 2. Multiple guests in the list.
 
 **Test Cases**
-1. `edit 1 n/Jonathan Doe`  
+1. `edit 1 n\Jonathan Doe`  
 **Expected**: Name of the first guest is updated to `Jonathan Doe`. Other details remain unchanged. Status message reflects successful edit.
 
-2. `edit 1 +rq/Fruit Basket`  
+2. `edit 1 +rq\Fruit Basket`  
 **Expected**: Adds `Fruit Basket` to the list of requests for the first guest. Status message reflects successful edit.
 
-3. `edit 1 -rq/Fruit Basket`  
+3. `edit 1 -rq\Fruit Basket`  
 **Expected**: Removes `Fruit Basket` from the request list of the first guest. If request is not found, error message is shown. Otherwise, status message reflects successful update.
 
-4. `edit 1 n/ r/`  
+4. `edit 1 n\ r\`  
 **Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
 
 5. Other incorrect edit commands to try:  
@@ -756,7 +786,7 @@ Listing all or filtered guests using the `list` command.
 3. `list roy irfan`  
 **Expected**: Guests with names matching the keywords `roy` or `irfan` (e.g., `Roy Ibrahim`, `Irfan Balakrishnan`) are shown. Deleted guests are not shown. Status message reflects the success of the `list` command.
 
-4. `list n/NAMETHATDOESNOTEXIST`  
+4. `list n\NAMETHATDOESNOTEXIST`  
 **Expected**: No guests are shown. The guest list is empty. Status message reflects that no matching guests were found.
 
 ### Finding a guest
@@ -774,7 +804,7 @@ Listing all or filtered guests using the `list` command.
    **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`, `Alexander Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
 
 3. `find 9876`  
-   **Expected**: Guests with phone numbers that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
+   **Expected**: Guests with phones that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
 
 4. `find 01-01`  
    **Expected**: Guests with room numbers matching `01-01` are shown. Partial matches (e.g., searching `01`) may also display other rooms like `01-02` or `02-01`). Status message confirms results.
@@ -791,41 +821,41 @@ Listing all or filtered guests using the `list` command.
 ### Check In
 
 **Prerequisites**
-1. The guest to be checked in is not already checked in.
+1. The guest to be checked has not already checked-in (ie. must have status set to `BOOKED`).
 
 **Test cases**
-1. `check-in 3` for when guest list is at least of length 3 and the guest has status `BOOKED` or `CHECKED-OUT`.
+1. `check-in 3`  when the guest list is at least of length 3 and the third guest has status `BOOKED`.</br>
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-IN`.
 
-2. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-IN`.
-   **Expected**: An error is displayed, stating that the guest is already checked in. 
+2. `check-in 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-IN` or `CHECKED-OUT`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest has already been checked in.
 
-3. `check-in 3` for when guest list is shorter than length 3
-   **Expected**: An error is displayed, stating that the guest index provided is invalid.
+3. `check-in 3` when guest list is shorter than length 3.</br>
+    **Expected**: An error is displayed, stating that the stated guest index is invalid.
 
-4. `check-in`:
-   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command. Guest list remains unchanged.
+4. `check-in`</br>
+    **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command.
 
 ### Check Out
 
 **Prerequisites**
-1. The guest to be checked out is already checked in.
+1. The guest to be checked out is already checked in and has not checked out (ie. must have status set to `CHECKED-IN`).
 
 **Test cases**
-1. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-IN`.
+1. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-IN`.</br>
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-OUT`.
 
-2. `check-in 3` for when guest list is at least of length 3 and the guest has status `BOOKED`.
-   **Expected**: An error is displayed, stating that the guest has not checked in. 
+2. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `BOOKED`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest has not checked in.
 
-3. `check-in 3` for when guest list is at least of length 3 and the guest has status `CHECKED-OUT`.
-   **Expected**: An error is displayed, stating that the guest has already checked out.
+3. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-OUT`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest already checked out.
 
-4. `check-in 3` for when guest list is shorter than length 3
-   **Expected**: An error is displayed, stating that the guest index provided is invalid.
+4. `check-out 3` when guest list is shorter than length 3.</br>
+   **Expected**: An error is displayed, stating that the stated guest index is invalid.
 
-5. `check-out`:
-   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-out` command. Guest list remains unchanged.
+5. `check-out`</br>
+   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command.
 
 ### Saving data
 
@@ -840,5 +870,17 @@ Listing all or filtered guests using the `list` command.
 ## **Appendix: Planned Enhancements**
 Team size: 5
 
-Soon to be updated.
-
+1. **Separate Find Feature for each Guest Field**</br>
+   Currently, the find feature works to search through all guest fields (ie. name, email, phone, room number, and request). This enhancement will allow a more specific search toward targeted needs. 
+2. **Remove Phone Number After Adding**</br>
+   Currently, users are unable to remove a phone number using the edit feature after adding their phone number using the add feature. This enhancement will give users more flexibility in managing phone. 
+3. **Stronger Phone Number Validation**</br>
+   Currently, phone numbers are not validated against country-specific formats. This enhancement introduces stricter validation by checking the presence and correctness of the country code, and whether the remaining number conforms to the valid length and format for that country. 
+4. **Stronger Email Validation**</br>
+   Currently, email addresses are not fully validated according to the standards defined in [RFC5322](https://datatracker.ietf.org/doc/html/rfc5322). This enhancement improves email validation by enforcing stricter checks to follow the RFC5322 format, such as (but not limited to):</br>
+- Valid Top-Level Domain (TLD): Ensures the domain ends with a known, valid TLD (e.g. `.com`, `.org`).</br>
+- MX Record Check: Confirms that the domain has mail exchange (MX) records and can receive emails.</br>
+- Unicode and International Email Support: Supports internationalised email addresses with non-ASCII characters.</br>
+- Blocked Reserved or Invalid Addresses: Filters out test or reserved domains (e.g. `example@invalid.com`, `@localhost`).
+5. **Specific Error Messages for Missing Compulsory Fields**
+   Currently, when the user fails to add compulsory fields, GuestNote displays a generic error message stating invalid command format. This enhancement improves usability by providing more informative error messages that explicitly state which compulsory fields are missing. This helps users identify and correct their mistakes more easily.
