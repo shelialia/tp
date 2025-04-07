@@ -415,6 +415,10 @@ Tries to change a guest's email to one that is already registered to another gue
 ### Adding a request to a guest: `edit INDEX +rq/REQUEST`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
+
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+</box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 **Adds** a request to an existing guest in the guest list.
@@ -443,10 +447,13 @@ Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra p
 ### Removing a request of a guest: `edit INDEX [-rq/REQUEST]…`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
+
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+</box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 **Removes** an existing request of an existing guest in the guest list.
-* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The request will be **removed** from the list of requests for the guest.
 * If the request is not found in the list of requests for the guest, nothing will happen and an error message will be shown.
 
@@ -457,7 +464,9 @@ Format: `edit INDEX [-rq/REQUEST]…​`
 </box>
 <box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-`-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command. <br>
+* `-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command.
+* Using together with `+rq/REQUEST` allows you to replace requests.
+* To prevent confusion, index removed will always be **based on the current request list**.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -469,12 +478,15 @@ Edits guest No.2 in the list by removing the request `Extra blanket`.
 Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`  <br>
 Edits guest No.2 in the list by removing two requests `Extra blanket` and `Extra pillow`.
 </box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -rq/extra pillow +rq/Extra Pillow`  <br>
+Edits guest No.2 in the list by removing `extra pillow` and adding `Extra Pillow`. This is okay as the lowercase version is removed before `Extra Pillow` is added, so no duplicate requests are created.
+</box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -ri/1 -rq/Extra Towel`  <br>
-Tries to remove the first request and a request `Extra Towel` in the list of requests for that guest.
-
-The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
+Sample Input: `edit 2 -ri/1 -rq/Extra Towel` <br>
+**Tries to use `-ri/` and `-rq/` together.** The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
 **To prevent confusion, nothing will occur, and an error message will be shown.**
 </box>
 </div>
@@ -483,6 +495,10 @@ The above command is not allowed as the requests deleted can be different depend
 ### Removing a request by index: `edit INDEX -ri/REQUEST_INDEX `
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
+
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+</box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 **Removes** an existing request **using the index of the request** of an existing guest in the guest list.
@@ -497,7 +513,9 @@ Format: `edit INDEX [-ri/REQUEST_INDEX]​`
 </box>
 <box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-`-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command. <br>
+* `-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command.
+* Using together with `+rq/REQUEST` allows you to replace requests.
+* To prevent confusion, index removed will always be **based on the current request list**.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -518,6 +536,7 @@ Tries to remove the first and second requests in the list of requests for that g
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Changes the status of the guest at the specified index to `CHECKED IN`.
+* Only `BOOKED` guests can be checked-in.
 * If the guest is already checked-in, the command will not have any effect and an error will be shown.
 * Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
 
@@ -540,7 +559,7 @@ Changes the status of the guest at index 1 to `CHECKED IN`.
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Changes the status of the guest at the specified index to `CHECKED OUT`.
-* !!The guest must have a status of checked-in before they can be checked-out!!. Otherwise, the command will not have any effect and an error will be shown.
+* Only `CHECKED IN` guests can be checked-out.
 * If the guest is already checked-out, the command will not have any effect and an error will be shown.
 * Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
 
