@@ -11,7 +11,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should contain 4 to 20 digits";
+            "Phone numbers should contain 4 to 20 digits and should not have leading/trailing whitespace";
     public static final String VALIDATION_REGEX = "^\\+?[\\d ]+$";
     public final String value;
 
@@ -35,6 +35,10 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        // Reject if starts or ends with whitespace
+        if (!test.equals(test.trim())) {
             return false;
         }
 
