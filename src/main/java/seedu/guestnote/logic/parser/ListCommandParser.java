@@ -1,5 +1,7 @@
 package seedu.guestnote.logic.parser;
 
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
+
 import java.util.Arrays;
 
 import seedu.guestnote.logic.commands.ListCommand;
@@ -21,22 +23,22 @@ public class ListCommandParser implements Parser<ListCommand> {
         // Tokenize by whitespace
         String[] tokens = trimmedArgs.split("\\s+");
         long rqCount = Arrays.stream(tokens)
-                             .filter(token -> token.equalsIgnoreCase("rq/"))
+                             .filter(token -> token.equalsIgnoreCase(String.valueOf(PREFIX_REQUEST)))
                              .count();
 
         if (rqCount > 1) {
-            throw new ParseException("Too many 'rq/' tokens. Only one is allowed.");
+            throw new ParseException("Too many " + PREFIX_REQUEST + " tokens. Only one is allowed.");
         }
 
         boolean hasRq = rqCount == 1;
         StringBuilder filterBuilder = new StringBuilder();
 
         for (String token : tokens) {
-            if (token.equalsIgnoreCase("rq/")) {
+            if (token.equalsIgnoreCase(String.valueOf(PREFIX_REQUEST))) {
                 continue;
             }
-            if (token.toLowerCase().contains("rq/")) {
-                throw new ParseException("'rq/' must be separated by whitespace.");
+            if (token.toLowerCase().contains(String.valueOf(PREFIX_REQUEST))) {
+                throw new ParseException(PREFIX_REQUEST + " must be separated by whitespace.");
             }
             filterBuilder.append(token).append(" ");
         }
