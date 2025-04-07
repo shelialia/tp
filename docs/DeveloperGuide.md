@@ -604,8 +604,11 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 2. GuestNote should target users who prefer keyboard-based interaction and are comfortable with fast typing, rather than relying on mouse-driven actions such as clicking buttons, selecting from dropdowns, or using drag-and-drop interfaces. 
 3. GuestNote should target users who handle actions on an individual basis. All commands in GuestNote are designed for managing one person at a time. 
 4. GuestNote should target users who are meticulous and unlikely to make input errors. Actions such as check-in and check-out are designed to be irreversible, so the system assumes that users execute these commands with care and confidence.
-5. GuestNote should provide clear and user-friendly error messages when operations fail to assist users in correcting mistakes. 
-6. GuestNote should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+5. GuestNote should target hotels with up to 99 floors and up to 99 rooms per floor. This supports a room numbering scheme in the format `FF-RR`, where:</br>
+- `FF` represents the floor number (01 to 99), and</br>
+- `RR` represents the room number on that floor (01 to 99)</br>
+6. GuestNote should provide clear and user-friendly error messages when operations fail to assist users in correcting mistakes. 
+7. GuestNote should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
 
 **Compatibility Requirements**
 1. GuestNote should work on any mainstream OS as long as it has Java 17 or above installed.
