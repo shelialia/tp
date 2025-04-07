@@ -11,14 +11,13 @@ public class RoomNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Room numbers should contain two two-digit numbers separated by a hyphen (eg. XX-YY)"
-                    + ", only values from 01 to 99 are allowed for both parts, "
                     + "and it should not be blank";
 
     /*
      * The first character of the room number must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "((0[1-9])|([1-9][0-9]))-((0[1-9])|([1-9][0-9]))";
+    public static final String VALIDATION_REGEX = "\\d{2}-\\d{2}";
 
     public final String roomNumber;
 

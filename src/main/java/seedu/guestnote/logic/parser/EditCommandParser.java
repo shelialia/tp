@@ -1,7 +1,6 @@
 package seedu.guestnote.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ_INDEX;
@@ -42,8 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format( "%s\n%s", pe.getMessage(),
-                    EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(pe.getMessage(), EditCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
