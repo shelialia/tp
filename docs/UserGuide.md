@@ -132,7 +132,7 @@ Some example commands you can try:
 
 <box type="default" icon=":glyphicon-plus:" background-color="#efefef" light>
 
-**Add your first guest:** `add n/John Doe p/91234567 e/johnd@example.com r/01-01`<br>
+**Add your first guest:** `add n\John Doe p\91234567 e\johnd@example.com r\01-01`<br>
 Adds a guest named !!John Doe!! who lives in room !!#01-01!! with email !!johnd@example.com!! and phone number !!91234567!!.
 
 </box>
@@ -144,7 +144,7 @@ Shows a list of all guests.
 </box>
 <box type="default" icon=":glyphicon-edit:" background-color="#efefef" light>
 
-**Edit a guest:** `edit 1 +rq/Room cleaning`<br>
+**Edit a guest:** `edit 1 +rq\Room cleaning`<br>
 Edits the !!first guest!!, adding an additional request !!Room cleaning!!.
 
 </box>
@@ -197,33 +197,33 @@ Woah! Before we dive into the features, here's a quick legend to help you unders
 
 **UPPER_CASE = !!Fill it in!!**<br>
 Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-**Example:** `n/NAME` :fa-solid-arrow-right: `n/John Doe` :fa-solid-check:
+**Example:** `n\NAME` :fa-solid-arrow-right: `n\John Doe` :fa-solid-check:
 
 </box>
 <box type="default" icon=":fa-solid-right-to-bracket:" background-color="#efefef" light>
 
 **[Square Brackets] = !!Optional!!** <br>
 Items in square brackets are optional.<br>
-**Example:** `n/NAME [rq/REQUEST]`<br>
-:fa-solid-arrow-right: `n/John Doe` :fa-solid-check: <br>
-:fa-solid-arrow-right: `n/John Doe rq/New Pillow` :fa-solid-check:
+**Example:** `n\NAME [rq\REQUEST]`<br>
+:fa-solid-arrow-right: `n\John Doe` :fa-solid-check: <br>
+:fa-solid-arrow-right: `n\John Doe rq\New Pillow` :fa-solid-check:
 
 </box>
 <box type="default" icon=":fa-solid-ellipsis:" background-color="#efefef" light>
 
 **Ellipsis … = !!Multiple Times!!** <br>
 Items with `…` after them can be used multiple times including zero times.<br>
-**Example:** `[rq/REQUEST]…`<br>
+**Example:** `[rq\REQUEST]…`<br>
 :fa-solid-arrow-right: ` ` (not used at all) :fa-solid-check: <br>
-:fa-solid-arrow-right: `rq/New Pillow` :fa-solid-check: <br>
-:fa-solid-arrow-right: `rq/New Pillow rq/Orange Juice rq/Socks` :fa-solid-check:
+:fa-solid-arrow-right: `rq\New Pillow` :fa-solid-check: <br>
+:fa-solid-arrow-right: `rq\New Pillow rq\Orange Juice rq\Socks` :fa-solid-check:
 </box>
 <box type="warning" icon=":fa-solid-right-left:">
 
 **!!Any Order!!: Parameters can be in any order**<br>
-Example: `n/NAME `**`p/PHONE e/EMAIL`**<br>
-:fa-solid-arrow-right: `n/NAME `**`p/PHONE e/EMAIL`** (same order) :fa-solid-check: <br>
-:fa-solid-arrow-right: **`e/EMAIL`**` n/NAME `**`p/PHONE`** (different order) :fa-solid-check:
+Example: `n\NAME `**`p\PHONE e\EMAIL`**<br>
+:fa-solid-arrow-right: `n\NAME `**`p\PHONE e\EMAIL`** (same order) :fa-solid-check: <br>
+:fa-solid-arrow-right: **`e\EMAIL`**` n\NAME `**`p\PHONE`** (different order) :fa-solid-check:
 
 </box>
 <box type="wrong" icon=":fa-solid-xmark:">
@@ -285,11 +285,11 @@ Adds a guest to the guest book.
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `add n/NAME e/EMAIL [p/PHONE] r/ROOMNUMBER [rq/REQUEST]…​`
+Format: `add n\NAME e\EMAIL [p\PHONE] r\ROOMNUMBER [rq\REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste`!!<br>
+!!Sample Input: `add n\David Li e\lidavid@example.com p\98767890 r\21-22 rq\Extra toothpaste`!!<br>
 Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
 </box>
 </div>
@@ -311,11 +311,11 @@ Shows a list of all guests in the guest list.
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `list [rq/] [NAME_FILTER]…`
+Format: `list [rq\] [NAME_FILTER]…`
 - **`list`** displays every guest.
-- **`list rq/`** displays only guests with requests (i.e. guests whose request field is not null).
+- **`list rq\`** displays only guests with requests (i.e. guests whose request field is not null).
 - **`list NAME_FILTER…`** displays only guests whose names match the filter.
-- **`list rq/ NAME_FILTER…`** displays only guests with requests whose names match the filter.
+- **`list rq\ NAME_FILTER…`** displays only guests with requests whose names match the filter.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -324,7 +324,7 @@ Shows a list of all guests in the guest list.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `list rq/`!!<br>
+!!Sample Input: `list rq\`!!<br>
 Shows a list of all guests in the guest list with requests.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
@@ -334,7 +334,7 @@ Shows a list of all guests with `John` in their name, including `John Doe` and `
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `list rq/ John Alex`!!<br>
+!!Sample Input: `list rq\ John Alex`!!<br>
 Shows a list of all guests with requests, with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
 </box>
 </div>
@@ -400,38 +400,38 @@ Other flags to edit a guest by [Adding a Request](#adding-a-request-to-a-guest-e
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOMNUMBER]`
+Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [r\ROOMNUMBER]`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 1 e/charlotte@example.com`!!<br>
+!!Sample Input: `edit 1 e\charlotte@example.com`!!<br>
 Changes the email for the first guest to `charlotte@example.com`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 p/91234567 r/01-03`!!<br>
+!!Sample Input: `edit 2 p\91234567 r\01-03`!!<br>
 Changes the phone number for the second guest to `91234567` and the room number to `01-03`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 1 r/19-23 +rq/High Floor`!!<br>
+!!Sample Input: `edit 1 r\19-23 +rq\High Floor`!!<br>
 Changes the room number to `19-23` and [Adds a Request](#adding-a-request-to-a-guest-edit-index-rq-request).
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04`!!<br>
+!!Sample Input: `edit 1 e\an_email_already_in_use@example.com r\03-04`!!<br>
 Tries to change a guest's email to one that is already registered to another guest, and update the room number. Nothing will occur, and an error message will be shown explaining that the email is not valid.
 
 </box>
 </div>
 <br>
 
-### Adding a request to a guest: `edit INDEX [+rq/REQUEST]…`
+### Adding a request to a guest: `edit INDEX [+rq\REQUEST]…`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n\NAME`, `p\PHONE`, `e\EMAIL`, and `r\ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -446,27 +446,27 @@ _Conditions and features described in the previous section on [edit](#editing-a-
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit INDEX [+rq/REQUEST]…​`
+Format: `edit INDEX [+rq\REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 +rq/Extra blanket`!!<br>
+!!Sample Input: `edit 2 +rq\Extra blanket`!!<br>
 Edits guest No.2 in the list by adding a request `Extra blanket`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 +rq/Extra blanket +rq/Extra pillow`!!<br>
+!!Sample Input: `edit 2 +rq\Extra blanket +rq\Extra pillow`!!<br>
 Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra pillow`.
 </box>
 </div>
 <br>
 
-### Removing a request of a guest: `edit INDEX [-rq/REQUEST]…`
+### Removing a request of a guest: `edit INDEX [-rq\REQUEST]…`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n\NAME`, `p\PHONE`, `e\EMAIL`, and `r\ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -479,44 +479,44 @@ _Conditions and features described in the previous section on [edit](#editing-a-
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit INDEX [-rq/REQUEST]…​`
+Format: `edit INDEX [-rq\REQUEST]…​`
 </box>
 <box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-* `-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command.
-* Using together with `+rq/REQUEST` allows you to replace requests.
+* `-ri\REQUEST_INDEX` and `-rq\REQUEST` cannot be used together in the same edit command.
+* Using together with `+rq\REQUEST` allows you to replace requests.
 * To prevent confusion, index removed will always be **based on the current request list**.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -rq/Extra blanket`!!<br>
+!!Sample Input: `edit 2 -rq\Extra blanket`!!<br>
 Edits guest No.2 in the list by removing the request `Extra blanket` (or any variant capitalisation of it, including `EXTRA BLANKET`, `Extra Blanket`, and `extra blanket`).
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`!!<br>
+!!Sample Input: `edit 2 -rq\Extra blanket -rq\Extra pillow`!!<br>
 Edits guest No.2 in the list by removing two requests `Extra blanket` and `Extra pillow`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -rq/extra pillow +rq/Extra Pillow`!!<br>
+!!Sample Input: `edit 2 -rq\extra pillow +rq\Extra Pillow`!!<br>
 Edits guest No.2 in the list by removing the request spelled `extra pillow` and adding `Extra Pillow`. This is okay as the lowercase version is removed before `Extra Pillow` is added, so no duplicate requests are created.
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -ri/1 -rq/Extra Towel`!!<br>
-**Tries to use `-ri/` and `-rq/` together.** The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
+!!Sample Input: `edit 2 -ri\1 -rq\Extra Towel`!!<br>
+**Tries to use `-ri\` and `-rq\` together.** The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
 **To prevent confusion, nothing will occur, and an error message will be shown.**
 </box>
 </div>
 <br>
 
-### Removing a request by index: `edit INDEX [-ri/REQUEST_INDEX]`
+### Removing a request by index: `edit INDEX [-ri\REQUEST_INDEX]`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n\NAME`, `p\PHONE`, `e\EMAIL`, and `r\ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -527,22 +527,22 @@ _Conditions and features described in the previous section on [edit](#editing-a-
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit INDEX [-ri/REQUEST_INDEX]​`
+Format: `edit INDEX [-ri\REQUEST_INDEX]​`
 </box>
 <box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-* `-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command.
-* Using together with `+rq/REQUEST` allows you to replace requests.
+* `-ri\REQUEST_INDEX` and `-rq\REQUEST` cannot be used together in the same edit command.
+* Using together with `+rq\REQUEST` allows you to replace requests.
 * To prevent confusion, index removed will always be **based on the current request list**.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -ri/1`!!<br>
+!!Sample Input: `edit 2 -ri\1`!!<br>
 Edits guest No.2 in the list by removing the first request in the list of requests for that guest.
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-!!Sample Input: `edit 2 -ri/1 -ri/2`!!<br>
+!!Sample Input: `edit 2 -ri\1 -ri\2`!!<br>
 Tries to remove the first and second requests in the list of requests for that guest. The above command is not allowed as the requests deleted can be different depending on how the command is interpreted. **To prevent confusion, nothing will occur, and an error message will be shown.**
 </box>
 </div>
@@ -710,41 +710,41 @@ The data file is stored in the home folder of GuestNote, where you placed the Gu
 
 | Action        | Format, Examples                                                                                                                                                                            |
 |---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME [p/PHONE] e/EMAIL r/ROOMNUMBER [rq/REQUEST]…​` <br> Example: `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`                            |
+| **Add**       | `add n\NAME [p\PHONE] e\EMAIL r\ROOMNUMBER [rq\REQUEST]…​` <br> Example: `add n\James Ho p\22224444 e\jamesho@example.com r\01-01 rq\Add Pillow rq\Orange Juice`                            |
 | **Check-In**  | `check-in INDEX`<br> Example: `check-in 1`                                                                                                                                                  |
 | **Check-Out** | `check-out INDEX`<br> Example: `check-out 1`                                                                                                                                                |
 | **Clear**     | `clear`                                                                                                                                                                                     |
 | **Delete**    | `delete INDEX`<br> Example: `delete 3`                                                                                                                                                      |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOMNUMBER]`<br>`[+rq/ADD_REQUEST]… [-rq/DELETE_REQUEST]… [-ri/DELETE_REQUEST_INDEX]​`<br> Example: `edit 2 n/James Lee e/jameslee@example.com` |
+| **Edit**      | `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [r\ROOMNUMBER]`<br>`[+rq\ADD_REQUEST]… [-rq\DELETE_REQUEST]… [-ri\DELETE_REQUEST_INDEX]​`<br> Example: `edit 2 n\James Lee e\jameslee@example.com` |
 | **Exit**      | `exit`                                                                                                                                                                                      |
 | **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> Example: `find James Jake`                                                                                                                               |
 | **Help**      | `help`                                                                                                                                                                                      |
-| **List**      | `list [rq/] [NAME_FILTER]…`<br> Example: `list` or `list rq/` or `list James`                                                                                                               |
+| **List**      | `list [rq\] [NAME_FILTER]…`<br> Example: `list` or `list rq\` or `list James`                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 ### **Glossary**
 ___
 
-| **Term**                     | **Definition / Example**                                                                                                                                   |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Term**                     | **Definition / Example**                                                                                                                                                                                                             |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AddressBook Level 3 (AB3)** | The original open-source Java application from which GuestNote was adapted. AB3 serves as a contact management app with a CLI interface and basic CRUD functionality, forming the foundation for GuestNote’s structure and features. |
-| **Backup**                  | A saved copy of your data file, used to restore the AddressBook in case of data loss.                                                                      |
-| **cd**                      | Stands for "change directory" – a terminal command used to navigate between folders.<br>e.g., `cd path/to/folder`                                          |
-| **Check-in**                | The process of registering a guest’s arrival at the hotel.                                                                                                  |
-| **Check-out**               | The process of finalising a guest’s stay and removing their active record.                                                                                 |
-| **CLI (Command Line Interface)** | A text-based interface for interacting with software by typing commands, instead of using a graphical interface. Common in developer tools and command-based apps like GuestNote. |
-| **Command**                 | An instruction typed into the CLI to perform an action in GuestNote.<br>e.g., `add`, `edit`, `check-in`                                                    |
-| **CSV (Comma Separated Values)** | A file format used for tabular data, where values are separated by commas and records by newlines. Can be opened by spreadsheet software like Excel.     |
-| **Guest**                   | A guest staying at the hotel whose information is stored in the **GuestNote** system.                                                                      |
-| **GuestNote**               | The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.                                |
-| **GUI (Graphical User Interface)** | A visual interface that allows users to interact with GuestNote using elements like buttons, lists, and panels.                                      |
-| **Home Folder**             | The folder on your computer where GuestNote stores its data files.                                                                                         |
-| **Index**                   | A number representing the position of a guest in the list.<br>e.g., in `delete 2`, "2" is the index of the guest to be deleted.                            |
-| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format that is easy to read and write. GuestNote uses JSON to store its internal data files.                      |
-| **JSON File Location**      | The path to the JSON data file used by GuestNote.<br>e.g., `/home/user/data/guestnote.json`                                                                |
-| **Mainstream OS**           | Refers to common operating systems supported by GuestNote: **Windows**, **Linux**, **Unix**, and **MacOS**.                                                |
-| **Parameter**               | A specific input provided with a command, usually in the form of a prefix and value.<br>e.g., `n/James` or `r/01-01`                                       |
-| **Request**                 | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                           |
-| **Status**                  | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                             |
-| **UI (User Interface)**     | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                   |
+| **Backup**                  | A saved copy of your data file, used to restore the AddressBook in case of data loss.                                                                                                                                                |
+| **cd**                      | Stands for "change directory" – a terminal command used to navigate between folders.<br>e.g., `cd path/to/folder`                                                                                                                    |
+| **Check-in**                | The process of registering a guest’s arrival at the hotel.                                                                                                                                                                           |
+| **Check-out**               | The process of finalising a guest’s stay and removing their active record.                                                                                                                                                           |
+| **CLI (Command Line Interface)** | A text-based interface for interacting with software by typing commands, instead of using a graphical interface. Common in developer tools and command-based apps like GuestNote.                                                    |
+| **Command**                 | An instruction typed into the CLI to perform an action in GuestNote.<br>e.g., `add`, `edit`, `check-in`                                                                                                                              |
+| **CSV (Comma Separated Values)** | A file format used for tabular data, where values are separated by commas and records by newlines. Can be opened by spreadsheet software like Excel.                                                                                 |
+| **Guest**                   | A guest staying at the hotel whose information is stored in the **GuestNote** system.                                                                                                                                                |
+| **GuestNote**               | The system responsible for managing hotel guest records, including personal details, requests, and check-in/check-out data.                                                                                                          |
+| **GUI (Graphical User Interface)** | A visual interface that allows users to interact with GuestNote using elements like buttons, lists, and panels.                                                                                                                      |
+| **Home Folder**             | The folder on your computer where GuestNote stores its data files.                                                                                                                                                                   |
+| **Index**                   | A number representing the position of a guest in the list.<br>e.g., in `delete 2`, "2" is the index of the guest to be deleted.                                                                                                      |
+| **JSON (JavaScript Object Notation)** | A lightweight data-interchange format that is easy to read and write. GuestNote uses JSON to store its internal data files.                                                                                                          |
+| **JSON File Location**      | The path to the JSON data file used by GuestNote.<br>e.g., `/home/user/data/guestnote.json`                                                                                                                                          |
+| **Mainstream OS**           | Refers to common operating systems supported by GuestNote: **Windows**, **Linux**, **Unix**, and **MacOS**.                                                                                                                          |
+| **Parameter**               | A specific input provided with a command, usually in the form of a prefix and value.<br>e.g., `n\James` or `r\01-01`                                                                                                                 |
+| **Request**                 | A service or action requested by a guest (e.g., room service, maintenance, additional amenities).                                                                                                                                    |
+| **Status**                  | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                                                                                                        |
+| **UI (User Interface)**     | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                                                                                             |
