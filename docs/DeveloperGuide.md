@@ -707,7 +707,7 @@ Adding a guest while in the main guest list view.
    **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
 
 2. `add n\Jane Doe e\janed@example.com r\01-01 rq\One extra pillow`  
-   **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
+   **Expected**: Guest `Jane Doe` is added. Phone is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
 3. `add n\June Doe p\98764444 e\johnd@example.com r\01-01`  
    **Expected**: Guest `June Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
@@ -804,7 +804,7 @@ Listing all or filtered guests using the `list` command.
    **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`, `Alexander Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
 
 3. `find 9876`  
-   **Expected**: Guests with phone numbers that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
+   **Expected**: Guests with phones that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
 
 4. `find 01-01`  
    **Expected**: Guests with room numbers matching `01-01` are shown. Partial matches (e.g., searching `01`) may also display other rooms like `01-02` or `02-01`). Status message confirms results.
