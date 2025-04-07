@@ -882,5 +882,5 @@ Team size: 5
 - MX Record Check: Confirms that the domain has mail exchange (MX) records and can receive emails.</br>
 - Unicode and International Email Support: Supports internationalised email addresses with non-ASCII characters.</br>
 - Blocked Reserved or Invalid Addresses: Filters out test or reserved domains (e.g. `example@invalid.com`, `@localhost`).
-5. **Specific Error Message Outlining Missing Fields when Invalid Command Format due to Missing Fields are Given**
+5. **Specific Error Messages for Missing Compulsory Fields**
    Currently, when the user fails to add compulsory fields, GuestNote displays a generic error message stating invalid command format. This enhancement improves usability by providing more informative error messages that explicitly state which compulsory fields are missing. This helps users identify and correct their mistakes more easily.
