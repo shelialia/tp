@@ -37,10 +37,6 @@ public class Phone {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
-        // Reject if starts or ends with whitespace
-        if (!test.equals(test.trim())) {
-            return false;
-        }
 
         // Count only the digits
         int digitCount = test.replaceAll("\\D", "").length();
