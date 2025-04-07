@@ -739,22 +739,22 @@ Deleting a guest while in the main guest list view.
 2. Guest to be deleted exists in the guest list.
 
 **Test Cases**
-1. `delete 1`  
+1. `delete 1`  </br>
    **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-2. `delete 0`  
+2. `delete 0`  </br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that index is not a non-zero unsigned integer. Status bar remains the same.
 
-3. `delete 0001`
+3. `delete 0001`</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that leading zeros are not allowed. Status bar remains the same.
 
-4. `delete`
+4. `delete`</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that missing field guest index. Status bar remains the same.
 
-5. `delete x.` where x is greater than 2147483647
+5. `delete x.` where x is greater than 2147483647</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that large positive indexes are not allowed. Status bar remains the same.
 
-6. `delete x` where x is larger than the size of the list and smaller than or equal to 2147483647
+6. `delete x` where x is larger than the size of the list and smaller than or equal to 2147483647</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that provided guest index is invalid. Status bar remains the same.
 
 ### Editing a guest
@@ -777,7 +777,10 @@ Editing a guest while all guests are being shown.
 4. `edit 1 n\ r\`  
 **Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
 
-5. Other incorrect edit commands to try:  
+5. `edit 1 -ri\2 -ri\3`  
+**Expected**: No changes made. Error message shown indicating that duplicate request removal prefixes are not allowed in the same command.
+
+6. Other incorrect edit commands to try:  
 - `edit`
 - `edit x`
 - `edit 5 abc`
@@ -813,7 +816,7 @@ Listing all or filtered guests using the `list` command.
    **Expected**: Guests with names containing `Alex` (e.g., `Alex Yeoh`, `Alexis Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
 
 2. `find Ander`  
-   **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`, `Alexander Tan`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
+   **Expected**: Guests with names containing `Ander` (e.g., `Ander Yeoh`) are shown in the list. Matching is case-insensitive and includes partial keywords. Status message reflects the success of the `find` command.
 
 3. `find 9876`  
    **Expected**: Guests with phones that contain `9876` are displayed (e.g., `98765432`, `99898768`). Status message reflects successful search.
@@ -827,7 +830,7 @@ Listing all or filtered guests using the `list` command.
 6. `find`  
    **Expected**: No input keyword provided. Error message appears, stating that a keyword must be included in the `find` command. Guest list remains unchanged.
 
-7. `find xyznotfound`  
+7. `find xyz`  where `xyz` is does not match any field of any guest in the list
     **Expected**: No guests match the keyword `xyznotfound`. Guest list is empty. Status message reflects that no guests matched the search.
 
 ### Check In
@@ -894,9 +897,9 @@ Team size: 5
 - MX Record Check: Confirms that the domain has mail exchange (MX) records and can receive emails.</br>
 - Unicode and International Email Support: Supports internationalised email addresses with non-ASCII characters.</br>
 - Blocked Reserved or Invalid Addresses: Filters out test or reserved domains (e.g. `example@invalid.com`, `@localhost`).
-5. **Specific Error Messages for Missing Compulsory Fields**
+5. **Specific Error Messages for Missing Compulsory Fields**</br>
    Currently, when the user fails to add compulsory fields, GuestNote displays a generic error message stating invalid command format. This enhancement improves usability by providing more informative error messages that explicitly state which compulsory fields are missing. This helps users identify and correct their mistakes more easily.
-6. **Restrict Duplicate Email and Phone Numbers Based on Family or Booking**
+6. **Restrict Duplicate Email and Phone Numbers Based on Family or Booking**</br>
    Currently, users can be added or edited to have the same email and/or same phone number as another existing guest in GuestNote. This enhancement will add further restrictions whereby only guests who are under the same family or the same booking will be able to share phone numbers and/or emails. 
-7. Restrict Number of Guests in the Same Room
+7. **Restrict Number of Guests in the Same Room**</br>
    Currently, multiple users can be added to the same room. This enhancement will add further restrictions on the number of guests that can be assigned to any given room, ensuring that room capacity limits are enforced.
