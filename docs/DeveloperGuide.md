@@ -853,9 +853,7 @@ Team size: 5
    Currently, users are unable to remove a phone number using the edit feature after adding their phone number. This enhancement will allow users to do so. 
 3. **Stronger Phone Number Validation**</br>
    Currently, phone numbers are not validated against country-specific formats. This enhancement introduces stricter validation by checking the presence and correctness of the country code, and whether the remaining number conforms to the valid length and format for that country. 
-4. **Top Level Domain (TLD) input validation for emails**</br>
-   Currently, emails of `x@xx` format are allowed, even though the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) (i.e. the minimal format of an email is `x@xx.xx`). This enhancement strengthens email validation by enforcing the presence of a TLD, ensuring the domain part includes at least one dot (.) to separate the domain and its TLD.
-5. **Stronger Email Validation**</br>
+4. **Stronger Email Validation**</br>
    Currently, email addresses are not fully validated according to the standards defined in [RFC5322](https://datatracker.ietf.org/doc/html/rfc5322). This enhancement improves email validation by enforcing stricter checks to follow the RFC5322 format, such as (but not limited to):</br>
 - Valid Top-Level Domain (TLD): Ensures the domain ends with a known, valid TLD (e.g. `.com`, `.org`).</br>
 - MX Record Check: Confirms that the domain has mail exchange (MX) records and can receive emails.</br>
