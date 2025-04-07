@@ -92,7 +92,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_REQUEST_NOT_FOUND + ": " + e.getErrorRequest());
         }
 
-        if (!guestToEdit.isSameGuest(editedGuest) && model.hasGuest(editedGuest)) {
+        if (!guestToEdit.isSameGuest(editedGuest) || model.hasGuest(editedGuest)) {
             throw new CommandException(MESSAGE_DUPLICATE_GUEST);
         }
 
