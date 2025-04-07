@@ -108,7 +108,8 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #a2b7c9
+    -fx-background-color: #a2b7c9;
+    -fx-border-width: 2px;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -309,8 +310,9 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0;
 }
 
 #commandTypeLabel {
