@@ -11,8 +11,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and be between 4 and 17 digits long";
-    public static final String VALIDATION_REGEX = "\\d{4,17}";
+            "Phone numbers should contain 4 to 20 digits";
+    public static final String VALIDATION_REGEX = "^\\+?[\\d ]+$";
     public final String value;
 
     /**
@@ -34,7 +34,13 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        // Count only the digits
+        int digitCount = test.replaceAll("\\D", "").length();
+        return digitCount >= 4 && digitCount <= 20;
     }
 
     @Override
