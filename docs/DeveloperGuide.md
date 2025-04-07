@@ -235,9 +235,9 @@ This feature allows users to add requests made by guests. Requests can added alo
 
 Given below is an example usage scenario of how a request is added alongside adding a new guest using `AddCommand`.
 
-**Example Usage: `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`**
+**Example Usage: `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`**
 
-Step 1. The user executes `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`.
+Step 1. The user executes `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -249,9 +249,9 @@ Step 5. When the command is executed, the model calls `addGuest` to add the gues
 
 Given below is an example usage scenario of how a request is added to an existing guest using `EditCommand`.
 
-**Example Usage: `edit 2 +rq/One extra blanket`**
+**Example Usage: `edit 2 +rq\One extra blanket`**
 
-Step 1. The user executes `edit 2 +rq/One extra blanket`.
+Step 1. The user executes `edit 2 +rq\One extra blanket`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -268,9 +268,9 @@ This feature allows users to delete requests made by guests. Requests can be del
 
 Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `-rq` prefix.
 
-**Example Usage: `edit 2 -rq/One extra pillow`**
+**Example Usage: `edit 2 -rq\One extra pillow`**
 
-Step 1. The user executes `edit 2 -rq/One extra pillow`.
+Step 1. The user executes `edit 2 -rq\One extra pillow`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -282,9 +282,9 @@ Step 5. When the command is executed, the original guest and its details are ret
 
 Given below is an example usage scenario of how a request is deleted using `EditCommand` by passing in `ri` prefix.
 
-**Example Usage: `edit 2 ri/1`**
+**Example Usage: `edit 2 -ri\1`**
 
-Step 1. The user executes `edit 2 ri/1`.
+Step 1. The user executes `edit 2 -ri\1`.
 
 Step 2. The Logic Manager receives the text input and passes it to `GuestNoteParser`.
 
@@ -687,18 +687,18 @@ Adding a guest while in the main guest list view.
 2. Guest to be added has a unique email and is not currently in guest list.
 
 **Test Cases**
-1. `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow`  
+1. `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`  
    **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-2. `add n/Jane Doe e/janed@example.com r/01-01 rq/One extra pillow`  
+2. `add n\Jane Doe e\janed@example.com r\01-01 rq\One extra pillow`  
    **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-3. `add n/June Doe p/98764444 e/johnd@example.com r/01-01`  
+3. `add n\June Doe p\98764444 e\johnd@example.com r\01-01`  
    **Expected**: Guest `John Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
 
 4. Other Incorrect add commands to try:  
-- `add n/ p/98765432 e/johnd@example.com r/01-01`  
-- `add n/John Doe r/01-01`  
+- `add n\ p\98765432 e\johnd@example.com r\01-01`  
+- `add n\John Doe r\01-01`  
 - `add`<br>
 **Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`).
 
@@ -730,16 +730,16 @@ Editing a guest while all guests are being shown.
 2. Multiple guests in the list.
 
 **Test Cases**
-1. `edit 1 n/Jonathan Doe`  
+1. `edit 1 n\Jonathan Doe`  
 **Expected**: Name of the first guest is updated to `Jonathan Doe`. Other details remain unchanged. Status message reflects successful edit.
 
-2. `edit 1 +rq/Fruit Basket`  
+2. `edit 1 +rq\Fruit Basket`  
 **Expected**: Adds `Fruit Basket` to the list of requests for the first guest. Status message reflects successful edit.
 
-3. `edit 1 -rq/Fruit Basket`  
+3. `edit 1 -rq\Fruit Basket`  
 **Expected**: Removes `Fruit Basket` from the request list of the first guest. If request is not found, error message is shown. Otherwise, status message reflects successful update.
 
-4. `edit 1 n/ r/`  
+4. `edit 1 n\ r\`  
 **Expected**: No changes made. Fields cannot be empty. Error message shown indicating missing values for required parameters.
 
 5. Other incorrect edit commands to try:  
@@ -763,7 +763,7 @@ Listing all or filtered guests using the `list` command.
 3. `list roy irfan`  
 **Expected**: Guests with names matching the keywords `roy` or `irfan` (e.g., `Roy Ibrahim`, `Irfan Balakrishnan`) are shown. Deleted guests are not shown. Status message reflects the success of the `list` command.
 
-4. `list n/NAMETHATDOESNOTEXIST`  
+4. `list n\NAMETHATDOESNOTEXIST`  
 **Expected**: No guests are shown. The guest list is empty. Status message reflects that no matching guests were found.
 
 ### Finding a guest
@@ -798,24 +798,41 @@ Listing all or filtered guests using the `list` command.
 ### Check In
 
 **Prerequisites**
-1. The guest to be checked in is not already checked in.
+1. The guest to be checked has not already checked-in (ie. must have status set to `BOOKED`).
 
 **Test cases**
-1. `check-in 3`  
+1. `check-in 3`  when the guest list is at least of length 3 and the third guest has status `BOOKED`.</br>
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-IN`.
 
-2. `check-in`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command. Guest list remains unchanged.
+2. `check-in 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-IN` or `CHECKED-OUT`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest has already been checked in.
+
+3. `check-in 3` when guest list is shorter than length 3.</br>
+    **Expected**: An error is displayed, stating that the stated guest index is invalid.
+
+4. `check-in`</br>
+    **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command.
 
 ### Check Out
 
 **Prerequisites**
-1. The guest to be checked out is already checked in.
+1. The guest to be checked out is already checked in and has not checked out (ie. must have status set to `CHECKED-IN`).
 
 **Test cases**
-1. `check-in 3`  
+1. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-IN`.</br>
    **Expected**: Third guest in the current list of guests will have its status changed to `CHECKED-OUT`.
 
-2. `check-out`: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-out` command. Guest list remains unchanged.
+2. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `BOOKED`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest has not checked in.
+
+3. `check-out 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-OUT`.</br>
+   **Expected**: An error is displayed, stating that the chosen guest already checked out.
+
+4. `check-out 3` when guest list is shorter than length 3.</br>
+   **Expected**: An error is displayed, stating that the stated guest index is invalid.
+
+5. `check-out`</br>
+   **Expected**: No input guest index provided. Error message appears, stating that a guest index must be included in the `check-in` command.
 
 ### Saving data
 
@@ -830,5 +847,17 @@ Listing all or filtered guests using the `list` command.
 ## **Appendix: Planned Enhancements**
 Team size: 5
 
-Soon to be updated.
-
+1. **Separate Find Feature for each Guest Field**</br>
+   Currently, the find feature works to search through all guest fields (ie. name, email, phone, room number, and request). This enhancement will allow a more specific search toward targeted needs. 
+2. **Remove Phone Number After Adding**</br>
+   Currently, users are unable to remove a phone number using the edit feature after adding their phone number. This enhancement will allow users to do so. 
+3. **Stronger Phone Number Validation**</br>
+   Currently, phone numbers are not validated against country-specific formats. This enhancement introduces stricter validation by checking the presence and correctness of the country code, and whether the remaining number conforms to the valid length and format for that country. 
+4. **Top Level Domain (TLD) input validation for emails**</br>
+   Currently, emails of `x@xx` format are allowed, even though the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) (i.e. the minimal format of an email is `x@xx.xx`). This enhancement strengthens email validation by enforcing the presence of a TLD, ensuring the domain part includes at least one dot (.) to separate the domain and its TLD.
+5. **Stronger Email Validation**</br>
+   Currently, email addresses are not fully validated according to the standards defined in [RFC5322](https://datatracker.ietf.org/doc/html/rfc5322). This enhancement improves email validation by enforcing stricter checks to follow the RFC5322 format, such as (but not limited to):</br>
+- Valid Top-Level Domain (TLD): Ensures the domain ends with a known, valid TLD (e.g. `.com`, `.org`).</br>
+- MX Record Check: Confirms that the domain has mail exchange (MX) records and can receive emails.</br>
+- Unicode and International Email Support: Supports internationalised email addresses with non-ASCII characters.</br>
+- Blocked Reserved or Invalid Addresses: Filters out test or reserved domains (e.g. `example@invalid.com`, `@localhost`).
