@@ -113,7 +113,7 @@
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
-    -fx-border-width: 2;
+    -fx-border-width: 2px;
 }
 
 .list-cell .label {
@@ -309,8 +309,9 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0;
 }
 
 #commandTypeLabel {
