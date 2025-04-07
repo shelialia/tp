@@ -33,8 +33,7 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
-        if (fieldValue instanceof Optional) {
-            Optional<?> optionalValue = (Optional<?>) fieldValue;
+        if (fieldValue instanceof Optional<?> optionalValue) {
             if (!optionalValue.isPresent()) {
                 return false;
             }
@@ -47,7 +46,11 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
             Object[] arr = (Object[]) fieldValue;
             return arrayContainsKeyword(arr, keywords);
         } else {
-            String fieldString = fieldValue.toString().trim();
+            String temp = fieldValue.toString();
+            if (temp == null) {
+                return false;
+            }
+            String fieldString = temp.trim();
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fieldString, keyword.trim()));
         }

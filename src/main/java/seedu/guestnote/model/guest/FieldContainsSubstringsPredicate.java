@@ -45,7 +45,11 @@ public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
             Object[] arr = (Object[]) fieldValue;
             return arrayContainsKeyword(arr, keywords);
         } else {
-            String fieldString = fieldValue.toString().trim();
+            String temp = fieldValue.toString();
+            if (temp == null) {
+                return false;
+            }
+            String fieldString = temp.trim();
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(fieldString, keyword.trim()));
         }
