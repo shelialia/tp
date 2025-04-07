@@ -19,7 +19,7 @@ import seedu.guestnote.model.guest.RoomNumber;
 
 public class JsonAdaptedGuestTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "123456789012345678901";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROOMNUMBER = " ";
     private static final String INVALID_REQUEST = "#friend";

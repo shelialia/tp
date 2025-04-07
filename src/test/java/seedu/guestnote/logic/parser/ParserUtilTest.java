@@ -21,7 +21,7 @@ import seedu.guestnote.model.request.Request;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+651234567890123456781";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_REQUEST = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
