@@ -177,16 +177,18 @@ Want to learn more? Check out the [Features](#features) section below.
 * [Viewing help](#viewing-help-help)
 * [Adding a guest](#adding-a-guest-add)
 * [Listing all guests](#listing-all-guests-list)
+* [Locating guests](#locating-guests-find)
 * [Editing a guest](#editing-a-guest-edit)
-* [Locating guests by name](#locating-guests-find)
+  * [Adding a request to a guest](#adding-a-request-to-a-guest-edit-index-rq-request)
+  * [Removing a request of a guest](#removing-a-request-of-a-guest-edit-index-rq-request)
+  * [Removing a request by index](#removing-a-request-by-index-edit-index-ri-request-index)
+* [Check-In a guest](#checking-in-a-guest-check-in)
+* [Check-Out a guest](#checking-out-a-guest-check-out)
 * [Deleting a guest](#deleting-a-guest-delete)
 * [Clearing all entries](#clearing-all-entries-clear)
 * [Exiting the program](#exiting-the-program-exit)
-* [Saving the data](#notes-on-the-data-file)
-* [Editing the data file](#notes-on-the-data-file)
-* [Check-In a guest](#checking-in-a-guest-check-in)
-* [Check-Out a guest](#checking-out-a-guest-check-out)
-* [Extended Find](#locating-guests-find)
+* [Notes on Data Management](#notes-on-the-data-file)
+
 
 #### Format Legend
 Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
@@ -438,7 +440,7 @@ Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra p
 </div>
 <br>
 
-### Removing a request of a guest: `edit INDEX -rq/REQUEST`
+### Removing a request of a guest: `edit INDEX [-rq/REQUEST]…`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
@@ -478,7 +480,7 @@ The above command is not allowed as the requests deleted can be different depend
 </div>
 <br>
 
-### Removing a request by index: `edit … -ri/REQUEST_INDEX `
+### Removing a request by index: `edit INDEX -ri/REQUEST_INDEX `
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
