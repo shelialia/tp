@@ -703,17 +703,17 @@ Adding a guest while in the main guest list view.
 2. Guest to be added has a unique email and is not currently in guest list.
 
 **Test Cases**
-1. `add n\John Doe p\+65 98765432 e\johnd@example.com r\01-01 rq\One extra pillow`  
+1. `add n\John Doe p\98765432 e\johnd@example.com r\01-01 rq\One extra pillow`  
    **Expected**: A new guest named `John Doe` is added to the list. All details (name, phone, email, room, request) are shown. Status of guest is `BOOKED`. A success message appears in the status bar.
 
 2. `add n\Jane Doe e\janed@example.com r\01-01 rq\One extra pillow`  
    **Expected**: Guest `Jane Doe` is added. Phone number is shown as `Not added`. Status of guest is `BOOKED`. A success message appears in the status bar.
 
-3. `add n\June Doe p\+63 98764444 e\johnd@example.com r\01-01`  
+3. `add n\June Doe p\98764444 e\johnd@example.com r\01-01`  
    **Expected**: Guest `June Doe` is added without any requests. Status of guest is `BOOKED`. No requests are visible. A success message appears in the status bar.
 
 4. Other Incorrect add commands to try:  
-- `add n\ p\+65 98765432 e\johnd@example.com r\01-01`  
+- `add n\ p\98765432 e\johnd@example.com r\01-01`  
 - `add n\John Doe r\01-01`  
 - `add`<br>
 **Expected**: No guest is added. Error message is shown in the status bar with details on missing mandatory fields (e.g., `name`, `email`, or `room`).
