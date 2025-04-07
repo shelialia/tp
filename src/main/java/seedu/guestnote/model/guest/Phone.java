@@ -11,7 +11,7 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should contain 4 to 20 digits and should not have leading/trailing whitespace";
+            "Phone numbers should contain 4 to 20 digits";
     public static final String VALIDATION_REGEX = "^\\+?[\\d ]+$";
     public final String value;
 
