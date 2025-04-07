@@ -263,25 +263,29 @@ Sample Output:<br>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Adds a guest to the guest book.
-- A guest can have any number of requests (including 0)
-- A guest can be added without a phone number
 - All guests automatically have status set to 'BOOKED' when they are added.
 - Names should only contain alphanumeric characters and spaces.
 - Phones should only contain numbers, and be between 4 and 17 digits long.
+  - This field is optional
 - Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The entire email must not exceed 254 characters.
-2. The local-part should only contain alphanumeric characters and these special characters: +, _, ., -. The local-part may not start or end with any special characters.
-3. The local-part is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
+  - The entire email must not exceed 254 characters. 
+  - The local-part should only contain alphanumeric characters and these special characters: +, _, ., -. The local-part may not start or end with any special characters. 
+  - The local-part is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
     - End with a domain label that is at least 2 characters long.
     - Have each domain label start and end with alphanumeric characters.
     - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 - Room numbers should contain two two-digit numbers separated by a hyphen.
+  - For example, `01-01`, `12-34`, `99-99` are valid room numbers.
+  - Room numbers can be the same between two guests.
 - Requests should be alphanumeric, may include spaces, and must not exceed 75 characters.
+  - A guest can have any number of requests (including 0).
+  - Requests must be unique. 
+  - Requests spelled the same are treated as the same, regardless of capitalisation
 
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
+Format: `add n/NAME e/EMAIL [p/PHONE] r/ROOMNUMBER [rq/REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -297,10 +301,12 @@ Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Shows a list of all guests in the guest list.
-- The list is sorted by the order in which guests were added.
-- An optional filter can be applied to **show only guests with requests**.
-- An optional filter can be applied to **show only guests whose names match the filter**.
-- The filters are provided for convenience to quickly find guests in the guest list, a stronger search can be done using the [find](#locating-guests-find) command.
+* The list is sorted by the order in which guests were added.
+* An optional filter can be applied to **show only guests with requests**.
+* An optional filter can be applied to **show only guests whose names match the filter**.
+  * The search is case-insensitive (e.g. `john` matches `John`).
+  * Partial matches allowed. For example, `Alex` matches `Alexis`, `Alexandar`.
+* The filters are provided for convenience to quickly find guests in the guest list, a stronger search can be done using the [find](#locating-guests-find) command.
 
 </box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
@@ -340,9 +346,8 @@ Shows a list of all guests with requests, with either `John` or `Alex` in their 
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 The `find` command now searches across all guest fields by default—including name, email, phone number, room number, and requests. Use this command to search for a keyword that may appear in any field.
-* At least one keyword must be provided.
-* The search is case-insensitive (e.g. `john` matches `John`).
-* Only full words are matched. For example, `Han` will not match `Hans`.
+* At least one keyword must be provided. 
+* Like the [list](#listing-all-guests-list) command's name filter, the search is case-insensitive and partial matches are allowed.
 * The search is performed across all guest fields (name, phone number, room number, and requests).
 * Guests matching at least one keyword will be returned (i.e. an OR search).
 
@@ -389,9 +394,13 @@ Edits an existing guest in the guest list.
 * If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed.
 
 </box>
+<box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
+
+Other flags to edit a guest by [Adding a Request](#adding-a-request-to-a-guest-edit-index-rq-request) and [Removing a Request](#removing-a-request-of-a-guest-edit-index-rq-request) can be used together in this command, but they have been omitted here for clarity. They are covered in later sections. 
+</box>
 <box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOMNUMBER]`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
@@ -403,6 +412,11 @@ Changes the email for the first guest to `charlotte@example.com`
 !!Sample Input: `edit 2 p/91234567 r/01-03`!!<br>
 Changes the phone number for the second guest to `91234567` and the room number to `01-03`.
 </box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+!!Sample Input: `edit 1 r/19-23 +rq/High Floor`!!<br>
+Changes the room number to `19-23` and [Adds a Request](#adding-a-request-to-a-guest-edit-index-rq-request).
+</box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
 !!Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04`!!<br>
@@ -412,12 +426,12 @@ Tries to change a guest's email to one that is already registered to another gue
 </div>
 <br>
 
-### Adding a request to a guest: `edit INDEX +rq/REQUEST`
+### Adding a request to a guest: `edit INDEX [+rq/REQUEST]…`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -427,7 +441,6 @@ _Conditions and features described in the previous section on [edit](#editing-a-
   * Requests spelled the same will be considered the same, regardless of capitalisation. 
   * For example, `Extra Pillow` and `extra pillow` are considered the same request.
   * If the request is already in the list of requests for the guest, nothing will happen and an error message will be shown.
-* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The new request will be **added** to the back of the current request list for the guest.
 
 </box>
@@ -453,7 +466,7 @@ Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra p
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
@@ -498,17 +511,16 @@ Edits guest No.2 in the list by removing the request spelled `extra pillow` and 
 </div>
 <br>
 
-### Removing a request by index: `edit INDEX -ri/REQUEST_INDEX `
+### Removing a request by index: `edit INDEX [-ri/REQUEST_INDEX]`
 --- 
 <div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
 <box theme="secondary" icon=":fa-solid-info:" style="margin-top:-1em; margin-bottom:0px; color:#999999" seamless>
 
-_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, and `r/ROOM_NUMBER` to edit the guest's details, but they have been omitted here for brevity._
+_Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply. <br> You may still use flags such as `n/NAME`, `p/PHONE`, `e/EMAIL`, and `r/ROOMNUMBER` to edit the guest's details, but they have been omitted here for brevity._
 </box>
 <box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 **Removes** an existing request **using the index of the request** of an existing guest in the guest list.
-* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The request at the **specified index** will be **removed** from the list of requests for the guest.
 * Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
 
@@ -556,6 +568,11 @@ Format: `check-in INDEX`
 !!Sample Input: `check-in 1`!!<br>
 Changes the status of the guest at index 1 to `CHECKED IN`.
 </box>
+<box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+!!Sample Input: `check-in 1 2`!!<br>
+**Tries to check-in two guests at once.** Because this process is irreversible, the above command is not allowed to reduce the chances of a typo causing errors. **Nothing will happen, and an error will be shown.**
+</box>
 </div>
 <br>
 
@@ -578,6 +595,11 @@ Format: `check-out INDEX`
 
 !!Sample Input: `check-out 1`!!<br>
 Changes the status of the guest at index 1 to `CHECKED OUT`.
+</box>
+<box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+!!Sample Input: `check-out 1 2`!!<br>
+**Tries to check-out two guests at once.** Because this process is irreversible, the above command is not allowed to reduce the chances of a typo causing errors. **Nothing will happen, and an error will be shown.**
 </box>
 </div>
 <br>
@@ -686,18 +708,18 @@ The data file is stored in the home folder of GuestNote, where you placed the Gu
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`
-**Check-In** | `check-in INDEX`<br> e.g., `check-in 1`
-**Check-Out** | `check-out INDEX`<br> e.g., `check-out 1`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [+rq/REQUEST]… [-rq/REQUEST]… [-ri/REQUEST]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Exit**   | `exit`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Help**   | `help`
-**List**   | `list`
+| Action        | Format, Examples                                                                                                                                                                            |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME [p/PHONE] e/EMAIL r/ROOMNUMBER [rq/REQUEST]…​` <br> Example: `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`                            |
+| **Check-In**  | `check-in INDEX`<br> Example: `check-in 1`                                                                                                                                                  |
+| **Check-Out** | `check-out INDEX`<br> Example: `check-out 1`                                                                                                                                                |
+| **Clear**     | `clear`                                                                                                                                                                                     |
+| **Delete**    | `delete INDEX`<br> Example: `delete 3`                                                                                                                                                      |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOMNUMBER]`<br>`[+rq/ADD_REQUEST]… [-rq/DELETE_REQUEST]… [-ri/DELETE_REQUEST_INDEX]​`<br> Example: `edit 2 n/James Lee e/jameslee@example.com` |
+| **Exit**      | `exit`                                                                                                                                                                                      |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> Example: `find James Jake`                                                                                                                               |
+| **Help**      | `help`                                                                                                                                                                                      |
+| **List**      | `list [rq/] [NAME_FILTER]…`<br> Example: `list` or `list rq/` or `list James`                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
