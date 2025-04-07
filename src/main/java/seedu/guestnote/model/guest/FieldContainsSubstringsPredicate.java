@@ -35,7 +35,7 @@ public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
-        if (fieldValue instanceof Optional<?> optionalValue) {//pattern matching
+        if (fieldValue instanceof Optional<?> optionalValue) { //pattern matching
             if (!optionalValue.isPresent()) {
                 return false;
             }
