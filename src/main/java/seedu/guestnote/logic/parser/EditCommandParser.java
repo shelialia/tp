@@ -113,5 +113,4 @@ public class EditCommandParser implements Parser<EditCommand> {
     private static boolean isAtLeastOnePrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
