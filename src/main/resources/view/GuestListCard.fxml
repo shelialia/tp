@@ -22,10 +22,11 @@
       <HBox spacing="0.5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label"/>
         <FlowPane fx:id="roomNumber" alignment="TOP_LEFT" vgap="0" hgap="3" maxWidth="40" />
-        <Label fx:id="name" styleClass="cell_big_label"/>
+        <Label fx:id="name" styleClass="cell_big_label" />
+        <FlowPane fx:id="status" alignment="TOP_LEFT" vgap="0" hgap="3" maxWidth="40" />
       </HBox>
 
-      <FlowPane fx:id="status" alignment="TOP_LEFT" vgap="3" hgap="5" />
+
 
       <FlowPane fx:id="requests" hgap="5" vgap="3" prefWrapLength="250" />
       <Label fx:id="phone" styleClass="cell_small_label" />

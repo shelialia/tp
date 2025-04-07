@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.testutil.Assert.assertThrows;
 import static seedu.guestnote.testutil.TypicalGuests.ALICE;
 import static seedu.guestnote.testutil.TypicalGuests.BOB;
@@ -79,7 +79,7 @@ public class GuestTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different requests -> returns false
-        editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_HUSBAND).build();
+        editedAlice = new GuestBuilder(ALICE).withRequests(VALID_REQUEST_SEAVIEW).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

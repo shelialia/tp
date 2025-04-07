@@ -6,8 +6,8 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_ROOMNUMBER_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
@@ -36,14 +36,14 @@ public class TypicalGuests {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withRoomNumber("12-33")
-            .withRequests("friend")
+            .withRequests("Extra Pillow")
             .withStatus(Status.BOOKED).build();
     public static final Guest BENSON = new GuestBuilder()
             .withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withRoomNumber("23-32")
-            .withRequests("owesMoney", "friend")
+            .withRequests("High Floor", "Sea View Suite")
             .withStatus(Status.BOOKED).build();
     public static final Guest CARL = new GuestBuilder()
             .withName("Carl Kurz")
@@ -57,7 +57,6 @@ public class TypicalGuests {
             .withEmail("cornelia@example.com")
             .withPhone("87652533")
             .withRoomNumber("04-22")
-            .withRequests("friend")
             .withStatus(Status.BOOKED)
             .build();
     public static final Guest ELLE = new GuestBuilder()
@@ -112,7 +111,7 @@ public class TypicalGuests {
             .withPhone(VALID_PHONE_AMY)
             .withRoomNumber(VALID_ROOMNUMBER_AMY)
             .withStatus(VALID_STATUS_AMY)
-            .withRequests(VALID_REQUEST_FRIEND)
+            .withRequests(VALID_REQUEST_SEAVIEW)
             .build();
     public static final Guest BOB = new GuestBuilder()
             .withName(VALID_NAME_BOB)
@@ -120,7 +119,7 @@ public class TypicalGuests {
             .withEmail(VALID_EMAIL_BOB)
             .withRoomNumber(VALID_ROOMNUMBER_BOB)
             .withStatus(VALID_STATUS_BOB)
-            .withRequests(VALID_REQUEST_HUSBAND, VALID_REQUEST_FRIEND)
+            .withRequests(VALID_REQUEST_EXTRAPILLOW, VALID_REQUEST_SEAVIEW)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

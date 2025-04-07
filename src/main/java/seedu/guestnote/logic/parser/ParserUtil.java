@@ -2,6 +2,7 @@ package seedu.guestnote.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,6 +22,9 @@ import seedu.guestnote.model.request.Request;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INDEX_HAS_LEADING_ZEROES =
+            "The index provided has leading zeros. Use '%s' instead of '%s'.";
+    public static final String MESSAGE_INDEX_TOO_LARGE = "The index provided is too large.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -29,9 +33,24 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (!trimmedIndex.matches("\\d+")) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        BigInteger bigInt = new BigInteger(trimmedIndex);
+        if (bigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+            throw new ParseException(MESSAGE_INDEX_TOO_LARGE);
+        }
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+
+        if (trimmedIndex.matches("^0+[1-9]\\d*$")) {
+            String suggested = trimmedIndex.replaceFirst("^0+(?!$)", "");
+            throw new ParseException(String.format(MESSAGE_INDEX_HAS_LEADING_ZEROES, suggested, trimmedIndex));
+        }
+
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 

@@ -1,8 +1,8 @@
 package seedu.guestnote.logic.parser;
 
 import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.guestnote.logic.commands.CommandTestUtil.ADD_REQUEST_DESC_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.ADD_REQUEST_DESC_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.ADD_REQUEST_DESC_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.ADD_REQUEST_DESC_SEAVIEW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_ADD_REQUEST_DESC;
@@ -12,14 +12,14 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.guestnote.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.REQUEST_DESC_SEAVIEW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_FRIEND;
-import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_HUSBAND;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
+import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -104,12 +104,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_GUEST;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADD_REQUEST_DESC_HUSBAND
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADD_REQUEST_DESC_EXTRAPILLOW
                 + EMAIL_DESC_AMY + NAME_DESC_AMY;
 
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withRequestsToAdd(VALID_REQUEST_HUSBAND).build();
+                .withRequestsToAdd(VALID_REQUEST_EXTRAPILLOW).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -149,8 +149,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // requests
-        userInput = targetIndex.getOneBased() + ADD_REQUEST_DESC_FRIEND;
-        descriptor = new EditGuestDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_FRIEND).build();
+        userInput = targetIndex.getOneBased() + ADD_REQUEST_DESC_SEAVIEW;
+        descriptor = new EditGuestDescriptorBuilder().withRequestsToAdd(VALID_REQUEST_SEAVIEW).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -173,8 +173,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + REQUEST_DESC_FRIEND + PHONE_DESC_AMY + EMAIL_DESC_AMY + REQUEST_DESC_FRIEND
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + REQUEST_DESC_HUSBAND;
+                + REQUEST_DESC_SEAVIEW + PHONE_DESC_AMY + EMAIL_DESC_AMY + REQUEST_DESC_SEAVIEW
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + REQUEST_DESC_EXTRAPILLOW;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));

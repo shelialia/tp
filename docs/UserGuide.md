@@ -6,7 +6,8 @@ pageNav: 3
 
 # GuestNote User Guide
 **Welcome to GuestNote!**  
-_Time is money, and in the hotel industry, every second counts._
+> Time is money, and in the hotel industry, every second counts.
+
 Mistakes in guest handling - like assigning the wrong room or forgetting a special request - don’t just hurt your workflow. They hurt your guests’ experience and cost your hotel real money.  
 
 **That’s where GuestNote comes in.**
@@ -30,6 +31,7 @@ With **GuestNote**, you can stay on top of guest needs, streamline daily concier
 Refer to the sidebar if you are on the website, or to the table below if you are on the PDF.
 
 1. [Quick Start](#quick-start)
+2. [Introducing the User Interface](#introducing-the-user-interface)
 2. [Features](#features)
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
@@ -51,266 +53,585 @@ Visit our online [User Guide](https://ay2425s2-cs2103t-w09-2.github.io/tp/UserGu
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-<panel header="_Not sure which Java version you have?_" no-close>
-    <tabs>
-        <tab header="Windows">
-        To check your Java version on Windows, please follow these steps:
-        <ol>
-        <li>Open Command Prompt.</li>
-        <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
-        </ol>
-        <img src="images/ug/checkjavaversion_windows.jpeg" alt="Java version Windows" style="width:100%;">
-        </tab>
-        <tab header="Mac">
-        To check your Java version on Mac, please follow these steps:
-        <ol>
-        <li>Open Terminal.</li>
-        <li>Type `java -version` and press Enter.</li>
-        <li>Check the version of Java installed on your computer. Your terminal should look like this: </li>
-        </ol>
-        <img src="images/ug/checkjavaversion_mac.png" alt="Java version Mac" style="width:100%;">
-        </tab>
-    </tabs>
-</panel>
+<box type="info">
+
+Hey there! If you are an **advanced user** and you:
+* Have Java `17` or above installed in your computer, and
+* Already have GuestNote installed in your computer,
+
+Click [here](#features) to view the features of GuestNote.
+
+</box>
+
+#### Installing Java and GuestNote
+1. If you already have Java `17` or above installed in your computer, you can skip to step 2.<br>
+
+<box border-left-color="#3c3c3c" icon=":glyphicon-wrench:" light>
+<span class="badge bg-secondary" style="font-size:1em">Windows Users: </span>
+<b>Installing Java for Windows</b> <br>
+
+* Follow these instructions to download and install Java [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html). { text="1. " }
+* To check your Java version on Windows, please follow these steps: { text="2. " }
+    * Open Command Prompt. { text="2.1 " }
+    * Type `java -version` and press Enter. { text="2.2 " }
+    * Check the version of Java installed on your computer. Your Command Prompt window should look like this:  { text="2.3 " }
+
+<img src="images/ug/checkjavaversion_windows.jpeg" alt="Java version Windows" style="width:100%;">
+</box>
+<box border-left-color="#3c3c3c" icon=":glyphicon-wrench:" light>
+<span class="badge bg-secondary" style="font-size:1em">Mac Users</span>
+<b>Installing Java for Mac</b> <br>
+
+* Follow these instructions to download and install Java [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). { text="1. " }
+* To check your Java version on Mac, please follow these steps: { text="2. " }
+    * Open Terminal. { text="2.1 " }
+    * Type `java --version` and press Enter. { text="2.2 " }
+    * Check the version of Java installed on your computer. Your Terminal window should look like this: { text="2.3 " }
+
+<img src="images/ug/checkjavaversion_mac.png" alt="Java version Mac" style="width:100%;">
+</box>
 <br>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-W09-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your GuestNote.
+3. Copy the file to the folder you want to use as the _home folder_ for your GuestNote. GuestNote will create all the files it needs in this folder.
 
-4. Open a command terminal, and use the `cd` command to navigate into the folder you put the jar file in.<br>Run `java -jar guestnote.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+#### Running GuestNote
+
+1. Open a command terminal, and use the `cd` command to navigate into the folder you put the jar file in. For example, if you put the jar file in a folder named `GuestNote` on the `Desktop`, you can run the following commands:
+    ```bash
+    cd Desktop      # Navigate from home directory to the Desktop
+    cd GuestNote    # Navigate to the folder containing the jar file
+    ```
+   
+2. Run `java -jar guestnote.jar` command to run the application.<br>
+   A GUI should appear in a few seconds. Note how the app contains some sample data.<br>
    ![firstview.png](images/ug/firstview.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-<panel header="Take it for a spin, let's try out some commands!" no-close expanded>
-    <tabs>
-        <tab header="**Parts of the App**">
-            <markdown>
+
+3. If you prefer to explore GuestNote on your own, you may refer to the [Features](#features) below for details of each command. Otherwise, keep reading!
+
+## Introducing the User Interface
+
 **The app is divided into 3 parts:**
 1. **Command Box:** This is where you type the commands.
 2. **Output Box:** This is where the result of the command is shown.
 3. **Guest Book:** This is where the list of guests is shown.
 ![labelledUI.png](images/ug/labelledUI.png)
-            </markdown>
-        </tab>
-        <tab header="**Try out the help command**">
-            <markdown>
-**Type `help` and press Enter to see the help window.**
-            </markdown>
-            <panel header="Help! Where do I type **`help`**?" no-close>
-                <markdown>
-Type the command **`help`** into the Command Box, as shown below:
-![command_input_help.png](images/ug/command_input_help.png)
-                </markdown>
-            </panel>
-            <panel header="What you should see:" no-close expanded>
-                <markdown>
-Now you can always come back to this page if you need help!
-![help_command_executed.png](images/ug/help_command_executed.png)
-                </markdown>
-            </panel>
-        </tab>
-        <tab header="**Try out some other commands**">
-            <markdown>
+
+<box type="info" header="##### Try out your first command: `help`" light>
+
+1. Type the command `help` into the Command Box, as shown below, then press Enter. 
+2. Now you can always come back to this page if you need help:
+![help_command_executed.png](images/ug/help_command_executed.png) 
+
+</box>
+
+<box type="tip" header="##### Try out some other commands: `add`, `list`, `edit`, `check-in`, and `delete`" light>
+
 Some example commands you can try:
 
-* `add n/John Doe p/98765432 e/johnd@example.com r/01-01 rq/One extra pillow` : Adds a guest named `John Doe` who lives in room `#01-01` with phone number `98765432` and unique email `johnd@example.com` and a request of `One extra pillow` to the Guest list.
+<box type="default" icon=":glyphicon-plus:" background-color="#efefef" light>
 
-* `list` : Lists all guests.
+**Add your first guest:** `add n/John Doe p/91234567 e/johnd@example.com r/01-01`<br>
+Adds a guest named !!John Doe!! who lives in room !!#01-01!! with email !!johnd@example.com!! and phone number !!91234567!!.
 
-* `edit 2 n/James Lee +rq/Room cleaning`: Edit guest No.2 to be named `James Lee` with an additional request `Room cleaning`.
+</box>
+<box type="default" icon=":glyphicon-th-list:" background-color="#efefef" light>
 
-* `edit 2 -ri/1`: Edit guest No.2 by deleting the first request for the guest. 
+**List all guests:** `list`<br>
+Shows a list of all guests.
 
-* `delete 3` : Deletes guest No.3 in the current list of guests.
+</box>
+<box type="default" icon=":glyphicon-edit:" background-color="#efefef" light>
 
-* `clear` : Deletes all guests.
-   
-* `find John` : Finds all guests whose fields (e.g. name, phone, email, room request) contain the word `John`.
-   
-* `check-in 1` : Check in guest No.1
+**Edit a guest:** `edit 1 +rq/Room cleaning`<br>
+Edits the !!first guest!!, adding an additional request !!Room cleaning!!.
 
-* `check-out 1`: Check out guest No.1
+</box>
+<box type="default" icon=":glyphicon-log-out:" background-color="#efefef" light>
 
-* `exit` : Exits the app.
+**Check-in a guest:** `check-in 1`<br>
+Checks in the !!first guest!!.
 
-* `help` : Shows the help window.
-            </markdown>
-        </tab>
-    </tabs>
-</panel>
+</box>
+<box type="default" icon=":glyphicon-trash:" background-color="#efefef" light>
+
+**Delete a guest:** `delete 1`<br>
+Deletes the !!first guest!! from the app.
+
+</box>
+
+Want to learn more? Check out the [Features](#features) section below.
+
+</box>
 <br>
 
-6. Refer to the [Features](#features) below for details of each command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<box type="info" seamless>
+#### Table of Contents
+* [Format Legend](#format-legend)
+* [Viewing help](#viewing-help-help)
+* [Adding a guest](#adding-a-guest-add)
+* [Listing all guests](#listing-all-guests-list)
+* [Editing a guest](#editing-a-guest-edit)
+* [Locating guests by name](#locating-guests-find)
+* [Deleting a guest](#deleting-a-guest-delete)
+* [Clearing all entries](#clearing-all-entries-clear)
+* [Exiting the program](#exiting-the-program-exit)
+* [Saving the data](#notes-on-the-data-file)
+* [Editing the data file](#notes-on-the-data-file)
+* [Check-In a guest](#checking-in-a-guest-check-in)
+* [Check-Out a guest](#checking-out-a-guest-check-out)
+* [Extended Find](#locating-guests-find)
 
-**Notes about the command format:**<br>
+#### Format Legend
+Woah! Before we dive into the features, here's a quick legend to help you understand the format of the commands:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+<box type="default" icon=":fa-solid-a:" background-color="#efefef" light>
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [rq/REQUEST]` can be used as `n/John Doe rq/New Pillow` or as `n/John Doe`.
+**UPPER_CASE = !!Fill it in!!**<br>
+Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+**Example:** `n/NAME` :fa-solid-arrow-right: `n/John Doe` :fa-solid-check:
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[rq/REQUEST]…​` can be used as ` ` (i.e. 0 times), `rq/New Pillow`, `rq/New Pillow rq/Orange Juice` etc.
+</box>
+<box type="default" icon=":fa-solid-right-to-bracket:" background-color="#efefef" light>
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+**[Square Brackets] = !!Optional!!** <br>
+Items in square brackets are optional.<br>
+**Example:** `n/NAME [rq/REQUEST]`<br>
+:fa-solid-arrow-right: `n/John Doe` :fa-solid-check: <br>
+:fa-solid-arrow-right: `n/John Doe rq/New Pillow` :fa-solid-check:
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+</box>
+<box type="default" icon=":fa-solid-ellipsis:" background-color="#efefef" light>
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+**Ellipsis … = !!Multiple Times!!** <br>
+Items with `…` after them can be used multiple times including zero times.<br>
+**Example:** `[rq/REQUEST]…`<br>
+:fa-solid-arrow-right: ` ` (not used at all) :fa-solid-check: <br>
+:fa-solid-arrow-right: `rq/New Pillow` :fa-solid-check: <br>
+:fa-solid-arrow-right: `rq/New Pillow rq/Orange Juice rq/Socks` :fa-solid-check:
+</box>
+<box type="warning" icon=":fa-solid-right-left:">
 
-### Viewing help : `help`
+**!!Any Order!!: Parameters can be in any order**<br>
+Example: `n/NAME `**`p/PHONE e/EMAIL`**<br>
+:fa-solid-arrow-right: `n/NAME `**`p/PHONE e/EMAIL`** (same order) :fa-solid-check: <br>
+:fa-solid-arrow-right: **`e/EMAIL`**` n/NAME `**`p/PHONE`** (different order) :fa-solid-check:
 
-Shows a message explaning how to access the help page.
+</box>
+<box type="wrong" icon=":fa-solid-xmark:">
 
-![help message](images/helpMessage.png)
+**!!Copy Carefully!!: Copying across line breaks in PDF version may cause issues**<br>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</box>
+
+### Commands
+
+
+
+### Viewing help: `help`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Shows a message with a link to this help page.
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Format: `help`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Output:<br>
+![help message](images/helpMessage.png)
+</box>
+</div>
+<br>
 
 
 ### Adding a guest: `add`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Adds a guest to the guest list.
-
-Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
-
-<box type="tip" seamless>
-
-**Tip:** 
-* A guest can have any number of requests (including 0)
-* A guest can be added without a phone number
-* All guests automatically have status set to 'BOOKED' when they are added. 
+Adds a guest to the guest book.
+- A guest can have any number of requests (including 0)
+- A guest can be added without a phone number
+- All guests automatically have status set to 'BOOKED' when they are added.
+- Names should only contain alphanumeric characters and spaces.
+- Phones should only contain numbers, and be between 4 and 17 digits long.
+- Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The entire email must not exceed 254 characters.
+2. The local-part should only contain alphanumeric characters and these special characters: +, _, ., -. The local-part may not start or end with any special characters.
+3. The local-part is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
+    - End with a domain label that is at least 2 characters long.
+    - Have each domain label start and end with alphanumeric characters.
+    - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+- Room numbers should contain two two-digit numbers separated by a hyphen.
+- Requests should be alphanumeric, may include spaces, and must not exceed 75 characters.
 
 </box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Examples:
-* `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
-![Screenshot 2025-04-03 at 11.22.47 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_aTywuZ%2FScreenshot%202025-04-03%20at%2011.22.47%E2%80%AFAM.png)
+Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` <br>
+Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
+</box>
+</div>
+<br>
 
 ### Listing all guests : `list`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Shows a list of all guests in the guest list.
+- The list is sorted by the order in which guests were added.
+- An optional filter can be applied to **show only guests with requests**.
+- An optional filter can be applied to **show only guests whose names match the filter**.
+- The filters are provided for convenience to quickly find guests in the guest list, a stronger search can be done using the [find](#locating-guests-find) command.
 
-Format: `list`
-![Screenshot 2025-04-03 at 11.23.14 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KsmbAU%2FScreenshot%202025-04-03%20at%2011.23.14%E2%80%AFAM.png)
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-### Editing a guest : `edit`
+Format: `list [rq/] [NAME_FILTER]…`
+- **`list`** displays every guest.
+- **`list rq/`** displays only guests with requests (i.e. guests whose request field is not null).
+- **`list NAME_FILTER…`** displays only guests whose names match the filter.
+- **`list rq/ NAME_FILTER…`** displays only guests with requests whose names match the filter.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list` <br>
+Shows a list of all guests in the guest list.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list rq/` <br>
+Shows a list of all guests in the guest list with requests.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list John` <br>
+Shows a list of all guests with `John` in their name, including `John Doe` and `Johnathon Chua`.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `list rq/ John Alex` <br>
+Shows a list of all guests with requests, with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
+</box>
+</div>
+<br>
+
+### Locating guests: `find`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+The `find` command now searches across all guest fields by default—including name, email, phone number, room number, and requests. Use this command to search for a keyword that may appear in any field.
+* At least one keyword must be provided.
+* The search is case-insensitive (e.g. `john` matches `John`).
+* Only full words are matched. For example, `Han` will not match `Hans`.
+* The search is performed across all guest fields (name, phone number, room number, and requests).
+* Guests matching at least one keyword will be returned (i.e. an OR search).
+
+</box>
+<box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Warning:**
+- Avoid using overly generic or very short keywords, as these may produce unintended matches.
+- Because the command uses an OR search across all fields, multiple keywords can broaden your search results more than expected.
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `find KEYWORD [MORE_KEYWORDS]…`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find John` <br>
+Shows a list where any field (e.g. email, name) contains the full word "John" (e.g. "John Doe").
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find BOOKED` <br>
+Shows all guests with the status `BOOKED`. You can also apply this for other statuses like `CHECKED IN` or `CHECKED OUT`, however you will need to use `find CHECKED_IN` and `find CHECKED_OUT` instead. 
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `find 03-04` <br>
+Shows all guests where any field (e.g. email, name) contains the full word "03-04" (e.g. "03-04"). This is useful for looking up the guests in a specific room. Note that the `#` symbol is not required.
+</box>
+
+</div>
+<br>
+
+
+### Editing a guest: `edit`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Edits an existing guest in the guest list.
-
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [+rq/REQUEST]…​ [-rq/REQUEST]…​ [-ri/REQUEST_INDEX]…​`
-
-**Tip:**
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer and must be valid** (ie. within the number of guests displayed).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing requests:
-  * an add request input will be added to the back of the current request list for the guest.
-  * a remove request input will cause the requests behind the deleted one to be shifted forward.
-* If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed. 
+* If the edit results in a duplicate guest in the guest list (ie. two with the same email address), the command is not allowed.
 
-Examples:
-*  `edit 2 +rq/Extra blanket` Edits guest No.2 in the list by adding a request `Extra blanket`.
-   ![Screenshot 2025-04-03 at 11.23.49 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_OpgCT6%2FScreenshot%202025-04-03%20at%2011.23.49%E2%80%AFAM.png)
-*  `edit 2 -ri/1` Edits guest No.2 in the list by deleting the first request for that guest.
-   ![Screenshot 2025-04-03 at 11.24.46 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_oyI2Dx%2FScreenshot%202025-04-03%20at%2011.24.46%E2%80%AFAM.png)
-*  `edit 1 e/charlotte@example.com` Will not be allowed when there is an existing guest with the email `charlotte@example.com` in the guest list.
-![Screenshot 2025-04-03 at 11.25.12 AM.png](..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fzf%2Fnqtl6ybj3nq848qtc63_c83r0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_M8SZpG%2FScreenshot%202025-04-03%20at%2011.25.12%E2%80%AFAM.png)
-
-### Locating guests by name: `find`
-
-Finds guests whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Guests matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a guest : `delete`
-
-Deletes the specified guest from the guest list.
-
-Format: `delete INDEX`
-
-* Deletes the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd guest in the guest list.
-* `find Betsy` followed by `delete 1` deletes the 1st guest in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the guest list.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-GuestNote data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-GuestNote data are saved automatically as a JSON file `[JAR file location]/data/guestnote.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, GuestNote will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the GuestNote to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-### Check-In a guest : `check-in`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER]`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Check-in a guest to the hotel.
+Sample Input: `edit 1 e/charlotte@example.com`<br>
+Changes the email for the first guest to `charlotte@example.com`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 p/91234567 r/01-03` <br>
+Changes the phone number for the second guest to `91234567` and the room number to `01-03`.
+</box>
+<box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04` <br>
+Tries to change a guest's email to one that is already registered to another guest, and update the room number. Nothing will occur, and an error message will be shown explaining that the email is not valid.
+
+</box>
+</div>
+<br>
+
+### Adding a request to a guest: `edit INDEX +rq/REQUEST`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Adds** a request to an existing guest in the guest list.
+* Request names should be alphanumeric, may include spaces, and must not exceed 75 characters
+* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The new request will be **added** to the back of the current request list for the guest.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [+rq/REQUEST]…​`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 +rq/Extra blanket`  <br>
+Edits guest No.2 in the list by adding a request `Extra blanket`.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 +rq/Extra blanket +rq/Extra pillow`  <br>
+Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra pillow`.
+</box>
+</div>
+<br>
+
+### Removing a request of a guest: `edit INDEX -rq/REQUEST`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Removes** an existing request of an existing guest in the guest list.
+* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The request will be **removed** from the list of requests for the guest.
+* If the request is not found in the list of requests for the guest, nothing will happen and an error message will be shown.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [-rq/REQUEST]…​`
+</box>
+<box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+`-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command. <br>
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -rq/Extra blanket`  <br>
+Edits guest No.2 in the list by removing the request `Extra blanket`.
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`  <br>
+Edits guest No.2 in the list by removing two requests `Extra blanket` and `Extra pillow`.
+</box>
+<box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -ri/1 -rq/Extra Towel`  <br>
+Tries to remove the first request and a request `Extra Towel` in the list of requests for that guest.
+
+The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
+**To prevent confusion, nothing will occur, and an error message will be shown.**
+</box>
+</div>
+<br>
+
+### Removing a request by index: `edit … -ri/REQUEST_INDEX `
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Removes** an existing request **using the index of the request** of an existing guest in the guest list.
+* Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
+* The request at the **specified index** will be **removed** from the list of requests for the guest.
+* Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `edit INDEX [-ri/REQUEST_INDEX]​`
+</box>
+<box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+`-ri/REQUEST_INDEX` and `-rq/REQUEST` cannot be used together in the same edit command. <br>
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -ri/1`  <br>
+Edits guest No.2 in the list by removing the first request in the list of requests for that guest.
+</box>
+<box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `edit 2 -ri/1 -ri/2`  <br>
+Tries to remove the first and second requests in the list of requests for that guest. The above command is not allowed as the requests deleted can be different depending on how the command is interpreted. **To prevent confusion, nothing will occur, and an error message will be shown.**
+</box>
+</div>
+<br>
+
+### Checking In a guest: `check-in` 
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Changes the status of the guest at the specified index to `CHECKED IN`.
+* If the guest is already checked-in, the command will not have any effect and an error will be shown.
+* Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Format: `check-in INDEX`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-* Check-in the guest at the specified `INDEX`.
-* If the guest is already checked-in, the command will not have any effect and an exception will show up in the app.
+Sample Input: `check-in 1`  <br>
+Changes the status of the guest at index 1 to `CHECKED IN`.
+</box>
+</div>
+<br>
 
-### Check-Out a guest : `check-out`
+### Checking Out a guest: `check-out`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-Check-out a guest from the hotel.
+Changes the status of the guest at the specified index to `CHECKED OUT`.
+* !!The guest must have a status of checked-in before they can be checked-out!!. Otherwise, the command will not have any effect and an error will be shown.
+* If the guest is already checked-out, the command will not have any effect and an error will be shown.
+* Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
 Format: `check-out INDEX`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-* Check-out the guest at the specified `INDEX`.
-* If the guest is already checked-out, the command will not have any effect and an exception will show up in the app.
-* If the guest is not checked in yet, the command will not have any effect and an exception will show up in the app.
+Sample Input: `check-out 1`  <br>
+Changes the status of the guest at index 1 to `CHECKED OUT`.
+</box>
+</div>
+<br>
 
-### Extended Find `[coming in v1.4]`
+### Deleting a guest : `delete`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
 
-_Details coming soon ..._
+Deletes the specified guest from the guest list.
+* The index refers to the index number shown in the displayed guest list.
+* Rules on specified index are the same as the rules for the [edit](#editing-a-guest-edit) command.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `delete INDEX`
+</box>
+<box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
+
+Sample Input: `delete 2` <br>
+Deletes the second guest in the guest list.
+</box>
+
+</div>
+<br>
+
+### Clearing all entries : `clear`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Deletes all guests in the guest list.
+* This command is provided for convenience to clear the mock data in the app.
+* It is not recommended to use this command as it will delete all guests in the guest list.
+
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `clear`
+</box>
+
+</div>
+<br>
+
+### Exiting the program : `exit`
+--- 
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Exits the program. 
+- This is provided for convenience to quick typists, closing the app without using the mouse. 
+- It is not necessary to use this command to exit the app.
+</box>
+<box theme="warning" icon=":fa-solid-i-cursor:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+Format: `exit`
+</box>
+</div>
+<br>
+
+### Notes on the data file
+---
+<div style="background-color:#fafafa; padding: 1em; border-radius: 5px; margin-bottom: 1em;">
+<box theme="success" icon=":fa-solid-check:" style="margin-top:-1em; margin-bottom:0px" seamless>
+Any changes to the data are immediately saved to the data file. **There is no need to save manually.**
+</box>
+<box theme="primary" icon=":fa-solid-question:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+The data file is stored in the home folder of GuestNote, where you placed the GuestNote jar file.
+- The data file is named `guestnote.json` and is created automatically when you run the application for the first time.
+- The data file is used to store all the guest information in JSON format, which is a standard format for storing data in a structured way.
+
+</box>
+<box theme="warning" icon=":fa-solid-triangle-exclamation:" style="margin-top:-1em; margin-bottom:0px" seamless>
+
+**Caution:** Advanced users are welcome to update data directly by editing that data file, however, please note:
+- If your changes to the data file makes its format invalid, GuestNote will discard all data and start with an empty data file at the next run.  Hence, **it is recommended to take a backup of the file before editing it**.<br>
+- Furthermore, certain edits can cause the GuestNote to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, **edit the data file only if you are confident** that you can update it correctly.
+</box>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -341,15 +662,15 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER [rq/REQUEST]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/01-01 rq/Add Pillow rq/Orange Juice`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rq/REQUEST]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Exit**   | `exit`
 **Check-In** | `check-in INDEX`<br> e.g., `check-in 1`
 **Check-Out** | `check-out INDEX`<br> e.g., `check-out 1`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [+rq/REQUEST]… [-rq/REQUEST]… [-ri/REQUEST]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Exit**   | `exit`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Help**   | `help`
+**List**   | `list`
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.guestnote.commons.util.StringUtil;
 
@@ -16,7 +14,7 @@ import seedu.guestnote.commons.util.StringUtil;
  * contains any of the given keywords.
  * </p>
  */
-public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
+public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
     private final List<String> keywords;
     private final Function<Guest, T> fieldExtractor;
 
@@ -25,7 +23,7 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
      * @param fieldExtractor Function that extracts the field to be tested from a Guest object.
      * @param keywords List of keywords to test against the field.
      */
-    public FieldContainsKeywordsPredicate(Function<Guest, T> fieldExtractor, List<String> keywords) {
+    public FieldContainsSubstringsPredicate(Function<Guest, T> fieldExtractor, List<String> keywords) {
         this.keywords = keywords;
         this.fieldExtractor = fieldExtractor;
     }
@@ -49,7 +47,7 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
         } else {
             String fieldString = fieldValue.toString().trim();
             return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(fieldString, keyword.trim()));
+                    .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(fieldString, keyword.trim()));
         }
     }
 
@@ -60,11 +58,11 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FieldContainsKeywordsPredicate)) {
+        if (!(other instanceof FieldContainsSubstringsPredicate)) {
             return false;
         }
 
-        FieldContainsKeywordsPredicate<?> otherPredicate = (FieldContainsKeywordsPredicate<?>) other;
+        FieldContainsSubstringsPredicate<?> otherPredicate = (FieldContainsSubstringsPredicate<?>) other;
         return keywords.equals(otherPredicate.keywords);
     }
 
@@ -74,25 +72,18 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<Guest> {
      * This ensures that for array fields (like requests), the complete phrase is matched.
      */
     private boolean arrayContainsKeyword(Object[] arr, List<String> keywords) {
-        // Join keywords into a normalized search phrase.
-        String normalizedSearch = String.join(" ", keywords).toLowerCase().trim()
-                .replaceAll("\\s+", " ");
-        // Prepare a regex pattern with word boundaries.
-        Pattern pattern = Pattern.compile("\\b" + Pattern.quote(normalizedSearch) + "\\b");
-
-        // Check each element of the array.
+        String normalizedSearch = String.join(" ", keywords).toLowerCase().trim().replaceAll("\\s+", " ");
         for (Object element : arr) {
             if (element != null) {
-                String normalizedElement = element.toString().toLowerCase().trim()
-                        .replaceAll("\\s+", " ");
-                Matcher matcher = pattern.matcher(normalizedElement);
-                if (matcher.find()) {
+                String normalizedElement = element.toString().toLowerCase().trim().replaceAll("\\s+", " ");
+                if (StringUtil.containsSubstringIgnoreCase(normalizedElement, normalizedSearch)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
     @Override
     public String toString() {
         return getClass().getCanonicalName() + "{keywords=" + keywords + "}";
