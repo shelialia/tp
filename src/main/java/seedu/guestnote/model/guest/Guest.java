@@ -82,8 +82,11 @@ public class Guest {
             return true;
         }
 
-        return otherGuest != null
-                && otherGuest.getEmail().value.equalsIgnoreCase(getEmail().value);
+        if (otherGuest == null) {
+            return false;
+        }
+
+        return otherGuest.phone.equals(this.phone) || otherGuest.getEmail().value.equalsIgnoreCase(getEmail().value);
     }
 
     /**
