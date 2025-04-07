@@ -21,8 +21,12 @@ import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_EXTRAPILLOW;
 import static seedu.guestnote.logic.commands.CommandTestUtil.VALID_REQUEST_SEAVIEW;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ_INDEX;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.guestnote.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.guestnote.testutil.TypicalIndexes.INDEX_FIRST_GUEST;
@@ -187,4 +191,56 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));
     }
 
+    @Test
+    public void parse_multipleRiFields_failure() {
+        // multiple ri fields
+        Index targetIndex = INDEX_FIRST_GUEST;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_DELETE_REQ_INDEX + "1 "
+                + PREFIX_DELETE_REQ_INDEX + "2";
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DELETE_REQ_INDEX));
+    }
+
+    @Test
+    public void parse_deleteReqIndexAndDeleteReq_failure() {
+        Index targetIndex = INDEX_FIRST_GUEST;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_DELETE_REQ_INDEX + "1 "
+                + PREFIX_DELETE_REQ + "Extra pillow";
+
+        assertParseFailure(parser, userInput,
+                "Cannot use " + PREFIX_DELETE_REQ_INDEX + " " + PREFIX_DELETE_REQ + " together.");
+    }
+
+    @Test
+    public void parse_duplicateNonRequestPrefixes_failure() {
+        Index targetIndex = INDEX_FIRST_GUEST;
+
+        // Duplicate name prefix
+        String userInput = targetIndex.getOneBased() + " "
+                + "n/Alice n/Amy";
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // Duplicate phone prefix
+        userInput = targetIndex.getOneBased() + " "
+                + "p/12345678 p/87654321";
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // Duplicate email prefix
+        userInput = targetIndex.getOneBased() + " "
+                + "e/alice@example.com e/bob@example.com";
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
+
+        // Duplicate room number prefix
+        userInput = targetIndex.getOneBased() + " "
+                + "r/101 r/202";
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROOMNUMBER));
+    }
 }

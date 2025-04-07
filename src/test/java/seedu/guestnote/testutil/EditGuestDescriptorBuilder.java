@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.commands.EditCommand.EditGuestDescriptor;
 import seedu.guestnote.model.guest.Email;
 import seedu.guestnote.model.guest.Guest;
@@ -91,6 +92,18 @@ public class EditGuestDescriptorBuilder {
     public EditGuestDescriptorBuilder withRequestsToDelete(String... requests) {
         List<Request> requestList = new ArrayList<>(Stream.of(requests).map(Request::new).toList());
         descriptor.setRequestsToDelete(requestList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code indexes} into a {@code List<Index>} and sets them as request indexes **to remove**
+     * in the {@code EditGuestDescriptor} that we are building.
+     */
+    public EditGuestDescriptorBuilder withRequestIndexesToDelete(String... indexes) {
+        List<Index> indexList = new ArrayList<>(Stream.of(indexes)
+                .map(index -> Index.fromOneBased(Integer.parseInt(index)))
+                .toList());
+        descriptor.setRequestIndexesToDelete(indexList);
         return this;
     }
 

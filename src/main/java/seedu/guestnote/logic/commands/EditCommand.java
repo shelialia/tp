@@ -118,8 +118,6 @@ public class EditCommand extends Command {
         UniqueRequestList updatedRequests = new UniqueRequestList();
         updatedRequests.setRequests(guestToEdit.getRequests());
 
-        editGuestDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
-        editGuestDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
         editGuestDescriptor.getRequestIndexesToDelete().ifPresent(indexes -> {
             List<Request> requests = updatedRequests.asUnmodifiableObservableList();
             for (Index idx : indexes) {
@@ -133,6 +131,8 @@ public class EditCommand extends Command {
 
             updatedRequests.removeAll(requestsToDeleteList);
         });
+        editGuestDescriptor.getRequestsToDelete().ifPresent(updatedRequests::removeAll);
+        editGuestDescriptor.getRequestsToAdd().ifPresent(updatedRequests::addAll);
 
         return new Guest(updatedName, updatedPhone, updatedEmail, updatedRoomNumber, updatedStatus, updatedRequests);
     }

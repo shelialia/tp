@@ -46,8 +46,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER, PREFIX_DELETE_REQ_INDEX
         );
+        if (argMultimap.getValue(PREFIX_DELETE_REQ).isPresent()
+                && argMultimap.getValue(PREFIX_DELETE_REQ_INDEX).isPresent()) {
+            throw new ParseException("Cannot use " + PREFIX_DELETE_REQ_INDEX + " " + PREFIX_DELETE_REQ + " together.");
+        }
 
         EditGuestDescriptor editGuestDescriptor = new EditGuestDescriptor();
 

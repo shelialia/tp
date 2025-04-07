@@ -205,6 +205,81 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_REQUEST + ": [friend]");
     }
 
+    @Test
+    public void execute_addRequestAndDeleteRequestIndex_success() {
+        // Set up the guest with initial requests
+        Guest originalGuest = new GuestBuilder()
+                .withName("Alex Yeoh")
+                .withPhone("99272758")
+                .withEmail("alexyeoh@example.com")
+                .withRoomNumber("23-32")
+                .withRequests("Late check in", "Hello4")
+                .build();
+        model.setGuest(model.getFilteredGuestList().get(0), originalGuest);
+
+        // Prepare expected guest after editing
+        Guest editedGuest = new GuestBuilder()
+                .withName("Alex Yeoh")
+                .withPhone("99272758")
+                .withEmail("alexyeoh@example.com")
+                .withRoomNumber("23-32")
+                .withRequests("Late check in", "Hello5") // Hello4 is removed (index 2), Hello5 is added
+                .build();
+
+        // Delete index 2 removes "Hello4", add "Hello5"
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder()
+                .withRequestsToAdd("Hello5")
+                .withRequestIndexesToDelete("2")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GUEST_SUCCESS, Messages.format(editedGuest));
+
+        Model expectedModel = new ModelManager(new GuestNote(model.getGuestNote()), new UserPrefs());
+        expectedModel.setGuest(model.getFilteredGuestList().get(0), editedGuest);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteIndexOutOfBoundsAndAddRequest_failure() {
+        // Set up the guest with 3 initial requests
+        Guest originalGuest = new GuestBuilder()
+                .withName("Alex Yeoh")
+                .withRequests("hello", "hello2", "hello3")
+                .build();
+        model.setGuest(model.getFilteredGuestList().get(0), originalGuest);
+
+        // Attempt to delete index 4 (invalid), then add "hello4"
+        // Deletion of index 4 should give error
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder()
+                .withRequestsToAdd("hello4")
+                .withRequestIndexesToDelete("4")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
+        String expectedMessage = "This request does not exist in the guest: Index Number 4";
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_deleteNotFoundRequestAndAddRequest_failure() {
+        // Set up the guest with 3 initial requests
+        Guest originalGuest = new GuestBuilder()
+                .withName("Alex Yeoh")
+                .withRequests("hello", "hello2", "hello3")
+                .build();
+        model.setGuest(model.getFilteredGuestList().get(0), originalGuest);
+
+        // Attempt to delete "hello4" (invalid), then add "hello5"
+        // Deletion of request "hello4" should give error
+        EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder()
+                .withRequestsToAdd("hello5")
+                .withRequestsToDelete("hello4")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GUEST, descriptor);
+        String expectedMessage = "This request does not exist in the guest: [hello4]";
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
 
     @Test
     public void equals() {
