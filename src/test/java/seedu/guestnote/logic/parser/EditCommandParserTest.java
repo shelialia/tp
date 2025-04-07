@@ -217,28 +217,28 @@ public class EditCommandParserTest {
 
         // Duplicate name prefix
         String userInput = targetIndex.getOneBased() + " "
-                + "n/Alice n/Amy";
+                + PREFIX_NAME + "Bob" + " " + PREFIX_NAME + "Alice";
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // Duplicate phone prefix
         userInput = targetIndex.getOneBased() + " "
-                + "p/12345678 p/87654321";
+                + PREFIX_PHONE + "89238322" + " " + PREFIX_PHONE + "87654321";
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // Duplicate email prefix
         userInput = targetIndex.getOneBased() + " "
-                + "e/alice@example.com e/bob@example.com";
+                + PREFIX_EMAIL + "alice@example.com" + " " + PREFIX_EMAIL + "bob@example.com";
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // Duplicate room number prefix
         userInput = targetIndex.getOneBased() + " "
-                + "r/101 r/202";
+                + PREFIX_ROOMNUMBER + "01-01" + " " + PREFIX_ROOMNUMBER + "01-02";
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROOMNUMBER));
