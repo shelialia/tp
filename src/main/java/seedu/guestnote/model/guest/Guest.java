@@ -83,6 +83,7 @@ public class Guest {
         }
 
         return otherGuest != null
+                && phone.equals(otherGuest.phone)
                 && otherGuest.getEmail().value.equalsIgnoreCase(getEmail().value);
     }
 
