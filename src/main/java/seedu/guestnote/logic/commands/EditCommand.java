@@ -46,9 +46,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ROOMNUMBER + "ROOMNUMBER] "
-            + "[" + PREFIX_ADD_REQ + "ADDREQUEST] "
-            + "[" + PREFIX_DELETE_REQ + "DELETEREQUEST]...\n"
-            + "[" + PREFIX_DELETE_REQ_INDEX + "DELETEREQUEST BY INDEX]...\n"
+            + "[" + PREFIX_ADD_REQ + "ADD_REQUEST] "
+            + "[" + PREFIX_DELETE_REQ + "DELETE_REQUEST]...\n"
+            + "[" + PREFIX_DELETE_REQ_INDEX + "DELETE_REQUEST_INDEX]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
