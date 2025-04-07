@@ -1,12 +1,12 @@
 package seedu.guestnote.logic.parser;
 
+import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
+
 import java.util.Arrays;
 
 import seedu.guestnote.logic.commands.ListCommand;
 import seedu.guestnote.logic.parser.exceptions.ParseException;
 import seedu.guestnote.model.guest.NameContainsSubstringsPredicate;
-
-import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_REQUEST;
 
 /**
  * Parses input arguments and creates a new ListCommand object.
