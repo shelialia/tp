@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---------------------------------------------------------
 
-### Use Cases
+### **Use Cases**
 
 This document outlines the use cases for the GuestNote system, detailing the interactions between the system and the Hotel Concierge actor. Each use case includes a main success scenario (MSS) and possible extensions or variations.
 
@@ -594,8 +594,35 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+### **Non-Functional Requirements**
+**Performance Requirements**
+1. GuestNote should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+2. GuestNote should respond within two seconds for most user operations.
+
+**Usability Requirements**
+1. GuestNote should not have multiple users on a shared computer.
+2. GuestNote should only support a single user. 
+3. GuestNote should target users who can type fast and prefer typing to clicking buttons, selecting dropdowns and drag-and-drop means. 
+4. GuestNote should provide clear and user-friendly error messages when operations fail to assist users in correcting mistakes. 
+5. GuestNote should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
+
+**Compatibility Requirements**
+1. GuestNote should work on any mainstream OS as long as it has Java 17 or above installed.
+2. GuestNote should work on Windows, Linux, and OS-X systems without relying on OS-dependent libraries or features.
+3. GuestNote should not depend on a remote server. 
+
+**Data Requirements**
+1. GuestNote should not use an external database for data storage.
+2. GuestNote should store data locally. 
+3. GuestNote should be packaged into a single JAR file. 
+4. GuestNote JAR file should not be above 100MB.
+
+**Reliability Requirements**
+1. The application should not crash under normal operations and should handle errors gracefully without data loss.
+2. The application should maintain a stable performance over extended usage periods.
+
+--------------------------------------------------------------------------------------------------------------------
 ### **Glossary**
-___
 
 | **Term**                              | **Definition / Example**                                                                                                                                                                                                           |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -622,7 +649,6 @@ ___
 | **Status**                            | Indicates the guest's booking stage:<br>**BOOKED**, **Checked-In** (`check-in INDEX`), or **Checked-Out** (`check-out INDEX`)                                                                                                      |
 | **Search Term**                       | The white-space separated value used in the Find feature e.g. for `find pillows`, it is `pillows`                                                                                                          |
 | **UI (User Interface)**               | The overall layout and design of how users interact with GuestNote, including both CLI and GUI elements.                                                                                                                           |
-=======
 
 ---------------------------------------------------------
 
