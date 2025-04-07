@@ -1,6 +1,7 @@
 package seedu.guestnote.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.guestnote.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ADD_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ;
 import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_DELETE_REQ_INDEX;
@@ -12,6 +13,7 @@ import static seedu.guestnote.logic.parser.CliSyntax.PREFIX_ROOMNUMBER;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import seedu.guestnote.commons.core.index.Index;
 import seedu.guestnote.logic.commands.EditCommand;
@@ -38,6 +40,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Index index;
 
+        if (!isAtLeastOnePrefixPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROOMNUMBER,
+                PREFIX_ADD_REQ, PREFIX_DELETE_REQ, PREFIX_DELETE_REQ_INDEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -104,4 +110,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(requestList);
     }
 
+    private static boolean isAtLeastOnePrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
