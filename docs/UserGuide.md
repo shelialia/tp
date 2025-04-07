@@ -274,9 +274,9 @@ Adds a guest to the guest book.
     - End with a domain label that is at least 2 characters long.
     - Have each domain label start and end with alphanumeric characters.
     - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-- Room numbers should contain two two-digit numbers separated by a hyphen.
+- Room numbers should contain two two-digit numbers between 01 and 99, separated by a hyphen.
   - For example, `01-01`, `12-34`, `99-99` are valid room numbers.
-  - Room numbers can be the same between two guests.
+  - Multiple guests can share the same room.
 - Requests should be alphanumeric, may include spaces, and must not exceed 75 characters.
   - A guest can have any number of requests (including 0).
   - Requests must be unique. 
@@ -690,7 +690,7 @@ The data file is stored in the home folder of GuestNote, where you placed the Gu
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GuestNote home folder.
 
 **Q**: What should I do if the app crashes or behaves unexpectedly?<br>
-**A**: Ensure you are using the correct version of Java as specified in the Quick Start section. If the issue persists, check the log files for any error messages and report them to the support team.
+**A**: Ensure you are using the correct version of Java as specified in the Quick Start section. If the issue persists, check the log files for any error messages and report them to the [support team](/AboutUs.html)
 
 **Q**: Can I use GuestNote on multiple computers simultaneously?<br>
 **A**: GuestNote is designed to be used on a single computer. Using it on multiple computers simultaneously may lead to data inconsistencies.
