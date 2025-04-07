@@ -285,7 +285,7 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] r/ROOM_NUMBER [rq/REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste` <br>
+!!Sample Input: `add n/David Li e/lidavid@example.com p/98767890 r/21-22 rq/Extra toothpaste`!!<br>
 Adds a new guest named `David Li` who lives in room `21-22` with email `lidavid@example.com` and phone `98767890` and a request `Extra toothpaste`.
 </box>
 </div>
@@ -313,22 +313,22 @@ Format: `list [rq/] [NAME_FILTER]…`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `list` <br>
+!!Sample Input: `list`!!<br>
 Shows a list of all guests in the guest list.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `list rq/` <br>
+!!Sample Input: `list rq/`!!<br>
 Shows a list of all guests in the guest list with requests.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `list John` <br>
+!!Sample Input: `list John`!!<br>
 Shows a list of all guests with `John` in their name, including `John Doe` and `Johnathon Chua`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `list rq/ John Alex` <br>
+!!Sample Input: `list rq/ John Alex`!!<br>
 Shows a list of all guests with requests, with either `John` or `Alex` in their name, including `John Doe` and `Alexander Chua`.
 </box>
 </div>
@@ -359,17 +359,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]…`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `find John` <br>
+!!Sample Input: `find John`!!<br>
 Shows a list where any field (e.g. email, name) contains the full word "John" (e.g. "John Doe").
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `find BOOKED` <br>
+!!Sample Input: `find BOOKED`!!<br>
 Shows all guests with the status `BOOKED`. You can also apply this for other statuses like `CHECKED IN` or `CHECKED OUT`, however you will need to use `find CHECKED_IN` and `find CHECKED_OUT` instead. 
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `find 03-04` <br>
+!!Sample Input: `find 03-04`!!<br>
 Shows all guests where any field (e.g. email, name) contains the full word "03-04" (e.g. "03-04"). This is useful for looking up the guests in a specific room. Note that the `#` symbol is not required.
 </box>
 
@@ -395,17 +395,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER]`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 1 e/charlotte@example.com`<br>
+!!Sample Input: `edit 1 e/charlotte@example.com`!!<br>
 Changes the email for the first guest to `charlotte@example.com`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 p/91234567 r/01-03` <br>
+!!Sample Input: `edit 2 p/91234567 r/01-03`!!<br>
 Changes the phone number for the second guest to `91234567` and the room number to `01-03`.
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04` <br>
+!!Sample Input: `edit 1 e/an_email_already_in_use@example.com r/03-04`!!<br>
 Tries to change a guest's email to one that is already registered to another guest, and update the room number. Nothing will occur, and an error message will be shown explaining that the email is not valid.
 
 </box>
@@ -423,6 +423,10 @@ _Conditions and features described in the previous section on [edit](#editing-a-
 
 **Adds** a request to an existing guest in the guest list.
 * Request names should be alphanumeric, may include spaces, and must not exceed 75 characters
+* **Requests must be unique to the guest.** 
+  * Requests spelled the same will be considered the same, regardless of capitalisation. 
+  * For example, `Extra Pillow` and `extra pillow` are considered the same request.
+  * If the request is already in the list of requests for the guest, nothing will happen and an error message will be shown.
 * Conditions and features described in the previous section on [edit](#editing-a-guest-edit) command apply.
 * The new request will be **added** to the back of the current request list for the guest.
 
@@ -433,12 +437,12 @@ Format: `edit INDEX [+rq/REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 +rq/Extra blanket`  <br>
+!!Sample Input: `edit 2 +rq/Extra blanket`!!<br>
 Edits guest No.2 in the list by adding a request `Extra blanket`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 +rq/Extra blanket +rq/Extra pillow`  <br>
+!!Sample Input: `edit 2 +rq/Extra blanket +rq/Extra pillow`!!<br>
 Edits guest No.2 in the list by adding two requests `Extra blanket` and `Extra pillow`.
 </box>
 </div>
@@ -455,6 +459,8 @@ _Conditions and features described in the previous section on [edit](#editing-a-
 
 **Removes** an existing request of an existing guest in the guest list.
 * The request will be **removed** from the list of requests for the guest.
+  * The request to be removed must be spelled the same as the request in the list of requests for the guest.
+  * You !!do not!! need to match the same capitalisation as the request in the list of requests for the guest.
 * If the request is not found in the list of requests for the guest, nothing will happen and an error message will be shown.
 
 </box>
@@ -470,22 +476,22 @@ Format: `edit INDEX [-rq/REQUEST]…​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -rq/Extra blanket`  <br>
-Edits guest No.2 in the list by removing the request `Extra blanket`.
+!!Sample Input: `edit 2 -rq/Extra blanket`!!<br>
+Edits guest No.2 in the list by removing the request `Extra blanket` (or any variant capitalisation of it, including `EXTRA BLANKET`, `Extra Blanket`, and `extra blanket`).
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`  <br>
+!!Sample Input: `edit 2 -rq/Extra blanket -rq/Extra pillow`!!<br>
 Edits guest No.2 in the list by removing two requests `Extra blanket` and `Extra pillow`.
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -rq/extra pillow +rq/Extra Pillow`  <br>
-Edits guest No.2 in the list by removing `extra pillow` and adding `Extra Pillow`. This is okay as the lowercase version is removed before `Extra Pillow` is added, so no duplicate requests are created.
+!!Sample Input: `edit 2 -rq/extra pillow +rq/Extra Pillow`!!<br>
+Edits guest No.2 in the list by removing the request spelled `extra pillow` and adding `Extra Pillow`. This is okay as the lowercase version is removed before `Extra Pillow` is added, so no duplicate requests are created.
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -ri/1 -rq/Extra Towel` <br>
+!!Sample Input: `edit 2 -ri/1 -rq/Extra Towel`!!<br>
 **Tries to use `-ri/` and `-rq/` together.** The above command is not allowed as the requests deleted can be different depending on how the command is interpreted.
 **To prevent confusion, nothing will occur, and an error message will be shown.**
 </box>
@@ -519,12 +525,12 @@ Format: `edit INDEX [-ri/REQUEST_INDEX]​`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -ri/1`  <br>
+!!Sample Input: `edit 2 -ri/1`!!<br>
 Edits guest No.2 in the list by removing the first request in the list of requests for that guest.
 </box>
 <box theme="danger" icon=":fa-solid-xmark:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `edit 2 -ri/1 -ri/2`  <br>
+!!Sample Input: `edit 2 -ri/1 -ri/2`!!<br>
 Tries to remove the first and second requests in the list of requests for that guest. The above command is not allowed as the requests deleted can be different depending on how the command is interpreted. **To prevent confusion, nothing will occur, and an error message will be shown.**
 </box>
 </div>
@@ -547,7 +553,7 @@ Format: `check-in INDEX`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `check-in 1`  <br>
+!!Sample Input: `check-in 1`!!<br>
 Changes the status of the guest at index 1 to `CHECKED IN`.
 </box>
 </div>
@@ -570,7 +576,7 @@ Format: `check-out INDEX`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `check-out 1`  <br>
+!!Sample Input: `check-out 1`!!<br>
 Changes the status of the guest at index 1 to `CHECKED OUT`.
 </box>
 </div>
@@ -592,7 +598,7 @@ Format: `delete INDEX`
 </box>
 <box theme="success" icon=":fa-solid-check:"  style="margin-top:-1em; margin-bottom:0em" seamless>
 
-Sample Input: `delete 2` <br>
+!!Sample Input: `delete 2`!!<br>
 Deletes the second guest in the guest list.
 </box>
 
