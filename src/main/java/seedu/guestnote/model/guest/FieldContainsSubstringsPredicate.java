@@ -28,11 +28,14 @@ public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
         this.fieldExtractor = fieldExtractor;
     }
 
+    /**
+     * @param guest the input argument
+     * @return
+     */
     @Override
     public boolean test(Guest guest) {
         T fieldValue = fieldExtractor.apply(guest);
-        if (fieldValue instanceof Optional) {
-            Optional<?> optionalValue = (Optional<?>) fieldValue;
+        if (fieldValue instanceof Optional<?> optionalValue) { //pattern matching
             if (!optionalValue.isPresent()) {
                 return false;
             }
@@ -45,7 +48,11 @@ public class FieldContainsSubstringsPredicate<T> implements Predicate<Guest> {
             Object[] arr = (Object[]) fieldValue;
             return arrayContainsKeyword(arr, keywords);
         } else {
-            String fieldString = fieldValue.toString().trim();
+            String temp = fieldValue.toString();
+            if (temp == null) {
+                return false;
+            }
+            String fieldString = temp.trim();
             return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(fieldString, keyword.trim()));
         }
