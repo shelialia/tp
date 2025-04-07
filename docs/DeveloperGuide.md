@@ -567,6 +567,18 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
         <li>2a2. GuestNote informs the Concierge that the guest was not found.<br>Use case ends.</li>
     </ul>
 </box>
+<box type="wrong" header="2a. Guest Already Checked In" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided guest is already checked in.</li>
+        <li>2a2. GuestNote informs the Concierge that the guest is already checked in.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="wrong" header="2a. Guest Already Checked Out" light>
+    <ul>
+        <li>2a1. GuestNote detects that the provided guest is already checked out.</li>
+        <li>2a2. GuestNote informs the Concierge that the guest is already checked out.<br>Use case ends.</li>
+    </ul>
+</box>
 
 ---------------------------------------------------------
 
@@ -594,8 +606,8 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 </box>
 <box type="wrong" header="2b. Guest Not Checked In" light>
     <ul>
-        <li>2b1. GuestNote detects that the provided guest is not checked in yet.</li>
-        <li>2b2. GuestNote informs the Concierge that the guest is not checked in yet.<br>Use case ends.</li>
+        <li>2b1. GuestNote detects that the provided guest has not checked in yet.</li>
+        <li>2b2. GuestNote informs the Concierge that the guest has not checked in yet.<br>Use case ends.</li>
     </ul>
 </box>
 <box type="wrong" header="2c. Guest Has Checked Out" light>
