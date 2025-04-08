@@ -869,7 +869,7 @@ Checking in a guest.
 2. `check-in 3`  when the guest list is at least of length 3 and the third guest has status `CHECKED-IN` or `CHECKED-OUT`.</br>
    **Expected**: An error is displayed, stating that the chosen guest has already been checked in.
 
-3. `check-in x` when guest list is shorter than length x.</br>
+3. `check-in x` when the guest list is shorter than length x.</br>
     **Expected**: An error is displayed, stating that the stated guest index is invalid.
 
 4. `check-in`</br>
