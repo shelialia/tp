@@ -758,7 +758,7 @@ Deleting a guest while in the main guest list view.
 4. `delete`</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that missing field guest index. Status bar remains the same.
 
-5. `delete x.` where x is greater than 2147483647</br>
+5. `delete x` where x is greater than 2147483647</br>
    **Expected**: No guest is deleted. Error details shown in the status message, stating that large positive indexes are not allowed. Status bar remains the same.
 
 6. `delete x` where x is larger than the size of the list and smaller than or equal to 2147483647</br>
