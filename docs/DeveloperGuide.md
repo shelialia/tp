@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
-- The formatting of our UserGuide is inspired by UserGuide of group's from previous semesters: [(AY2425S1-CS2103T-F15-4)](https://ay2425s1-cs2103t-f15-4.github.io/tp/UserGuide.html) and [(AY2425S1-CS2103T-T09-1)](https://ay2425s1-cs2103t-t09-1.github.io/tp/UserGuide.html).
+- The formatting of our UserGuide is inspired by that of groups from previous semesters: [(AY2425S1-CS2103T-F15-4)](https://ay2425s1-cs2103t-f15-4.github.io/tp/UserGuide.html) and [(AY2425S1-CS2103T-T09-1)](https://ay2425s1-cs2103t-t09-1.github.io/tp/UserGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ Refer to the guide [_Setting up and getting started_](https://github.com/AY2425S
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The * * *Architecture Diagram* * * given above explains the high-level design of the App.
+The **Architecture Diagram** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
