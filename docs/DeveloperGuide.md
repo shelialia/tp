@@ -415,11 +415,18 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
         <li>2a3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
-<box type="tip" header="2b. Filter Guests by search term" light>
+<box type="tip" header="2b. Filter Guests by Name" light>
     <ul>    
-        <li>2b1. Concierge provides a search term.</li>
-        <li>2b2. GuestNote filters the list of guests by comparing all their details against that search term.</li>
+        <li>2b1. Concierge provides a name to filter by.</li>
+        <li>2b2. GuestNote filters the list of guests by comparing their names against the provided name.</li>
         <li>2b3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
+    </ul>
+</box>
+<box type="tip" header="2c. Filter Guests by search term" light>
+    <ul>    
+        <li>2c1. Concierge provides a search term.</li>
+        <li>2c2. GuestNote filters the list of guests by comparing all guest fields against that search term.</li>
+        <li>2c3. GuestNote displays the filtered list of guests.<br>Use case ends.</li>
     </ul>
 </box>
 
