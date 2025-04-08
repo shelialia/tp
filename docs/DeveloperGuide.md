@@ -926,7 +926,7 @@ Team size: 5
 - Blocked Reserved or Invalid Addresses: Filters out test or reserved domains (e.g. `example@invalid.com`, `@localhost`).
 5. **Specific Error Messages for Missing Compulsory Fields**</br>
    Currently, when the user fails to add compulsory fields, GuestNote displays a generic error message stating invalid command format. This enhancement improves usability by providing more informative error messages that explicitly state which compulsory fields are missing. This helps users identify and correct their mistakes more easily.
-6. **Restrict Duplicate Email and Phone Numbers Based on Family or Booking**</br>
-   Currently, users can be added or edited to have the same email and/or same phone number as another existing guest in GuestNote. This enhancement will add further restrictions whereby only guests who are under the same family or the same booking will be able to share phone numbers and/or emails.
+6. **Restrict Duplicate Phone Numbers Based on Family or Booking**</br>
+   Currently, users can be added or edited to have the same phone number as another existing guest in GuestNote. This enhancement will add further restrictions whereby only guests who are under the same family or the same booking will be able to share the same phone number.
 7. **Restrict Number of Guests in the Same Room**</br>
    Currently, multiple users can be added to the same room. This enhancement will add further restrictions on the number of guests that can be assigned to any given room, ensuring that room capacity limits are enforced.
