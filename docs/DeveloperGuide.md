@@ -643,7 +643,7 @@ For all cases below, the **System** is the `GuestNote` and the **Actor** is the 
 
 **Compatibility Requirements**
 1. GuestNote should work on any mainstream OS as long as it has Java 17 or above installed.
-2. GuestNote should work on Windows, Linux, and OS-X systems without relying on OS-dependent libraries or features.
+2. GuestNote should work on Windows, Linux, and MacOS systems without relying on OS-dependent libraries or features.
 3. GuestNote should not depend on a remote server. 
 
 **Data Requirements**
